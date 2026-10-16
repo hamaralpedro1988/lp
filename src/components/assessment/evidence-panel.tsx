@@ -7,7 +7,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
 
 type Evidence = { id: string; name: string; url: string; video: boolean }
-export function EvidencePanel({ note, onNoteChange }: { note: string; onNoteChange: (value: string) => void }) {
+export function EvidencePanel({ note, onNoteChange, onCountChange }: { note: string; onNoteChange: (value: string) => void; onCountChange?: (count: number) => void }) {
   const [open, setOpen] = useState(false)
   const [mediaOpen, setMediaOpen] = useState(false)
   const [preview, setPreview] = useState<Evidence | null>(null)
@@ -26,12 +26,14 @@ export function EvidencePanel({ note, onNoteChange }: { note: string; onNoteChan
     const file = files.find(item => item.id === id)
     if (file) { URL.revokeObjectURL(file.url); urls.current.delete(file.url) }
     setFiles(previous => previous.filter(item => item.id !== id))
+    if (file) onCountChange?.(files.length - 1)
   }
   function choose(event: React.ChangeEvent<HTMLInputElement>) {
     const selected = Array.from(event.target.files ?? [])
     const valid = selected.filter(file => file.type.startsWith('image/') || file.type.startsWith('video/'))
     setError(valid.length !== selected.length ? 'Choose an image or video file.' : '')
     setFiles(previous => [...previous, ...valid.map(file => { const url = URL.createObjectURL(file); urls.current.add(url); return { id: crypto.randomUUID(), name: file.name, url, video: file.type.startsWith('video/') } })])
+    onCountChange?.(files.length + valid.length)
     event.target.value = ''
   }
   return <section aria-labelledby="evidence-title" className="space-y-4">

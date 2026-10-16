@@ -1,48 +1,55 @@
-import { useEffect, useRef, useState } from 'react'
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronRight, Flame, Focus, ListChecks, Pause, Play, Timer } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Check, CheckCircle2, ChevronDown, Circle, Flame, MoreHorizontal, Pause, Play, Timer } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { EvidencePanel } from '@/components/assessment/evidence-panel'
-import { applyTheme, loadTheme } from '@/lib/theme'
 import { useAssessmentDraft } from '@/hooks/use-assessment-draft'
 import { useMobileOverlay, useMobileViewport } from '@/hooks/use-mobile-overlay'
+import { applyTheme, loadTheme } from '@/lib/theme'
 
 export default function Assessment() {
   const { result, setResult, note, setNote, paused, setPaused, seconds } = useAssessmentDraft()
-  const [focused, setFocused] = useState(false)
-  const [checklist, setChecklist] = useState(false)
+  const [mediaCount, setMediaCount] = useState(0)
+  const [expanded, setExpanded] = useState(false)
+  const [options, setOptions] = useState(false)
   const [pauseSheet, setPauseSheet] = useState(false)
-  const content = useRef<HTMLElement>(null)
-  const heading = useRef<HTMLHeadingElement>(null)
-  const returnToCriterion = useRef(false)
   useEffect(() => { applyTheme(loadTheme(), 'light') }, [])
   useMobileViewport()
-  useMobileOverlay(checklist, () => { setChecklist(false); return true })
+  useMobileOverlay(options, () => { setOptions(false); return true })
   useMobileOverlay(pauseSheet, () => { setPauseSheet(false); return true })
   const time = `${Math.floor(seconds / 60).toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`
+  const assessed = result ? 1 : 0
+  const status = result === 'meets' ? 'Meet standard' : result === 'improve' ? 'Needs improvement' : 'Not assessed'
   return <div className="assessment-mobile min-h-dvh bg-muted/40 text-foreground">
     <div className="mx-auto flex h-dvh w-full max-w-lg flex-col bg-background sm:border-x">
       <header className="shrink-0 border-b px-5 pb-4 pt-[max(0.75rem,env(safe-area-inset-top))]">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-3"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Flame className="size-5"/></span><div>{!focused && <p className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">Skills assessment</p>}<h1 className="truncate text-base">Fryer Station</h1></div></div>
-          <Button variant={focused ? 'secondary' : 'ghost'} size="icon" aria-label="Focus view" aria-pressed={focused} onClick={() => setFocused(value => !value)}><Focus className="size-5"/></Button>
-        </div>
-        <div className="mt-3 flex items-center justify-between gap-3"><p className="text-xs text-muted-foreground">Preparation <span className="mx-1">/</span> <span className="font-medium text-foreground">1 of 3</span></p><Button variant={paused ? 'secondary' : 'ghost'} className="min-w-28 gap-2 px-3 text-xs" aria-label={paused ? 'Resume timer' : 'Pause timer'} onClick={() => { if (paused) setPaused(false); else { setPaused(true); setPauseSheet(true) } }}><Timer className="size-3.5"/><span className="font-mono tabular-nums">{time}</span>{paused ? <Play className="size-3.5"/> : <Pause className="size-3.5"/>}<span className="sr-only">{paused ? 'Paused' : 'Running'}</span></Button></div>
-        <Progress value={100 / 3} aria-label="Current criterion: 1 of 3" aria-valuemin={0} aria-valuemax={3} aria-valuenow={1} className="mt-1 h-1.5"/>
-        {paused && <p role="status" className="mt-2 text-xs text-muted-foreground">Timer paused. Tap the timer to resume.</p>}
-        {focused && <p role="status" className="mt-2 text-xs leading-5 text-muted-foreground">Focus view on · Device calls and notifications are unchanged.</p>}
+        <div className="flex items-center justify-between gap-3"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Flame className="size-5"/></span><div><p className="text-[10px] tracking-widest text-muted-foreground uppercase">Skills assessment</p><h1 className="text-base">Fryer Station</h1></div></div><Button variant="ghost" size="icon" aria-label="Assessment options" onClick={() => setOptions(true)}><MoreHorizontal className="size-5"/></Button></div>
+        <div className="mt-3 flex items-center justify-between gap-3"><p className="text-xs text-muted-foreground">Checklist <span className="mx-1">·</span> 3 criteria</p><Button variant={paused ? 'secondary' : 'ghost'} className="min-w-28 gap-2 px-3 text-xs" aria-label={paused ? 'Resume timer' : 'Pause timer'} onClick={() => { if (paused) setPaused(false); else { setPaused(true); setPauseSheet(true) } }}><Timer className="size-3.5"/><span className="font-mono tabular-nums">{time}</span>{paused ? <Play className="size-3.5"/> : <Pause className="size-3.5"/>}</Button></div>
+        {paused && <p role="status" className="mt-1 text-xs text-muted-foreground">Paused · Tap the timer to resume</p>}
       </header>
-      <main ref={content} className="min-h-0 flex-1 space-y-7 overflow-y-auto overscroll-contain px-5 py-6">
-        <section><p className="mb-3 text-xs font-medium tracking-wider text-muted-foreground uppercase">Preparation</p><h2 ref={heading} tabIndex={-1} className="text-[28px] leading-[1.25] tracking-tight outline-none">Checks fryer readiness and oil conditions</h2><p className="mt-4 text-sm leading-6 text-muted-foreground">Observe the applicable safety checks before starting.</p></section>
-        <fieldset><legend className="mb-3 text-xs font-medium tracking-wider text-muted-foreground uppercase">Your observation</legend><RadioGroup value={result} onValueChange={setResult} className="gap-3">{[['meets', 'Meet standard', 'The criterion has been demonstrated.'], ['improve', 'Needs improvement', 'Further practice or support is needed.']].map(([value,label,description]) => <label key={value} htmlFor={`result-${value}`} className="flex min-h-20 cursor-pointer touch-manipulation items-center gap-4 rounded-xl border p-4 transition-colors active:bg-accent has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-accent has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring"><RadioGroupItem id={`result-${value}`} value={value} className="size-5 shrink-0"/><span className="min-w-0 flex-1"><span className="block text-sm font-medium">{label}</span><span className="mt-1 block text-xs leading-5 text-muted-foreground">{description}</span></span>{result === value && <Check className="size-4 shrink-0" aria-hidden="true"/>}</label>)}</RadioGroup></fieldset>
-        <EvidencePanel note={note} onNoteChange={setNote}/>
+      <main className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+        <div className="mb-5"><div className="flex items-center justify-between"><h2 className="text-2xl tracking-tight">Preparation</h2><span className="text-xs text-muted-foreground">{assessed} / 3 assessed</span></div><p className="mt-2 text-sm leading-6 text-muted-foreground">Tap a criterion to assess it and add evidence.</p><Progress value={assessed / 3 * 100} aria-label="Assessed criteria" aria-valuenow={assessed} aria-valuemin={0} aria-valuemax={3} className="mt-4 h-1"/></div>
+        <ol aria-label="Preparation checklist" className="overflow-hidden rounded-xl border">
+          <li>
+            <h3><button id="criterion-trigger" aria-expanded={expanded} aria-controls="criterion-details" onClick={() => setExpanded(value => !value)} className="flex min-h-24 w-full items-start gap-3 p-4 text-left active:bg-accent/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring">
+              <span className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full ${result ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>{result ? <Check className="size-3.5"/> : <span className="text-xs font-medium">1</span>}</span>
+              <span className="min-w-0 flex-1"><span className="block text-sm leading-6 font-medium">Checks fryer readiness and oil conditions</span><span className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-normal text-muted-foreground">{result ? <CheckCircle2 className="size-3.5"/> : <Circle className="size-3"/>}<span>{status}</span>{note && <><span aria-hidden="true">·</span><span>Note added</span></>}{mediaCount > 0 && <><span aria-hidden="true">·</span><span>{mediaCount} {mediaCount === 1 ? 'file' : 'files'}</span></>}</span></span><ChevronDown className={`mt-1 size-4 shrink-0 text-muted-foreground transition-transform ${expanded ? 'rotate-180' : ''}`}/>
+            </button></h3>
+            <div id="criterion-details" role="region" aria-labelledby="criterion-trigger" hidden={!expanded} className="border-t bg-muted/15 p-4">
+              <p className="mb-4 text-sm leading-6 text-muted-foreground">Observe the applicable safety checks before starting.</p>
+              <fieldset className="mb-5"><legend className="mb-3 text-xs font-medium text-muted-foreground">Your observation</legend><RadioGroup value={result} onValueChange={setResult} className="grid grid-cols-2 gap-2">{[['meets','Meet standard'],['improve','Needs improvement']].map(([value,label]) => <label key={value} htmlFor={`list-result-${value}`} className="flex min-h-14 cursor-pointer items-center gap-2 rounded-lg border bg-background px-3 py-3 active:bg-accent has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-accent has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring"><RadioGroupItem id={`list-result-${value}`} value={value} className="shrink-0"/><span className="text-xs leading-5 font-medium">{label}</span></label>)}</RadioGroup></fieldset>
+              <EvidencePanel note={note} onNoteChange={setNote} onCountChange={setMediaCount}/>
+            </div>
+          </li>
+          {[2,3].map(number => <li key={number} className="border-t"><div className="flex min-h-20 items-center gap-3 p-4"><span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs text-muted-foreground">{number}</span><div className="flex-1"><h3 className="text-sm text-muted-foreground">Criterion {number}</h3><p className="mt-1 text-xs text-muted-foreground">Content to be defined</p></div><span className="text-[10px] text-muted-foreground">Unavailable</span></div></li>)}
+        </ol>
+        <p className="mt-4 text-xs leading-5 text-muted-foreground">This prototype includes one criterion. The remaining two are shown for context.</p>
       </main>
-      <footer className="shrink-0 border-t bg-background px-5 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <nav aria-label="Assessment navigation" className="grid grid-cols-3 items-center gap-3"><Button variant="outline" disabled aria-label="Back: first criterion"><ArrowLeft/>Back</Button><Sheet open={checklist} onOpenChange={setChecklist}><SheetTrigger asChild><Button variant="ghost" aria-label="Open checklist"><ListChecks/><span>Checklist</span></Button></SheetTrigger><SheetContent side="bottom" className="mobile-sheet mx-auto max-w-lg rounded-t-2xl" onCloseAutoFocus={event => { if (returnToCriterion.current) { event.preventDefault(); returnToCriterion.current = false; heading.current?.focus({preventScroll:true}) } }}><SheetHeader><SheetTitle>Fryer Station checklist</SheetTitle><SheetDescription>Preparation · 1 of 3 criteria. Only the first criterion is defined in this prototype.</SheetDescription></SheetHeader><div className="min-h-0 space-y-3 overflow-y-auto px-5 pb-4"><button onClick={() => { returnToCriterion.current = true; setChecklist(false); content.current?.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'}); heading.current?.focus({preventScroll:true}) }} aria-current="step" className="flex min-h-16 w-full items-start gap-3 rounded-xl border border-primary bg-accent p-4 text-left"><span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">1</span><span className="flex-1 text-sm font-medium">Checks fryer readiness and oil conditions<span className="mt-1 block text-xs font-normal text-muted-foreground">{result === 'meets' ? 'Meet standard' : result === 'improve' ? 'Needs improvement' : 'Not assessed yet'}</span></span>{result ? <CheckCircle2 className="size-4"/> : <ChevronRight className="size-4"/>}</button>{[2,3].map(number => <button key={number} disabled className="flex min-h-16 w-full items-center gap-3 rounded-xl border p-4 text-left text-muted-foreground opacity-60"><span className="flex size-7 items-center justify-center rounded-full bg-muted text-xs">{number}</span><span className="text-sm">Criterion {number}<span className="mt-1 block text-xs">Not available in this prototype</span></span></button>)}<a href="?studio=1" className="flex min-h-11 items-center justify-center text-xs text-muted-foreground underline underline-offset-4">Open Theme Studio</a></div></SheetContent></Sheet><Button disabled aria-describedby="navigation-help">Next<ArrowRight/></Button></nav><p id="navigation-help" className="mt-2 text-center text-[10px] leading-4 text-muted-foreground">Next criterion is not available in this prototype.</p>
-      </footer>
+
     </div>
-    <Sheet open={pauseSheet} onOpenChange={setPauseSheet}><SheetContent side="bottom" className="mobile-sheet mx-auto max-w-lg rounded-t-2xl"><SheetHeader><SheetTitle>Assessment paused</SheetTitle><SheetDescription>Your timer is stopped. Closing this panel keeps it paused until you choose Resume.</SheetDescription></SheetHeader><div className="px-5 pb-5"><div className="py-6 text-center font-mono text-4xl tabular-nums">{time}</div><Button className="h-12 w-full" onClick={() => { setPauseSheet(false); setPaused(false) }}><Play/>Resume assessment</Button><p className="mt-4 text-center text-xs leading-5 text-muted-foreground">The timer also pauses when the app goes into the background.</p></div></SheetContent></Sheet>
+    <Sheet open={options} onOpenChange={setOptions}><SheetContent side="bottom" className="mobile-sheet mx-auto max-w-lg rounded-t-2xl"><SheetHeader><SheetTitle>Assessment options</SheetTitle><SheetDescription>Try the alternative layout or adjust your theme.</SheetDescription></SheetHeader><div className="space-y-2 px-5 pb-4"><Button variant="outline" asChild className="h-12 w-full justify-start"><a href="?view=step">View one criterion at a time</a></Button><Button variant="outline" asChild className="h-12 w-full justify-start"><a href="?studio=1">Open Theme Studio</a></Button></div></SheetContent></Sheet>
+    <Sheet open={pauseSheet} onOpenChange={setPauseSheet}><SheetContent side="bottom" className="mobile-sheet mx-auto max-w-lg rounded-t-2xl"><SheetHeader><SheetTitle>Assessment paused</SheetTitle><SheetDescription>The timer stays paused when you close this panel.</SheetDescription></SheetHeader><div className="px-5 pb-5"><div className="py-6 text-center font-mono text-4xl tabular-nums">{time}</div><Button className="h-12 w-full" onClick={() => { setPauseSheet(false); setPaused(false) }}><Play/>Resume assessment</Button></div></SheetContent></Sheet>
   </div>
 }

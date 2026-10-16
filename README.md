@@ -105,3 +105,12 @@ The media chooser separates rear-camera photo capture, video capture, and librar
 `use-assessment-draft.ts` stores text/results/timing in `sessionStorage` under `lp-assessment-draft-v1`. The timer pauses on page visibility loss, and restored drafts start paused. Media remains in memory only. `use-mobile-overlay.ts` handles sheet Back navigation and keyboard viewport measurements.
 
 Chromium touch-emulation checks passed at 320/390/430/768px: whole-row radio selection, fixed navigation during scroll, note save and discard guard, Back dismissal, media capture attributes and preview, explicit resume, simulated background pause, draft reload recovery, and disabled unavailable criteria. Reduced-height viewport checks verify note actions stay visible, but native camera and actual iOS/Android soft-keyboard behavior still require physical-device verification.
+
+
+### Simplified checklist exploration
+
+The default assessment route now uses a compact checklist rather than one page per criterion. All three slots stay in context; only the defined first criterion is interactive. Tap its row to expand inline rating and evidence controls, then collapse it to see the updated status and note indicator. Hidden details stay mounted so collapsing preserves attached media. Progress counts assessed criteria rather than the currently viewed position. There are no Back/Next controls or redundant bottom navigation in this version.
+
+The original mobile screen is retained at `?view=step`, accessible through **Assessment options → View one criterion at a time**. The two layouts share the same tab-scoped result/note/timer draft. Files remain page-local and do not survive navigation between layouts. Theme Studio remains at `?studio=1` and is available in the options sheet.
+
+Touch tests validated overview/expansion, inline result changes, progress, note and media retention across collapse, timer pause/Back, layout comparison with draft preservation, and 320/390/430/768px widths.

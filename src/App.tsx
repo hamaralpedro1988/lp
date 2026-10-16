@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { applyTheme, isTheme, loadTheme } from '@/lib/theme'
 
+const AssessmentStep = lazy(() => import('@/pages/assessment-step'))
 const Assessment = lazy(() => import('@/pages/assessment'))
 const ThemeStudio = lazy(() => import('@/pages/theme-studio'))
 const ComponentPlayground = lazy(() => import('@/pages/component-playground'))
@@ -22,5 +23,5 @@ function Preview() {
 }
 export default function App() {
   const params = new URLSearchParams(location.search)
-  return <TooltipProvider><Suspense fallback={<p role="status" className="p-8 text-sm text-muted-foreground">A carregar…</p>}>{params.get('preview') === '1' ? <Preview/> : params.get('studio') === '1' ? <ThemeStudio/> : <Assessment/>}</Suspense></TooltipProvider>
+  return <TooltipProvider><Suspense fallback={<p role="status" className="p-8 text-sm text-muted-foreground">A carregar…</p>}>{params.get('preview') === '1' ? <Preview/> : params.get('studio') === '1' ? <ThemeStudio/> : params.get('view') === 'step' ? <AssessmentStep/> : <Assessment/>}</Suspense></TooltipProvider>
 }
