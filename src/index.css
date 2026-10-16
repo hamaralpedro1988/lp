@@ -21,3 +21,22 @@
 @layer utilities {
   :is(h1,h2,h3,h4,h5,h6,[data-slot="card-title"],[data-slot="dialog-title"],[data-slot="sheet-title"],[data-slot="alert-dialog-title"]) { font-weight: var(--heading-weight, 600); }
 }
+
+/* Mobile sheets follow the visible viewport when the on-screen keyboard opens. */
+.mobile-sheet {
+  bottom: var(--keyboard-inset, 0px);
+  max-height: calc(var(--visual-height, 100dvh) - 0.75rem);
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  overscroll-behavior: contain;
+}
+.mobile-sheet > button[data-slot="sheet-close"],
+.mobile-sheet > button:last-child:has(> .sr-only) {
+  min-width: 44px;
+  min-height: 44px;
+  top: 4px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+}
+.assessment-mobile button[data-size="icon"] { min-width: 44px; min-height: 44px; }
+.assessment-mobile input, .assessment-mobile textarea { font-size: 16px; }

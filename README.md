@@ -89,6 +89,19 @@ The root route shows the reference's first criterion: **Checks fryer readiness a
 
 Implemented interactions: mutually exclusive observation result, note editor with save/cancel/remove, local image/video attachment previews and removal, elapsed timer with pause/resume, focus view, and a checklist sheet reflecting the current result. Focus view only reduces interface distractions; a website cannot suppress device calls or notifications.
 
-Only the supplied criterion is defined. Back is disabled; Next explains that the next criterion is not yet available. Criteria 2 and 3 are clearly marked as undefined rather than fabricated. Notes, results, elapsed time, and attachment object URLs are kept only while this page remains mounted; reload/navigation clears them. Files are never uploaded. Theme choices continue to persist separately in browser storage.
+Only the supplied criterion is defined. Back is disabled; Next is disabled, with an explanation that the next criterion is not available. Criteria 2 and 3 are clearly marked as undefined rather than fabricated. Text notes, results, and elapsed time are saved in this tab’s sessionStorage; reload restores the draft with the timer paused. Attachment object URLs are temporary and reload/navigation clears them. Files are never uploaded. Theme choices continue to persist separately in browser storage.
 
 Chromium checks exercised selection, note save/cancel, image add/remove, actual timer pause/resume, focus view, checklist status, prototype navigation limits, route links, and layouts at 390/768/1440px.
+
+
+### Mobile interaction pass
+
+The assessment is now an edge-to-edge, viewport-height mobile screen (centered at a phone width on larger screens), with a fixed header, independently scrolling content, and fixed bottom navigation. Safe-area insets protect the top and bottom controls. Touch actions use large row targets and icon buttons at least 44px square.
+
+Checklist, pause controls, notes, media sources, and evidence preview use bottom sheets. Browser Back dismisses an active sheet first. Dismissing pause controls does not resume timing; Resume is explicit. Unsaved note edits require a discard decision. The note sheet follows `visualViewport` dimensions to leave room for the on-screen keyboard and its editor uses 16px text to avoid iOS focus zoom.
+
+The media chooser separates rear-camera photo capture, video capture, and library selection via native file inputs. `capture="environment"` is a browser/device hint, not a guarantee of camera availability. Evidence can be opened in a larger preview, and video uses inline playback controls. No upload occurs. Focus view reduces UI distractions only; OS notifications and calls are unaffected.
+
+`use-assessment-draft.ts` stores text/results/timing in `sessionStorage` under `lp-assessment-draft-v1`. The timer pauses on page visibility loss, and restored drafts start paused. Media remains in memory only. `use-mobile-overlay.ts` handles sheet Back navigation and keyboard viewport measurements.
+
+Chromium touch-emulation checks passed at 320/390/430/768px: whole-row radio selection, fixed navigation during scroll, note save and discard guard, Back dismissal, media capture attributes and preview, explicit resume, simulated background pause, draft reload recovery, and disabled unavailable criteria. Reduced-height viewport checks verify note actions stay visible, but native camera and actual iOS/Android soft-keyboard behavior still require physical-device verification.
