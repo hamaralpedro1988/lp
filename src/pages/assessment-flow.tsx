@@ -51,16 +51,11 @@ export default function AssessmentFlow() {
   useMobileViewport()
   useMobileOverlay(sheet !== null, () => { setSheet(null); return true })
   useEffect(() => {
-    const theme = { ...creatorTheme, typography: { ...loadTheme().typography, body: 'inter' as const, heading: 'inter' as const, headingWeight: 740 } }
-    const preference = matchMedia('(prefers-color-scheme: dark)')
-    const requested = new URLSearchParams(location.search).get('mode')
-    function syncMode() {
-      const mode = requested === 'light' || requested === 'dark' ? requested : preference.matches ? 'dark' : 'light'
-      applyTheme(theme, mode)
-    }
-    syncMode()
-    preference.addEventListener('change', syncMode)
-    return () => preference.removeEventListener('change', syncMode)
+    const typography = loadTheme().typography
+    const theme = { ...creatorTheme, typography: { ...typography, size: typography.size + 2, body: 'inter' as const, heading: 'inter' as const, headingWeight: 740 } }
+    document.documentElement.dataset.assessmentVersion = '2'
+    applyTheme(theme, 'light')
+    return () => { delete document.documentElement.dataset.assessmentVersion }
   }, [])
 
   useLayoutEffect(() => {
