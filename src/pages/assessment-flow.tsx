@@ -7,7 +7,7 @@ import { EvidencePanel, type EvidenceActions } from '@/components/assessment/evi
 import { VersionSwitcher } from '@/components/layout/version-switcher'
 import { flowCriteria as criteria, flowScreens, flowStorageKey, emptyFlowDraft, normalizeFlowDraft, flowEvidenceOk, flowMissing, type FlowDraft, type FlowScreen, type FlowAnswer } from '@/data/flow-draft'
 import { useMobileOverlay, useMobileViewport } from '@/hooks/use-mobile-overlay'
-import { applyTheme, loadTheme } from '@/lib/theme'
+import { applyTheme, creatorTheme, loadTheme } from '@/lib/theme'
 import '@/styles/flow.css'
 
 const screenNames: Record<FlowScreen, string> = { list: 'Assessments', overview: 'Overview', assessment: 'Live checklist', review: 'Review', signoff: 'Sign-off' }
@@ -51,9 +51,18 @@ export default function AssessmentFlow() {
   useMobileViewport()
   useMobileOverlay(sheet !== null, () => { setSheet(null); return true })
   useEffect(() => {
-    const theme = loadTheme()
-    applyTheme({ ...theme, typography: { ...theme.typography, body: 'inter', heading: 'inter', headingWeight: 740 }, light: { ...theme.light, background: '#f4f5f3', foreground: '#202926', card: '#ffffff', 'card-foreground': '#202926', primary: '#202926', 'primary-foreground': '#ffffff', secondary: '#f1f5f1', 'secondary-foreground': '#284a3a', muted: '#f8faf8', 'muted-foreground': '#6a7570', border: '#e4e9e5', input: '#dce5dd', ring: '#236756' } }, 'light')
+    const theme = { ...creatorTheme, typography: { ...loadTheme().typography, body: 'inter' as const, heading: 'inter' as const, headingWeight: 740 } }
+    const preference = matchMedia('(prefers-color-scheme: dark)')
+    const requested = new URLSearchParams(location.search).get('mode')
+    function syncMode() {
+      const mode = requested === 'light' || requested === 'dark' ? requested : preference.matches ? 'dark' : 'light'
+      applyTheme(theme, mode)
+    }
+    syncMode()
+    preference.addEventListener('change', syncMode)
+    return () => preference.removeEventListener('change', syncMode)
   }, [])
+
   useLayoutEffect(() => {
     screenRef.current?.scrollTo({ top: 0 })
     if (mounted.current) titleRef.current?.focus({ preventScroll: true })
