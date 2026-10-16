@@ -176,7 +176,7 @@ Comments remain visible and save per keystroke. V2 uses `lp-rosa-flow-v2-v01` in
 
 Real photo/video attachments use the shared native camera/library chooser, previews and removal. Controllers stay mounted across screen/criterion changes. Only current-session images qualify as photo evidence; videos and stored file names do not. Reload or switching versions releases attachments, and review recalculates missing evidence. Text survives. Local storage failures are visible.
 
-Not observed remains recorded for progress but needs re-observation before sign-off, matching the reference. Needs coaching is a recorded observation, without an invented pass threshold. Sign-off is gated by completeness; changing observations, feedback or evidence clears the demo assessor confirmation. Online/offline toggles simulate status only. Assessor review never grants real approval, sync or certification.
+The response options are Pass, Needs coaching, and Fail. All three count as recorded results; required evidence still applies. Legacy Not observed drafts stay pending and are never silently converted to Fail. Review includes Pass/Fail counts, and feedback highlights recorded failures or coaching without inventing a certification threshold. Sign-off is gated by completeness; changing observations, feedback or evidence clears the demo assessor confirmation. Online/offline toggles simulate status only. Assessor review never grants real approval, sync or certification.
 
 Implementation: `src/pages/assessment-flow.tsx`, scoped `src/styles/flow.css`, validated data/storage model `src/data/flow-draft.ts`, and shared `src/components/layout/version-switcher.tsx`. V1 and V2 are lazy-loaded independently.
 

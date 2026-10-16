@@ -9,13 +9,16 @@ test('Rosa Flow preserves the supplied eleven observations and configuration', (
   assert.deepEqual(flowCriteria.flatMap((c, i) => 'evidence' in c ? [i] : []), [8])
   assert.equal(flowStorageKey, 'lp-rosa-flow-v2-v01')
 })
-test('not observed requires another observation; coaching is a recorded outcome', () => {
+test('Pass, Fail and coaching are recorded outcomes; legacy not observed still needs a response', () => {
   const draft = emptyFlowDraft()
   draft.answers = Object.fromEntries(flowCriteria.map((_, i) => [i, 'met']))
   draft.notes[8] = 'Observed quality checks'
   assert.deepEqual(flowMissing(draft), [])
   draft.answers[1] = 'coaching'
   assert.deepEqual(flowMissing(draft), [])
+  draft.answers[2] = 'fail'
+  assert.deepEqual(flowMissing(draft), [])
+  assert.equal(normalizeFlowDraft(draft).answers[2], 'fail')
   draft.answers[2] = 'notObserved'
   delete draft.answers[3]
   assert.deepEqual(flowMissing(draft), [2, 3])
@@ -25,6 +28,8 @@ test('required evidence accepts nonblank notes or current-session photos, never 
   assert.equal(flowEvidenceOk(draft, 8), false)
   assert.equal(flowEvidenceOk(draft, 8, { 8: 1 }), true)
   assert.equal(flowEvidenceOk(draft, 8), false) // Reload discards media eligibility.
+  draft.answers[8] = 'fail'
+  assert.ok(flowMissing(draft).includes(8))
   draft.notes[8] = 'Product appeared consistent with the agreed standard.'
   assert.equal(flowEvidenceOk(draft, 8), true)
 })

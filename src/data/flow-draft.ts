@@ -13,7 +13,8 @@ export const flowCriteria = [
 ] as const
 export const flowScreens = ['list', 'overview', 'assessment', 'review', 'signoff'] as const
 export type FlowScreen = typeof flowScreens[number]
-export type FlowAnswer = 'met' | 'coaching' | 'notObserved'
+// Preserve legacy unobserved responses as pending; they are never converted into Fail.
+export type FlowAnswer = 'met' | 'coaching' | 'fail' | 'notObserved'
 export type FlowDraft = { screen: FlowScreen; index: number; offline: boolean; answers: Record<number, FlowAnswer>; notes: Record<number, string>; feedback: string; paused: boolean; assessorConfirmed: boolean }
 export const flowStorageKey = 'lp-rosa-flow-v2-v01'
 export const emptyFlowDraft = (): FlowDraft => ({ screen: 'assessment', index: 4, offline: false, answers: {}, notes: {}, feedback: '', paused: false, assessorConfirmed: false })
@@ -28,7 +29,7 @@ export function normalizeFlowDraft(value: unknown): FlowDraft {
   for (let i = 0; i < flowCriteria.length; i++) {
     const answer = (v.answers as Record<number, unknown> | undefined)?.[i]
     const note = (v.notes as Record<number, unknown> | undefined)?.[i]
-    if (answer === 'met' || answer === 'coaching' || answer === 'notObserved') draft.answers[i] = answer
+    if (answer === 'met' || answer === 'coaching' || answer === 'fail' || answer === 'notObserved') draft.answers[i] = answer
     if (typeof note === 'string') draft.notes[i] = note
   }
   return draft
