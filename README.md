@@ -149,3 +149,16 @@ New draft key: `lp-rosa-focused-v2-3`. It stores committed answers, notes, activ
 Implementation: `focused-response.tsx` renders the five response controls; `focused-draft.ts` validates and migrates drafts; `use-focused-draft.ts` handles local persistence; `focused.css` adapts the supplied card styles. Shared evidence controls support compact display and restore focus to the visible calling action.
 
 Validation: 14 unit tests plus Chromium touch tests for all five response types, automatic focus, required evidence, zero/comma measurement values, explicit multi confirmation, complete review, pause, reload with missing session photos, reset, 44px rating controls and 320/390/430/768px widths. A separate browser run verifies legacy migration preserves the old draft and restores uncommitted numeric/multi values without counting them as recorded.
+
+
+## Question bottom sheet and inline comment
+
+The default assessment now keeps all nine cards compact. Tapping a criterion opens a modal sheet from the bottom with the question, response controls, guidance, an always-open Comment textarea, and photo evidence. The list stays behind the overlay; browser Back/outside/close dismiss the sheet and restore focus to the current row.
+
+Comments are controlled by the existing per-criterion notes map and saved locally on every change. There is no Add note button or extra comment modal in this flow. Required-evidence rules accept a non-blank comment or available session photo. Pause makes the question read-only and provides an explicit Resume action.
+
+Selecting or recording an answer no longer advances automatically: **Continue** leaves time to comment, then changes the question inside the same sheet. The action stays disabled until the criterion is complete. When all criteria are complete, it opens Review assessment. Closing the question never discards a recorded answer or comment.
+
+The sheet has a fixed action footer, a scrollable question body, keyboard-aware height/bottom placement via visualViewport, 16px comment input, safe-area padding, and reduced-motion support. Existing media controllers remain mounted outside the question portal; gallery previews are portalled into the active question, preserving actual files across sheet dismissal and question changes without an upload.
+
+Chromium touch checks passed for all five response types, explicit continuation, comment persistence/whitespace rules, nested photo/preview Back behavior, focus restoration, review-to-question navigation, per-criterion gallery retention, reduced-height keyboard simulation, pause/reload recovery and 320/390/430/768px widths. Native keyboard/camera verification on a physical device remains necessary.
