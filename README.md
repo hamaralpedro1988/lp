@@ -1,6 +1,6 @@
 # Learning Pool — S2S Assessment foundation
 
-A neutral component playground, ready for iterative product design. No assessment screens, branding, backend, or authentication are implemented.
+A neutral component playground, ready for iterative product design. Includes the first Fryer Station observation screen and the design playground. No backend or authentication is implemented.
 
 ## Develop
 
@@ -50,7 +50,7 @@ Chromium smoke checks passed at 390px, 768px, and 1440px with no page-level hori
 
 ## Theme Studio
 
-The application opens in the Portuguese Theme Studio. The editor changes semantic tokens in an isolated, interactive playground iframe (`?preview=1`), including portalled dialogs and menus. The editor itself stays neutral.
+The application opens in the Fryer Station assessment prototype. Open `?studio=1` for the Portuguese Theme Studio. The editor changes semantic tokens in an isolated, interactive playground iframe (`?preview=1`), including portalled dialogs and menus. The editor itself stays neutral.
 
 - Eleven starting presets: the supplied shadcn/create theme, neutral, ocean, forest, plum, ruby, amber, teal, indigo, rose, and slate. Presets replace both color modes and the radius.
 - Edit 37 semantic colors through the native color picker or a six-digit HEX or OKLCH value (apply with Enter or blur).
@@ -81,3 +81,14 @@ The project default now uses the exact supplied OKLCH tokens and `--radius: 0.45
 The editor accepts HEX and OKLCH strings without rounding or converting their stored values. Its native color picker displays an approximate opaque sRGB HEX swatch; editing through that picker intentionally replaces the value with HEX and removes alpha. Use the text field to preserve or edit OKLCH transparency. Contrast calculations convert to sRGB using Culori and composite alpha (a transparent background uses a white underlying surface).
 
 Browser draft storage is now `lp-theme-studio-v2` so the supplied palette appears on the first visit to this release. Older drafts remain untouched in `lp-theme-studio-v1` and can be restored with **Recuperar ajustes anteriores**. Restoring a preset preserves typography; **Repor o teu tema** resets the full theme to the supplied project default.
+
+
+## First assessment screen
+
+The root route shows the reference's first criterion: **Checks fryer readiness and oil conditions**, Preparation 1 of 3. The interface uses the applied theme and the current saved typography/colors. Theme Studio remains available at `?studio=1`; the component iframe remains at `?preview=1`. Routes are loaded separately.
+
+Implemented interactions: mutually exclusive observation result, note editor with save/cancel/remove, local image/video attachment previews and removal, elapsed timer with pause/resume, focus view, and a checklist sheet reflecting the current result. Focus view only reduces interface distractions; a website cannot suppress device calls or notifications.
+
+Only the supplied criterion is defined. Back is disabled; Next explains that the next criterion is not yet available. Criteria 2 and 3 are clearly marked as undefined rather than fabricated. Notes, results, elapsed time, and attachment object URLs are kept only while this page remains mounted; reload/navigation clears them. Files are never uploaded. Theme choices continue to persist separately in browser storage.
+
+Chromium checks exercised selection, note save/cancel, image add/remove, actual timer pause/resume, focus view, checklist status, prototype navigation limits, route links, and layouts at 390/768/1440px.

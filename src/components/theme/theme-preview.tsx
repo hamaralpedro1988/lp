@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Mode, Theme } from '@/lib/theme'
 
 export function ThemePreview({ theme, mode, viewport }: { theme: Theme; mode: Mode; viewport: 'mobile' | 'desktop' }) {
@@ -7,8 +7,15 @@ export function ThemePreview({ theme, mode, viewport }: { theme: Theme; mode: Mo
   const [available, setAvailable] = useState(390)
   const width = viewport === 'mobile' ? 390 : 1200
   const scale = Math.min(1, available / width)
-  const sync = () => frame.current?.contentWindow?.postMessage({ type: 'lp-theme', theme, mode }, location.origin)
-  useEffect(sync, [theme, mode])
+  const sync = useCallback(() => frame.current?.contentWindow?.postMessage({ type: 'lp-theme', theme, mode }, location.origin), [theme, mode])
+  useEffect(sync, [sync])
+  useEffect(() => {
+    function ready(event: MessageEvent) {
+      if (event.origin === location.origin && event.source === frame.current?.contentWindow && event.data?.type === 'lp-preview-ready') sync()
+    }
+    window.addEventListener('message', ready)
+    return () => window.removeEventListener('message', ready)
+  }, [sync])
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => setAvailable(entry.contentRect.width))
     if (container.current) observer.observe(container.current)

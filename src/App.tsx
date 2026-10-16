@@ -1,8 +1,10 @@
-import { useEffect } from 'react'
-import ComponentPlayground from '@/pages/component-playground'
-import ThemeStudio from '@/pages/theme-studio'
+import { lazy, Suspense, useEffect } from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { applyTheme, isTheme, loadTheme } from '@/lib/theme'
+
+const Assessment = lazy(() => import('@/pages/assessment'))
+const ThemeStudio = lazy(() => import('@/pages/theme-studio'))
+const ComponentPlayground = lazy(() => import('@/pages/component-playground'))
 
 function Preview() {
   useEffect(() => {
@@ -13,10 +15,12 @@ function Preview() {
       if (data?.type === 'lp-theme' && isTheme(data.theme) && (data.mode === 'light' || data.mode === 'dark')) applyTheme(data.theme, data.mode)
     }
     window.addEventListener('message', receive)
+    if (window.parent !== window) window.parent.postMessage({ type: 'lp-preview-ready' }, location.origin)
     return () => window.removeEventListener('message', receive)
   }, [])
   return <ComponentPlayground/>
 }
 export default function App() {
-  return <TooltipProvider>{new URLSearchParams(location.search).get('preview') === '1' ? <Preview/> : <ThemeStudio/>}</TooltipProvider>
+  const params = new URLSearchParams(location.search)
+  return <TooltipProvider><Suspense fallback={<p role="status" className="p-8 text-sm text-muted-foreground">A carregar…</p>}>{params.get('preview') === '1' ? <Preview/> : params.get('studio') === '1' ? <ThemeStudio/> : <Assessment/>}</Suspense></TooltipProvider>
 }
