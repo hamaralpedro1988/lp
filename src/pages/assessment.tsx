@@ -13,6 +13,7 @@ import { useFocusedDraft } from '@/hooks/use-focused-draft'
 import { useAssessmentDraft } from '@/hooks/use-assessment-draft'
 import { useMobileOverlay, useMobileViewport } from '@/hooks/use-mobile-overlay'
 import { applyTheme, loadTheme } from '@/lib/theme'
+import { VersionSwitcher } from '@/components/layout/version-switcher'
 import '@/styles/focused.css'
 
 export default function Assessment() {
@@ -72,7 +73,7 @@ export default function Assessment() {
   const typeLabel={binary:'Yes / No',rating:'Rating · 1–5',number:'Number',single:'Single choice',multi:'Multi-select'}
   return <div className="assessment-mobile focused-app"><div className="phone" aria-label="Rosa assessment prototype">
     <header className="phone-header"><div className="topline"><h1 className="screen-title">Fryer Station</h1><span className="time" title="Assessment session time, not task duration">{Math.floor(seconds/60).toString().padStart(2,'0')}:{(seconds%60).toString().padStart(2,'0')}</span><Button variant="ghost" size="icon" aria-label={paused?'Resume assessment':'Pause assessment'} onClick={()=>{if(paused){setPaused(false);toast('Assessment resumed')}else{setPaused(true);openSheet('pause')}}}>{paused?<Play/>:<Pause/>}</Button><Button variant="ghost" size="icon" aria-label="More options" onClick={()=>openSheet('menu')}><MoreHorizontal/></Button></div>
-      <div className="header-mini"><Progress value={ready/criteria.length*100} aria-label="Assessment criteria complete" aria-valuemin={0} aria-valuemax={criteria.length} aria-valuenow={ready}/><span className="progress-label">{ready} of {criteria.length} assessed</span></div>
+      <div className="header-mini"><Progress value={ready/criteria.length*100} aria-label="Assessment criteria complete" aria-valuemin={0} aria-valuemax={criteria.length} aria-valuenow={ready}/><span className="progress-label">{ready} of {criteria.length} assessed</span><VersionSwitcher current={1}/></div>
       <nav className="tabs" aria-label="Checklist sections">{sections.map(s=><button key={s} aria-current={s===section?'location':undefined} className="tab" disabled={paused} onClick={()=>{const items=criteria.filter(c=>c.section===s);focus((items.find(c=>!isComplete(c,draft.answers,draft.notes,photos))??items[0]).id,false,false)}}>{s}</button>)}</nav>
       {paused&&<p role="status" className="paused-banner">Paused · Resume to continue responding</p>}
     </header>

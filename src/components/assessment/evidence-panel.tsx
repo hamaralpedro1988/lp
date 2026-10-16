@@ -9,7 +9,7 @@ import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
 
 export type EvidenceActions = { openNote: () => void; openMedia: () => void }
 type Evidence = { id: string; name: string; url: string; video: boolean }
-export function EvidencePanel({ note, onNoteChange, onCountChange, controllerRef, context, persistentNote = false, photosOnly = false, compact = false, onOverlayClosed, externalGallery = false, galleryTarget }: { note: string; onNoteChange: (value: string) => void; onCountChange?: (count: number) => void; controllerRef?: Ref<EvidenceActions>; context?: string; persistentNote?: boolean; photosOnly?: boolean; compact?: boolean; onOverlayClosed?: () => void; externalGallery?: boolean; galleryTarget?: HTMLElement | null }) {
+export function EvidencePanel({ note, onNoteChange, onCountChange, onPhotoCountChange, controllerRef, context, persistentNote = false, photosOnly = false, compact = false, onOverlayClosed, externalGallery = false, galleryTarget }: { note: string; onNoteChange: (value: string) => void; onCountChange?: (count: number) => void; onPhotoCountChange?: (count: number) => void; controllerRef?: Ref<EvidenceActions>; context?: string; persistentNote?: boolean; photosOnly?: boolean; compact?: boolean; onOverlayClosed?: () => void; externalGallery?: boolean; galleryTarget?: HTMLElement | null }) {
   const uniqueId = useId()
   const externalTrigger = useRef<HTMLElement | null>(null)
   const [open, setOpen] = useState(false)
@@ -31,7 +31,7 @@ export function EvidencePanel({ note, onNoteChange, onCountChange, controllerRef
     const file = files.find(item => item.id === id)
     if (file) { URL.revokeObjectURL(file.url); urls.current.delete(file.url) }
     setFiles(previous => previous.filter(item => item.id !== id))
-    if (file) onCountChange?.(files.length - 1)
+    if (file) { onCountChange?.(files.length - 1); onPhotoCountChange?.(files.filter(item => !item.video && item.id !== id).length) }
   }
   function choose(event: React.ChangeEvent<HTMLInputElement>) {
     const selected = Array.from(event.target.files ?? [])
@@ -39,6 +39,7 @@ export function EvidencePanel({ note, onNoteChange, onCountChange, controllerRef
     setError(valid.length !== selected.length ? (photosOnly ? 'Choose an image file.' : 'Choose an image or video file.') : '')
     setFiles(previous => [...previous, ...valid.map(file => { const url = URL.createObjectURL(file); urls.current.add(url); return { id: crypto.randomUUID(), name: file.name, url, video: file.type.startsWith('video/') } })])
     onCountChange?.(files.length + valid.length)
+    onPhotoCountChange?.(files.filter(item => !item.video).length + valid.filter(file => file.type.startsWith('image/')).length)
     event.target.value = ''
   }
   const gallery = <>{files.length > 0 && <div className="grid grid-cols-2 gap-3">{files.map(file => <div key={file.id} className="min-w-0 overflow-hidden rounded-lg border"><button className="flex aspect-video w-full items-center justify-center bg-muted" aria-label={`Preview ${file.name}`} onClick={event => { externalTrigger.current=event.currentTarget; setPreview(file) }}>{file.video ? <Play className="size-8"/> : <img src={file.url} alt={file.name} className="h-full w-full object-cover"/>}</button><div className="flex items-center gap-1 px-2 py-1"><span className="min-w-0 flex-1 truncate text-xs">{file.name}</span><Button variant="ghost" size="icon" aria-label={`Remove ${file.name}`} onClick={() => remove(file.id)}><Trash2 className="size-4"/></Button></div></div>)}</div>}

@@ -157,3 +157,5 @@
 .question-footer button {min-height:48px;white-space:normal;font-size:13px;}
 .question-footer button:last-child {flex:1;}
 @media(prefers-reduced-motion:reduce){.question-sheet,.question-sheet *{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.focused-app .version-trigger{font-size:11px;gap:5px;padding-inline:8px;flex-shrink:0}

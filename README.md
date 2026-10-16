@@ -162,3 +162,22 @@ Selecting or recording an answer no longer advances automatically: **Continue** 
 The sheet has a fixed action footer, a scrollable question body, keyboard-aware height/bottom placement via visualViewport, 16px comment input, safe-area padding, and reduced-motion support. Existing media controllers remain mounted outside the question portal; gallery previews are portalled into the active question, preserving actual files across sheet dismissal and question changes without an upload.
 
 Chromium touch checks passed for all five response types, explicit continuation, comment persistence/whitespace rules, nested photo/preview Back behavior, focus restoration, review-to-question navigation, per-criterion gallery retention, reduced-height keyboard simulation, pause/reload recovery and 320/390/430/768px widths. Native keyboard/camera verification on a physical device remains necessary.
+
+## Side-by-side versions — Rosa Flow v0.1
+
+The supplied `LearningPool_Rosa_Flow_v01.html` is integrated as a separate React experience. **Versões** is visible in both assessment headers and opens a mobile bottom sheet with direct links:
+
+- `/` or `?version=1`: the existing compact nine-criterion checklist and question bottom sheet (V1).
+- `?version=2`: the new Rosa Flow experience (V2), including Assessments, Overview, Live checklist, Review, and demonstration sign-off.
+
+V2 preserves the reference's eleven observations (Preparation 3 / Frying 5 / Completion 3), three response states, illustrative critical/weight flags, and required note-or-photo evidence on product quality. It starts on criterion 5, as in the supplied HTML. The menu beside **S2S Assessments** exposes every screen and the sample/reset tools on mobile; Home opens the assignment list. Desktop retains the reference's navigation and rationale rails. Mobile uses the actual browser viewport without a simulated status bar or home indicator. Both versions keep their original navigation and independent drafts.
+
+Comments remain visible and save per keystroke. V2 uses `lp-rosa-flow-v2-v01` in localStorage and never migrates or overwrites V1 answers. Browser Back dismisses open sheets. Save & exit retains the draft and returns to the assignment list, which offers resume through Overview. Reset has confirmation and affects V2 only.
+
+Real photo/video attachments use the shared native camera/library chooser, previews and removal. Controllers stay mounted across screen/criterion changes. Only current-session images qualify as photo evidence; videos and stored file names do not. Reload or switching versions releases attachments, and review recalculates missing evidence. Text survives. Local storage failures are visible.
+
+Not observed remains recorded for progress but needs re-observation before sign-off, matching the reference. Needs coaching is a recorded observation, without an invented pass threshold. Sign-off is gated by completeness; changing observations, feedback or evidence clears the demo assessor confirmation. Online/offline toggles simulate status only. Assessor review never grants real approval, sync or certification.
+
+Implementation: `src/pages/assessment-flow.tsx`, scoped `src/styles/flow.css`, validated data/storage model `src/data/flow-draft.ts`, and shared `src/components/layout/version-switcher.tsx`. V1 and V2 are lazy-loaded independently.
+
+Validation: 18 unit tests, production build, lint (three pre-existing official UI Fast Refresh warnings), Chromium mobile interaction checks across the complete V2 flow and the existing V1 question-sheet flow, widths 320/390/430/768/1440px, and a reduced-height keyboard simulation. Native camera and keyboard behavior still need physical-device verification.
