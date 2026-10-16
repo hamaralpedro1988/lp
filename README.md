@@ -52,12 +52,23 @@ Chromium smoke checks passed at 390px, 768px, and 1440px with no page-level hori
 
 The application opens in the Portuguese Theme Studio. The editor changes semantic tokens in an isolated, interactive playground iframe (`?preview=1`), including portalled dialogs and menus. The editor itself stays neutral.
 
-- Four starting presets: neutral, ocean, forest, and plum. Presets replace both color modes and the radius.
-- Edit 18 semantic colors through the native color picker or a six-digit HEX value (apply with Enter or blur).
+- Ten starting presets: neutral, ocean, forest, plum, ruby, amber, teal, indigo, rose, and slate. Presets replace both color modes and the radius.
+- Edit 37 semantic colors through the native color picker or a six-digit HEX value (apply with Enter or blur).
 - Light and dark colors are independent; radius (0–24px) is shared.
 - Preview a real 390px mobile or 1200px desktop viewport, scaled to fit the available space.
 - On smaller screens, switch between editing and preview using the top panel controls.
-- Four text contrast checks use the WCAG relative-luminance formula and the 4.5:1 AA threshold for normal text. These are limited checks, not a complete accessibility audit.
+- Seven text contrast checks use the WCAG relative-luminance formula and the 4.5:1 AA threshold for normal text. These are limited checks, not a complete accessibility audit.
 - Edits persist locally in this browser. Reset requires confirmation. Export both modes by copying CSS or downloading `theme.css`; applying the exported tokens to source remains a deliberate separate step.
 
 The theme model, presets, validation, contrast calculation, and CSS export are in `src/lib/theme.ts`; the editor is in `src/pages/theme-studio.tsx`; the isolated preview is in `src/components/theme/theme-preview.tsx`. No new runtime dependencies were needed.
+
+
+### Typography and expanded color tools
+
+Choose independent body and heading families from System, Inter, Roboto, Lora, Georgia, and Monospace. Inter, Roboto, and Lora are bundled locally through Fontsource; they do not depend on external font requests. Body base size (14–20px), body line height (1.2–1.8), and heading weight (400–700) apply in both modes. Typography has a dedicated sample in the editor and playground. Existing text utilities keep their relative size roles; explicit line heights in components are retained.
+
+Colors are grouped into surfaces/text, actions/controls, status, charts, and sidebar tokens. Twenty quick swatches can be applied to any selected token. Status surfaces, illustrative chart bars, and a sidebar sample show the additional tokens in context. Color presets preserve typography; resetting the entire theme resets typography too.
+
+Legacy browser themes automatically gain default typography and the new tokens while preserving existing color overrides and radius. CSS export includes typography variables, body/heading rules, all color tokens, and both modes. When using the CSS in another project, install/import any selected Fontsource fonts as indicated in the export header; this project already includes them.
+
+`npm test` uses Node's test runner (Node 24 recommended) for migration, invalid saved data, presets, contrast reference values, and CSS export. Browser checks also verified font files actually load, the computed styles update, typography survives reload and color preset changes, additional colors render, CSS reproduces typography, and mobile editing works.

@@ -1,3 +1,4 @@
+import { PaletteSample } from '@/components/theme/palette-sample'
 import { useState, type ReactNode } from 'react'
 import { ArrowRight, Plus, Check, Info, Loader2, SlidersHorizontal } from 'lucide-react'
 import { PlaygroundLayout } from '@/components/layout/playground-layout'
@@ -37,6 +38,7 @@ export default function ComponentPlayground() {
       <div className="mt-7 flex flex-wrap gap-2">{['16 components', 'Accessible primitives', 'Mobile first'].map(x => <Badge key={x} variant="outline" className="px-3 py-1.5 font-normal">{x}</Badge>)}</div>
       <div className="mt-8 grid grid-cols-3 overflow-hidden rounded-xl border bg-muted/30">{[['01','Explore'],['02','Interact'],['03','Refine']].map(([n,t])=><div key={n} className="border-r p-4 last:border-r-0 sm:p-5"><p className="font-mono text-xs text-muted-foreground">{n}</p><p className="mt-2 text-sm font-medium">{t}</p></div>)}</div>
     </section>
+    <PaletteSample/>
     <Section id="buttons" number="01" title="Actions & emphasis" description="A clear hierarchy, from the primary action to the quietest link.">
       <div className="rounded-xl border p-5 sm:p-6"><Caption>Button variants</Caption><div className="flex flex-wrap gap-3"><Button onClick={()=>setNotice('Primary action selected.')}>Primary action<ArrowRight/></Button><Button variant="secondary" onClick={()=>setNotice('Secondary action selected.')}>Secondary</Button><Button variant="outline" onClick={()=>setNotice('Outline action selected.')}><Plus/>Add item</Button><Button variant="ghost" onClick={()=>setNotice('Ghost action selected.')}>Ghost</Button><Button variant="link" onClick={()=>setNotice('Link action selected.')}>Text link<ArrowRight/></Button></div><Separator className="my-6"/><Caption>Interaction states</Caption><div className="flex flex-wrap gap-3"><Button variant="outline" className="bg-accent text-accent-foreground">Hover example</Button><Button variant="outline" className="border-ring ring-[3px] ring-ring/50">Focus example</Button><Button disabled>Disabled</Button><Button disabled variant="secondary"><Loader2 className="animate-spin"/>Loading</Button></div><p className="mt-4 text-xs leading-5 text-muted-foreground">Hover and focus are visual samples. Tab through the controls to review actual keyboard focus.</p></div>
     </Section>
