@@ -114,3 +114,23 @@ The default assessment route now uses a compact checklist rather than one page p
 The original mobile screen is retained at `?view=step`, accessible through **Assessment options → View one criterion at a time**. The two layouts share the same tab-scoped result/note/timer draft. Files remain page-local and do not survive navigation between layouts. Theme Studio remains at `?studio=1` and is available in the options sheet.
 
 Touch tests validated overview/expansion, inline result changes, progress, note and media retention across collapse, timer pause/Back, layout comparison with draft preservation, and 320/390/430/768px widths.
+
+
+## Rosa V2 — supplied compact checklist
+
+The default route now implements the supplied `LearningPool_Rosa_V2_Compact_Checklist.html` as React components. It uses the reference's compact Inter typography, neutral surfaces, green/red decision states, section pills, swipe actions, full criterion details, and completeness review. The original single-criterion route remains at `?view=step`; Theme Studio is at `?studio=1`.
+
+The supplied ten criteria are in `src/data/rosa-criteria.ts` (Preparation 3, Frying 4, Completion 3). The configuration weights, critical flags, and the f2 evidence rule are expressly illustrative. Review reports observed counts and missing evidence; it does not calculate a certification score, submit data, or implement sign-off.
+
+- Tap ✓ / ✕ to select a result; tap the selected value again to clear it.
+- Tap criterion text to open question, observation guidance, illustrative configuration, assessment, and evidence.
+- Swipe a row left to reveal note/media actions. The same actions remain accessible from details without a gesture.
+- Section pills scroll within the list; scrolling updates the active section.
+- Review reports unanswered criteria and any configured evidence gaps, with direct links to details.
+- Reset requires confirmation and clears responses, notes, media and elapsed time. This supplied version exposes image capture/library options; the previous layout retains video support.
+
+Answers/notes are validated and stored under localStorage key `lp-rosa-compact-v1`; the first existing criterion draft is migrated when applicable. Timer interruption behavior remains tab-scoped. Photos/videos remain in memory, survive list/detail transitions, and are released on reset or page exit. File names alone are never counted as available evidence after reload. The UI makes this storage distinction explicit. Local-save failures are reported.
+
+Shared evidence controls now expose an imperative controller for swipe shortcuts and use unique accessible field IDs per criterion. Nested browser Back navigation keeps criterion detail open when dismissing a note or media sheet.
+
+Validation: production build, lint (three existing official UI Fast Refresh warnings), nine unit tests, and Chromium touch checks for quick toggle/clear, swipe notes, details, nested Back, section jumps, evidence gaps, review (including all ten complete), actual per-item attachment retention, local reload, menu review, reset/cancel and widths 320/390/430/768px.

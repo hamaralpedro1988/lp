@@ -42,5 +42,10 @@ export function useAssessmentDraft() {
   useEffect(() => {
     try { sessionStorage.setItem(draftKey, JSON.stringify({ result, note, paused, elapsed: elapsed.current + (started.current === null ? 0 : Date.now() - started.current) })) } catch { /* Keep operating in memory. */ }
   }, [result, note, paused, seconds])
-  return { result, setResult, note, setNote, paused, setPaused, seconds }
+  function resetTimer() {
+    elapsed.current = 0
+    started.current = paused ? null : Date.now()
+    setSeconds(0)
+  }
+  return { resetTimer, result, setResult, note, setNote, paused, setPaused, seconds }
 }

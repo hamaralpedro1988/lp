@@ -9,6 +9,7 @@ export function useMobileOverlay(open: boolean, requestClose: () => boolean) {
     const id = crypto.randomUUID()
     history.pushState({ ...history.state, assessmentOverlay: id }, '')
     function back() {
+      if (history.state?.assessmentOverlay === id) return
       if (!close.current()) history.pushState({ ...history.state, assessmentOverlay: id }, '')
     }
     window.addEventListener('popstate', back)
