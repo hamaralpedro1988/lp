@@ -134,3 +134,18 @@ Answers/notes are validated and stored under localStorage key `lp-rosa-compact-v
 Shared evidence controls now expose an imperative controller for swipe shortcuts and use unique accessible field IDs per criterion. Nested browser Back navigation keeps criterion detail open when dismissing a note or media sheet.
 
 Validation: production build, lint (three existing official UI Fast Refresh warnings), nine unit tests, and Chromium touch checks for quick toggle/clear, swipe notes, details, nested Back, section jumps, evidence gaps, review (including all ten complete), actual per-item attachment retention, local reload, menu review, reset/cancel and widths 320/390/430/768px.
+
+
+## Current default — Rosa V2.3 focused cards and mixed responses
+
+The latest supplied `LearningPool_Rosa_V2_3_Focused_Cards_Mixed_Responses.html` replaces the default list with nine focused cards: Preparation (3), Frying (4), Completion (2). It uses the reference's blue active-card treatment and Inter typography, one expanded criterion at a time, inline guidance, evidence actions, and a subtle one-shot number pulse after advancing. Controls retain at least 44px touch targets; reduced-motion preferences suppress animation.
+
+`src/data/focused-criteria.ts` contains the supplied binary, 1–5 rating, numeric measurement, single-choice, and multi-select criteria. Numeric and multi-select values are only committed with Record. Numeric zero and comma decimals are accepted; negative/non-finite values are rejected. Ratings have no implicit pass/fail threshold. The p2 criterion requires a note or available photo before counting as complete, irrespective of its binary answer.
+
+Answering a complete criterion advances to the next pending card after a brief delay. Manual navigation, editing, opening a sheet, or pausing cancels pending advancement. Required evidence keeps the card active until supplied. The footer offers Save, Review, and Next pending (or Review assessment when complete). Review is a bottom sheet with summaries for every section; sign-off remains an explicit prototype placeholder.
+
+New draft key: `lp-rosa-focused-v2-3`. It stores committed answers, notes, active card, guidance state, and uncommitted numeric/multi drafts. Compatible p1/p2/c2 answers and notes can migrate from `lp-rosa-compact-v1`; changed observation types are not guessed. The old draft key stays untouched. Photos remain actual page-session objects, and progress is recalculated without them on reload. Timer/background/Back/keyboard behavior continues through shared mobile hooks. Pause locks response inputs while retaining readable guidance and evidence.
+
+Implementation: `focused-response.tsx` renders the five response controls; `focused-draft.ts` validates and migrates drafts; `use-focused-draft.ts` handles local persistence; `focused.css` adapts the supplied card styles. Shared evidence controls support compact display and restore focus to the visible calling action.
+
+Validation: 14 unit tests plus Chromium touch tests for all five response types, automatic focus, required evidence, zero/comma measurement values, explicit multi confirmation, complete review, pause, reload with missing session photos, reset, 44px rating controls and 320/390/430/768px widths. A separate browser run verifies legacy migration preserves the old draft and restores uncommitted numeric/multi values without counting them as recorded.

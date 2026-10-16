@@ -1,0 +1,132 @@
+.focused-app { --blue:#3468c8; --blue-soft:#f6f9ff; --blue-line:#92b4fa; --green:#16784b; --green-bg:#e8f7ee; --amber:#a65d19; --amber-bg:#fcf3e8; --line:#e6e9ee; --shadow:0 4px 16px rgba(18,33,53,.035); background:#f5f6f8; min-height:100dvh; color:#18202b; font-family:"Inter Variable",sans-serif; }
+.focused-app .phone { max-width:440px; height:100dvh; display:flex; flex-direction:column; margin:auto; background:#fff; border-inline:1px solid #dde2e9; overflow:hidden; position:relative; }
+.focused-app .phone-header{padding:19px 18px 0;border-bottom:1px solid var(--line);background:rgba(255,255,255,.97);z-index:3;flex-shrink:0}
+.focused-app .topline{display:flex;align-items:center;gap:9px}
+.focused-app .screen-title{flex:1;font-size:19px;line-height:1.3;font-weight:650;letter-spacing:-.055em;margin:0}
+.focused-app .time{font-variant-numeric:tabular-nums;font-size:12px;font-weight:600;color:#475367}
+.focused-app .icon-btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:9px;background:transparent;color:#556174;min-width:38px;min-height:38px;padding:7px}
+.focused-app .icon-btn:hover{background:#f3f5f8}
+.focused-app .header-mini{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:13px 0 12px}
+.focused-app .progress-track{height:5px;flex:1;overflow:hidden;border-radius:20px;background:#e9edf3}
+.focused-app .progress-fill{height:100%;width:0%;background:var(--blue);border-radius:inherit;transition:width .28s ease}
+.focused-app .progress-label{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:11px;color:#7b8695}
+.focused-app .tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:0 -1px;padding:0 0 13px}
+.focused-app .tab{border:0;border-radius:9px;background:#f3f5f8;color:#687281;font-size:13px;font-weight:600;padding:12px 6px;min-height:43px;transition:background .15s,color .15s}
+.focused-app .tab[aria-selected="true"]{background:#1f2937;color:#fff}
+
+    .focused-app .scroll{padding:12px 15px 28px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;flex:1;scroll-behavior:smooth}
+.focused-app .section{padding-top:4px;scroll-margin-top:12px}
+.focused-app .section+.section{margin-top:21px}
+.focused-app .section-head{display:flex;justify-content:space-between;align-items:center;padding:9px 3px 11px;color:#667183;font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:.08em}
+.focused-app .section-head span:last-child{font-variant-numeric:tabular-nums;color:#9ba3ad;letter-spacing:0}
+.focused-app .item-list{display:grid;gap:9px}
+.focused-app .criterion{background:#fff;border:1px solid #e4e7ec;border-radius:13px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+.focused-app .criterion.active{border-color:var(--blue-line);background:var(--blue-soft);box-shadow:0 0 0 2px rgba(78,127,208,.055),0 8px 24px rgba(42,80,150,.04)}
+.focused-app .item-top{display:flex;align-items:center;gap:10px;padding:15px 12px;min-height:76px}
+.focused-app .item-main{flex:1;display:flex;align-items:center;gap:11px;border:0;background:transparent;text-align:left;color:inherit;min-width:0;padding:0;align-self:stretch}
+.focused-app .index{width:31px;height:31px;flex:0 0 31px;border:1.5px solid #d9dee6;color:#758091;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:650;font-size:12px;position:relative;background:#fff}
+.focused-app .index.success{background:var(--green-bg);border-color:var(--green-bg);color:var(--green)}
+.focused-app .index.attention{background:var(--amber-bg);border-color:var(--amber-bg);color:var(--amber)}
+.focused-app .active .index.current{border:1.8px solid var(--blue);color:var(--blue);background:#fff}
+.focused-app .index.pulse::after{content:"";position:absolute;inset:-7px;border:2px solid rgba(53,102,200,.5);border-radius:50%;animation:focused-number-pulse .72s cubic-bezier(.2,.8,.2,1) 1 forwards;pointer-events:none}
+@keyframes focused-number-pulse{0%{transform:scale(.7);opacity:0}
+25%{opacity:1}
+100%{transform:scale(1.35);opacity:0}
+}
+.focused-app .criterion-title{font-size:15px;font-weight:600;line-height:1.48;letter-spacing:-.018em}
+.focused-app .card-caps{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:5px}
+.focused-app .type-label{font-size:10px;color:#8390a1}
+.focused-app .critical{font-size:10px;font-weight:650;color:#aa4d36;background:#fcf0ec;padding:3px 6px;border-radius:5px}
+.focused-app .weighted{font-size:10px;color:#8a6a36;background:#faf5ea;padding:3px 6px;border-radius:5px}
+.focused-app .item-side{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.focused-app .result{font-size:10px;border-radius:7px;padding:6px 7px;background:#edf6ef;color:#2c7550;font-weight:650;max-width:97px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.focused-app .result.negative{background:#fbf1e9;color:#a05e29}
+.focused-app .result.neutral{background:#f0f3f8;color:#5f6a79}
+.focused-app .chevron{height:34px;width:27px;display:grid;place-items:center;border:0;background:transparent;color:#7c8797;padding:0}
+.focused-app .chevron svg{width:17px;height:17px;transition:transform .17s}
+.focused-app .active .chevron svg{transform:rotate(180deg)}
+
+    .focused-app .details{padding:0 15px 15px 52px;animation:enter .18s ease}
+.focused-app .question{font-size:14px;line-height:1.55;color:#586578;margin:0 0 12px}
+.focused-app .prompt{margin:0 0 9px;font-size:10px;color:#7a8798;letter-spacing:.08em;font-weight:700;text-transform:uppercase}
+.focused-app .options{display:grid;gap:7px}
+.focused-app .choice{min-height:46px;display:flex;align-items:center;gap:10px;width:100%;background:#fff;border:1px solid #dfe5ed;border-radius:9px;text-align:left;color:#2c3647;font-size:14px;font-weight:550;padding:10px 12px;line-height:1.4}
+.focused-app .choice:hover{border-color:#aabddd}
+.focused-app .choice.selected{border-color:#7fa6ee;background:#ecf3ff;color:#234c9c;box-shadow:inset 0 0 0 1px rgba(50,105,202,.18)}
+.focused-app .choice-radio{width:17px;height:17px;border:1.5px solid #bec8d4;border-radius:50%;flex-shrink:0;display:grid;place-items:center}
+.focused-app .choice.selected .choice-radio{border-color:#386fd0}
+.focused-app .choice.selected .choice-radio::after{content:"";height:7px;width:7px;border-radius:50%;background:#386fd0}
+.focused-app .rate{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.focused-app .rate button{background:#fff;border:1px solid #dfe5ed;height:52px;border-radius:10px;font-size:15px;font-weight:600;color:#536173}
+.focused-app .rate button.selected{background:#edf3ff;border:2px solid var(--blue);color:#2e5caf}
+.focused-app .scale-legend{display:flex;justify-content:space-between;margin:8px 0 4px;font-size:10px;color:#7d8896}
+.focused-app .numeric{display:flex;gap:8px;align-items:stretch}
+.focused-app .numeric-wrap{display:flex;align-items:center;flex:1;min-width:0;background:#fff;border:1px solid #dfe5ed;border-radius:9px;padding:0 12px}
+.focused-app .numeric-wrap input{background:transparent;border:0;outline:0!important;width:100%;min-height:47px;font-size:18px;font-weight:550;font-variant-numeric:tabular-nums}
+.focused-app .numeric-wrap span{color:#8290a1;font-size:12px}
+.focused-app .primary-small{border:0;border-radius:9px;background:#233047;color:#fff;font-weight:600;font-size:12px;min-width:71px;padding:0 12px}
+.focused-app .info-mini{font-size:11px;color:#7c8798;line-height:1.5;margin:8px 0 0}
+.focused-app .guidance{padding:0;border:0;background:transparent;color:#5672a0;font-size:11px;font-weight:600;margin-top:11px;display:inline-flex;align-items:center;gap:4px}
+.focused-app .guidance-box{border-left:2px solid #bacce8;margin:8px 0 0;padding:7px 9px;font-size:11px;line-height:1.5;color:#697789;background:#fff;border-radius:0 6px 6px 0}
+.focused-app .evidence-bar{display:flex;gap:8px;align-items:center;justify-content:space-between;border-top:1px solid #e6ebf3;margin-top:15px;padding-top:11px;flex-wrap:wrap}
+.focused-app .evidence-copy{font-size:10px;color:#7a8798}
+.focused-app .evidence-copy.req{color:#a86835;font-weight:600}
+.focused-app .evidence-actions{display:flex;gap:5px;margin-left:auto}
+.focused-app .evidence-btn{display:flex;align-items:center;gap:5px;min-height:36px;background:#fff;border:1px solid #dce2eb;border-radius:8px;padding:7px 9px;color:#556273;font-size:11px;font-weight:600}
+.focused-app .evidence-btn svg{height:15px;width:15px}
+.focused-app .evidence-btn.has{color:#276f54;background:#f2faf5;border-color:#cae6d6}
+.focused-app .warning{border:1px solid #f2dab9;background:#fff9f1;padding:9px 11px;border-radius:8px;color:#995e23;font-size:11px;line-height:1.5;margin-top:10px}
+
+
+.focused-app .phone-header {padding-top:max(13px,env(safe-area-inset-top));}
+.focused-app .topline [data-slot=button] {min-width:44px;width:44px;height:44px;padding:8px;color:#556174;}
+.focused-app .topline h1 {font-weight:650;}
+.focused-app .header-mini > [data-slot=progress] {height:5px;flex:1;background:#e9edf3;}
+.focused-app .header-mini [data-slot=progress-indicator] {background:var(--blue);}
+.focused-app .tab {min-height:44px;}
+.focused-app .tab[aria-current=location] {background:#1f2937;color:#fff;}
+.focused-app .section-head h2 {font-size:11px; font-weight:650;}
+.focused-app .item-heading {min-width:0;flex:1;align-self:stretch;display:flex;}
+.focused-app .criterion-copy {min-width:0;flex:1;}
+.focused-app .criterion-title {display:block;}
+.focused-app .item-main {min-height:44px;}
+.focused-app .index svg {width:16px;height:16px;}
+.focused-app [data-slot=button].chevron {width:44px;min-width:44px;height:44px;padding:0;}
+.focused-app .choice[data-slot=button] {height:auto;white-space:normal;justify-content:flex-start;}
+.focused-app .choice {cursor:pointer;}
+.focused-app .choice [data-slot=checkbox] {flex-shrink:0;}
+.focused-app .rate button {padding:0;min-width:0;}
+.focused-app .numeric-wrap:focus-within {outline:2px solid #99bbff;outline-offset:2px;}
+.focused-app .numeric-wrap input {box-shadow:none; padding-inline:0;}
+.focused-app .primary-small {min-height:44px;}
+.focused-app .multi-save {display:flex;justify-content:flex-end;margin-top:9px;}
+.focused-app .guidance {min-height:44px;margin-top:0;}
+.focused-app .guidance svg {width:13px;height:13px;}
+.focused-app .evidence-btn {min-height:44px;}
+.focused-app .paused-banner {font-size:11px;color:#687384;margin:0 0 10px;}
+.focused-app .bottom {border-top:1px solid #e6e9ee;padding:11px 15px max(11px,env(safe-area-inset-bottom));background:#fff;display:flex;gap:8px;flex-shrink:0;}
+.focused-app .bottom button {min-height:45px;border-radius:10px;font-size:12px;gap:7px;font-weight:600;}
+.focused-app .secondary-btn {color:#4d5b6e;background:#fff;border:1px solid #e0e5ec;padding:9px 11px;}
+.focused-app .dark-btn {background:#243044;color:#fff;flex:1;padding:9px 13px;}
+.focused-app .save-warning {font-size:11px;padding:8px 15px;color:#a65d19;}
+.focused-app .visually-hidden {position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.focused-toast {position:fixed;bottom:85px;left:50%;transform:translateX(-50%);z-index:80;max-width:min(88vw,390px);background:#202936;color:#fff;padding:10px 13px;border-radius:9px;font-size:11px;line-height:1.5;text-align:center;pointer-events:none;}
+.focused-sheet .review-title {font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#87909d;margin:17px 0 0;}
+.focused-sheet .group-review {border:1px solid #e6e9ee;border-radius:9px;overflow:hidden;margin:12px 0;}
+.focused-sheet .review-row {padding:11px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;border-bottom:1px solid #edf0f4;min-height:44px;width:100%;text-align:left;}
+.focused-sheet .review-row:last-child {border-bottom:0;}
+.focused-sheet .review-row span:first-child {flex:1;color:#445065;}
+.focused-sheet .review-row span:last-child {color:#7e8998;font-weight:600;white-space:nowrap;}
+.focused-sheet .confirmation {background:#f5f8fd;padding:11px 12px;border-radius:9px;font-size:11px;line-height:1.6;color:#61718b;}
+.focused-sheet .sheet-actions {display:flex;flex-wrap:wrap;gap:9px;margin-top:15px;}
+.focused-sheet .sheet-actions button {flex:1;min-height:45px;border-radius:9px;font-size:12px;font-weight:600;white-space:normal;}
+.focused-sheet .menu-btn {width:100%;min-height:48px;justify-content:flex-start;text-align:left;font-size:13px;}
+.focused-sheet a.menu-btn {display:flex;align-items:center;padding-inline:12px;text-decoration:underline;}
+.focused-sheet .caption {font-size:10px;color:#8993a2;line-height:1.5;margin-top:15px;}
+@media(max-width:360px){.focused-app .details{padding-left:15px}.focused-app .scroll{padding-inline:11px}.focused-app .item-top{gap:5px;padding-inline:10px}.focused-app .item-main{gap:8px}.focused-app .result{max-width:64px}.focused-app .numeric input{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.focused-app *,.focused-app *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.focused-sheet .sheet-status {margin-top:12px;padding:10px 12px;background:#f5f8fd;color:#435165;border-radius:8px;font-size:12px;line-height:1.5;}
+
+.focused-app .details {animation:focused-card-enter .18s ease;}
+@keyframes focused-card-enter {from{opacity:.5;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
