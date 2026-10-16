@@ -23,7 +23,7 @@ In this cloud environment, use `npm_config_cache=/workspace/.npm-cache` when run
 - `src/pages/`: interactive component playground.
 - `src/data/`: reserved for future mock data.
 - `src/lib/utils.ts`: shared `cn` utility.
-- `src/styles/theme.css`: standard shadcn neutral light/dark tokens and Tailwind mappings.
+- `src/styles/theme.css`: project light/dark tokens supplied from shadcn/create and Tailwind mappings.
 - `src/index.css`: global typography, touch targets, and reduced-motion support.
 
 Tailwind 4 uses the Vite plugin and CSS-first configuration; no `tailwind.config.js` is needed. `@/` resolves to `src/` in both TypeScript and Vite. Change semantic tokens in `theme.css` to theme the application later. The default view is light; dark tokens are ready for a future theme control.
@@ -52,8 +52,8 @@ Chromium smoke checks passed at 390px, 768px, and 1440px with no page-level hori
 
 The application opens in the Portuguese Theme Studio. The editor changes semantic tokens in an isolated, interactive playground iframe (`?preview=1`), including portalled dialogs and menus. The editor itself stays neutral.
 
-- Ten starting presets: neutral, ocean, forest, plum, ruby, amber, teal, indigo, rose, and slate. Presets replace both color modes and the radius.
-- Edit 37 semantic colors through the native color picker or a six-digit HEX value (apply with Enter or blur).
+- Eleven starting presets: the supplied shadcn/create theme, neutral, ocean, forest, plum, ruby, amber, teal, indigo, rose, and slate. Presets replace both color modes and the radius.
+- Edit 37 semantic colors through the native color picker or a six-digit HEX or OKLCH value (apply with Enter or blur).
 - Light and dark colors are independent; radius (0–24px) is shared.
 - Preview a real 390px mobile or 1200px desktop viewport, scaled to fit the available space.
 - On smaller screens, switch between editing and preview using the top panel controls.
@@ -72,3 +72,12 @@ Colors are grouped into surfaces/text, actions/controls, status, charts, and sid
 Legacy browser themes automatically gain default typography and the new tokens while preserving existing color overrides and radius. CSS export includes typography variables, body/heading rules, all color tokens, and both modes. When using the CSS in another project, install/import any selected Fontsource fonts as indicated in the export header; this project already includes them.
 
 `npm test` uses Node's test runner (Node 24 recommended) for migration, invalid saved data, presets, contrast reference values, and CSS export. Browser checks also verified font files actually load, the computed styles update, typography survives reload and color preset changes, additional colors render, CSS reproduces typography, and mobile editing works.
+
+
+### Applied shadcn/create theme
+
+The project default now uses the exact supplied OKLCH tokens and `--radius: 0.45rem` in `src/styles/theme.css`. The same values are in `src/data/creator-theme.json` for the editor's **O teu tema** preset. Tests verify that global CSS, default palettes and export agree for every supplied token, including dark border/input alpha. Status colors and typography were not specified in the supplied theme; status defaults remain and previous typography choices are retained.
+
+The editor accepts HEX and OKLCH strings without rounding or converting their stored values. Its native color picker displays an approximate opaque sRGB HEX swatch; editing through that picker intentionally replaces the value with HEX and removes alpha. Use the text field to preserve or edit OKLCH transparency. Contrast calculations convert to sRGB using Culori and composite alpha (a transparent background uses a white underlying surface).
+
+Browser draft storage is now `lp-theme-studio-v2` so the supplied palette appears on the first visit to this release. Older drafts remain untouched in `lp-theme-studio-v1` and can be restored with **Recuperar ajustes anteriores**. Restoring a preset preserves typography; **Repor o teu tema** resets the full theme to the supplied project default.

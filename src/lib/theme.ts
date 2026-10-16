@@ -1,3 +1,6 @@
+import creator from '../data/creator-theme.json' with { type: 'json' }
+import { isColor, colorHex, colorContrast } from './theme-colors.ts'
+export { isColor, colorHex }
 export const colorTokens = [
   ['background', 'Fundo'], ['foreground', 'Texto principal'],
   ['card', 'Cartões'], ['card-foreground', 'Texto dos cartões'],
@@ -54,7 +57,9 @@ const dark: Palette = { ...extraDark,
   secondary: '#404040', 'secondary-foreground': '#fafafa', muted: '#404040', 'muted-foreground': '#b3b3b3',
   accent: '#404040', 'accent-foreground': '#fafafa', destructive: '#f87171', border: '#404040', input: '#525252', ring: '#a3a3a3',
 }
+export const creatorTheme: Theme = { light: { ...light, ...creator.light }, dark: { ...dark, ...creator.dark }, radius: 7.2, typography: defaultTypography }
 export const presets = [
+  { id: 'creator', name: 'O teu tema', color: creator.light['chart-3'], theme: creatorTheme },
   { id: 'neutral', name: 'Neutro', color: '#262626', theme: { light, dark, radius: 10, typography: defaultTypography } },
   { id: 'ocean', name: 'Oceano', color: '#1d4ed8', theme: { light: { ...light, primary: '#1d4ed8', ring: '#2563eb', accent: '#eff6ff', 'accent-foreground': '#1e3a8a' }, dark: { ...dark, primary: '#93c5fd', 'primary-foreground': '#172554', ring: '#60a5fa', accent: '#1e3a5f' }, radius: 12, typography: defaultTypography } },
   { id: 'forest', name: 'Floresta', color: '#166534', theme: { light: { ...light, primary: '#166534', ring: '#15803d', accent: '#f0fdf4', 'accent-foreground': '#14532d' }, dark: { ...dark, primary: '#86efac', 'primary-foreground': '#052e16', ring: '#4ade80', accent: '#14532d' }, radius: 8, typography: defaultTypography } },
@@ -73,7 +78,8 @@ export const presets = [
   } })),
 ] satisfies { id: string; name: string; color: string; theme: Theme }[]
 export const defaultTheme: Theme = presets[0].theme
-export const storageKey = 'lp-theme-studio-v1'
+export const legacyStorageKey = 'lp-theme-studio-v1'
+export const storageKey = 'lp-theme-studio-v2'
 export function isTheme(value: unknown): value is Theme {
   if (!value || typeof value !== 'object') return false
   const t = value as Theme
@@ -81,7 +87,7 @@ export function isTheme(value: unknown): value is Theme {
   const type = t.typography
   if (!type || !fontValid(type.body) || !fontValid(type.heading) || !Number.isFinite(type.size) || type.size < 14 || type.size > 20 || !Number.isFinite(type.lineHeight) || type.lineHeight < 1.2 || type.lineHeight > 1.8 || ![400,500,600,700].includes(type.headingWeight)) return false
   return typeof t.radius === 'number' && Number.isFinite(t.radius) && t.radius >= 0 && t.radius <= 24 &&
-    (['light', 'dark'] as const).every(mode => t[mode] && colorTokens.every(([key]) => typeof t[mode][key] === 'string' && /^#[\da-f]{6}$/i.test(t[mode][key])))
+    (['light', 'dark'] as const).every(mode => t[mode] && colorTokens.every(([key]) => isColor(t[mode][key])))
 }
 // Fill new tokens without discarding themes saved by previous editor versions.
 export function migrateTheme(value: unknown): Theme {
@@ -94,7 +100,22 @@ function typographyCSS(type: Typography) {
   return `  --font-body: ${fonts.find(f => f.id === type.body)!.stack};\n  --font-heading: ${fonts.find(f => f.id === type.heading)!.stack};\n  --text-base: ${type.size / 16}rem;\n  --body-line-height: ${type.lineHeight};\n  --heading-weight: ${type.headingWeight};`
 }
 export function loadTheme(): Theme {
-  try { const value: unknown = JSON.parse(localStorage.getItem(storageKey) || 'null'); return migrateTheme(value) } catch { return structuredClone(defaultTheme) }
+  try {
+    const current = localStorage.getItem(storageKey)
+    if (current) return migrateTheme(JSON.parse(current))
+    // Apply the new project theme on first visit; retain the previous typography and draft.
+    const previous = loadPreviousTheme()
+    return { ...structuredClone(defaultTheme), typography: previous?.typography ?? { ...defaultTypography } }
+  } catch { return structuredClone(defaultTheme) }
+}
+export function loadPreviousTheme(): Theme | null {
+  try {
+    const raw = localStorage.getItem(legacyStorageKey)
+    if (!raw) return null
+    const previous = JSON.parse(raw)
+    if (typeof previous?.radius !== 'number' || !previous.light || !previous.dark) return null
+    return migrateTheme(previous)
+  } catch { return null }
 }
 export function themeCSS(theme: Theme) {
   return ['/* Tema gerado no Component Studio. Substitui os tokens em src/styles/theme.css. */\n/* Inter, Roboto e Lora: instalar @fontsource-variable/{inter,roboto,lora} e importar o respetivo CSS quando usados. */',
@@ -116,8 +137,4 @@ export function applyTheme(theme: Theme, mode: Mode) {
   root.style.setProperty('--heading-weight', String(type.headingWeight))
   colorTokens.forEach(([key]) => root.style.setProperty(`--${key}`, theme[mode][key]))
 }
-function luminance(hex: string) {
-  const rgb = hex.slice(1).match(/../g)!.map(c => parseInt(c, 16) / 255).map(c => c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4)
-  return rgb[0] * .2126 + rgb[1] * .7152 + rgb[2] * .0722
-}
-export function contrast(a: string, b: string) { const x = luminance(a), y = luminance(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05) }
+export const contrast = colorContrast
