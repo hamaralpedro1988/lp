@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Circle, Home, Menu, Camera, Minus, Wifi, WifiOff } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Circle, Home, Menu, List, Camera, Minus, Wifi, WifiOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Progress } from '@/components/ui/progress'
@@ -32,11 +32,13 @@ export default function AssessmentFlow() {
   const [photos, setPhotos] = useState<Record<number, number>>({})
   const [mediaVersion, setMediaVersion] = useState(0)
   const [galleryTarget, setGalleryTarget] = useState<HTMLDivElement | null>(null)
-  const [sheet, setSheet] = useState<'navigation' | 'saved' | 'finished' | 'reset' | null>(null)
+  const [sheet, setSheet] = useState<'navigation' | 'sections' | 'finished' | 'reset' | null>(null)
   const controllers = useRef<Record<number, EvidenceActions | null>>({})
   const screenRef = useRef<HTMLElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const mounted = useRef(false)
+  const sectionsFocus = useRef<'question' | 'trigger' | null>(null)
+  const sectionsButton = useRef<HTMLButtonElement>(null)
   const draftRef = useRef(draft)
   const missing = flowMissing(draft, photos)
   // A restored draft cannot retain eligibility based on media from a previous page session.
@@ -67,6 +69,12 @@ export default function AssessmentFlow() {
   function go(next: FlowScreen) { update({ screen: next === 'signoff' && missing.length ? 'review' : next }); setSheet(null) }
   function start() { const next = criteria.findIndex((_, i) => !draft.answers[i]); update({ screen: 'assessment', index: next < 0 ? draft.index : next, paused: false }) }
   function edit(index: number) { update({ index, screen: 'assessment', paused: false }) }
+  function jumpToSection(section: typeof c.section) {
+    sectionsFocus.current = 'question'
+    edit(criteria.findIndex(item => item.section === section))
+    screenRef.current?.scrollTo({ top: 0 })
+    setSheet(null)
+  }
   function answer(value: FlowAnswer) { update({ answers: { ...draft.answers, [draft.index]: value } }, true) }
   function note(index: number, value: string) { update({ notes: { ...draftRef.current.notes, [index]: value } }, true) }
   function reset() { replace({ ...emptyFlowDraft(), index: 0 }); setPhotos({}); setMediaVersion(value => value + 1); setSheet(null) }
@@ -90,16 +98,24 @@ export default function AssessmentFlow() {
       <footer className="phonebottom">
         {screen === 'list' && <p className="subtext center">Your assigned assessments are shown above</p>}
         {screen === 'overview' && <button className="action" onClick={start}>{draft.paused ? 'Resume observation' : 'Start live assessment'} <ArrowRight size={16}/></button>}
-        {screen === 'assessment' && <><div className="footrow"><button className="action outline" onClick={() => { update({ paused: true }); setSheet('saved') }}>Save & exit</button><button className="action" onClick={() => draft.index === criteria.length - 1 ? go('review') : update({ index: draft.index + 1 })}>{draft.index === criteria.length - 1 ? 'Review' : 'Next criterion'} <ArrowRight size={16}/></button></div><div className="footlinks"><button className="link" disabled={draft.index === 0} onClick={() => update({ index: draft.index - 1 })}><ArrowLeft size={13}/> Previous</button><button className="link" onClick={() => go('review')}>Review all <ArrowRight size={13}/></button></div></>}
+        {screen === 'assessment' && <nav className="criterion-navigation" aria-label="Criterion navigation">
+          <button className="action outline" disabled={draft.index === 0} onClick={() => update({ index: draft.index - 1 })}><ArrowLeft size={16}/> Back</button>
+          <button ref={sectionsButton} className="action outline" aria-haspopup="dialog" onClick={() => { sectionsFocus.current = 'trigger'; setSheet('sections') }}><List size={16}/> Sections</button>
+          <button className="action" onClick={() => draft.index === criteria.length - 1 ? go('review') : update({ index: draft.index + 1 })}>Next <ArrowRight size={16}/></button>
+        </nav>}
         {screen === 'review' && <><button className="action" disabled={missing.length > 0} onClick={() => go('signoff')}>Continue to feedback & sign-off <ArrowRight size={16}/></button>{missing.length > 0 && <p className="subtext center spaced">Complete {missing.length} item(s) before sign-off</p>}</>}
         {screen === 'signoff' && <><button className="action" disabled={missing.length > 0} onClick={() => { if (missing.length) return; update({ assessorConfirmed: true }); setSheet('finished') }}>{draft.assessorConfirmed ? 'View pending status' : 'Confirm assessor review'} <ArrowRight size={16}/></button><button className="action textbtn" onClick={() => go('review')}><ArrowLeft size={15}/> Back to review</button></>}
       </footer></div><p className="floating">Working UX prototype · V2 / Flow v0.1 · no final theme</p>
     </main><aside className="right"><div className="eyebrow">DESIGN RATIONALE</div><h2>{rationale[screen][0]}</h2><div className="annotation"><b>Design intent</b><p>{rationale[screen][1]}</p></div><div className="annotation"><b>Trade-off / validation</b><p>{rationale[screen][2]}</p></div><div className="hint"><b>What we can evaluate</b><p>Tap targets, scanning, criteria clarity, mandatory evidence, save/resume and feedback.</p><b>What remains open</b><p>Scoring thresholds, exact critical items, video permission, sign-off identity checks and offline sync architecture.</p></div></aside>
   </div>
   <div hidden>{criteria.map((item, i) => <EvidencePanel key={`${i}-${mediaVersion}`} note={draft.notes[i] ?? ''} onNoteChange={value => note(i, value)} onPhotoCountChange={count => { setPhotos(previous => ({ ...previous, [i]: count })); update({ assessorConfirmed: false }) }} controllerRef={api => { controllers.current[i] = api }} context={item.title} persistentNote compact externalGallery galleryTarget={screen === 'assessment' && draft.index === i ? galleryTarget : null}/>)}</div>
-  <Sheet open={sheet !== null} onOpenChange={open => { if (!open) setSheet(null) }}><SheetContent side="bottom" className="mobile-sheet flow-sheet mx-auto max-w-lg rounded-t-3xl"><SheetHeader><SheetTitle>{sheet === 'navigation' ? 'Screen flow' : sheet === 'saved' ? saveError ? 'Unable to save locally' : 'Saved for later' : sheet === 'reset' ? 'Reset V2 prototype?' : 'Assessor review recorded · demo'}</SheetTitle><SheetDescription>{sheet === 'navigation' ? 'Explore the V2 assessment flow.' : sheet === 'saved' ? saveError ? 'Storage is unavailable. Keep this page open to retain your draft.' : 'Your responses and comments are saved in this browser. Photos and videos stay in this page session only.' : sheet === 'reset' ? 'Clear V2 responses, comments, feedback and attachments. Your V1 draft will be retained.' : 'This is a visual prototype. No real approval or certification has been issued.'}</SheetDescription></SheetHeader><div className="min-h-0 space-y-4 overflow-y-auto px-5 pb-5">
+  <Sheet open={sheet !== null} onOpenChange={open => { if (!open) setSheet(null) }}><SheetContent side="bottom" className="mobile-sheet flow-sheet mx-auto max-w-lg rounded-t-3xl" onCloseAutoFocus={event => { if (sectionsFocus.current) { event.preventDefault(); const target = sectionsFocus.current === 'question' || !sectionsButton.current?.isConnected ? titleRef.current : sectionsButton.current; sectionsFocus.current = null; target?.focus({ preventScroll: true }) } }}><SheetHeader><SheetTitle>{sheet === 'navigation' ? 'Screen flow' : sheet === 'sections' ? 'Jump to section' : sheet === 'reset' ? 'Reset V2 prototype?' : 'Assessor review recorded · demo'}</SheetTitle><SheetDescription>{sheet === 'navigation' ? 'Explore the V2 assessment flow.' : sheet === 'sections' ? 'Jump to the first question in any section. Your responses and comments are saved automatically.' : sheet === 'reset' ? 'Clear V2 responses, comments, feedback and attachments. Your V1 draft will be retained.' : 'This is a visual prototype. No real approval or certification has been issued.'}</SheetDescription></SheetHeader><div className="min-h-0 space-y-4 overflow-y-auto px-5 pb-5">
     {sheet === 'navigation' && <>{navigation}<button className="action outline" onClick={() => update({ offline: !draft.offline })}>{draft.offline ? <WifiOff size={16}/> : <Wifi size={16}/>} {draft.offline ? 'Offline demo' : 'Online demo'} · toggle</button><p className="subtext">This toggle simulates a status only. No server sync is implemented.</p>{tools}<a className="action outline" href="?studio=1">Open Theme Studio</a></>}
-    {sheet === 'saved' && <><p className="notice warn">{recorded} of {criteria.length} criteria recorded · {draft.offline ? 'Offline simulation · local only' : 'Draft · demo only'}</p><button className="action" onClick={() => go('list')}>Return to assessments</button><button className="action secondary" onClick={() => { update({ paused: false }); setSheet(null) }}>Continue now</button></>}
+    {sheet === 'sections' && <><nav className="section-picker" aria-label="Assessment sections">{(['Preparation', 'Frying', 'Completion'] as const).map((section, index) => {
+      const items = criteria.map((item, i) => ({ ...item, index: i })).filter(item => item.section === section)
+      const count = items.filter(item => draft.answers[item.index]).length
+      return <button key={section} className={`section-option ${c.section === section ? 'current' : ''}`} aria-current={c.section === section ? 'location' : undefined} onClick={() => jumpToSection(section)}><span className="section-number">{index + 1}</span><span className="section-copy"><strong>{section}</strong><small>{count} of {items.length} recorded{c.section === section ? ' · Current section' : ''}</small></span><ArrowRight size={17}/></button>
+    })}</nav><button className="action secondary" onClick={() => go('review')}>Review all <ArrowRight size={16}/></button></>}
     {sheet === 'finished' && <><p className="notice warn">{draft.offline ? 'Saved on device only · no sync' : 'Pending other configured signatures / approval'}<br/><b>Not certified yet</b></p><p className="page-sub">Dre should receive clear feedback and a reassessment path if required.</p><button className="action" onClick={() => go('list')}>Done for now</button></>}
     {sheet === 'reset' && <><button className="action" onClick={reset}>Reset V2</button><button className="action outline" onClick={() => setSheet(null)}>Cancel</button></>}
   </div></SheetContent></Sheet>
