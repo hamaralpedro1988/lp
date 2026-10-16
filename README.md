@@ -165,12 +165,12 @@ Chromium touch checks passed for all five response types, explicit continuation,
 
 ## Side-by-side versions — Rosa Flow v0.1
 
-The supplied `LearningPool_Rosa_Flow_v01.html` is integrated as a separate React experience. **Versões** is visible in both assessment headers and opens a mobile bottom sheet with direct links:
+The supplied `LearningPool_Rosa_Flow_v01.html` is integrated as a separate React experience. **Versões** opens a bottom sheet with direct links. It is available in the V1 header and in V2’s external desktop presentation sidebar:
 
 - `/` or `?version=1`: the existing compact nine-criterion checklist and question bottom sheet (V1).
 - `?version=2`: the new Rosa Flow experience (V2), including Assessments, Overview, Live checklist, Review, and demonstration sign-off.
 
-V2 preserves the reference's eleven observations (Preparation 3 / Frying 5 / Completion 3), three response states, illustrative critical/weight flags, and required note-or-photo evidence on product quality. It starts on criterion 5, as in the supplied HTML. The menu beside **S2S Assessments** exposes every screen and the sample/reset tools on mobile; Home opens the assignment list. Desktop retains the reference's navigation and rationale rails. Mobile uses the actual browser viewport without a simulated status bar or home indicator. Both versions keep their original navigation and independent drafts.
+V2 preserves the reference's eleven observations (Preparation 3 / Frying 5 / Completion 3), three response states, illustrative critical/weight flags, and required note-or-photo evidence on product quality. It starts on criterion 5, as in the supplied HTML. V2 has no presentation header inside the app. Screen shortcuts, version switching, sample/reset tools and Theme Studio remain in the external desktop sidebar; the offline simulation toggle remains outside the phone. On mobile, only the app screens and their own controls are shown; use `?version=1` or `?version=2` for direct version access. Mobile uses the actual browser viewport without a simulated status bar or home indicator, with safe-area spacing on its content. Both versions keep their original navigation and independent drafts.
 
 Comments remain visible and save per keystroke. V2 uses `lp-rosa-flow-v2-v01` in localStorage and never migrates or overwrites V1 answers. Browser Back dismisses open sheets. Responses and comments autosave on every change. The fixed assessment footer contains Back, Sections, and Next; Back is disabled on the first question, and Next opens Review after the final question. Sections opens a bottom sheet with progress for Preparation, Frying, and Completion, jumps to the first question in the selected section, and also provides Review all. Reset has confirmation and affects V2 only.
 
