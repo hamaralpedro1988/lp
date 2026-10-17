@@ -63,7 +63,7 @@ export default function AssessmentFlow() {
   useMobileOverlay(sheet !== null, () => { setSheet(null); return true })
   useEffect(() => {
     const typography = loadTheme().typography
-    const theme = { ...creatorTheme, typography: { ...typography, size: typography.size + 2, body: 'inter' as const, heading: 'inter' as const, headingWeight: 740 } }
+    const theme = { ...creatorTheme, typography: { ...typography, size: 16, body: 'inter' as const, heading: 'inter' as const, headingWeight: 740 } }
     document.documentElement.dataset.assessmentVersion = '2'
     applyTheme(theme, 'light')
     return () => { delete document.documentElement.dataset.assessmentVersion }
