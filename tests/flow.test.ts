@@ -35,8 +35,8 @@ test('required evidence accepts nonblank notes or current-session photos, never 
 })
 test('normalization bounds navigation and isolates incompatible or malformed draft data', () => {
   const draft = normalizeFlowDraft({ screen: 'unknown', index: -1, answers: { 0: 'met', 1: 'not', 2: 'notObserved', 11: 'met' }, notes: { 0: 'A', 1: 42 }, paused: 'false', assessorConfirmed: true, feedback: 'Follow up' })
-  assert.equal(draft.index, 4)
-  assert.equal(draft.screen, 'assessment')
+  assert.equal(draft.index, 0)
+  assert.equal(draft.screen, 'overview')
   assert.deepEqual(draft.answers, { 0: 'met', 2: 'notObserved' })
   assert.deepEqual(draft.notes, { 0: 'A' })
   assert.equal(draft.paused, false)

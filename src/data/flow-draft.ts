@@ -17,7 +17,7 @@ export type FlowScreen = typeof flowScreens[number]
 export type FlowAnswer = 'met' | 'coaching' | 'fail' | 'notObserved'
 export type FlowDraft = { screen: FlowScreen; index: number; offline: boolean; answers: Record<number, FlowAnswer>; notes: Record<number, string>; feedback: string; paused: boolean; assessorConfirmed: boolean }
 export const flowStorageKey = 'lp-rosa-flow-v2-v01'
-export const emptyFlowDraft = (): FlowDraft => ({ screen: 'assessment', index: 4, offline: false, answers: {}, notes: {}, feedback: '', paused: false, assessorConfirmed: false })
+export const emptyFlowDraft = (): FlowDraft => ({ screen: 'overview', index: 0, offline: false, answers: {}, notes: {}, feedback: '', paused: false, assessorConfirmed: false })
 export function normalizeFlowDraft(value: unknown): FlowDraft {
   const draft = emptyFlowDraft()
   if (!value || typeof value !== 'object') return draft
