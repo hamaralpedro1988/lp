@@ -58,7 +58,7 @@ Additional states: [Sections](screenshots/06-sections-sheet.png),
 - `src/data/spatial-flow.ts`: isolated V5 draft normalization, two-choice model,
   completion semantics and theme adapter. Coaching in earlier V5 drafts becomes
   unanswered with an explicit reselection notice; V2–V4 storage is untouched.
-- `src/pages/spatial-catalog.tsx`: interactive usage examples and token reference.
+- `src/pages/design-system.tsx`: expanded interactive Spatial Design System Explorer. The earlier catalog URL remains an alias.
 
 ## Verification
 

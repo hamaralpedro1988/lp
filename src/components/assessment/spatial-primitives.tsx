@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, type ComponentProps, type Ref } from 'react'
+import { useId, useLayoutEffect, useRef, type ComponentProps, type Ref } from 'react'
 import { ArrowRight, Camera, Check, ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -32,31 +32,33 @@ export function SpatialAssessmentHeader({ draft, photos, saveError, onBack }: { 
     {saveError ? <SpatialStatus tone="error">Local save unavailable. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · local draft only. No server sync.</SpatialStatus>}
   </header>
 }
-export function SpatialChoice({ value, title, description, selected }: { value: 'met' | 'fail'; title: string; description: string; selected: boolean }) {
-  return <label className="spatial-choice" data-outcome={value} data-selected={selected} htmlFor={`spatial-answer-${value}`}>
-    <RadioGroupItem id={`spatial-answer-${value}`} value={value} aria-label={title} className="spatial-radio"/>
+export function SpatialChoice({ value, title, description, selected, disabled = false }: { value: 'met' | 'fail'; title: string; description: string; selected: boolean; disabled?: boolean }) {
+  const id = useId()
+  return <label className="spatial-choice" data-disabled={disabled || undefined} data-outcome={value} data-selected={selected} htmlFor={id}>
+    <RadioGroupItem id={id} disabled={disabled} value={value} aria-label={title} className="spatial-radio"/>
     <span className="spatial-choice-copy"><strong>{title}</strong><small>{description}</small></span>
     <Check className="spatial-choice-confirm" aria-hidden="true"/>
   </label>
 }
 /** Explicit roving selection keeps Radix radio behavior consistent on touch browsers. */
-export function SpatialChoices({ value, onChange, label = 'Observation result' }: { value: string; onChange: (value: 'met' | 'fail') => void; label?: string }) {
-  return <RadioGroup className="spatial-choices" aria-label={label} value={value} onValueChange={next => { if (next === 'met' || next === 'fail') onChange(next) }} onKeyDownCapture={event => {
+export function SpatialChoices({ value, onChange, label = 'Observation result', disabled = false }: { value: string; onChange: (value: 'met' | 'fail') => void; label?: string; disabled?: boolean }) {
+  return <RadioGroup disabled={disabled} className="spatial-choices" aria-label={label} value={value} onValueChange={next => { if (next === 'met' || next === 'fail') onChange(next) }} onKeyDownCapture={event => {
     if (!['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
     const current = spatialOptions.findIndex(option => option.value === (event.target as HTMLButtonElement).value)
     if (current < 0) return
     event.preventDefault(); event.stopPropagation()
     const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1 : (current + 1) % 2
-    onChange(spatialOptions[next].value)
-    document.getElementById(`spatial-answer-${spatialOptions[next].value}`)?.focus()
-  }}>{spatialOptions.map(option => <SpatialChoice key={option.value} {...option} selected={value === option.value}/>)}</RadioGroup>
+    onChange(spatialOptions[next].value);
+    (event.currentTarget.querySelectorAll('[role="radio"]')[next] as HTMLButtonElement)?.focus()
+  }}>{spatialOptions.map(option => <SpatialChoice disabled={disabled} key={option.value} {...option} selected={value === option.value}/>)}</RadioGroup>
 }
 export function SpatialEvidenceComposer({ note, count, pending, required, onNote, onCamera, galleryRef }: { note: string; count: number; pending: boolean; required: boolean; onNote: (value: string) => void; onCamera: () => void; galleryRef?: Ref<HTMLDivElement> }) {
+  const id = useId()
   return <section className="spatial-evidence" aria-label="Observation evidence">
     <div className="spatial-composer" data-required={pending || undefined}>
-      <Textarea id="spatial-comment" aria-label="Comment" aria-describedby="spatial-evidence-help" placeholder="Add a comment…" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
-      <div className="spatial-composer-bottom"><span id="spatial-evidence-help" className="spatial-composer-help" role="status">{pending ? 'Comment or photo required' : required ? 'Evidence recorded' : count ? 'Photo · session only' : 'Optional evidence'}</span>
-        <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-required={pending || undefined} data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby="spatial-evidence-help"><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
+      <Textarea id={`${id}-comment`} aria-label="Comment" aria-describedby={`${id}-help`} placeholder="Add a comment…" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
+      <div className="spatial-composer-bottom"><span id={`${id}-help`} className="spatial-composer-help" role="status">{pending ? 'Comment or photo required' : required ? 'Evidence recorded' : count ? 'Photo · session only' : 'Optional evidence'}</span>
+        <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-required={pending || undefined} data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby={`${id}-help`}><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
       </div>
     </div>
     <div className="flow-gallery spatial-attachments" ref={galleryRef}/>

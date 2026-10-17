@@ -14,6 +14,7 @@ import { VersionSwitcher } from '@/components/layout/version-switcher'
 import { flowCriteria as criteria, flowScreens, flowStorageKey, emptyFlowDraft, normalizeFlowDraft, flowEvidenceOk, flowMissing, type FlowDraft, type FlowScreen, type FlowAnswer } from '@/data/flow-draft'
 import { useMobileOverlay, useMobileViewport } from '@/hooks/use-mobile-overlay'
 import { spatialTheme, spatialStorageKey, emptySpatialDraft, normalizeSpatialDraft } from '@/data/spatial-flow'
+import { SpatialAssignmentCard, SpatialPeopleCard, SpatialReviewSummary, SpatialReviewList, SpatialFeedbackCard, SpatialApprovals } from '@/components/assessment/spatial-journey'
 import { SpatialAssessmentHeader, SpatialLiveCard, SpatialActionButton, SpatialSurface, SpatialNavigation, SpatialSections } from '@/components/assessment/spatial-primitives'
 import { applyTheme, creatorTheme, loadTheme } from '@/lib/theme'
 import '@/styles/flow.css'
@@ -162,7 +163,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
   const navigation = <nav className="flow-nav" aria-label="Screen flow">{flowScreens.map((id, i) => <button key={id} className={screen === id ? 'active' : ''} aria-current={screen === id ? 'step' : undefined} onClick={() => go(id)}><span className="number">0{i + 1}</span>{screenNames[id]}{id === 'signoff' && missing.length > 0 && <span className="sr-only"> (requires complete checklist)</span>}</button>)}</nav>
   const tools = <div className="stack"><ActionButton variant="outline" className="action outline" onClick={sample}>Load sample observations <ArrowUpRight size={15}/></ActionButton><ActionButton variant="outline" className="action outline" onClick={() => setSheet('reset')}>Reset prototype</ActionButton></div>
   return <div className={`flow-app ${floatingEvidence && !spatial ? 'flow-v3' : ''} ${wireframe && !spatial ? 'flow-v4' : ''} ${spatial ? 'flow-v5' : ''}`}><div className="workspace">
-    <aside className="side"><div className="wordmark"><span className="brandmark"><ArrowUpRight size={17}/></span> Learning Pool <span>/ S2S</span></div><div className="eyebrow">EXERCISE 01 · ON THE FLOOR</div><h2 className="intro">{spatial ? <>Spatial<br/><em>Flow.</em></> : <>Designing for<br/>the moment.</>}</h2><p className="desc">Rosa’s practical assessment of Dre, during a busy shift. A mobile-first flow for observation, evidence and feedback.</p><h2 className="railhead">Presentation controls</h2><VersionSwitcher current={version}/><h2 className="railhead">Screen flow</h2>{navigation}<div className="aside-card"><strong>Prototype boundaries</strong>Checklist rules are illustrative. No backend, identity verification or server sync is simulated as real.</div>{spatial && <a className="action outline spaced" href="?version=5&catalog=1">Spatial theme catalog</a>}<h2 className="railhead">Testing shortcuts</h2>{tools}<a className="action outline spaced" href="?studio=1">Open Theme Studio</a></aside>
+    <aside className="side"><div className="wordmark"><span className="brandmark"><ArrowUpRight size={17}/></span> Learning Pool <span>/ S2S</span></div><div className="eyebrow">EXERCISE 01 · ON THE FLOOR</div><h2 className="intro">{spatial ? <>Spatial<br/><em>Flow.</em></> : <>Designing for<br/>the moment.</>}</h2><p className="desc">Rosa’s practical assessment of Dre, during a busy shift. A mobile-first flow for observation, evidence and feedback.</p><h2 className="railhead">Presentation controls</h2><VersionSwitcher current={version}/><h2 className="railhead">Screen flow</h2>{navigation}<div className="aside-card"><strong>Prototype boundaries</strong>Checklist rules are illustrative. No backend, identity verification or server sync is simulated as real.</div>{spatial && <a className="action outline spaced" href="?view=design-system">Spatial Design System</a>}<h2 className="railhead">Testing shortcuts</h2>{tools}<a className="action outline spaced" href="?studio=1">Open Theme Studio</a></aside>
     <main className="stage"><div className="stage-label"><span>Rosa / Mobile-first assessment</span><button className={`toggle ${draft.offline ? 'offline' : ''}`} onClick={() => update({ offline: !draft.offline })}>{draft.offline ? <WifiOff size={14}/> : <Wifi size={14}/>} {draft.offline ? 'Offline demo' : 'Online demo'}</button></div>
       <div className="phone">
       {screen !== 'assessment' && <header className="overview-topbar">{screen !== 'list' ? <ActionButton variant="ghost" size="icon" onClick={back} aria-label={screen === 'overview' ? 'Back to assessments' : screen === 'review' ? 'Back to checklist' : 'Back to review'}><ChevronLeft aria-hidden="true"/></ActionButton> : <span/>}<p>{pageLabels[screen]}</p><div className="mobile-version-switcher"><VersionSwitcher current={version}/></div></header>}
@@ -175,6 +176,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
       {spatial && retiredChoices.length > 0 && (screen !== 'assessment' || retiredChoices.includes(draft.index)) && <p role="status" className="notice warn">Earlier coaching observations need a new Pass or Fail selection. No result has been inferred.</p>}
       {screen === 'list' && <div className="flow-page-content">
         {title('Your assessments', 'Observe, support and review your team’s practical skills.')}
+        {spatial ? <SpatialAssignmentCard status={assessmentStatus} onOpen={() => go('overview')}/> : <>
         <Surface className="overview-card">
           <CardHeader><CardTitle><h2>Ready to assess</h2></CardTitle></CardHeader>
           <CardContent>
@@ -186,6 +188,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
             <ActionButton className="overview-start spaced" onClick={() => go('overview')}>View Assessment <ChevronRight aria-hidden="true"/></ActionButton>
           </CardContent>
         </Surface>
+        </>}
         {draft.paused && <p className="notice">Your observations are saved on this device. Resume when you’re ready.</p>}
         <Surface className="overview-card"><CardContent className="flow-tip"><span className="overview-goal-icon"><Clock3 aria-hidden="true"/></span><div><h2>At your own pace</h2><p className="overview-description">Record observations as you go. You can leave the checklist and return to your saved draft.</p></div></CardContent></Surface>
       </div>}
@@ -195,6 +198,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
           <div className="overview-heading"><h1 ref={titleRef} tabIndex={-1}>Fryer Station</h1><span>{criteria.length} criteria</span></div>
           <p className="overview-category">Food Process &amp; Safety <span aria-hidden="true">•</span> Category 2</p>
         </header>
+        {spatial ? <SpatialPeopleCard status={assessmentStatus} onMember={() => setSheet('member')}/> : <>
         <Surface className="overview-card">
           <CardContent className="overview-member-content">
             <ActionButton variant="ghost" className="overview-member" onClick={() => setSheet('member')} aria-label="View team member Dre Jackson">
@@ -209,6 +213,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
             <div><span>Qualified Assessor</span><strong>Rosa Thompson (me)</strong></div>
           </CardContent>
         </Surface>
+        </>}
         <Surface className="overview-card">
           <CardHeader><CardTitle><h2>Assessment description</h2></CardTitle></CardHeader>
           <CardContent><p className="overview-description">Observe Dre completing the fryer task from preparation to handoff. Check safe working practices, the cooking process and the finished product against the station standard.</p></CardContent>
@@ -247,7 +252,8 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
           <div className="flow-gallery" ref={setGalleryTarget}/>
         </div>}
       </div>}
-      {screen === 'review' && <div className="flow-page-content">
+      {screen === 'review' && spatial && <div className="flow-page-content">{title('Review observations', 'Fryer Station · Dre Jackson')}<SpatialReviewSummary draft={draft} photos={photos}/><SpatialReviewList draft={draft} photos={photos} onEdit={edit}/></div>}
+      {screen === 'review' && !spatial && <div className="flow-page-content">
         {title('Review observations', 'Fryer Station · Dre Jackson')}
         <Surface className="overview-card"><CardHeader><CardTitle><h2>Assessment summary</h2></CardTitle></CardHeader><CardContent><div className="review-stats">{[{ count: met, label: 'Pass', Icon: Check }, { count: failed, label: 'Fail', Icon: X }, ...(!spatial ? [{ count: coaching, label: 'Needs coaching', Icon: MessageSquare }] : []), { count: missing.length, label: 'Incomplete', Icon: ClipboardCheck }].map(({ count, label, Icon }) => <div className="review-stat" data-result={label} key={label}><span className="overview-goal-icon"><Icon aria-hidden="true"/></span><b>{count}</b><small>{label}</small></div>)}</div></CardContent></Surface>
         <p role="status" className={`notice ${missing.length ? 'warn' : ''}`}>{missing.length ? `${missing.length} ${spatial && missing.length === 1 ? 'criterion needs' : 'criteria need'} attention. Record each result and add required evidence before sign-off.` : (spatial ? 'All observations and required evidence are complete. Review the results with Dre; this is not an overall pass.' : 'All required observations and evidence are recorded. Review the results with Dre.')}</p>
@@ -255,7 +261,8 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
           {(['Preparation', 'Frying', 'Completion'] as const).map((section, sectionIndex) => <section className="review-section" key={section} aria-labelledby={`review-section-${sectionIndex}`}><h3 id={`review-section-${sectionIndex}`}><span className="overview-section-number">{sectionIndex + 1}</span>{section}</h3>{criteria.map((item, i) => item.section === section && <ActionButton key={item.title} variant="ghost" className="review-item" onClick={() => edit(i)} aria-label={`Edit: ${item.title}`}><span className={`dot ${draft.answers[i] ?? ''}`} aria-hidden="true"/><span><strong>{item.title}{'critical' in item && <span className="critical-mark" title="Critical"> ◆</span>}</strong><small>{!draft.answers[i] ? 'Not recorded' : !flowEvidenceOk(draft, i, photos) ? 'Evidence required' : draft.answers[i] === 'notObserved' ? 'Response needed' : options.find(option => option.value === draft.answers[i])?.title}{spatial && (draft.notes[i]?.trim() || photos[i]) ? ` · ${draft.notes[i]?.trim() ? 'Comment recorded' : 'Photo · session only'}` : ''}</small></span><ChevronRight aria-hidden="true"/></ActionButton>)}</section>)}
         </CardContent></Surface>
       </div>}
-      {screen === 'signoff' && <div className="flow-page-content">
+      {screen === 'signoff' && spatial && <div className="flow-page-content">{title('Share feedback', 'Fryer Station · Dre Jackson')}<SpatialFeedbackCard draft={draft} onFeedback={feedback => update({ feedback }, true)}/><SpatialApprovals confirmed={draft.assessorConfirmed}/><p className={`notice signoff-notice ${offline ? 'warn' : ''}`}>{offline ? 'Offline: saved on this device. No sync or certification occurs.' : 'Demo only · assessor review is saved on this device, not submitted. Employee acknowledgement and manager countersign depend on configured rules. No certification is issued.'}</p></div>}
+      {screen === 'signoff' && !spatial && <div className="flow-page-content">
         {title(floatingEvidence ? 'Share feedback' : 'Feedback & sign-off', 'Fryer Station · Dre Jackson')}
         <Surface className="overview-card"><CardHeader><CardTitle><h2>{followUp ? 'Next steps for Dre' : 'What went well'}</h2></CardTitle></CardHeader><CardContent>
           <Badge variant="outline" className={`pill ${followUp ? 'warn' : 'good'}`}>{failed ? 'Feedback needed' : coaching ? 'Further coaching indicated' : 'Observations complete'}</Badge>
