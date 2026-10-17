@@ -12,9 +12,10 @@ with sync_playwright() as pw:
  for width in [320,390,1440]:
   page.set_viewport_size({'width':width,'height':844})
   page.goto(args.url+'/?version=5');page.locator('.screen').wait_for()
+  fixture=out/'fixture.png';page.screenshot(path=str(fixture))
   for screen,back,label,destination in [('list',None,'Assessments',None),('overview','Back to assessments','Assessment overview','list'),('assessment','Back to overview','Fryer Station','overview'),('review','Back to checklist','Assessment review','assessment'),('signoff','Back to review','Feedback & sign-off','review')]:
    draft={'screen':screen,'index':1,'answers':{str(i):'met' for i in range(11)},'notes':{'8':'Quality checks observed.'},'feedback':'Review station safety.','offline':False,'paused':False,'assessorConfirmed':False}
-   page.evaluate('d=>localStorage.setItem("lp-rosa-flow-v5-v01",JSON.stringify(d))',draft);page.reload()
+   page.evaluate('d=>localStorage.setItem("lp-rosa-flow-v5-v01",JSON.stringify(d))',draft);page.reload();page.locator('.screen').wait_for();page.locator('input[aria-label="Take photo"]').nth(8).set_input_files(str(fixture))
    expect(page.locator('.screen')).to_have_attribute('data-screen',screen)
    expect(page.locator('.spatial-header')).to_have_count(1)
    expect(page.locator('.spatial-header .assessment-name')).to_have_text(label)

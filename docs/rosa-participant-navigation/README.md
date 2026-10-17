@@ -25,3 +25,9 @@ V5 supplies an optional portal container to the shared Sheet, Dialog and AlertDi
 ## Evidence requirement presentation
 
 Required evidence is communicated only by the composer helper (“Comment or photo required”), matching the existing either/or validation. Removed the camera-only Required badge and the camera button's required-state highlight. The button remains neutral while evidence is missing; its attachment indicator still reflects an added photo. Section and Critical tags are unchanged. Regression checks assert the helper, neutral button and absent Required badge, and exercise photo/comment completion.
+
+## Explicit evidence modalities
+
+V5 evidence requirements now distinguish `comment`, `photo`, and `comment-and-photo` (plus optional `none`). The finished-product quality criterion requires both a comment and a photo. Shared requirement functions determine the helper, Next availability, progress, review completeness, section status and sign-off eligibility. The helper names the remaining evidence: “Comment and photo required”, “Comment required”, or “Photo required”. The photo action stays neutral and there is no separate required badge.
+
+V2–V4 retain their existing either/or rules. Explorer uses the same V5 functions and composer prop; Complete stories include a safe in-memory photo fixture. Tests cover all requirement modes, whitespace-only comments, partial evidence, photo removal/session loss and restored sign-off gating.

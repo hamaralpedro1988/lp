@@ -14,7 +14,7 @@ import { EvidencePanel, type EvidenceActions } from '@/components/assessment/evi
 import { VersionSwitcher } from '@/components/layout/version-switcher'
 import { flowCriteria as criteria, flowScreens, flowStorageKey, emptyFlowDraft, normalizeFlowDraft, flowEvidenceOk, flowMissing, type FlowDraft, type FlowScreen, type FlowAnswer } from '@/data/flow-draft'
 import { useMobileOverlay, useMobileViewport } from '@/hooks/use-mobile-overlay'
-import { spatialTheme, spatialStorageKey, emptySpatialDraft, normalizeSpatialDraft } from '@/data/spatial-flow'
+import { spatialEvidenceOk, spatialMissing, spatialTheme, spatialStorageKey, emptySpatialDraft, normalizeSpatialDraft } from '@/data/spatial-flow'
 import { SpatialAssignmentCard, SpatialPeopleCard, SpatialReviewSummary, SpatialReviewList, SpatialFeedbackCard, SpatialApprovals } from '@/components/assessment/spatial-journey'
 import { SpatialFlowHeader, SpatialAssessmentHeader, SpatialLiveCard, SpatialActionButton, SpatialSurface, SpatialNavigation, SpatialSections } from '@/components/assessment/spatial-primitives'
 import { applyTheme, creatorTheme, loadTheme } from '@/lib/theme'
@@ -82,13 +82,13 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
   const sectionsButton = useRef<HTMLButtonElement>(null)
   const sheetTrigger = useRef<HTMLElement | null>(null)
   const draftRef = useRef(draft)
-  const missing = flowMissing(draft, photos)
+  const missing = spatial ? spatialMissing(draft, photos) : flowMissing(draft, photos)
   // A restored draft cannot retain eligibility based on media from a previous page session.
   const screen = draft.screen === 'signoff' && missing.length ? 'review' : draft.screen
   const c = criteria[draft.index]
   const responseOptions = spatial ? wireframeOptions.filter(option => option.value !== 'coaching') : wireframe ? wireframeOptions : options
   const evidenceRequired = 'evidence' in c
-  const evidencePending = evidenceRequired && !flowEvidenceOk(draft, draft.index, photos)
+  const evidencePending = evidenceRequired && !(spatial ? spatialEvidenceOk(draft, draft.index, photos) : flowEvidenceOk(draft, draft.index, photos))
   const recorded = Object.values(draft.answers).filter(value => value !== 'notObserved').length
   const met = Object.values(draft.answers).filter(answer => answer === 'met').length
   const coaching = Object.values(draft.answers).filter(answer => answer === 'coaching').length

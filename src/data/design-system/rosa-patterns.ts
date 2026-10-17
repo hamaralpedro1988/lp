@@ -20,7 +20,7 @@ export function rosaExample(id: string) {
     header:'<SpatialAssessmentHeader draft={draft} photos={photos} saveError={saveError} onBack={openOverview} />',
     card:'<SpatialLiveCard draft={draft} photos={photos} direction="next" titleRef={titleRef} onAnswer={onAnswer} onNote={onNote} onCamera={openCamera} galleryRef={setGalleryTarget} />',
     choices:'<SpatialChoices value={draft.answers[draft.index] ?? ""} onChange={onAnswer} disabled={false} />',
-    evidence:'<SpatialEvidenceComposer note={note} count={photoCount} required={required} pending={pending} onNote={onNote} onCamera={openCamera} galleryRef={setGalleryTarget} />',
+    evidence:'<SpatialEvidenceComposer note={note} count={photoCount} requirement="comment-and-photo" onNote={onNote} onCamera={openCamera} galleryRef={setGalleryTarget} />',
     footer:'<SpatialNavigation index={draft.index} canContinue={canContinue} sectionsRef={sectionsRef} onBack={previousCriterion} onSections={openSections} onNext={nextCriterion} />',
     sections:'<SpatialSections draft={draft} photos={photos} onJump={jumpToCriterion} />',
     progress:'<SpatialProgress draft={draft} photos={photos} />',
