@@ -15,3 +15,9 @@ The participant preview now has a Galaxy A55-inspired decorative shell above 650
 Removed “Before you begin” from the Overview. Removed generic “Category 2” metadata from V5 Assignments and Overview (legacy versions retain their category). Reviewed participant copy across entry, overview, observations, evidence, review, feedback, acknowledgements, section navigation, migration, offline/save errors and completion. Labels use direct assessor language, response descriptions are parallel, and local-only review wording avoids suggesting a submission or certification occurred. Existing assessment criteria and scoring logic are unchanged.
 
 The segmented progress indicator is inset with the same `--spatial-space-gutter` as the content. Narrow layouts use that gutter too. The participant browser check compares actual left/right progress bounds with content padding at 320/390/1440px, in addition to asserting the removed Overview content is absent.
+
+## Device overlay containment
+
+V5 supplies an optional portal container to the shared Sheet, Dialog and AlertDialog primitives. Its overlay host lives inside the device screen, establishes the fixed-position containing block, and clips to the screen radius. Both the dimmed backdrop and content stay inside the device; sheets have a height limit relative to that screen and scroll internally. Dedicated tools and legacy flows keep Radix's default body portal.
+
+`check-device-overlays.py` measures member/sections/photo content and backdrops at 320/390/1440px, checks the last criterion remains reachable, focus restoration on close and selection, and an open panel resized from desktop to short desktop to mobile.
