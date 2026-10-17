@@ -218,3 +218,9 @@ Open `?version=4` for the wireframe-based live checklist. V4 reuses the V3 Mist/
 Overview, review and sign-off retain the V3 design. V4 uses `lp-rosa-flow-v4-v01` for an isolated local draft and appears in the four-version picker. Photos stay in the current page session. The earlier V3 floating-evidence UI remains available.
 
 Validation: production build, unit tests, lint (three existing Fast Refresh warnings), and Chromium checks for left-aligned radios, keyboard selection, inline comment/photo, required-evidence states, all eleven responses, review/sign-off, section navigation, persistence and V3 isolation. No horizontal overflow at 320/390/768/1440px.
+
+## V5 · Spatial Flow (design exploration)
+
+Open `?version=5` for the full Spatial Flow journey: Assignments, Overview, Live assessment, Review and Sign-off. V5 uses its own iris/lavender theme, layered opaque cards, segmented completion progress, contextual shadcn sheets and purposeful CSS motion with reduced-motion support. It retains the V4 rules and real evidence controls, using a separate `lp-rosa-flow-v5-v01` draft. No backend, real signatures or certification are simulated.
+
+See the [V5 review guide and screenshots](docs/rosa-v5/README.md), [EN → PT implementation decisions](docs/rosa-v5/DECISIONS.md), and the repeatable [browser regression check](scripts/check-spatial.py). The design references remain on `design/rosa-v5-spatial-handoff`.
