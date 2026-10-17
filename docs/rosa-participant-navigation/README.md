@@ -21,3 +21,7 @@ The segmented progress indicator is inset with the same `--spatial-space-gutter`
 V5 supplies an optional portal container to the shared Sheet, Dialog and AlertDialog primitives. Its overlay host lives inside the device screen, establishes the fixed-position containing block, and clips to the screen radius. Both the dimmed backdrop and content stay inside the device; sheets have a height limit relative to that screen and scroll internally. Dedicated tools and legacy flows keep Radix's default body portal.
 
 `check-device-overlays.py` measures member/sections/photo content and backdrops at 320/390/1440px, checks the last criterion remains reachable, focus restoration on close and selection, and an open panel resized from desktop to short desktop to mobile.
+
+## Evidence requirement presentation
+
+Required evidence is communicated only by the composer helper (“Comment or photo required”), matching the existing either/or validation. Removed the camera-only Required badge and the camera button's required-state highlight. The button remains neutral while evidence is missing; its attachment indicator still reflects an added photo. Section and Critical tags are unchanged. Regression checks assert the helper, neutral button and absent Required badge, and exercise photo/comment completion.

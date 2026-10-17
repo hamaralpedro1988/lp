@@ -64,7 +64,7 @@ export function SpatialEvidenceComposer({ note, count, pending, required, onNote
     <div className="spatial-composer" data-required={pending || undefined}>
       <Textarea id={`${id}-comment`} aria-label="Comment" aria-describedby={`${id}-help`} placeholder="Add a comment…" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
       <div className="spatial-composer-bottom"><span id={`${id}-help`} className="spatial-composer-help" role="status">{pending ? 'Comment or photo required' : required ? 'Evidence recorded' : count ? 'Photo · session only' : 'Optional evidence'}</span>
-        <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-required={pending || undefined} data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby={`${id}-help`}><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
+        <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby={`${id}-help`}><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
       </div>
     </div>
     <div className="flow-gallery spatial-attachments" ref={galleryRef}/>
@@ -77,7 +77,7 @@ export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, 
   useLayoutEffect(() => { cardRef.current?.scrollTo({ top: 0 }) }, [draft.index])
   return <SpatialSurface className="spatial-live-card" ref={cardRef} aria-label="Current criterion">
     <div className="spatial-question-body" key={draft.index} data-direction={direction}>
-      <div className="spatial-criterion-context"><div className="spatial-badges"><Badge className="spatial-badge" variant="secondary">{criterion.section}</Badge>{'critical' in criterion && <Badge className="spatial-badge" data-tone="critical" variant="secondary">◆ Critical</Badge>}{required && <Badge className="spatial-badge" data-tone="critical" variant="secondary"><Camera aria-hidden="true"/>Required</Badge>}</div><span className="spatial-position">{String(draft.index + 1).padStart(2, '0')} / {String(flowCriteria.length).padStart(2, '0')}</span></div>
+      <div className="spatial-criterion-context"><div className="spatial-badges"><Badge className="spatial-badge" variant="secondary">{criterion.section}</Badge>{'critical' in criterion && <Badge className="spatial-badge" data-tone="critical" variant="secondary">◆ Critical</Badge>}</div><span className="spatial-position">{String(draft.index + 1).padStart(2, '0')} / {String(flowCriteria.length).padStart(2, '0')}</span></div>
       <h2 id="live-question-title" className="spatial-question-title" ref={titleRef} tabIndex={-1}>{criterion.title}</h2><p className="spatial-question-description">{criterion.desc}</p>
       <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer}/>
     </div>
