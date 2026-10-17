@@ -9,3 +9,9 @@ Validation: production build, unit suites, lint (three existing Fast Refresh war
 ## Desktop device presentation
 
 The participant preview now has a Galaxy A55-inspired decorative shell above 650px: handset proportions (76.5:161.1), graphite bezel, centered camera, side keys and a gesture bar. It fits the viewport without scaling app text or intercepting input. At mobile widths the shell disappears and the app remains full screen. No simulated OS buttons, version controls or presentation rails are added.
+
+## Copy and progress refinement
+
+Removed “Before you begin” from the Overview. Removed generic “Category 2” metadata from V5 Assignments and Overview (legacy versions retain their category). Reviewed participant copy across entry, overview, observations, evidence, review, feedback, acknowledgements, section navigation, migration, offline/save errors and completion. Labels use direct assessor language, response descriptions are parallel, and local-only review wording avoids suggesting a submission or certification occurred. Existing assessment criteria and scoring logic are unchanged.
+
+The segmented progress indicator is inset with the same `--spatial-space-gutter` as the content. Narrow layouts use that gutter too. The participant browser check compares actual left/right progress bounds with content padding at 320/390/1440px, in addition to asserting the removed Overview content is absent.

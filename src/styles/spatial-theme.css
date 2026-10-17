@@ -142,13 +142,13 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 /* V5 layout selectors intentionally carry greater specificity than legacy Flow
    CSS, independent of Vite async chunk load order. */
 /* Header and footer are fixed flex siblings on one continuous canvas. */
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {flex:none;padding:14px 16px 0;background:transparent;border:0;box-shadow:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {flex:none;padding:14px var(--spatial-space-gutter) 0;background:transparent;border:0;box-shadow:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-top {display:flex;align-items:center;gap:9px;min-height:44px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-back {width:44px;height:44px;flex:none;border-radius:15px;background:var(--spatial-surface);border:1px solid var(--spatial-input-line);color:var(--spatial-section-ink);box-shadow:0 1px 3px #4c41610c}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-name {flex:1;min-width:0;font-size:clamp(16px,4.5vw,20px);font-weight:780;letter-spacing:-.6px;line-height:1.15;margin:0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {display:flex;align-items:center;gap:7px;color:var(--spatial-ink);font-size:14px;font-weight:750;flex:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {width:35px;height:35px;display:grid;place-items:center;border-radius:50%;background:var(--spatial-section-bg);color:var(--spatial-section-ink);font-size:12px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;margin:14px -16px 0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;margin:14px 0 0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments>span {height:4px;border-radius:1px;background:var(--spatial-progress-track);transition:background-color var(--spatial-motion-progress)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments>span[data-state=complete] {background:var(--spatial-progress)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header .spatial-status {margin:8px 0 0;font-size:12px;padding:8px 10px}
@@ -261,12 +261,12 @@ html[data-assessment-version="5"] .spatial-criterion-number>svg {width:14px;heig
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {padding-top:max(14px,env(safe-area-inset-top))}
 }
 @media(max-width:350px) {
-  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {padding:10px 12px}
+  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {padding:10px var(--spatial-space-gutter)}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {padding:20px 17px}
-  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {padding-inline:12px}
+  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {padding-inline:var(--spatial-space-gutter)}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {font-size:12px;gap:5px}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {width:30px;height:30px;font-size:10px}
-  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {margin-inline:-12px}
+  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {margin-inline:0}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-navigation {grid-template-columns:minmax(0,1fr) 48px minmax(0,1.07fr);gap:8px}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-navigation .spatial-action {font-size:14px;gap:6px}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-metadata>div {flex-wrap:wrap}

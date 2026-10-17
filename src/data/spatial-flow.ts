@@ -45,6 +45,6 @@ export const spatialTheme: Theme = {
 }
 
 export const spatialOptions = [
-  { value: 'met', title: 'Pass', description: 'Did meet the standard' },
-  { value: 'fail', title: 'Fail', description: 'Standard not met' },
+  { value: 'met', title: 'Pass', description: 'Met the standard' },
+  { value: 'fail', title: 'Fail', description: 'Did not meet the standard' },
 ] as const

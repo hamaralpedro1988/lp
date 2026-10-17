@@ -21,6 +21,16 @@ with sync_playwright() as pw:
    expect(page.locator('.side,.right,.stage-label,.floating,.mobile-version-switcher')).to_have_count(0)
    expect(page.get_by_role('button',name='Reset prototype')).to_have_count(0)
    expect(page.locator('a[href="?studio=1"],a[href="?view=design-system"]')).to_have_count(0)
+   if screen == 'overview':
+    expect(page.get_by_role('heading',name='Before you begin',exact=True)).to_have_count(0)
+    assert 'Category 2' not in page.locator('.phone').inner_text()
+   if screen == 'assessment':
+    aligned=page.evaluate('''() => {
+      const progress=document.querySelector('.spatial-segments').getBoundingClientRect();
+      const screen=document.querySelector('.screen');const box=screen.getBoundingClientRect();const css=getComputedStyle(screen);
+      return Math.abs(progress.left-box.left-parseFloat(css.paddingLeft))<1 && Math.abs(box.right-progress.right-parseFloat(css.paddingRight))<1;
+    }''')
+    assert aligned, f'Progress must align with content gutters at {width}px'
    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
    page.evaluate('document.fonts.ready');page.evaluate('() => Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))')
    page.screenshot(path=str(out/f'participant-{screen}-{width}.png'))

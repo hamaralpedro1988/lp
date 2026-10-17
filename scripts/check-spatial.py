@@ -80,12 +80,12 @@ with sync_playwright() as pw:
  page.locator('.screen').evaluate('(e)=>e.scrollTop=e.scrollHeight');capture('04-review-details-390')
  nav('Continue to feedback & sign-off')
  expect(page.locator('.approval-row')).to_have_count(2)
- page.get_by_role('textbox',name='Coaching / feedback note').fill('Discuss safe basket handling and quality checks with Dre.')
+ page.get_by_role('textbox',name='Feedback for Dre').fill('Discuss safe basket handling and quality checks with Dre.')
  capture('05-signoff-390')
  page.locator('.screen').evaluate('(e)=>e.scrollTop=e.scrollHeight');capture('05-signoff-details-390')
  nav('Confirm assessor review');capture('06-confirmation-sheet')
  expect(page.get_by_role('dialog')).to_contain_text('Not certified yet')
- nav('Done for now');expect(page.locator('.overview-status')).to_contain_text('Review recorded · demo')
+ nav('Done for now');expect(page.locator('.overview-status')).to_contain_text('Review saved on this device')
  saved=page.evaluate('(k)=>localStorage.getItem(k)',KEY)
  # All screens across requested widths and desktop.
  for width in [320,375,390,419,1440]:
@@ -101,7 +101,7 @@ with sync_playwright() as pw:
  # Whole-card scroll: composer naturally follows answers, no nested sticky footer.
  page.set_viewport_size({'width':320,'height':520})
  page.evaluate('k=>{const d=JSON.parse(localStorage.getItem(k));d.screen="assessment";d.index=8;d.offline=true;localStorage.setItem(k,JSON.stringify(d))}',KEY)
- page.reload();expect(page.locator('.spatial-header')).to_contain_text('Offline · local draft only')
+ page.reload();expect(page.locator('.spatial-header')).to_contain_text('Offline · draft saved on this device only')
  card=page.locator('.spatial-live-card')
  assert card.evaluate('(e)=>e.scrollHeight>e.clientHeight')
  before=page.locator('.spatial-evidence').bounding_box()['y']
@@ -116,20 +116,20 @@ with sync_playwright() as pw:
  assert card.evaluate('(e)=>e.scrollWidth<=e.clientWidth')
  page.evaluate('() => { Storage.prototype.setItem=function(){throw new Error("Test storage failure")}; }')
  page.get_by_role('radio',name='Fail',exact=True).check()
- expect(page.get_by_role('alert')).to_contain_text('Local save unavailable')
+ expect(page.get_by_role('alert')).to_contain_text('Unable to save on this device')
  capture('07-save-error')
  context.set_offline(True)
- expect(page.locator('.spatial-header')).to_contain_text('Local save unavailable')
+ expect(page.locator('.spatial-header')).to_contain_text('Unable to save on this device')
  context.set_offline(False)
  # Legacy coaching is unassessed, explicitly disclosed, never mapped to Fail.
  page.reload();page.evaluate('k=>localStorage.setItem(k,JSON.stringify({screen:"assessment",index:0,answers:{0:"coaching"},notes:{}}))',KEY);page.reload()
- expect(page.locator('.notice[role=status]')).to_contain_text('Earlier coaching observations')
+ expect(page.locator('.notice[role=status]')).to_contain_text('Review your earlier observations')
  expect(page.get_by_role('radio',name='Fail',exact=True)).not_to_be_checked();complete(0)
  expect(page.get_by_role('button',name='Next',exact=True)).to_be_disabled()
  context.set_offline(True)
- expect(page.locator('.spatial-header')).to_contain_text('Offline · local draft only')
+ expect(page.locator('.spatial-header')).to_contain_text('Offline · draft saved on this device only')
  context.set_offline(False)
- expect(page.locator('.spatial-header')).not_to_contain_text('Offline · local draft only')
+ expect(page.locator('.spatial-header')).not_to_contain_text('Offline · draft saved on this device only')
  # V2-V4 keep three choices, own colors, their evidence layout and separate state.
  saved_v5=page.evaluate('(k)=>localStorage.getItem(k)',KEY)
  for version in [2,3,4]:

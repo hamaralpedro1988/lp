@@ -35,7 +35,7 @@ export function SpatialFlowHeader({ title, onBack, backLabel, end, children, lab
 export function SpatialAssessmentHeader({ draft, photos, saveError, onBack }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; onBack: () => void }) {
   return <SpatialFlowHeader title="Fryer Station" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<span className="spatial-person"><span aria-hidden="true">DR</span>Dre</span>}>
     <SpatialProgress draft={draft} photos={photos}/>
-    {saveError ? <SpatialStatus tone="error">Local save unavailable. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · local draft only. No server sync.</SpatialStatus>}
+    {saveError ? <SpatialStatus tone="error">Unable to save on this device. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · draft saved on this device only.</SpatialStatus>}
   </SpatialFlowHeader>
 }
 export function SpatialChoice({ value, title, description, selected, disabled = false }: { value: 'met' | 'fail'; title: string; description: string; selected: boolean; disabled?: boolean }) {
