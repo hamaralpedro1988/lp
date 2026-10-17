@@ -390,7 +390,7 @@ html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialo
   .flow-app.flow-v5.participant-flow .stage {justify-content:center;padding:24px}
   .flow-app.flow-v5.participant-flow .device-shell {
     display:block;position:relative;flex:none;width:min(414px,calc((100dvh - 48px) * .47486));
-    aspect-ratio:76.5 / 161.1;padding:8px;border:1px solid #989aa6;border-radius:38px;
+    height:min(871.84px,calc(100dvh - 48px));aspect-ratio:76.5 / 161.1;padding:8px;border:1px solid #989aa6;border-radius:38px;
     background:linear-gradient(105deg,#9d9eaa 0%,#33343e 1%,#15151b 3%,#101014 97%,#72737e 99%,#b1b2bc 100%);
     box-shadow:0 28px 65px #29203835,0 8px 18px #1c162b26,inset 0 0 0 2px #8d8e9855;
   }
