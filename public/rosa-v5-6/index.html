@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f3f0fb" />
+  <title>Learning Pool · Rosa V5.6 · Spatial Flow</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700;750;800&display=swap');
+    :root { color-scheme:light; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-synthesis:none; --ink:#242339; --muted:#76748c; --iris:#7363bd; --iris-deep:#6453b0; --line:#e8e5f0; --canvas:#f3f0fb; --pass:#427764; --amber:#a5743f; --fail:#b96572; }
+    [hidden]{display:none!important}
+    *{box-sizing:border-box} html,body{margin:0;min-height:100%;} button,input,textarea{font:inherit} button{cursor:pointer;-webkit-tap-highlight-color:transparent} button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #9482ed;outline-offset:3px} button:disabled{cursor:not-allowed}
+    .icon{display:inline-block;width:19px;height:19px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}
+    .stage{min-height:100dvh;display:grid;place-items:center;padding:30px 22px;background:radial-gradient(ellipse 60% 66% at 24% 25%,#e0daf5 0%,transparent 76%),radial-gradient(ellipse 40% 55% at 88% 85%,#e2dafa 0%,transparent 74%),#f7f7fc;overflow:hidden}
+    .layout{width:min(100%,1120px);display:grid;grid-template-columns:minmax(310px,405px) minmax(300px,1fr);gap:clamp(36px,7vw,115px);align-items:center;justify-content:center}
+    .device-wrap{position:relative;padding:10px;border-radius:49px;background:linear-gradient(145deg,#fff,#d9d5e7 55%,#fff);box-shadow:0 38px 85px #3f34643c,0 12px 35px #51456d1a,inset 0 0 0 1px #fefeff}
+    .phone{height:min(812px,calc(100dvh - 96px));min-height:620px;max-width:390px;position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;border-radius:40px;background:linear-gradient(155deg,#f8f7fd 0%,#ecebf7 60%,#e9e5f5 100%);color:var(--ink)}
+    .ambient{pointer-events:none;z-index:-1;position:absolute;right:-135px;top:190px;height:390px;width:390px;border-radius:50%;background:radial-gradient(circle,#b9a5f169,transparent 68%)}
+    .glow-left{pointer-events:none;z-index:-1;position:absolute;left:-150px;bottom:-50px;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle,#fff9,transparent 72%)}
+    .phone-header{z-index:2;flex:0 0 auto;padding:21px 21px 16px;background:linear-gradient(160deg,#ffffffdf,#ffffffe5);border-bottom:1px solid #fff;box-shadow:0 6px 28px #4b44600d;backdrop-filter:blur(18px)}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:8px}.screen-title{font-size:19px;letter-spacing:-.7px;line-height:1.2;font-weight:780;margin:0}.person{display:flex;align-items:center;gap:7px;border:1px solid #e5e3ef;background:#fff;padding:4px 9px 4px 5px;border-radius:25px;font-size:12px;font-weight:710;box-shadow:0 2px 8px #3629560a}.avatar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#eae4fc;color:#6656a5;font-weight:790;font-size:10px}
+    .segments{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;margin-top:18px}.segment{height:5px;border-radius:50px;background:#e1dfeb;transition:background .33s,box-shadow .33s,transform .33s}.segment.complete{background:#8475c9;box-shadow:0 1px 6px #8671c552}.segment.new{animation:segment-pop .4s ease-out}.progress-details{display:flex;justify-content:space-between;gap:10px;margin-top:9px;font-size:11px;font-weight:540;color:#888298}.progress-details strong{color:#55496e;font-weight:720}
+    .main{position:relative;z-index:1;flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:none;display:flex;flex-direction:column;padding:20px 18px 22px}.main::-webkit-scrollbar{display:none}
+    .main-center{flex:1;min-height:0;display:flex;align-items:stretch;position:relative}
+    .depth-card{position:absolute;left:16px;right:16px;top:calc(50% - 208px);height:90px;border:1px solid #fff9;border-radius:25px;background:#fffc;box-shadow:0 9px 24px #574e8113;transform:translateY(-13px) scale(.966);pointer-events:none;opacity:.85}
+    .depth-card::before{content:"";position:absolute;left:12px;right:12px;top:-9px;height:50px;border-radius:24px;background:#fff9;border:1px solid #fff8;z-index:-1}
+    .assessment-card{position:relative;width:100%;height:100%;margin:8px 0;background:linear-gradient(155deg,#fff 0%,#fdfcff 70%,#f9f7ff 100%);border-radius:25px;border:1px solid #fff;padding:25px 20px 20px;box-shadow:0 22px 46px #51458027,0 4px 15px #51458012,inset 0 1px 0 #fff;transform-origin:50% 60%;overflow:auto;scrollbar-width:thin;scrollbar-color:#d9d2ed transparent}
+    .assessment-card.enter-next{animation:slide-in-next .38s cubic-bezier(.18,.8,.25,1) both}.assessment-card.enter-back{animation:slide-in-back .38s cubic-bezier(.18,.8,.25,1) both}
+    .eyebrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:18px}.pill{border-radius:9px;padding:5px 8px;background:#f0edfa;color:#6555a9;font-weight:760;letter-spacing:.2px;font-size:10px;white-space:nowrap}.pill.critical{background:#fff1e2;color:#ad6738}.pill.required{background:#fff1e2;color:#a3693e}.criterion-counter{margin-left:auto;white-space:nowrap;color:#9893a9;font-size:10px;font-weight:750;font-variant-numeric:tabular-nums}
+    .question{font-weight:790;letter-spacing:-.8px;line-height:1.19;font-size:clamp(22px,5.4vw,25px);margin:0 0 13px}.description{font-size:12px;line-height:1.6;color:#777387;margin:0 0 23px}
+    .answers{display:grid;gap:9px}.answer{min-height:62px;display:flex;align-items:center;width:100%;gap:13px;text-align:left;background:#f9f8fd;border:1px solid #e6e4ef;color:var(--ink);border-radius:16px;padding:10px 13px;position:relative;transition:transform .16s,border-color .2s,background .2s,box-shadow .25s}.answer:active{transform:scale(.979)}.answer[aria-pressed=true]{background:#f1edff;border-color:#8978cf;box-shadow:0 0 0 2px #b6a6ed3a,0 7px 19px #8674c325;transform:translateY(-1px)}.answer[data-value=fail][aria-pressed=true]{background:#fff2f2;border-color:#db9ca7;box-shadow:0 0 0 2px #f0b7bf46,0 7px 19px #c5788420}.radio{display:grid;place-items:center;width:22px;height:22px;border:1.7px solid #c5c0d8;border-radius:50%;background:#fff;flex:0 0 auto}.radio:after{content:"";width:10px;height:10px;border-radius:50%;background:#7363bd;transform:scale(0);transition:transform .17s cubic-bezier(.15,1.4,.3,1)}.answer[aria-pressed=true] .radio{border-color:#8170c5}.answer[aria-pressed=true] .radio:after{transform:scale(1)}.answer[data-value=fail][aria-pressed=true] .radio{border-color:#c26b79}.answer[data-value=fail][aria-pressed=true] .radio:after{background:#ba6070}.answer-copy{display:grid;gap:1px;flex:1}.answer-label{font-weight:720;font-size:13px;letter-spacing:-.1px}.answer-desc{color:#938e9f;font-size:11px;line-height:1.35}.answer[aria-pressed=true] .answer-desc{color:#706a84}.answer .check-mark{width:17px;height:17px;color:#7a6cb8;opacity:0;transform:scale(.65);transition:opacity .2s,transform .2s}.answer[aria-pressed=true] .check-mark{opacity:1;transform:scale(1)}
+    .evidence{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:19px;padding-top:17px;border-top:1px solid #eeeaf4}.evidence button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:47px;border-radius:13px;border:1px solid #e4e0ee;background:#fff;box-shadow:0 3px 10px #4d40720a;color:#4e4868;font-weight:720;font-size:12px;transition:transform .15s,background .2s}.evidence button:active{transform:scale(.96)}.evidence button.has-data{background:#f2efff;border-color:#d7cbfc}.evidence button.attention{border-color:#edc995;background:#fff7ec;color:#a36b35}.evidence .icon{width:17px;height:17px}.content-attachment{margin-top:11px;display:none;gap:6px;align-items:center;color:#726d83;font-size:11px;word-break:break-word}.content-attachment.visible{display:flex}.content-attachment img{width:30px;height:30px;object-fit:cover;border-radius:7px}
+    .footer{z-index:2;display:grid;grid-template-columns:50px minmax(0,1fr) minmax(0,1.05fr);gap:9px;padding:13px 17px max(18px,env(safe-area-inset-bottom));background:#ffffffd4;border-top:1px solid #fff;backdrop-filter:blur(18px);box-shadow:0 -10px 22px #51447f09;flex-shrink:0}.footer button{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:13px;border:1px solid #e4e1ee;background:#fff;color:#4c4761;min-height:50px;font-weight:740;font-size:12px;transition:transform .16s}.footer button:active:not(:disabled){transform:scale(.96)}.footer button.primary{background:#27253b;border-color:#27253b;color:#fff;box-shadow:0 8px 20px #2c264b2a}.footer button.primary:disabled{background:#e7e5ee;color:#a5a1b0;box-shadow:none;border-color:#e7e5ee}.footer .icon{width:17px;height:17px}
+    .summary-screen{width:100%;min-height:100%;animation:summary-enter .4s cubic-bezier(.2,.8,.2,1);padding:7px 0 16px}.summary-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.summary-head h2{margin:0;font-size:24px;letter-spacing:-.9px}.summary-subtitle{font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 21px}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0 0 18px}.stat{padding:12px 8px;text-align:center;border-radius:16px;border:1px solid #fff;background:#fffd;box-shadow:0 8px 20px #5a4b7a0b}.stat strong{font-size:24px;letter-spacing:-.9px;display:block}.stat span{font-size:10px;color:#858094;font-weight:700}.stat.pass strong{color:#477a68}.stat.fail strong{color:#bc6272}.review-callout{border-radius:14px;background:#fff8ef;border:1px solid #f2dcc2;padding:13px;color:#8f663d;font-size:12px;line-height:1.55;margin-bottom:16px}.review-callout.success{background:#edf7f1;border-color:#cfe5d8;color:#457862}.review-list{overflow:hidden;border-radius:17px;border:1px solid #e9e5ef;background:#fff}.review-row{width:100%;text-align:left;display:flex;gap:10px;align-items:center;background:#fff;color:#3c374d;border:0;border-bottom:1px solid #eeeaf4;padding:12px;font-size:12px}.review-row:last-child{border-bottom:0}.review-indicator{width:8px;height:8px;flex:none;border-radius:50%;background:#c9c5d5}.review-indicator.met{background:#549c79}.review-indicator.fail{background:#c76f7b}.review-row div{flex:1}.review-row small{display:block;color:#8c889b;font-size:10px;margin-top:3px}.review-row strong{font-weight:690}.review-row .icon{color:#9993a8;width:16px;height:16px}.review-sectiontitle{color:#666077;font-weight:750;font-size:11px;margin:16px 4px 9px}.review-fineprint{font-size:10px;line-height:1.6;color:#817b8b;padding-top:14px}.signoff-panel{border-radius:22px;padding:22px;border:1px solid #fff;background:#fff;box-shadow:0 17px 35px #52457a1d}.signoff-panel h2{font-size:23px;margin:0 0 12px;letter-spacing:-.7px}.signoff-panel p{font-size:13px;color:#777186;line-height:1.65}.demo-banner{margin-top:18px;border:1px solid #e9e3f2;border-radius:12px;padding:13px;background:#faf9ff;color:#666177;font-size:11px;line-height:1.5}
+    .overlay{position:absolute;inset:0;z-index:10;background:#2b244a63;backdrop-filter:blur(6px);display:none;align-items:flex-end}.overlay.open{display:flex;animation:overlay-in .21s ease-out}.sheet{background:linear-gradient(160deg,#fff,#f8f6ff);width:100%;max-height:86%;display:flex;flex-direction:column;padding:13px 20px max(24px,env(safe-area-inset-bottom));border-radius:27px 27px 0 0;box-shadow:0 -18px 50px #30264835;animation:sheet-in .32s cubic-bezier(.19,.8,.2,1);overflow:hidden}.handle{height:4px;width:39px;background:#d8d4e6;border-radius:4px;flex:none;margin:0 auto 16px}.sheet-header{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:17px}.sheet-header h2{font-size:20px;letter-spacing:-.55px;margin:0}.close{border:0;background:#eeebf5;color:#58506e;border-radius:50%;width:36px;height:36px;display:grid;place-items:center}.sheet-body{overflow:auto;min-height:0;scrollbar-width:thin}.sheet-copy{font-size:12px;color:#817b93;line-height:1.55;margin:0 0 14px}.sheet textarea{display:block;width:100%;border:1px solid #ded9ec;background:#fff;color:#302b41;border-radius:13px;padding:14px;min-height:145px;line-height:1.5;font-size:13px;resize:vertical}.sheet-button{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;min-height:49px;margin-top:13px;border:0;border-radius:13px;background:#2b2841;color:#fff;font-weight:720;font-size:13px}.sheet-button.secondary{background:#efedf8;color:#554e75}.sheet-list{display:grid;gap:8px;padding-bottom:5px}.sheet-section-label{font-size:11px;color:#837c97;font-weight:800;margin:10px 3px 3px}.section-item{width:100%;display:flex;align-items:center;gap:10px;text-align:left;min-height:52px;padding:9px 12px;border:1px solid #eae5f1;background:white;border-radius:13px;color:#454058}.section-item.current{background:#f4efff;border-color:#cfc4f4}.section-item span:nth-child(2){flex:1;font-size:11px;font-weight:650}.section-item small{font-size:10px;color:#887f96}.section-number{width:21px;height:21px;border-radius:50%;display:grid;place-items:center;border:1px solid #e2dcea;font-size:10px;color:#7f759a;flex:none}.section-number.answered{border-color:#a8cabb;background:#edf7f1;color:#4b866b}.photo-upload{width:100%;display:grid;place-items:center;gap:11px;min-height:165px;border:1px dashed #b9aed5;background:#faf8ff;border-radius:15px;cursor:pointer;text-align:center;padding:18px;font-size:12px;color:#6a6282}.photo-upload .icon{width:34px;height:34px;color:#7265a9}.photo-preview{display:block;width:100%;max-height:200px;object-fit:contain;border-radius:13px;margin-top:12px}.photo-help{font-size:11px;color:#807a90;line-height:1.55;margin-top:12px}.toast{position:absolute;left:50%;bottom:103px;transform:translate(-50%,10px);opacity:0;pointer-events:none;z-index:8;border-radius:100px;background:#252239ed;color:#fff;font-size:11px;font-weight:700;padding:10px 15px;box-shadow:0 8px 18px #271b4b3d;white-space:nowrap;transition:opacity .2s,transform .2s}.toast.visible{opacity:1;transform:translate(-50%,0)}
+    .editorial{max-width:570px;color:#34304c}.edition{color:#7c70a1;font-size:11px;font-weight:800;letter-spacing:2.2px;margin:0 0 30px}.hero{font-size:clamp(52px,6.8vw,94px);font-weight:790;line-height:.98;letter-spacing:-5.5px;margin:0 0 22px}.hero em{font-style:normal;color:#7d6ac3}.intro{max-width:470px;color:#79738a;font-size:15px;line-height:1.8;margin-bottom:30px}.editorial-rule{width:42px;height:3px;background:#9d89e4;border-radius:6px;margin:32px 0}.interaction-list{display:grid;gap:20px}.interaction-item{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}.interaction-index{color:#a59aba;font-size:11px;font-weight:800;padding-top:3px}.interaction-name{font-size:14px;font-weight:780;color:#302c45;margin-bottom:4px}.interaction-details{color:#8b8596;font-size:12px;line-height:1.6}.bottom-note{margin:29px 0 0;color:#9a92a6;font-size:10px;line-height:1.65}.color-swatches{display:flex;gap:7px;margin:22px 0}.color-swatches span{height:23px;width:23px;border-radius:7px;border:1px solid #ffffffd9}.editorial .pill{display:inline-flex;align-items:center;gap:7px;background:#eeeafa;color:#6d5baa;padding:9px 11px}
+    @keyframes slide-in-next{from{opacity:.3;transform:translate3d(34px,0,0) scale(.969)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}@keyframes slide-in-back{from{opacity:.3;transform:translate3d(-34px,0,0) scale(.969)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}@keyframes segment-pop{0%{transform:scaleY(.5)}60%{transform:scaleY(1.35)}100%{transform:scaleY(1)}}@keyframes overlay-in{from{opacity:0}to{opacity:1}}@keyframes sheet-in{from{transform:translateY(75px);opacity:.4}to{transform:translateY(0);opacity:1}}@keyframes summary-enter{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:800px){.stage{padding:17px}.layout{width:100%;display:flex;flex-direction:column-reverse;gap:25px}.editorial{width:min(100%,390px)}.hero{font-size:34px;letter-spacing:-1.7px;margin-bottom:8px}.edition{margin-bottom:12px}.intro{display:none}.editorial-rule,.interaction-list,.color-swatches,.bottom-note{display:none}.device-wrap{width:min(100%,410px)}.phone{width:100%;max-width:none;height:720px}.editorial .pill{display:none}}
+    @media(max-width:480px){.stage{display:block;padding:0;min-height:100dvh;background:#f3f0fb}.layout{display:block;max-width:none}.device-wrap{width:100%;padding:0;box-shadow:none;border-radius:0;background:none}.phone{width:100%;height:100dvh;min-height:560px;max-width:none;border-radius:0}.editorial{display:none}.phone-header{padding-top:max(18px,env(safe-area-inset-top))}.main{padding:16px 17px 13px}.assessment-card{padding:22px 19px 18px}.question{font-size:23px}.depth-card{top:calc(50% - 205px)}.footer{padding-bottom:max(12px,env(safe-area-inset-bottom))}}
+    @media(max-height:710px){.phone{min-height:0}.main{padding-top:12px}.assessment-card{padding:17px}.eyebrow{margin-bottom:12px}.question{font-size:21px}.description{margin-bottom:14px}.answer{min-height:54px;padding:8px 12px}.answers{gap:7px}.evidence{margin-top:12px;padding-top:11px}.evidence button{min-height:42px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+    /* V5.2 · Seamless Spatial Canvas — header and bottom navigation have no separate surface. */
+    .phone { background:linear-gradient(155deg,#f8f7fd 0%,#efedf8 60%,#f0eef9 100%); }
+    .phone-header {padding:19px 22px 14px;background:transparent;box-shadow:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;}
+    .screen-title {font-size:19px;letter-spacing:-.52px;}
+    .progress-details {margin-top:9px;font-size:12px;}
+    #saveStatus {white-space:nowrap;color:#88829a;font-weight:550;}
+    .segments {margin-top:15px;gap:3px;}
+    .segment {height:6px;}
+    .main {overflow:hidden;padding:10px 16px 14px;}
+    .main-center {flex:1;min-height:0;display:flex;align-items:stretch;position:relative;}
+    .depth-card{left:19px;right:19px;top:9px;height:82px;opacity:.4;transform:translateY(0) scale(.97);}
+    .assessment-card {
+      display:flex; flex-direction:column; flex:1; min-height:0;
+      padding:23px 22px 21px; margin:0; height:auto;
+      border:1px solid rgba(255,255,255,.95);border-radius:29px;
+      background:linear-gradient(155deg,#fff 0%,#fffdff 58%,#faf8ff 100%);
+      box-shadow:0 18px 40px #52458218,0 3px 14px #5245820b,inset 0 1px 0 #fff;
+      transform:none!important;animation:none!important;
+    }
+    .assessment-body {
+      flex:none;min-height:auto;overflow:visible;
+    }
+    .assessment-body.enter-next {animation:content-enter-next .34s cubic-bezier(.2,.85,.25,1) both;}
+    .assessment-body.enter-back {animation:content-enter-back .34s cubic-bezier(.2,.85,.25,1) both;}
+    .eyebrow{margin-bottom:24px;gap:7px;}
+    .pill {font-size:11px;border-radius:9px;padding:6px 9px;}
+    .criterion-counter{font-size:11px;letter-spacing:.1px;}
+    .question{font-size:clamp(24px,6.5vw,29px);line-height:1.18;letter-spacing:-.9px;margin-bottom:24px;}
+    .description{font-size:15px;line-height:1.47;margin-bottom:23px;color:#7c7791;}
+    .answers{gap:10px;}
+    .answer{min-height:68px;border-radius:18px;padding:11px 14px;gap:14px;background:#f9f8fd;}
+    .answer-label{font-size:15px;}
+    .answer-desc{font-size:12px;}
+    .radio{width:23px;height:23px;}
+    .assessment-actions{flex:none;margin-top:18px;padding-top:16px;position:relative;z-index:1;background:transparent;}
+    .evidence{margin:0;padding:0;border-top:0;gap:10px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+    .evidence button{min-height:51px;border-radius:15px;font-size:13px;box-shadow:none;background:#fff;}
+    .evidence .icon {width:19px;height:19px;}
+    .content-attachment {display:none;margin:0 0 10px;border:1px solid #ece8f3;border-radius:11px;background:#f8f5ff;padding:7px 9px;max-height:66px;overflow:auto;}
+    .content-attachment.visible{display:flex;}
+    .footer{background:transparent;box-shadow:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;padding:10px 16px max(17px,env(safe-area-inset-bottom));gap:10px;grid-template-columns:52px minmax(0,1fr) minmax(0,1.05fr);}
+    .footer button {min-height:55px;border-radius:14px;font-size:13px;}
+    .footer button.primary{background:#28253c;border-color:#28253c;}
+    .main:has(.summary-screen:not([hidden])){overflow-y:auto;}
+    @keyframes content-enter-next {from{opacity:.15;transform:translateX(24px) scale(.985);}to{opacity:1;transform:none;}}
+    @keyframes content-enter-back {from{opacity:.15;transform:translateX(-24px) scale(.985);}to{opacity:1;transform:none;}}
+    @media(max-width:480px){
+       .phone-header{padding:18px 20px 13px;}
+       .main{padding:12px 17px 12px;}
+       .assessment-card{padding:22px 21px 19px;border-radius:28px;}
+       .footer{padding:10px 16px max(16px,env(safe-area-inset-bottom));}
+       .question{font-size:clamp(23px,6.5vw,28px);}
+    }
+    @media(max-height:720px){
+       .phone-header{padding-top:12px;padding-bottom:10px;}
+       .segments{margin-top:11px;}
+       .main{padding-top:8px;padding-bottom:8px;}
+       .assessment-card{padding:15px 17px;}
+       .eyebrow{margin-bottom:13px;}
+       .question{font-size:23px;margin-bottom:12px;}
+       .description{font-size:13px;margin-bottom:13px;}
+       .answer{min-height:52px;padding:8px 11px;}
+       .answers{gap:7px;}
+       .assessment-actions{padding-top:9px;}
+       .evidence button{min-height:43px;}
+       .footer button{min-height:47px;}
+    }
+    @media(max-height:570px){
+       .question{font-size:21px}
+       .answer{min-height:44px}
+       .assessment-card{padding:12px}
+       .main{padding:6px 9px}
+       .footer{padding:6px 9px max(8px,env(safe-area-inset-bottom))}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .assessment-body.enter-next,.assessment-body.enter-back {animation:none!important;}
+    }
+
+
+    /* V5.3 · Inline evidence composer (anchored card footer + in-field camera) */
+    .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+    .assessment-actions{padding-top:16px;background:transparent;}
+    .composer{position:relative;display:flex;flex-direction:column;min-height:104px;max-height:104px;border-radius:17px;border:1px solid #ded9ea;background:linear-gradient(135deg,#fff 0%,#fff 75%,#faf9ff 100%);box-shadow:0 2px 10px #51487908;transition:border-color .18s,box-shadow .18s}
+    .composer:focus-within{border-color:#9c8be3;box-shadow:0 0 0 3px #9781dd24,0 6px 18px #6654a40c}
+    .composer textarea{background:transparent;color:var(--ink);font-family:inherit;font-size:15px;line-height:1.45;width:100%;min-width:0;flex:1;min-height:0;resize:none;border:0;border-radius:17px;padding:14px 65px 2px 15px;outline:none;box-shadow:none;overflow-y:auto;scrollbar-width:thin}
+    .composer textarea:focus-visible{outline:none}
+    .composer textarea::placeholder{color:#89849a;opacity:1}
+    .composer-bottom{height:49px;flex:none;display:flex;align-items:center;gap:5px;position:relative;padding:3px 61px 7px 13px}
+    .composer-camera{position:absolute;right:10px;bottom:9px;width:43px;height:43px;border-radius:13px;display:grid;place-items:center;border:1px solid #e3ddf0;background:#f6f4fb;color:#5b507c;box-shadow:none;transition:transform .16s,background .18s,border-color .18s;isolation:isolate}
+    .composer-camera svg{width:21px;height:21px;transition:transform .18s}
+    .composer-camera:hover{background:#ede8fb;border-color:#c9b9f0}
+    .composer-camera:active{transform:scale(.93)}
+    .composer-camera:active svg{transform:scale(.9)}
+    .composer-camera.has-data{background:#ebe6fc;border-color:#b4a1ea;color:#6753b1}
+    .composer-camera.attention{border-color:#e2b27c;background:#fff5e8;color:#a16b31}
+    .composer-camera:focus-visible{outline:3px solid #9482ed;outline-offset:3px}
+    .camera-dot{display:none;position:absolute;right:3px;top:3px;width:9px;height:9px;border-radius:100%;border:2px solid white;background:#7562c6}
+    .composer-camera.has-data .camera-dot{display:block}
+    .attachment-chip{display:inline-flex;min-width:0;align-items:center;gap:6px;max-width:100%;border:0;background:#eeeafb;border-radius:9px;padding:3px 7px 3px 3px;font-size:11px;font-weight:690;color:#645598;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:31px}
+    .attachment-chip[hidden]{display:none!important}
+    .attachment-chip img{width:24px;height:24px;border-radius:6px;object-fit:cover;flex:none;background:#e3dff1}
+    .attachment-chip span{overflow:hidden;text-overflow:ellipsis}
+    .composer-helper{color:#9a94a8;font-size:10px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .composer-helper.attention{color:#a26d38;font-weight:670}
+    @media(max-width:480px){.assessment-actions{padding-top:12px}.composer{min-height:103px;max-height:103px}}
+    @media(max-height:710px){.assessment-actions{padding-top:8px}.composer{min-height:88px;max-height:88px}.composer textarea{padding-top:9px;font-size:14px}.composer-bottom{height:42px;padding-bottom:4px}.composer-camera{height:37px;width:37px;bottom:6px;right:8px}.composer-camera svg{width:19px;height:19px}.composer-bottom{padding-right:52px}}
+    @media(max-height:570px){.composer{min-height:78px;max-height:78px}.composer-bottom{height:37px}.composer-camera{height:32px;width:32px;bottom:4px}}
+    @media(prefers-reduced-motion:reduce){.composer,.composer-camera,.composer-camera svg{transition:none!important}}
+
+  
+    /* V5.4.1 — hide the scrollbar track, not the scrolling behavior.
+       The entire assessment card still scrolls naturally via touch, wheel and keyboard. */
+    .assessment-card, .sheet-body, .content-attachment, .composer textarea {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* older Edge */
+    }
+    .assessment-card::-webkit-scrollbar,
+    .sheet-body::-webkit-scrollbar,
+    .content-attachment::-webkit-scrollbar,
+    .composer textarea::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+    /* V5.4.2 — Binary assessment: two predictable response targets. */
+    .answers{gap:13px;}
+    .answer{min-height:76px;}
+    @media(max-height:710px){.answers{gap:10px}.answer{min-height:64px;}}
+
+    /* V5.5 — Compact, backgroundless header: overview Back + title + employee and
+       full-width segmented progress. Autosave is silent unless saving fails. */
+    .phone-header{padding:16px 20px 0;background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;overflow:visible}
+    .phone-header .topline{display:flex;align-items:center;gap:10px;min-height:48px;justify-content:initial}
+    .phone-header .header-back{height:46px;width:46px;display:grid;place-items:center;flex:0 0 46px;padding:0;background:#ffffffeb;border:1px solid #ded9ef;border-radius:15px;color:#574e76;box-shadow:0 1px 3px #4c41610c;transition:transform .16s,background .2s}
+    .phone-header .header-back:hover{background:#fff}
+    .phone-header .header-back:active{transform:scale(.95)}
+    .phone-header .header-back .icon{height:21px;width:21px}
+    .phone-header .screen-title{min-width:0;flex:1;font-size:clamp(16px,4.5vw,20px);line-height:1.15;font-weight:780;letter-spacing:-.6px;margin:0}
+    .phone-header .person{flex:0 0 auto;gap:7px;border:none;background:transparent;padding:0;box-shadow:none;border-radius:0;color:#29243b;font-weight:760;font-size:14px}
+    .phone-header .avatar{width:35px;height:35px;border-radius:50%;font-size:12px}
+    .phone-header .segments{margin:15px -20px 0;gap:3px;grid-template-columns:repeat(11,minmax(0,1fr));overflow:hidden}
+    .phone-header .segment{height:4px;border-radius:1px;background:#dedce8;box-shadow:none}
+    .phone-header .segment.complete{background:#8272cf;box-shadow:none}
+    .phone-header .header-alert{display:block;margin:5px 0 7px;font-size:11px;font-weight:660;color:#a4484e}
+    .phone-header .header-alert[hidden]{display:none}
+    .phone-header.in-overview .header-back,.phone-header.in-overview .segments{display:none}
+    .phone-header.in-overview{padding-bottom:15px}
+    .phone-header.in-overview .topline{padding-left:2px}
+    .main{padding-top:13px}
+    /* The complete card scrolls; evidence follows responses in natural order. */
+    .assessment-card{overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;-ms-overflow-style:none}
+    .assessment-card::-webkit-scrollbar{width:0;height:0;display:none}
+    .assessment-body{overflow:visible!important;min-height:auto!important}
+    .assessment-actions{margin-top:22px!important;padding-top:0!important;position:relative!important;background:transparent!important}
+    .overview-screen{margin:auto 0;background:linear-gradient(153deg,#fff,#faf8ff);padding:27px 22px;border-radius:28px;border:1px solid #fff;box-shadow:0 18px 40px #5145801d}
+    .overview-badge{display:inline-flex;background:#efeafb;color:#6555a9;border-radius:8px;padding:6px 9px;letter-spacing:.3px;font-size:10px;font-weight:800}
+    .overview-screen h2{font-size:27px;letter-spacing:-1px;margin:18px 0 10px;color:var(--ink)}
+    .overview-lead{font-size:14px;line-height:1.6;color:#777188;margin:0 0 19px}
+    .overview-details{border:1px solid #ebe7f2;background:#f9f8fe;border-radius:15px;padding:5px 13px}
+    .overview-details>div{display:flex;align-items:baseline;justify-content:space-between;gap:14px;border-bottom:1px solid #ebe7f2;padding:11px 0;font-size:12px}
+    .overview-details>div:last-child{border:0}
+    .overview-details span{color:#7e7892}
+    .overview-details strong{max-width:66%;text-align:right;font-size:12px;color:#332e44}
+    .overview-footnote{color:#817b91;font-size:11px;line-height:1.55;margin:18px 0}
+    .overview-resume{width:100%;min-height:52px;background:#29263d;color:white;border:0;border-radius:15px;font-weight:740;display:flex;justify-content:center;align-items:center;gap:8px}
+    .overview-resume .icon{width:17px;height:17px}
+    @media(max-width:480px){
+      .phone-header{padding:14px 16px 0}
+      .phone-header .header-back{width:44px;height:44px;flex-basis:44px}
+      .phone-header .topline{gap:9px;min-height:44px}
+      .phone-header .segments{margin:14px -16px 0}
+      .main{padding-top:12px}
+    }
+    @media(max-width:350px){
+      .phone-header{padding-inline:12px}
+      .phone-header .topline{gap:7px}
+      .phone-header .screen-title{font-size:16px;letter-spacing:-.65px}
+      .phone-header .header-back{width:40px;height:40px;flex-basis:40px}
+      .phone-header .avatar{width:30px;height:30px;font-size:10px}
+      .phone-header .person{font-size:12px;gap:5px}
+      .phone-header .segments{margin-inline:-12px}
+    }
+    @media(max-height:720px){
+      .phone-header{padding-top:10px;padding-bottom:0}
+      .phone-header .segments{margin-top:9px}
+      .main{padding-top:7px}
+    }
+    @media(prefers-reduced-motion:reduce){.phone-header .header-back{transition:none!important}}
+  
+    /* V5.6 — Footer hierarchy: secondary Back, tertiary icon-only Sections, primary Next. */
+    .footer {
+      grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1.09fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+    .footer #backButton {
+      min-width: 0;
+      background: #ffffff;
+      border-color: #e1ddee;
+      border-radius: 15px;
+      font-size: 15px;
+      font-weight: 680;
+      gap: 9px;
+      color: #29253c;
+    }
+    .footer #backButton .icon { width: 21px; height: 21px; }
+    .footer #sectionsButton {
+      min-width: 0;
+      width: 54px;
+      padding: 0;
+      background: #ffffff;
+      border-color: #e1ddee;
+      border-radius: 15px;
+    }
+    .footer #sectionsButton .icon { width: 24px; height: 24px; color: #5f557d; }
+    .footer #nextButton { font-size: 15px; font-weight: 730; border-radius: 15px; }
+    .footer button:disabled { opacity: .52; }
+    .footer #nextButton:disabled { opacity: 1; }
+    @media (max-width: 350px) {
+      .footer { grid-template-columns: minmax(0,1fr) 48px minmax(0,1.07fr); gap: 8px; }
+      .footer #sectionsButton { width:48px; }
+      .footer #backButton { font-size:14px; gap:6px; }
+      .footer #nextButton { font-size:14px; }
+    }
+
+  </style>
+</head>
+<body>
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h3l2-3h4l2 3h3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M12 20h9M16 3l5 5-12 12-6 1 1-6L16 3Z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9M16 3l5 5-12 12-6 1 1-6L16 3Z"/></symbol>
+  </defs></svg>
+  <div class="stage"><div class="layout">
+    <div class="device-wrap">
+      <div class="phone" id="app">
+        <div class="ambient"></div><div class="glow-left"></div>
+        <header class="phone-header" id="appHeader">
+          <div class="topline">
+            <button class="header-back" id="overviewButton" type="button" aria-label="Back to assessment overview" title="Back to overview"><svg class="icon"><use href="#i-back"/></svg></button>
+            <h1 class="screen-title">Fryer Station</h1>
+            <div class="person" aria-label="Employee: Dre"><span class="avatar" aria-hidden="true">DR</span><span>Dre</span></div>
+          </div>
+          <div class="segments" id="segments" role="progressbar" aria-label="Criteria assessed" aria-valuemin="0" aria-valuemax="11" aria-valuenow="0"></div>
+          <span id="saveAlert" class="header-alert" role="status" hidden>Unable to save locally. Keep this tab open.</span>
+        </header>
+        <main class="main" id="main" aria-live="off">
+          <div class="main-center" id="assessmentView">
+            <div class="depth-card" aria-hidden="true"></div>
+            <article class="assessment-card" id="questionCard" aria-labelledby="questionTitle">
+              <div class="assessment-body" id="questionBody">
+              <div class="eyebrow"><span class="pill" id="sectionBadge">PREPARATION</span><span class="pill critical" id="criticalBadge" hidden>◆ Critical</span><span class="pill required" id="requiredBadge" hidden>Evidence required</span><span class="criterion-counter" id="criterionIndex">01 / 11</span></div>
+              <h2 class="question" id="questionTitle">Prepares a safe, clean work area</h2>
+              <p class="description" id="questionDescription">Observe station readiness and safe working conditions.</p>
+              <div class="answers" role="group" aria-label="Observation result">
+                <button type="button" class="answer" data-value="met" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="answer-copy"><span class="answer-label">Pass</span><span class="answer-desc">Did meet the standard</span></span><svg class="icon check-mark"><use href="#i-check"/></svg></button>
+                <button type="button" class="answer" data-value="fail" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="answer-copy"><span class="answer-label">Fail</span><span class="answer-desc">Standard not met</span></span><svg class="icon check-mark"><use href="#i-check"/></svg></button>
+              </div>
+              </div>
+              <div class="assessment-actions" aria-label="Observation evidence">
+                <div class="composer" id="evidenceComposer">
+                  <label class="sr-only" for="commentField">Observation comment for this criterion</label>
+                  <textarea id="commentField" rows="3" placeholder="Comment" aria-label="Observation comment" spellcheck="true"></textarea>
+                  <div class="composer-bottom">
+                    <button type="button" class="attachment-chip" id="attachmentChip" hidden aria-label="View attached photo">
+                      <img id="attachmentThumb" src="" alt="" />
+                      <span>1 photo attached</span>
+                    </button>
+                    <span class="composer-helper" id="composerHelper">Optional evidence</span>
+                    <button type="button" class="composer-camera" id="photoButton" aria-label="Take or attach photo" title="Take or attach photo"><svg class="icon"><use href="#i-camera"/></svg><span class="camera-dot" aria-hidden="true"></span></button>
+                  </div>
+                </div>
+                <span class="sr-only" id="evidenceStatus" role="status" aria-live="polite"></span>
+              </div>
+            </article>
+          </div>
+          <div class="summary-screen" id="summaryView" hidden></div>
+          <div class="summary-screen" id="signoffView" hidden></div>
+          <section class="overview-screen" id="overviewView" aria-labelledby="overviewHeading" hidden>
+            <div class="overview-badge">ASSESSMENT OVERVIEW</div>
+            <h2 id="overviewHeading">Fryer Station</h2>
+            <p class="overview-lead">Observe Dre carrying out the fryer task from preparation to handoff. Continue where you left off whenever you're ready.</p>
+            <div class="overview-details">
+              <div><span>Employee</span><strong>Dre Jackson</strong></div>
+              <div><span>Assessor</span><strong>Rosa Thompson</strong></div>
+              <div><span>Category</span><strong>Food Process &amp; Safety</strong></div>
+              <div><span>Criteria</span><strong>11 · Preparation, Frying, Completion</strong></div>
+              <div><span>Draft</span><strong id="overviewProgress">0 of 11 criteria assessed</strong></div>
+            </div>
+            <p class="overview-footnote">Answers and comments are saved on this device. Photos are not persisted by this prototype.</p>
+            <button type="button" class="overview-resume" id="resumeButton">Resume assessment <svg class="icon"><use href="#i-arrow"/></svg></button>
+          </section>
+        </main>
+        <footer class="footer" aria-label="Assessment navigation">
+          <button id="backButton" type="button" aria-label="Previous criterion"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg><span>Back</span></button>
+          <button id="sectionsButton" type="button" aria-label="Sections" title="All criteria"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg></button>
+          <button class="primary" id="nextButton" type="button" disabled><span id="nextText">Next</span><svg class="icon"><use href="#i-arrow"/></svg></button>
+        </footer>
+        <div class="overlay" id="overlay" aria-hidden="true"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="handle"></div><div class="sheet-header"><h2 id="sheetTitle">Comment</h2><button class="close" id="closeSheet" type="button" aria-label="Close panel"><svg class="icon"><use href="#i-x"/></svg></button></div><div class="sheet-body" id="sheetBody"></div></div></div>
+        <div class="toast" id="toast" role="status"></div>
+        <input id="filePicker" type="file" accept="image/*" hidden aria-label="Choose a photo of the observation" />
+      </div>
+    </div>
+    <aside class="editorial">
+      <p class="edition">LEARNING POOL / V5.5 · SPATIAL FLOW</p>
+      <h2 class="hero">Spatial<br/><em>Flow.</em></h2>
+      <p class="intro">An assessment experience shaped by depth, tactile feedback and seamless transitions. Quiet when Rosa observes. Expressive when she acts.</p>
+      <span class="pill">✦ &nbsp; Interactive concept · V5</span>
+      <div class="editorial-rule"></div>
+      <div class="interaction-list">
+        <div class="interaction-item"><span class="interaction-index">01</span><div><div class="interaction-name">Living assessment card</div><div class="interaction-details">The full card scrolls as one continuous surface: criterion, response and optional evidence move together.</div></div></div>
+        <div class="interaction-item"><span class="interaction-index">02</span><div><div class="interaction-name">Two clear decisions</div><div class="interaction-details">Pass and Fail always appear in the same order, with clear selection feedback and no automatic advancement.</div></div></div>
+        <div class="interaction-item"><span class="interaction-index">03</span><div><div class="interaction-name">Contextual evidence</div><div class="interaction-details">Comment and camera share one optional evidence composer at the end of the assessment card.</div></div></div>
+        <div class="interaction-item"><span class="interaction-index">04</span><div><div class="interaction-name">Living progress</div><div class="interaction-details">Completed observations illuminate their segment without implying the employee has passed.</div></div></div>
+      </div>
+      <div class="color-swatches"><span style="background:#29263c"></span><span style="background:#7363bd"></span><span style="background:#c1b3ee"></span><span style="background:#e7e1f9"></span><span style="background:#fcfbff"></span></div>
+      <p class="bottom-note">DESIGN PROTOTYPE · NO BACKEND · NO REAL SIGN-OFF<br/>A permanently visible comment field includes an in-field camera action. Notes are saved locally; chosen photos are preview-only for this session and are not uploaded.</p>
+    </aside>
+  </div></div>
+  <script>
+    (()=>{
+      'use strict';
+      const criteria=[
+        {section:'Preparation',title:'Prepares a safe, clean work area',desc:'Observe station readiness and safe working conditions.'},
+        {section:'Preparation',title:'Checks fryer readiness and oil conditions',desc:'Observe the applicable safety checks before starting.',critical:true},
+        {section:'Preparation',title:'Selects the correct product and portion',desc:'Check the food item and portion against the station standard.'},
+        {section:'Frying',title:'Loads the basket without overfilling',desc:'Observe preparation and basket loading.'},
+        {section:'Frying',title:'Lowers the basket safely',desc:'Watch how Dre handles and lowers the basket.',critical:true},
+        {section:'Frying',title:'Selects the approved cooking programme',desc:'Observe the correct programme selection for the product.'},
+        {section:'Frying',title:'Monitors the cycle and follows alerts',desc:'Observe Dre responding to the equipment instructions.'},
+        {section:'Frying',title:'Lifts and drains the basket safely',desc:'Observe removal and handling of the cooked product.',critical:true},
+        {section:'Completion',title:'Checks the finished product quality',desc:'Observe product quality checks against the agreed standard.',evidence:true},
+        {section:'Completion',title:'Transfers product to the correct area',desc:'Observe the safe handoff to the designated service area.'},
+        {section:'Completion',title:'Follows the approved holding guidance',desc:'Observe product handling after cooking.'}
+      ];
+      const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+      const storage='lp-spatial-v5-binary-v542';
+      const previousStorage='lp-spatial-v5-inline-evidence-v1';
+      const state={index:0,screen:'assessment',answers:{},notes:{},photos:{},photoUrls:{},saveError:false};
+      try {const saved=JSON.parse(localStorage.getItem(storage)||localStorage.getItem(previousStorage)||'null');if(saved&&typeof saved==='object'){
+        if(Number.isInteger(saved.index)&&saved.index>=0&&saved.index<criteria.length)state.index=saved.index;
+        for(let i=0;i<criteria.length;i++){
+          if(['met','fail'].includes(saved.answers?.[i]))state.answers[i]=saved.answers[i]; // Legacy coaching remains unassessed; Rosa must explicitly choose Pass or Fail.
+          if(typeof saved.notes?.[i]==='string')state.notes[i]=saved.notes[i];
+        }
+      }}catch(_){state.saveError=true}
+      // Explicitly requested visual preview: ?demo=1. Normal usage starts unassessed.
+      if(new URLSearchParams(location.search).get('demo')==='1'){
+        state.index=1;state.answers={0:'met',1:'met'};state.notes={};
+      }
+      let lastFocused=null;let toastTimer=0;
+      const esc=str=>String(str).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+      const escapeAttribute=esc;
+      const answered=i=>['met','fail'].includes(state.answers[i]);
+      const evidenceOk=i=>!criteria[i].evidence||Boolean(state.notes[i]?.trim())||Boolean(state.photos[i]);
+      const complete=i=>answered(i)&&evidenceOk(i);
+      const missing=()=>criteria.map((_,i)=>i).filter(i=>!complete(i));
+      function save(){try{localStorage.setItem(storage,JSON.stringify({index:state.index,answers:state.answers,notes:state.notes}));state.saveError=false}catch(_){state.saveError=true;announce('Local storage unavailable')}}
+      function announce(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),2200)}
+      function progress(previousCount){let n=criteria.filter((_,i)=>complete(i)).length;let bar=$('#segments');bar.innerHTML=criteria.map((_,i)=>`<span class="segment ${complete(i)?'complete':''} ${previousCount!==undefined&&n>previousCount&&i===state.index?'new':''}"></span>`).join('');bar.setAttribute('aria-valuenow',String(n));bar.setAttribute('aria-valuetext',`${n} of ${criteria.length} assessed`);$('#saveAlert').hidden=!state.saveError}
+      function updateCard(direction=''){
+        state.screen='assessment';$('#assessmentView').hidden=false;$('#summaryView').hidden=true;$('#signoffView').hidden=true;$('#overviewView').hidden=true;$('#appHeader').classList.remove('in-overview');$('.footer').hidden=false;
+        const c=criteria[state.index];$('#sectionBadge').textContent=c.section.toUpperCase();$('#criticalBadge').hidden=!c.critical;$('#requiredBadge').hidden=!c.evidence;$('#criterionIndex').textContent=String(state.index+1).padStart(2,'0')+' / '+String(criteria.length).padStart(2,'0');$('#questionTitle').textContent=c.title;$('#questionDescription').textContent=c.desc;
+        $$('.answer').forEach(b=>b.setAttribute('aria-pressed',String(state.answers[state.index]===b.dataset.value)));
+        // Evidence controls remain spatially anchored; only their content changes.
+        $('#commentField').value=state.notes[state.index]||'';
+        const attached=Boolean(state.photos[state.index]);
+        const chip=$('#attachmentChip');chip.hidden=!attached;
+        $('#attachmentThumb').src=attached?state.photoUrls[state.index]:'';
+        const camera=$('#photoButton');camera.classList.toggle('has-data',attached);
+        camera.classList.toggle('attention',Boolean(c.evidence&&!evidenceOk(state.index)));
+        camera.setAttribute('aria-label',attached?'Replace attached photo':'Take or attach photo');
+        const helper=$('#composerHelper');helper.textContent=c.evidence&&!evidenceOk(state.index)?'Comment or photo required':attached?'Photo preview · not uploaded':c.evidence?'Evidence recorded':'Optional evidence';
+        helper.classList.toggle('attention',Boolean(c.evidence&&!evidenceOk(state.index)));
+        $('#evidenceStatus').textContent=attached?'One photo attached for this criterion. Photo not uploaded.':c.evidence&&!evidenceOk(state.index)?'Comment or photo required for this criterion.':'';
+        $('#backButton').disabled=state.index===0;$('#nextButton').disabled=!answered(state.index);$('#nextText').textContent=state.index===criteria.length-1?'Review':'Next';$('#sectionsButton').disabled=false;$('#main').scrollTop=0;
+        $('#questionCard').scrollTop=0;const body=$('#questionBody');body.classList.remove('enter-next','enter-back');body.scrollTop=0;if(direction&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){void body.offsetWidth;body.classList.add(direction==='back'?'enter-back':'enter-next')}
+        progress();
+      }
+      function setScreen(screen){state.screen=screen;$('#assessmentView').hidden=screen!=='assessment';$('#summaryView').hidden=screen!=='review';$('#signoffView').hidden=screen!=='signoff';$('#overviewView').hidden=true;$('#appHeader').classList.remove('in-overview');$('.footer').hidden=false;$('#main').scrollTop=0;$('#sectionsButton').disabled=screen==='signoff';$('#backButton').disabled=false;$('#nextButton').disabled=false;progress();if(screen==='review')renderReview();if(screen==='signoff')renderSignoff()}
+      function renderReview(){const counts={met:0,fail:0};Object.values(state.answers).forEach(x=>{if(counts[x]!==undefined)counts[x]++});let outstanding=missing();
+        const container=$('#summaryView');container.innerHTML=`<div class="summary-head"><h2>Assessment review</h2><span class="pill">11 criteria</span></div><p class="summary-subtitle">Review what you observed before moving to sign-off.</p><div class="stats"><div class="stat pass"><strong>${counts.met}</strong><span>Pass</span></div><div class="stat fail"><strong>${counts.fail}</strong><span>Fail</span></div></div><div class="review-callout ${outstanding.length?'':'success'}">${outstanding.length?`${outstanding.length} ${outstanding.length===1?'criterion needs':'criteria need'} attention before sign-off. Review missing responses and required evidence.`:'All 11 criteria and configured evidence requirements are complete. This does not automatically mean Dre passed the overall assessment.'}</div>${['Preparation','Frying','Completion'].map(section=>`<div class="review-sectiontitle">${section}</div><div class="review-list">${criteria.map((c,i)=>c.section===section?`<button class="review-row" data-review-index="${i}"><span class="review-indicator ${state.answers[i]||''}"></span><div><strong>${esc(c.title)}</strong><small>${!answered(i)?'Not assessed':!evidenceOk(i)?'Evidence required':{met:'Pass',fail:'Fail'}[state.answers[i]]}</small></div><svg class="icon"><use href="#i-edit"/></svg></button>`:'').join('')}</div>`).join('')}<p class="review-fineprint">Illustrative assessment template. Criticality and weight do not establish a final score here. No backend or certification service is connected.</p>`;
+        $('#backButton').disabled=false;$('#nextText').textContent=outstanding.length?'Complete missing': 'Sign-off';$('#nextButton').disabled=false;
+        container.querySelectorAll('[data-review-index]').forEach(b=>b.addEventListener('click',()=>{state.index=Number(b.dataset.reviewIndex);save();updateCard('back')}));
+      }
+      function renderSignoff(){const el=$('#signoffView');el.innerHTML='<div class="signoff-panel"><div class="eyebrow"><span class="pill">FINAL STEP</span></div><h2>Ready for sign-off</h2><p>In a production workflow, Rosa would confirm the assessment, Dre could acknowledge it where configured, and a manager would countersign when required by the template.</p><div class="demo-banner">Prototype boundary: no identity verification, server submission, certification, or real signatures are performed in this HTML.</div></div>';
+        $('#nextText').textContent='Done';$('#nextButton').disabled=true;
+      }
+      function openOverview(){
+        // The top Back returns to the overview, distinct from the footer's Previous criterion.
+        // Nothing is submitted when leaving this live assessment.
+        state.screen='overview';
+        $('#assessmentView').hidden=true;$('#summaryView').hidden=true;$('#signoffView').hidden=true;
+        $('#overviewView').hidden=false;$('#appHeader').classList.add('in-overview');
+        $('.footer').hidden=true;
+        $('#overviewProgress').textContent=`${criteria.filter((_,i)=>complete(i)).length} of ${criteria.length} criteria assessed`;
+        $('#main').scrollTop=0;
+        $('#resumeButton').focus({preventScroll:true});
+      }
+      function next(){if(state.screen==='signoff')return;if(state.screen==='review'){let m=missing();if(m.length){state.index=m[0];save();updateCard('next');announce('Complete the outstanding criterion');return}setScreen('signoff');return}if(!answered(state.index))return;if(state.index<criteria.length-1){state.index++;save();updateCard('next');return}setScreen('review')}
+      function back(){if(state.screen==='signoff'){setScreen('review');return}if(state.screen==='review'){updateCard('back');return}if(state.index>0){state.index--;save();updateCard('back')}}
+      function openSheet(title,body){lastFocused=document.activeElement;$('#sheetTitle').textContent=title;$('#sheetBody').innerHTML=body;$('#overlay').classList.add('open');$('#overlay').setAttribute('aria-hidden','false');$('#closeSheet').focus()}
+      function closeSheet(){if(!$('#overlay').classList.contains('open'))return;$('#overlay').classList.remove('open');$('#overlay').setAttribute('aria-hidden','true');$('#sheetBody').innerHTML='';if(lastFocused?.isConnected)lastFocused.focus()}
+      function showAttachedPhoto(){
+        if(!state.photos[state.index])return;
+        openSheet('Photo evidence',`<p class="sheet-copy">Preview of your attached photo for this criterion. It is stored only in this open browser session and is not uploaded.</p><img class="photo-preview" alt="Photo evidence preview" src="${escapeAttribute(state.photoUrls[state.index])}"/><button id="replaceAttachedPhoto" class="sheet-button" type="button">Replace photo</button><button id="removeAttachedPhoto" class="sheet-button secondary" type="button">Remove photo</button>`);
+        $('#replaceAttachedPhoto').addEventListener('click',()=>{closeSheet();$('#filePicker').click()});
+        $('#removeAttachedPhoto').addEventListener('click',()=>{let before=criteria.filter((_,i)=>complete(i)).length;let idx=state.index;if(state.photoUrls[idx])URL.revokeObjectURL(state.photoUrls[idx]);delete state.photoUrls[idx];delete state.photos[idx];closeSheet();updateCard();progress(before);announce('Photo removed')});
+      }
+      function showSections(){const content=`<p class="sheet-copy">Jump to any criterion. Your existing answers stay in place, including unanswered items.</p><div class="sheet-list">${['Preparation','Frying','Completion'].map(s=>`<div class="sheet-section-label">${s}</div>${criteria.map((c,i)=>c.section===s?`<button class="section-item ${state.index===i&&state.screen==='assessment'?'current':''}" data-index="${i}"><span class="section-number ${complete(i)?'answered':''}">${complete(i)?'✓':i+1}</span><span>${esc(c.title)}</span><small>${complete(i)?'Done':!answered(i)?'Pending':'Evidence'}</small></button>`:'').join('')}`).join('')}</div>`;openSheet('All criteria',content);$('#sheetBody').querySelectorAll('[data-index]').forEach(b=>b.addEventListener('click',()=>{let nextIndex=Number(b.dataset.index),direction=nextIndex<state.index?'back':'next';state.index=nextIndex;save();closeSheet();updateCard(direction)}))}
+      $$('.answer').forEach(button=>button.addEventListener('click',()=>{let before=criteria.filter((_,i)=>complete(i)).length;state.answers[state.index]=button.dataset.value;save();updateCard();progress(before)}));
+      $('#overviewButton').addEventListener('click',openOverview);$('#resumeButton').addEventListener('click',()=>updateCard());$('#backButton').addEventListener('click',back);$('#nextButton').addEventListener('click',next);$('#sectionsButton').addEventListener('click',showSections);$('#photoButton').addEventListener('click',()=>$('#filePicker').click());$('#attachmentChip').addEventListener('click',showAttachedPhoto);$('#closeSheet').addEventListener('click',closeSheet);$('#overlay').addEventListener('click',e=>{if(e.target===$('#overlay'))closeSheet()});
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();if($('#overlay').classList.contains('open')&&e.key==='Tab'){const elements=$('#overlay').querySelectorAll('button:not(:disabled),textarea,input:not([hidden]),label[for]');const f=Array.from(elements).filter(n=>n.getClientRects().length);if(!f.length)return;const first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+      // Save comments as Rosa types, without shifting or re-rendering the fixed composer.
+      $('#commentField').addEventListener('input',event=>{
+        const before=criteria.filter((_,i)=>complete(i)).length;
+        state.notes[state.index]=event.target.value;
+        save();progress(before);
+        const c=criteria[state.index];
+        $('#composerHelper').textContent=c.evidence&&!evidenceOk(state.index)?'Comment or photo required':state.photos[state.index]?'Photo preview · not uploaded':c.evidence?'Evidence recorded':'Optional evidence';
+        $('#composerHelper').classList.toggle('attention',Boolean(c.evidence&&!evidenceOk(state.index)));
+      });
+      $('#filePicker').addEventListener('change',event=>{const file=event.target.files?.[0];if(!file)return;if(!file.type.startsWith('image/')){announce('Please choose an image');return}if(file.size>8*1024*1024){announce('Choose an image under 8 MB');return}let before=criteria.filter((_,i)=>complete(i)).length;let idx=state.index;if(state.photoUrls[idx])URL.revokeObjectURL(state.photoUrls[idx]);state.photoUrls[idx]=URL.createObjectURL(file);state.photos[idx]=true;event.target.value='';closeSheet();updateCard();progress(before);announce('Photo preview added · not persisted')});
+      updateCard();
+    })();
+  </script>
+</body>
+</html>
