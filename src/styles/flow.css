@@ -335,3 +335,5 @@ html:is([data-assessment-version="3"],[data-assessment-version="4"]) [data-slot=
   .flow-v4 .criterion-navigation{gap:12px}
   .flow-v4 .inline-evidence-actions{gap:12px}
 }
+
+.flow-v4 .live-question .criterion-context{margin-bottom:16px}
