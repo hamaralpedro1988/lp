@@ -24,5 +24,5 @@ function Preview() {
 }
 export default function App() {
   const params = new URLSearchParams(location.search)
-  return <TooltipProvider><Suspense fallback={<p role="status" className="p-8 text-sm text-muted-foreground">A carregar…</p>}>{params.get('preview') === '1' ? <Preview/> : params.get('studio') === '1' ? <ThemeStudio/> : params.get('view') === 'step' ? <AssessmentStep/> : params.get('version') === '2' ? <AssessmentFlow/> : <Assessment/>}</Suspense></TooltipProvider>
+  return <TooltipProvider><Suspense fallback={<p role="status" className="p-8 text-sm text-muted-foreground">A carregar…</p>}>{params.get('preview') === '1' ? <Preview/> : params.get('studio') === '1' ? <ThemeStudio/> : params.get('view') === 'step' ? <AssessmentStep/> : params.get('version') === '3' ? <AssessmentFlow key="v3" version={3}/> : params.get('version') === '2' ? <AssessmentFlow key="v2"/> : <Assessment/>}</Suspense></TooltipProvider>
 }

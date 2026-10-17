@@ -61,7 +61,7 @@
 }
 
 /* Scope portal typography to V2, including shared shadcn sheets and media controls. */
-html[data-assessment-version="2"]{
+html:is([data-assessment-version="2"],[data-assessment-version="3"]){
   --text-xs:14px;
   --text-sm:14px;
   --text-base:16px;
@@ -71,7 +71,7 @@ html[data-assessment-version="2"]{
   --text-3xl:30px;
 }
 @media(max-width:360px){.flow-app .review-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
-html[data-assessment-version="2"] [data-slot="sheet-title"]{font-size:18px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"]) [data-slot="sheet-title"]{font-size:18px}
 
 /* Assessment overview: wireframe hierarchy, using shared shadcn components. */
 .flow-app .overview-screen{padding:28px 20px 22px}
@@ -214,14 +214,33 @@ html[data-assessment-version="2"] [data-slot="sheet-title"]{font-size:18px}
 .flow-app .choice-copy small{font-size:var(--flow-secondary-size)}
 .flow-app .autosave-status,.flow-app .assessment-header-progress{font-size:var(--flow-status-size)}
 .flow-app .assessment-header-top{flex-wrap:wrap;row-gap:2px}
-html[data-assessment-version="2"] [role=dialog]{font-size:16px}
-html[data-assessment-version="2"] :is([data-slot=sheet-title],[data-slot=dialog-title],[data-slot=alert-dialog-title]){font-size:18px}
-html[data-assessment-version="2"] :is([data-slot=sheet-description],[data-slot=dialog-description],[data-slot=alert-dialog-description]){font-size:14px}
-html[data-assessment-version="2"] :is([data-slot=textarea],[data-slot=input]){font-size:16px}
-html[data-assessment-version="2"] [role=dialog] [data-slot=button]{font-size:16px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialog]{font-size:16px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"]) :is([data-slot=sheet-title],[data-slot=dialog-title],[data-slot=alert-dialog-title]){font-size:18px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"]) :is([data-slot=sheet-description],[data-slot=dialog-description],[data-slot=alert-dialog-description]){font-size:14px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"]) :is([data-slot=textarea],[data-slot=input]){font-size:16px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialog] [data-slot=button]{font-size:16px}
 .flow-app .flow-card-heading{flex-wrap:wrap}
 
 .flow-app .choice{cursor:pointer}
 .flow-app .choice:focus-within{outline:3px solid var(--ring);outline-offset:2px}
 .flow-app .response-radio{width:17px;height:17px;color:inherit;border-color:currentColor;box-shadow:none}
 .flow-app .response-radio [data-slot=radio-group-indicator] svg{fill:currentColor}
+
+/* V3 evidence actions float above navigation in a reserved, non-overlapping dock. */
+.flow-app .mobile-version-switcher{display:none}
+@media(max-width:650px){
+  .flow-app .mobile-version-switcher{display:block;justify-self:end}
+  .flow-app .mobile-version-switcher .version-trigger{width:36px;height:36px;padding:0}
+  .flow-app .mobile-version-switcher .version-trigger>span{display:none}
+}
+.flow-v3 .evidence-fab-dock{flex:none;display:flex;justify-content:flex-end;gap:12px;padding:10px 20px 4px;background:var(--background)}
+.flow-v3 .evidence-fab{position:relative;width:52px;height:52px;border-radius:50%;background:var(--card);color:var(--foreground);box-shadow:0 4px 14px color-mix(in oklab,var(--foreground) 12%,transparent)}
+.flow-v3 .evidence-fab>svg{width:22px;height:22px}
+.flow-v3 .fab-indicator{position:absolute;top:-3px;right:-3px;display:grid;place-items:center;min-width:20px;height:20px;padding:2px;border-radius:50%;background:var(--primary);color:var(--primary-foreground);font-size:12px}
+.flow-v3 .fab-indicator>svg{width:12px;height:12px}
+.flow-v3 .floating-evidence-summary{display:grid;gap:12px;min-width:0}
+.flow-v3 .floating-evidence-summary:has(.flow-gallery:empty):not(:has(.saved-note)){display:none}
+.flow-v3 .floating-evidence-summary .flow-gallery{margin:0}
+.flow-v3 .saved-note{height:auto;min-height:48px;padding:12px;justify-content:flex-start;align-items:flex-start;border:1px solid var(--border);border-radius:12px;white-space:normal;text-align:left;font-size:16px}
+.flow-v3 .saved-note>svg{margin-top:4px}
+.flow-v3 .saved-note>span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;min-width:0}
