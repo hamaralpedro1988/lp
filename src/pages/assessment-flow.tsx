@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { FileText, UserRound, MessageSquare, Clock3, ShieldCheck, Droplets, CookingPot, ClipboardCheck, ChevronLeft, ChevronRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, List, Camera, X, Wifi, WifiOff } from 'lucide-react'
+import { FileText, UserRound, MessageSquare, Clock3, LayoutGrid, CirclePlus, ShieldCheck, Droplets, CookingPot, ClipboardCheck, ChevronLeft, ChevronRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, List, Camera, X, Wifi, WifiOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Badge } from '@/components/ui/badge'
@@ -33,6 +33,11 @@ const assessmentGoals = [
   { Icon: CookingPot, label: 'Cook and handle food safely' },
   { Icon: ClipboardCheck, label: 'Meet product quality and holding standards' },
 ] as const
+const wireframeOptions = [
+  { value: 'met', title: 'Pass', desc: 'Did meet the standard', Icon: Check },
+  { value: 'coaching', title: 'Needs coaching', desc: 'Met partially', Icon: ArrowUpRight },
+  { value: 'fail', title: 'Fail', desc: 'Standard not met', Icon: X },
+] as const
 const options = [
   { value: 'met', title: 'Pass', desc: 'Performed as expected', Icon: Check },
   { value: 'coaching', title: 'Needs coaching', desc: 'Further practice is needed', Icon: ArrowUpRight },
@@ -40,9 +45,10 @@ const options = [
 ] as const
 
 
-export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
-  const floatingEvidence = version === 3
-  const storageKey = floatingEvidence ? 'lp-rosa-flow-v3-v01' : flowStorageKey
+export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 }) {
+  const floatingEvidence = version >= 3
+  const wireframe = version === 4
+  const storageKey = version === 4 ? 'lp-rosa-flow-v4-v01' : floatingEvidence ? 'lp-rosa-flow-v3-v01' : flowStorageKey
   const [draft, setDraft] = useState<FlowDraft>(() => { try { return normalizeFlowDraft(JSON.parse(localStorage.getItem(storageKey) ?? 'null')) } catch { return emptyFlowDraft() } })
   const [saveError, setSaveError] = useState(false)
   const [photos, setPhotos] = useState<Record<number, number>>({})
@@ -62,6 +68,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
   // A restored draft cannot retain eligibility based on media from a previous page session.
   const screen = draft.screen === 'signoff' && missing.length ? 'review' : draft.screen
   const c = criteria[draft.index]
+  const responseOptions = wireframe ? wireframeOptions : options
   const evidenceRequired = 'evidence' in c
   const evidencePending = evidenceRequired && !flowEvidenceOk(draft, draft.index, photos)
   const recorded = Object.values(draft.answers).filter(value => value !== 'notObserved').length
@@ -80,7 +87,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
     document.documentElement.dataset.assessmentVersion = String(version)
     applyTheme(theme, 'light')
     return () => { delete document.documentElement.dataset.assessmentVersion }
-  }, [version])
+  }, [version, floatingEvidence])
 
   useLayoutEffect(() => {
     screenRef.current?.scrollTo({ top: 0 })
@@ -128,7 +135,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
 
   const navigation = <nav className="flow-nav" aria-label="Screen flow">{flowScreens.map((id, i) => <button key={id} className={screen === id ? 'active' : ''} aria-current={screen === id ? 'step' : undefined} onClick={() => go(id)}><span className="number">0{i + 1}</span>{screenNames[id]}{id === 'signoff' && missing.length > 0 && <span className="sr-only"> (requires complete checklist)</span>}</button>)}</nav>
   const tools = <div className="stack"><Button variant="outline" className="action outline" onClick={sample}>Load sample observations <ArrowUpRight size={15}/></Button><Button variant="outline" className="action outline" onClick={() => setSheet('reset')}>Reset prototype</Button></div>
-  return <div className={`flow-app ${floatingEvidence ? 'flow-v3' : ''}`}><div className="workspace">
+  return <div className={`flow-app ${floatingEvidence ? 'flow-v3' : ''} ${wireframe ? 'flow-v4' : ''}`}><div className="workspace">
     <aside className="side"><div className="wordmark"><span className="brandmark"><ArrowUpRight size={17}/></span> Learning Pool <span>/ S2S</span></div><div className="eyebrow">EXERCISE 01 · ON THE FLOOR</div><h2 className="intro">Designing for<br/>the moment.</h2><p className="desc">Rosa’s practical assessment of Dre, during a busy shift. A mobile-first flow for observation, evidence and feedback.</p><h2 className="railhead">Presentation controls</h2><VersionSwitcher current={version}/><h2 className="railhead">Screen flow</h2>{navigation}<div className="aside-card"><strong>Prototype boundaries</strong>Checklist rules are illustrative. No backend, identity verification or server sync is simulated as real.</div><h2 className="railhead">Testing shortcuts</h2>{tools}<a className="action outline spaced" href="?studio=1">Open Theme Studio</a></aside>
     <main className="stage"><div className="stage-label"><span>Rosa / Mobile-first assessment</span><button className={`toggle ${draft.offline ? 'offline' : ''}`} onClick={() => update({ offline: !draft.offline })}>{draft.offline ? <WifiOff size={14}/> : <Wifi size={14}/>} {draft.offline ? 'Offline demo' : 'Online demo'}</button></div>
       <div className="phone">
@@ -198,8 +205,13 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
           </CardContent>
         </Card>
       </div>}
-      {screen === 'assessment' && <div className="flow-page-content"><section className="live-question" aria-labelledby="live-question-title"><div className="row criterion-context"><div className="criterion-tags"><span className="pill">{c.section}</span>{'critical' in c && <span className="pill danger">◆ Critical</span>}</div><span className="subtext criterion-position">Criterion {draft.index + 1} / {criteria.length}</span></div><div className="chips">{'evidence' in c && <EvidenceRequiredTag/>}</div><h2 id="live-question-title" ref={floatingEvidence ? titleRef : undefined} tabIndex={floatingEvidence ? -1 : undefined} className="criterion-title">{c.title}</h2><p className="criterion-desc">{c.desc}</p></section><section className="live-responses" aria-label="Observation result"><RadioGroup className="choices" onKeyDownCapture={floatingEvidence ? answerKey : undefined} aria-label="Observation result" value={draft.answers[draft.index] ?? ''} onValueChange={value => { if (value === 'met' || value === 'coaching' || value === 'fail') answer(value) }}>{options.map(({ value, title: label, desc, Icon }) => <div key={value} onClick={() => answer(value)} className={`choice ${value} ${draft.answers[draft.index] === value ? 'selected' : ''}`}><span className="choice-icon"><Icon size={17}/></span><span className="choice-copy"><b>{label}</b><small>{desc}</small></span><RadioGroupItem id={`flow-answer-${value}`} value={value} aria-label={label} className="response-radio"/></div>)}</RadioGroup></section>
+      {screen === 'assessment' && <div className="flow-page-content"><section className="live-question" aria-labelledby="live-question-title"><div className={wireframe ? 'sr-only' : 'row criterion-context'}><div className="criterion-tags"><span className="pill">{c.section}</span>{'critical' in c && <span className="pill danger">◆ Critical</span>}</div><span className="subtext criterion-position">Criterion {draft.index + 1} / {criteria.length}</span></div><div className="chips">{'evidence' in c && <EvidenceRequiredTag/>}</div><h2 id="live-question-title" ref={floatingEvidence ? titleRef : undefined} tabIndex={floatingEvidence ? -1 : undefined} className="criterion-title">{wireframe && draft.index === 1 ? 'Check fryer readiness and oil conditions' : c.title}</h2><p className="criterion-desc">{wireframe && draft.index === 1 ? 'Is the fryer ready for safe operation and have the oil checks been completed?' : c.desc}</p></section><section className="live-responses" aria-label="Observation result"><RadioGroup className="choices" onKeyDownCapture={floatingEvidence ? answerKey : undefined} aria-label="Observation result" value={draft.answers[draft.index] ?? ''} onValueChange={value => { if (value === 'met' || value === 'coaching' || value === 'fail') answer(value) }}>{responseOptions.map(({ value, title: label, desc, Icon }) => <div key={value} onClick={() => answer(value)} className={`choice ${value} ${draft.answers[draft.index] === value ? 'selected' : ''}`}><span className="choice-icon"><Icon size={17}/></span><span className="choice-copy"><b>{label}</b><small>{desc}</small></span><RadioGroupItem id={`flow-answer-${value}`} value={value} aria-label={label} className="response-radio"/></div>)}</RadioGroup></section>
         {!floatingEvidence && <Card className="overview-card evidencebox" aria-label="Observation evidence"><CardContent><div className="evidencehead"><h2>Observation evidence</h2>{'evidence' in c ? <EvidenceRequiredTag/> : <span className="pill">Optional</span>}</div><Textarea id="flow-comment" aria-label="Comment" value={draft.notes[draft.index] ?? ''} onChange={event => note(draft.index, event.target.value)} placeholder="Describe the observed action…" aria-describedby="flow-comment-help"/><p id="flow-comment-help" className="subtext">{saveError ? 'Unable to save. Keep this page open.' : 'Saved as you type on this device.'}</p><Button variant="outline" className="action outline spaced" onClick={() => controllers.current[draft.index]?.openMedia()}><Camera size={16}/> Add photo / video</Button><div className="flow-gallery" ref={setGalleryTarget}/></CardContent></Card>}
+        {wireframe && <div className="inline-evidence-actions" role="group" aria-label="Add observation evidence">
+          {evidenceRequired && <span id="floating-evidence-requirement" className="sr-only" role="status">{evidencePending ? 'Add a comment or photo. Either one meets the evidence requirement.' : 'Evidence requirement met.'}</span>}
+          <Button variant="outline" className="inline-evidence-action" data-evidence-pending={evidencePending || undefined} aria-describedby={evidenceRequired ? 'floating-evidence-requirement' : undefined} onClick={() => controllers.current[draft.index]?.openMedia()} aria-label="Add photo"><Camera aria-hidden="true"/> Photo{(photos[draft.index] ?? 0) > 0 && <Badge variant="secondary">{photos[draft.index]}</Badge>}</Button>
+          <Button variant="outline" className="inline-evidence-action" data-evidence-pending={evidencePending || undefined} aria-describedby={evidenceRequired ? 'floating-evidence-requirement' : undefined} onClick={() => controllers.current[draft.index]?.openNote()} aria-label={draft.notes[draft.index]?.trim() ? 'Edit comment' : 'Add comment'}><CirclePlus aria-hidden="true"/> Comment{draft.notes[draft.index]?.trim() && <Check aria-hidden="true"/>}</Button>
+        </div>}
         {floatingEvidence && <div className="floating-evidence-summary" aria-label="Saved evidence">
           {draft.notes[draft.index]?.trim() && <Button variant="ghost" className="saved-note" onClick={() => controllers.current[draft.index]?.openNote()} aria-label="Edit observation note"><FileText aria-hidden="true"/><span>{draft.notes[draft.index]}</span></Button>}
           <div className="flow-gallery" ref={setGalleryTarget}/>
@@ -229,7 +241,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
       </div>}
       {saveError && <p role="alert" className="notice warn">Local save unavailable. Keep this page open to retain your work.</p>}
       </section>
-      {floatingEvidence && screen === 'assessment' && <div className="evidence-fab-dock" role="group" aria-label="Add observation evidence">
+      {floatingEvidence && !wireframe && screen === 'assessment' && <div className="evidence-fab-dock" role="group" aria-label="Add observation evidence">
         {evidenceRequired && <span id="floating-evidence-requirement" className="sr-only" role="status">{evidencePending ? 'Add a note or photo. Either one meets the evidence requirement.' : 'Evidence requirement met. You can edit the note or add more photos.'}</span>}
         <Tooltip><TooltipTrigger asChild><Button variant={evidencePending ? 'default' : 'outline'} size="icon" className="evidence-fab" data-evidence-pending={evidencePending || undefined} aria-describedby={evidenceRequired ? 'floating-evidence-requirement' : undefined} onClick={() => controllers.current[draft.index]?.openNote()} aria-label={draft.notes[draft.index]?.trim() ? 'Edit note' : 'Add note'} title={draft.notes[draft.index]?.trim() ? 'Edit note' : 'Add note'}><FileText aria-hidden="true"/>{draft.notes[draft.index]?.trim() && <span className="fab-indicator"><Check aria-hidden="true"/></span>}</Button></TooltipTrigger><TooltipContent side="top" sideOffset={8}>{draft.notes[draft.index]?.trim() ? 'Edit note' : 'Add note'}</TooltipContent></Tooltip>
         <Tooltip><TooltipTrigger asChild><Button variant={evidencePending ? 'default' : 'outline'} size="icon" className="evidence-fab" data-evidence-pending={evidencePending || undefined} aria-describedby={evidenceRequired ? 'floating-evidence-requirement' : undefined} onClick={() => controllers.current[draft.index]?.openMedia()} aria-label="Add photo" title="Add photo"><Camera aria-hidden="true"/>{(photos[draft.index] ?? 0) > 0 && <span className="fab-indicator">{photos[draft.index]}</span>}</Button></TooltipTrigger><TooltipContent side="top" sideOffset={8}>Add photo</TooltipContent></Tooltip>
@@ -239,7 +251,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
         {screen === 'overview' && <Button className="overview-start" size="lg" onClick={start}>{draft.paused || recorded ? 'Resume Assessment' : 'Start Assessment'}</Button>}
         {screen === 'assessment' && <nav className="criterion-navigation" aria-label="Criterion navigation">
           <Button variant="outline" className="action outline" disabled={draft.index === 0} onClick={() => update({ index: draft.index - 1 })}><ArrowLeft size={16}/> Back</Button>
-          <Button variant="outline" ref={sectionsButton} className="action outline" aria-haspopup="dialog" onClick={() => { sectionsFocus.current = 'trigger'; setSheet('sections') }}><List size={16}/> Sections</Button>
+          <Button variant="outline" ref={sectionsButton} className="action outline" aria-label="Sections" title="Sections" aria-haspopup="dialog" onClick={() => { sectionsFocus.current = 'trigger'; setSheet('sections') }}>{wireframe ? <LayoutGrid aria-hidden="true"/> : <><List size={16}/> Sections</>}</Button>
           <Button variant="default" className="action" onClick={() => draft.index === criteria.length - 1 ? go('review') : update({ index: draft.index + 1 })}>{floatingEvidence && draft.index === criteria.length - 1 ? 'Review' : 'Next'} <ArrowRight size={16}/></Button>
         </nav>}
         {screen === 'review' && <><Button variant="default" className="action" disabled={missing.length > 0} onClick={() => go('signoff')}>Continue to feedback & sign-off <ArrowRight size={16}/></Button>{missing.length > 0 && <p className="subtext center spaced">Complete {missing.length} item(s) before sign-off</p>}</>}

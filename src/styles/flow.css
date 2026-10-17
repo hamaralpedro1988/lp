@@ -61,7 +61,7 @@
 }
 
 /* Scope portal typography to V2, including shared shadcn sheets and media controls. */
-html:is([data-assessment-version="2"],[data-assessment-version="3"]){
+html:is([data-assessment-version="2"],[data-assessment-version="3"],[data-assessment-version="4"]){
   --text-xs:14px;
   --text-sm:14px;
   --text-base:16px;
@@ -71,7 +71,7 @@ html:is([data-assessment-version="2"],[data-assessment-version="3"]){
   --text-3xl:30px;
 }
 @media(max-width:360px){.flow-app .review-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
-html:is([data-assessment-version="2"],[data-assessment-version="3"]) [data-slot="sheet-title"]{font-size:18px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"],[data-assessment-version="4"]) [data-slot="sheet-title"]{font-size:18px}
 
 /* Assessment overview: wireframe hierarchy, using shared shadcn components. */
 .flow-app .overview-screen{padding:28px 20px 22px}
@@ -214,11 +214,11 @@ html:is([data-assessment-version="2"],[data-assessment-version="3"]) [data-slot=
 .flow-app .choice-copy small{font-size:var(--flow-secondary-size)}
 .flow-app .autosave-status,.flow-app .assessment-header-progress{font-size:var(--flow-status-size)}
 .flow-app .assessment-header-top{flex-wrap:wrap;row-gap:2px}
-html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialog]{font-size:16px}
-html:is([data-assessment-version="2"],[data-assessment-version="3"]) :is([data-slot=sheet-title],[data-slot=dialog-title],[data-slot=alert-dialog-title]){font-size:18px}
-html:is([data-assessment-version="2"],[data-assessment-version="3"]) :is([data-slot=sheet-description],[data-slot=dialog-description],[data-slot=alert-dialog-description]){font-size:14px}
-html:is([data-assessment-version="2"],[data-assessment-version="3"]) :is([data-slot=textarea],[data-slot=input]){font-size:16px}
-html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialog] [data-slot=button]{font-size:16px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"],[data-assessment-version="4"]) [role=dialog]{font-size:16px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"],[data-assessment-version="4"]) :is([data-slot=sheet-title],[data-slot=dialog-title],[data-slot=alert-dialog-title]){font-size:18px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"],[data-assessment-version="4"]) :is([data-slot=sheet-description],[data-slot=dialog-description],[data-slot=alert-dialog-description]){font-size:14px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"],[data-assessment-version="4"]) :is([data-slot=textarea],[data-slot=input]){font-size:16px}
+html:is([data-assessment-version="2"],[data-assessment-version="3"],[data-assessment-version="4"]) [role=dialog] [data-slot=button]{font-size:16px}
 .flow-app .flow-card-heading{flex-wrap:wrap}
 
 .flow-app .choice{cursor:pointer}
@@ -279,7 +279,7 @@ html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialo
 .flow-v3 .evidence-fab-dock{padding-bottom:12px}
 .flow-v3 .response-radio{min-width:20px;min-height:20px}
 .flow-v3 .fab-indicator{border:2px solid var(--card);min-width:22px;height:22px;font-weight:600}
-html[data-assessment-version="3"] [data-slot=tooltip-content]{font-size:14px}
+html:is([data-assessment-version="3"],[data-assessment-version="4"]) [data-slot=tooltip-content]{font-size:14px}
 @media(max-width:650px){
   .flow-v3 .stage{position:static;height:auto;display:block}
   .flow-v3 .phone{height:var(--visual-height,100dvh);max-height:none}
@@ -303,3 +303,35 @@ html[data-assessment-version="3"] [data-slot=tooltip-content]{font-size:14px}
 .flow-v3 .choice:not(.selected){background:var(--card);border-color:transparent}
 .flow-v3 .saved-note{background:var(--card);border-color:transparent}
 @media(hover:hover){.flow-v3 .choice:not(.selected):hover{background:var(--accent);border-color:var(--ring)}}
+
+/* V4 live assessment: flat header, left-hand radios and inline evidence actions. */
+.flow-v4 .assessment-header{margin:0;padding:16px 20px 12px 12px;border:0;border-bottom:1px solid var(--border);border-radius:0;background:var(--card);gap:10px}
+.flow-v4 .assessment-screen{padding:32px 24px 28px}
+.flow-v4 .assessment-screen .flow-page-content{gap:28px}
+.flow-v4 .criterion-title{margin:0 0 18px}
+.flow-v4 .live-question .chips:not(:empty){margin:0 0 12px}
+.flow-v4 .choice-icon{display:none}
+.flow-v4 .choice{padding:12px;gap:16px;min-height:64px;border-color:var(--border)}
+.flow-v4 .choice:not(.selected){border-color:var(--border)}
+.flow-v4 .response-radio{order:-1}
+.flow-v4 .choices{gap:8px}
+.flow-v4 .choice-copy{display:grid;gap:3px}
+.flow-v4 .choice-copy small{margin:0}
+.flow-v4 .inline-evidence-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding-top:4px}
+.flow-v4 .inline-evidence-action{height:auto;min-height:50px;width:100%;border-radius:var(--radius);font-size:16px;background:var(--card);color:var(--card-foreground);gap:6px;white-space:normal;padding:10px}
+.flow-v4 .inline-evidence-action>svg{width:20px;height:20px}
+.flow-v4 .inline-evidence-action[data-evidence-pending=true]{background:var(--warning);color:var(--warning-foreground)}
+.flow-v4 .inline-evidence-action[data-evidence-pending=true]:hover{background:color-mix(in oklab,var(--warning) 90%,var(--warning-foreground))}
+.flow-v4 .inline-evidence-action [data-slot=badge]{padding:1px 5px;font-size:12px}
+.flow-v4 .phone:has(.assessment-screen) .phonebottom{background:var(--card);padding:16px max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom))}
+.flow-v4 .criterion-navigation{gap:20px}
+.flow-v4 .criterion-navigation .action{font-size:16px;min-height:50px}
+.flow-v4 .criterion-navigation [aria-label=Sections]>svg{width:22px;height:22px}
+@media(max-width:650px){.flow-v4 .assessment-header{padding-top:max(16px,env(safe-area-inset-top))}}
+@media(max-width:360px){
+  .flow-v4 .assessment-header{padding-inline:12px;gap:6px}
+  .flow-v4 .assessment-screen{padding:24px 16px}
+  .flow-v4 .assessment-screen .flow-page-content{gap:24px}
+  .flow-v4 .criterion-navigation{gap:12px}
+  .flow-v4 .inline-evidence-actions{gap:12px}
+}

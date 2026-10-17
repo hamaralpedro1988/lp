@@ -210,3 +210,11 @@ The generated palette is synchronized into `src/styles/theme.css` and `src/data/
 Validated production build, unit tests, lint and Chromium checks across all V3 screens, keyboard navigation, sign-off and required-evidence states.
 
 V3 adapts the preset surface hierarchy to the supplied UI reference: a `#f7f8f8` canvas and white cards. Main cards, the live progress header, saved notes and unselected response options use the white card token with transparent borders. Selected outcomes and required-evidence warning colors remain semantic. The override is scoped to the V3 runtime palette; V2 retains the unmodified preset surfaces.
+
+## V4 · Simplified live assessment
+
+Open `?version=4` for the wireframe-based live checklist. V4 reuses the V3 Mist/Inter theme, light-grey canvas and white cards. Its live header spans the viewport without a card outline. Radios sit to the left of each response, with shorter supporting descriptions and no outcome icon. `Photo` and `Comment` are inline actions below the answers; missing required evidence uses the existing warning colors. The fixed footer has Back, an accessible icon-only section picker, and Next/Review.
+
+Overview, review and sign-off retain the V3 design. V4 uses `lp-rosa-flow-v4-v01` for an isolated local draft and appears in the four-version picker. Photos stay in the current page session. The earlier V3 floating-evidence UI remains available.
+
+Validation: production build, unit tests, lint (three existing Fast Refresh warnings), and Chromium checks for left-aligned radios, keyboard selection, inline comment/photo, required-evidence states, all eleven responses, review/sign-off, section navigation, persistence and V3 isolation. No horizontal overflow at 320/390/768/1440px.
