@@ -76,7 +76,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
   useMobileOverlay(sheet !== null, () => { setSheet(null); return true })
   useEffect(() => {
     const typography = loadTheme().typography
-    const theme = { ...creatorTheme, light: floatingEvidence ? { ...creatorTheme.light, background: '#ffffff', card: '#f7f8f8' } : creatorTheme.light, typography: { ...typography, size: 16, body: 'inter' as const, heading: 'inter' as const, headingWeight: 740 } }
+    const theme = { ...creatorTheme, light: floatingEvidence ? { ...creatorTheme.light, background: '#f7f8f8', card: '#ffffff' } : creatorTheme.light, typography: { ...typography, size: 16, body: 'inter' as const, heading: 'inter' as const, headingWeight: 740 } }
     document.documentElement.dataset.assessmentVersion = String(version)
     applyTheme(theme, 'light')
     return () => { delete document.documentElement.dataset.assessmentVersion }

@@ -298,7 +298,7 @@ html[data-assessment-version="3"] [data-slot=tooltip-content]{font-size:14px}
 .flow-app .overview-card,.flow-app .assessment-header{border-radius:calc(var(--radius) * 1.4)}
 .flow-app .action,.flow-app .overview-start,.flow-app textarea{border-radius:var(--radius)}
 
-/* V3 surface hierarchy: white canvas and gently tinted cards, like the reference. */
+/* V3 surface hierarchy: gently tinted canvas and white cards. */
 .flow-v3 .overview-card,.flow-v3 .assessment-header{background:var(--card);border-color:transparent;box-shadow:none}
 .flow-v3 .choice:not(.selected){background:var(--card);border-color:transparent}
 .flow-v3 .saved-note{background:var(--card);border-color:transparent}
