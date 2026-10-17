@@ -1,4 +1,4 @@
-import { useId, useLayoutEffect, useRef, type ComponentProps, type Ref } from 'react'
+import { useId, useLayoutEffect, useRef, type ComponentProps, type ReactNode, type Ref } from 'react'
 import { ArrowRight, Camera, Check, ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -25,12 +25,18 @@ export function SpatialProgress({ draft, photos }: { draft: FlowDraft; photos: R
     {flowCriteria.map((criterion, index) => <span key={criterion.title} aria-hidden="true" data-state={completed.includes(index) ? 'complete' : 'pending'}/>)}
   </div>
 }
+/** Shared navigation chrome for every participant screen; progress is a contextual subrow. */
+export function SpatialFlowHeader({ title, onBack, backLabel, end, children, label = 'Assessment navigation' }: { title: string; onBack?: () => void; backLabel?: string; end?: ReactNode; children?: ReactNode; label?: string }) {
+  return <header className="spatial-header" aria-label={label}>
+    <div className="spatial-header-top">{onBack && <SpatialActionButton variant="outline" size="icon" className="spatial-header-back" onClick={onBack} aria-label={backLabel ?? 'Back'}><ChevronLeft aria-hidden="true"/></SpatialActionButton>}<h1 className="assessment-name">{title}</h1>{end}</div>
+    {children}
+  </header>
+}
 export function SpatialAssessmentHeader({ draft, photos, saveError, onBack }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; onBack: () => void }) {
-  return <header className="spatial-header" aria-label="Assessment progress">
-    <div className="spatial-header-top"><SpatialActionButton variant="outline" size="icon" className="spatial-header-back" onClick={onBack} aria-label="Back to overview"><ChevronLeft aria-hidden="true"/></SpatialActionButton><h1 className="assessment-name">Fryer Station</h1><span className="spatial-person"><span aria-hidden="true">DR</span>Dre</span></div>
+  return <SpatialFlowHeader title="Fryer Station" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<span className="spatial-person"><span aria-hidden="true">DR</span>Dre</span>}>
     <SpatialProgress draft={draft} photos={photos}/>
     {saveError ? <SpatialStatus tone="error">Local save unavailable. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · local draft only. No server sync.</SpatialStatus>}
-  </header>
+  </SpatialFlowHeader>
 }
 export function SpatialChoice({ value, title, description, selected, disabled = false }: { value: 'met' | 'fail'; title: string; description: string; selected: boolean; disabled?: boolean }) {
   const id = useId()
