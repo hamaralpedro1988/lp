@@ -234,7 +234,7 @@ html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialo
   .flow-app .mobile-version-switcher .version-trigger>span{display:none}
 }
 .flow-v3 .evidence-fab-dock{flex:none;display:flex;justify-content:flex-end;gap:12px;padding:10px 20px 4px;background:var(--background)}
-.flow-v3 .evidence-fab{position:relative;width:52px;height:52px;border-radius:50%;background:var(--card);color:var(--foreground);box-shadow:0 4px 14px color-mix(in oklab,var(--foreground) 12%,transparent)}
+.flow-v3 .evidence-fab{position:relative;width:52px;height:52px;border-radius:50%;box-shadow:0 4px 14px color-mix(in oklab,var(--foreground) 12%,transparent)}
 .flow-v3 .evidence-fab>svg{width:22px;height:22px}
 .flow-v3 .fab-indicator{position:absolute;top:-3px;right:-3px;display:grid;place-items:center;min-width:20px;height:20px;padding:2px;border-radius:50%;background:var(--primary);color:var(--primary-foreground);font-size:12px}
 .flow-v3 .fab-indicator>svg{width:12px;height:12px}
@@ -244,3 +244,12 @@ html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialo
 .flow-v3 .saved-note{height:auto;min-height:48px;padding:12px;justify-content:flex-start;align-items:flex-start;border:1px solid var(--border);border-radius:12px;white-space:normal;text-align:left;font-size:16px}
 .flow-v3 .saved-note>svg{margin-top:4px}
 .flow-v3 .saved-note>span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;min-width:0}
+
+/* Use shadcn primary / outline variants to distinguish pending evidence. */
+.flow-v3 .evidence-fab-dock{align-items:center}
+.flow-v3 .evidence-fab[data-variant=default]{background:var(--primary);color:var(--primary-foreground)}
+.flow-v3 .evidence-fab[data-variant=outline]{background:var(--card);color:var(--foreground)}
+.flow-v3 .evidence-fab[data-variant=default]:hover{background:color-mix(in oklab,var(--primary) 90%,var(--card))}
+.flow-v3 .evidence-fab[data-variant=outline]:hover{background:var(--accent);color:var(--accent-foreground)}
+.flow-v3 .fab-requirement{margin-right:auto;min-width:0}
+.flow-v3 .fab-requirement [data-slot=badge]{font-size:14px}

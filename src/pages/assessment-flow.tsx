@@ -60,6 +60,8 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
   // A restored draft cannot retain eligibility based on media from a previous page session.
   const screen = draft.screen === 'signoff' && missing.length ? 'review' : draft.screen
   const c = criteria[draft.index]
+  const evidenceRequired = 'evidence' in c
+  const evidencePending = evidenceRequired && !flowEvidenceOk(draft, draft.index, photos)
   const recorded = Object.keys(draft.answers).length
   const met = Object.values(draft.answers).filter(answer => answer === 'met').length
   const coaching = Object.values(draft.answers).filter(answer => answer === 'coaching').length
@@ -212,8 +214,9 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 }) {
       {saveError && <p role="alert" className="notice warn">Local save unavailable. Keep this page open to retain your work.</p>}
       </section>
       {floatingEvidence && screen === 'assessment' && <div className="evidence-fab-dock" role="group" aria-label="Add observation evidence">
-        <Button variant="outline" size="icon" className="evidence-fab" onClick={() => controllers.current[draft.index]?.openNote()} aria-label={draft.notes[draft.index]?.trim() ? 'Edit note' : 'Add note'} title={draft.notes[draft.index]?.trim() ? 'Edit note' : 'Add note'}><FileText aria-hidden="true"/>{draft.notes[draft.index]?.trim() && <span className="fab-indicator"><Check aria-hidden="true"/></span>}</Button>
-        <Button variant="outline" size="icon" className="evidence-fab" onClick={() => controllers.current[draft.index]?.openMedia()} aria-label="Add photo" title="Add photo"><Camera aria-hidden="true"/>{(photos[draft.index] ?? 0) > 0 && <span className="fab-indicator">{photos[draft.index]}</span>}</Button>
+        {evidenceRequired && <div className="fab-requirement" role="status"><Badge variant="secondary">{evidencePending ? <><FileText aria-hidden="true"/> Required</> : <><Check aria-hidden="true"/> Added</>}</Badge><span id="floating-evidence-requirement" className="sr-only">{evidencePending ? 'Add a note or photo. Either one meets the evidence requirement.' : 'Evidence requirement met. You can edit the note or add more photos.'}</span></div>}
+        <Button variant={evidencePending ? 'default' : 'outline'} size="icon" className="evidence-fab" aria-describedby={evidenceRequired ? 'floating-evidence-requirement' : undefined} onClick={() => controllers.current[draft.index]?.openNote()} aria-label={draft.notes[draft.index]?.trim() ? 'Edit note' : 'Add note'} title={draft.notes[draft.index]?.trim() ? 'Edit note' : 'Add note'}><FileText aria-hidden="true"/>{draft.notes[draft.index]?.trim() && <span className="fab-indicator"><Check aria-hidden="true"/></span>}</Button>
+        <Button variant={evidencePending ? 'default' : 'outline'} size="icon" className="evidence-fab" aria-describedby={evidenceRequired ? 'floating-evidence-requirement' : undefined} onClick={() => controllers.current[draft.index]?.openMedia()} aria-label="Add photo" title="Add photo"><Camera aria-hidden="true"/>{(photos[draft.index] ?? 0) > 0 && <span className="fab-indicator">{photos[draft.index]}</span>}</Button>
       </div>}
       <footer className={`phonebottom ${screen === 'overview' ? 'overview-footer' : ''}`}>
         {screen === 'list' && <p className="subtext center">Your assigned assessments are shown above</p>}
