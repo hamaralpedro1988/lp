@@ -29,7 +29,7 @@ export const fonts = [
 ] as const
 export type FontId = typeof fonts[number]['id']
 export type Typography = { body: FontId; heading: FontId; size: number; lineHeight: number; headingWeight: number }
-export const defaultTypography: Typography = { body: 'system', heading: 'system', size: 16, lineHeight: 1.5, headingWeight: 600 }
+export const defaultTypography: Typography = { body: 'inter', heading: 'inter', size: 16, lineHeight: 1.5, headingWeight: 600 }
 export const quickColors = ['#171717', '#ffffff', '#64748b', '#ef4444', '#f97316', '#f59e0b', '#eab308', '#84cc16', '#22c55e', '#10b981', '#14b8a6', '#06b6d4', '#0ea5e9', '#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#d946ef', '#ec4899', '#f43f5e']
 export type Token = typeof colorTokens[number][0]
 export type Palette = Record<Token, string>
@@ -57,7 +57,7 @@ const dark: Palette = { ...extraDark,
   secondary: '#404040', 'secondary-foreground': '#fafafa', muted: '#404040', 'muted-foreground': '#b3b3b3',
   accent: '#404040', 'accent-foreground': '#fafafa', destructive: '#f87171', border: '#404040', input: '#525252', ring: '#a3a3a3',
 }
-export const creatorTheme: Theme = { light: { ...light, ...creator.light }, dark: { ...dark, ...creator.dark }, radius: 7.2, typography: defaultTypography }
+export const creatorTheme: Theme = { light: { ...light, ...creator.light }, dark: { ...dark, ...creator.dark }, radius: creator.radius, typography: defaultTypography }
 export const presets = [
   { id: 'creator', name: 'O teu tema', color: creator.light['chart-3'], theme: creatorTheme },
   { id: 'neutral', name: 'Neutro', color: '#262626', theme: { light, dark, radius: 10, typography: defaultTypography } },

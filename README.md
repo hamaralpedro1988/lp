@@ -76,7 +76,7 @@ Legacy browser themes automatically gain default typography and the new tokens w
 
 ### Applied shadcn/create theme
 
-The project default now uses the exact supplied OKLCH tokens and `--radius: 0.45rem` in `src/styles/theme.css`. The same values are in `src/data/creator-theme.json` for the editor's **O teu tema** preset. Tests verify that global CSS, default palettes and export agree for every supplied token, including dark border/input alpha. Status colors and typography were not specified in the supplied theme; status defaults remain and previous typography choices are retained.
+The project default now uses the exact supplied OKLCH tokens and `--radius: 0.625rem` in `src/styles/theme.css`. The same values are in `src/data/creator-theme.json` for the editor's **O teu tema** preset. Tests verify that global CSS, default palettes and export agree for every supplied token, including dark border/input alpha. Status colors and typography were not specified in the supplied theme; status defaults remain and previous typography choices are retained.
 
 The editor accepts HEX and OKLCH strings without rounding or converting their stored values. Its native color picker displays an approximate opaque sRGB HEX swatch; editing through that picker intentionally replaces the value with HEX and removes alpha. Use the text field to preserve or edit OKLCH transparency. Contrast calculations convert to sRGB using Culori and composite alpha (a transparent background uses a white underlying surface).
 
@@ -180,7 +180,7 @@ The response options are Pass, Needs coaching, and Fail. All three count as reco
 
 Implementation: `src/pages/assessment-flow.tsx`, scoped `src/styles/flow.css`, validated data/storage model `src/data/flow-draft.ts`, and shared `src/components/layout/version-switcher.tsx`. V1 and V2 are lazy-loaded independently.
 
-V2 applies the supplied shadcn Creator theme exactly, including its OKLCH light/dark tokens and 0.45rem base radius. The assessment stylesheet uses semantic surface/text, primary, input, border, focus and sidebar tokens rather than the HTML reference palette. Existing success/warning tokens distinguish outcomes; critical/failure tints and supporting text derive from theme colors with readable contrast. The compact header and question hierarchy are retained. V2 is fixed to light mode. Its typography is increased by at least 2px across questions, headings, badges, supporting text, fields, buttons and portalled sheets/media controls. The smallest labels use at least 12px, and textareas use 18px. Shared typography tokens are scoped to V2; at narrow widths the review statistics use two columns for readability. V2 does not overwrite saved Theme Studio settings.
+V2 applies the supplied shadcn Creator theme exactly, including its OKLCH light/dark tokens and 0.625rem base radius. The assessment stylesheet uses semantic surface/text, primary, input, border, focus and sidebar tokens rather than the HTML reference palette. Existing success/warning tokens distinguish outcomes; critical/failure tints and supporting text derive from theme colors with readable contrast. The compact header and question hierarchy are retained. V2 is fixed to light mode. The shared assessment typography uses 16px body/answers/inputs, 14px supporting text, 18px card headings, 24px criterion titles, and 12px live-header status/progress. Shared typography tokens are scoped to V2; at narrow widths the review statistics use two columns for readability. V2 does not overwrite saved Theme Studio settings.
 
 Validation: 18 unit tests, production build, lint (three pre-existing official UI Fast Refresh warnings), Chromium mobile interaction checks across the complete V2 flow and the existing V1 question-sheet flow, widths 320/390/430/768/1440px, and a reduced-height keyboard simulation. Native camera and keyboard behavior still need physical-device verification.
 
@@ -199,3 +199,12 @@ The desktop preview now stays within the viewport, keeping its navigation visibl
 Keyboard navigation supports arrows, Home and End; criterion changes focus the question, and detail sheets return focus to their trigger. The final criterion's action reads “Review”. Resuming opens the first incomplete criterion, including missing required evidence, and legacy “not observed” responses do not inflate recorded counts.
 
 Verified with the production build, unit tests, lint, Chromium screenshots for all five screens at 320/390/768/1440px, desktop viewport checks at 640/844px height, full assessment/review/sign-off interaction, required evidence add/remove, keyboard/focus behavior, draft persistence and V2 isolation.
+
+
+### Applied shadcn preset b1tgce4ie
+
+Applied using `pnpm dlx shadcn@latest apply --preset b1tgce4ie --only theme,font`. The official CLI supplies Mist light/dark tokens, Inter, cyan chart colors and a 0.625rem (10px) radius. Components remain the existing customized shadcn sources.
+
+The generated palette is synchronized into `src/styles/theme.css` and `src/data/creator-theme.json`, with the same radius used by the runtime theme model. This ensures assessment initialization uses the preset rather than overriding it with the earlier theme. Semantic success/warning colors, floating evidence states, draft data and the requested typography scale are retained. Cards and progress headers follow the preset radius.
+
+Validated production build, unit tests, lint and Chromium checks across all V3 screens, keyboard navigation, sign-off and required-evidence states.

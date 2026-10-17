@@ -62,8 +62,8 @@ test('creator values remain exact in global styles, default palettes and exporte
       assert.ok(exportBlock.includes(`--${token}: ${value};`))
     }
   }
-  assert.equal(defaultTheme.radius / 16, .45)
-  assert.ok(exported.includes('--radius: 0.45rem;'))
+  assert.equal(defaultTheme.radius / 16, .625)
+  assert.ok(exported.includes('--radius: 0.625rem;'))
 })
 test('OKLCH validation, alpha, picker approximation and contrast reference values', () => {
   for (const value of ['oklch(1 0 0 / 10%)', 'oklch(0.148 0.004 228.8)', '#abcdef']) assert.ok(isColor(value))

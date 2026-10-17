@@ -293,3 +293,7 @@ html[data-assessment-version="3"] [data-slot=tooltip-content]{font-size:14px}
   .flow-v3 .overview-metadata strong{text-align:left}
   .flow-v3 .evidence-fab-dock{padding-inline:16px}
 }
+
+/* Follow the applied shadcn preset radius while keeping circular evidence controls. */
+.flow-app .overview-card,.flow-app .assessment-header{border-radius:calc(var(--radius) * 1.4)}
+.flow-app .action,.flow-app .overview-start,.flow-app textarea{border-radius:var(--radius)}
