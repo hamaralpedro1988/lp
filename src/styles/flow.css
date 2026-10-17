@@ -251,5 +251,7 @@ html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialo
 .flow-v3 .evidence-fab[data-variant=outline]{background:var(--card);color:var(--foreground)}
 .flow-v3 .evidence-fab[data-variant=default]:hover{background:color-mix(in oklab,var(--primary) 90%,var(--card))}
 .flow-v3 .evidence-fab[data-variant=outline]:hover{background:var(--accent);color:var(--accent-foreground)}
-.flow-v3 .fab-requirement{margin-right:auto;min-width:0}
-.flow-v3 .fab-requirement [data-slot=badge]{font-size:14px}
+
+/* Match the Required tag's semantic warning colors without repeating its label. */
+.flow-v3 .evidence-fab[data-evidence-pending=true]{background:var(--warning);color:var(--warning-foreground);border:1px solid var(--border)}
+.flow-v3 .evidence-fab[data-evidence-pending=true]:hover{background:color-mix(in oklab,var(--warning) 90%,var(--warning-foreground))}
