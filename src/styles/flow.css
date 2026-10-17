@@ -255,3 +255,41 @@ html:is([data-assessment-version="2"],[data-assessment-version="3"]) [role=dialo
 /* Match the Required tag's semantic warning colors without repeating its label. */
 .flow-v3 .evidence-fab[data-evidence-pending=true]{background:var(--warning);color:var(--warning-foreground);border:1px solid var(--border)}
 .flow-v3 .evidence-fab[data-evidence-pending=true]:hover{background:color-mix(in oklab,var(--warning) 90%,var(--warning-foreground))}
+
+/* V3 review refinements: consistent hierarchy, state colors and viewport fit. */
+.flow-v3 .stage{position:sticky;top:0;align-self:start;height:100dvh;min-height:0}
+.flow-v3 .phone{flex:1;min-height:0;max-height:792px}
+.flow-v3 .overview-status{background:var(--secondary);color:var(--secondary-foreground);border-color:var(--border);font-weight:500}
+.flow-v3 .overview-avatar{display:grid;place-items:center;color:var(--muted-foreground)}
+.flow-v3 .overview-avatar svg{width:20px;height:20px}
+.flow-v3 .overview-description.spaced{margin-top:12px}
+.flow-v3 .overview-metadata>div{align-items:flex-start}
+.flow-v3 .overview-metadata>div>strong{min-width:0;overflow-wrap:anywhere}
+.flow-v3 .criterion-title:focus{outline:none}
+.flow-v3 .review-stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.flow-v3 .review-stat{padding:4px 0;min-width:0}
+.flow-v3 .review-stat small{min-height:40px;display:flex;align-items:flex-start;justify-content:center;text-align:center;line-height:1.4}
+.flow-v3 .review-stat[data-result=Pass] .overview-goal-icon{background:var(--success);color:var(--success-foreground)}
+.flow-v3 .review-stat[data-result=Fail] .overview-goal-icon{background:var(--flow-danger-bg);color:var(--flow-danger-text)}
+.flow-v3 .review-stat[data-result="Needs coaching"] .overview-goal-icon{background:var(--warning);color:var(--warning-foreground)}
+.flow-v3 .review-section h3{background:var(--muted);padding-top:12px;padding-bottom:12px}
+.flow-v3 .signoff-notice:not(.warn){background:var(--muted);color:var(--muted-foreground)}
+.flow-v3 .phonebottom{border-top:1px solid var(--border)}
+.flow-v3 .overview-footer{border-top:0}
+.flow-v3 .evidence-fab-dock{padding-bottom:12px}
+.flow-v3 .response-radio{min-width:20px;min-height:20px}
+.flow-v3 .fab-indicator{border:2px solid var(--card);min-width:22px;height:22px;font-weight:600}
+html[data-assessment-version="3"] [data-slot=tooltip-content]{font-size:14px}
+@media(max-width:650px){
+  .flow-v3 .stage{position:static;height:auto;display:block}
+  .flow-v3 .phone{height:var(--visual-height,100dvh);max-height:none}
+  .flow-v3 .overview-topbar{grid-template-columns:44px 1fr 44px;padding-inline:8px}
+  .flow-v3 .overview-topbar>button,.flow-v3 .mobile-version-switcher .version-trigger{width:44px;height:44px}
+}
+@media(max-width:360px){
+  .flow-v3 .review-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .flow-v3 .review-stat small{min-height:0}
+  .flow-v3 .overview-metadata>div:has(strong){display:grid;gap:6px}
+  .flow-v3 .overview-metadata strong{text-align:left}
+  .flow-v3 .evidence-fab-dock{padding-inline:16px}
+}

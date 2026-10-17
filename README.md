@@ -191,3 +191,11 @@ Open `?version=3` for the floating-evidence variant of the assessment flow. The 
 V3 retains the V2 typography, radio responses, required-evidence validation, review and sign-off flow. Its local draft uses `lp-rosa-flow-v3-v01`; V2 drafts remain isolated. Photos remain page-session only and clear on reload. The version picker supports all three variants and is available from the mobile overview.
 
 Validation: production build, existing unit tests, lint (three existing Fast Refresh warnings), and Chromium checks for note save/edit, photo upload, per-criterion evidence, draft persistence, V2 isolation and non-overlapping controls at 320/390/768/1440px.
+
+### V3 UI review
+
+The desktop preview now stays within the viewport, keeping its navigation visible. V3 uses neutral assessment status badges, a consistent member icon, compact review totals with semantic outcome colors, clearer section headings, and neutral sign-off information. Mobile header controls have 44px touch targets. Evidence actions retain the Required tag colors and gain shadcn tooltips without adding another visible label.
+
+Keyboard navigation supports arrows, Home and End; criterion changes focus the question, and detail sheets return focus to their trigger. The final criterion's action reads “Review”. Resuming opens the first incomplete criterion, including missing required evidence, and legacy “not observed” responses do not inflate recorded counts.
+
+Verified with the production build, unit tests, lint, Chromium screenshots for all five screens at 320/390/768/1440px, desktop viewport checks at 640/844px height, full assessment/review/sign-off interaction, required evidence add/remove, keyboard/focus behavior, draft persistence and V2 isolation.
