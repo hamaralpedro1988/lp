@@ -75,13 +75,11 @@ html[data-assessment-version="2"] [data-slot="sheet-title"]{font-size:var(--text
 /* Assessment overview: wireframe hierarchy, using shared shadcn components. */
 .flow-app .overview-screen{padding:28px 20px 22px}
 .flow-app .overview-content{display:grid;gap:22px}
-.flow-app .overview-eyebrow{margin:0 0 14px;font-size:14px;line-height:1.4;font-weight:750;text-transform:uppercase}
 .flow-app .overview-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .flow-app .overview-heading h1{margin:0;font-size:23px;line-height:1.3;font-weight:750;letter-spacing:-.5px;outline:none}
 .flow-app .overview-heading>span{flex-shrink:0;font-size:13px;color:var(--flow-muted)}
 .flow-app .overview-category{margin:7px 0 0;font-size:13px;color:var(--flow-muted)}
 .flow-app .overview-category>span{padding-inline:2px;color:var(--border)}
-.flow-app .overview-question{margin:12px 0 2px;font-size:15px;line-height:1.55;color:var(--flow-muted)}
 .flow-app .overview-card{gap:0;padding:0;border-radius:16px;box-shadow:none;overflow:hidden}
 .flow-app .overview-card [data-slot=card-header]{display:block;padding:17px 16px 0}
 .flow-app .overview-card [data-slot=card-title] h2{margin:0;font-size:17px;font-weight:600;line-height:1.4;letter-spacing:-.2px}
@@ -105,3 +103,14 @@ html[data-assessment-version="2"] [data-slot="sheet-title"]{font-size:var(--text
 .flow-app .overview-footer{border-top:0;padding:0 20px max(16px,env(safe-area-inset-bottom))}
 .flow-app .overview-start{width:100%;height:50px;border-radius:10px;font-size:15px}
 @media(max-width:360px){.flow-app .overview-screen{padding-inline:16px}.flow-app .overview-metadata>div{flex-wrap:wrap}.flow-app .overview-heading h1{font-size:21px}}
+
+/* Simplified overview header and assessment goals. */
+.flow-app .overview-topbar{display:grid;grid-template-columns:36px 1fr 36px;align-items:center;gap:4px;flex:none;padding:12px 14px 0}
+.flow-app .overview-topbar p{margin:0;text-align:center;text-transform:uppercase;font-size:13px;font-weight:750}
+.flow-app .overview-topbar button>svg{width:22px;height:22px}
+.flow-app .overview-card .overview-member-content{padding-top:12px}
+.flow-app .overview-goals{display:grid;gap:10px;list-style:none;margin:0;padding:0}
+.flow-app .overview-goals li{display:flex;align-items:center;gap:10px;color:var(--flow-muted);font-size:14px;line-height:1.45}
+.flow-app .overview-goal-icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;background:var(--muted);color:var(--foreground)}
+.flow-app .overview-goal-icon svg{width:18px;height:18px;stroke-width:1.8}
+@media(max-width:650px){.flow-app .overview-topbar{padding-top:max(12px,env(safe-area-inset-top))}}

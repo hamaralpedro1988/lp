@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { ChevronRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, Circle, List, Camera, X, Wifi, WifiOff } from 'lucide-react'
+import { ShieldCheck, Droplets, CookingPot, ClipboardCheck, ChevronLeft, ChevronRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, Circle, List, Camera, X, Wifi, WifiOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -22,6 +22,12 @@ const rationale: Record<FlowScreen, [string, string, string]> = {
   review: ['Completeness before submission', 'Show missing responses and evidence; never infer an outcome from an invented score.', 'Critical and weighted scoring remains a configuration dependency.'],
   signoff: ['Coaching and trust', 'Separate the observation from sign-off and final certification.', 'A shared-device confirmation is not automatically proof of identity.'],
 }
+const assessmentGoals = [
+  { Icon: ShieldCheck, label: 'Prepare a clean, safe fryer station' },
+  { Icon: Droplets, label: 'Check oil condition and fryer readiness' },
+  { Icon: CookingPot, label: 'Cook and handle food safely' },
+  { Icon: ClipboardCheck, label: 'Meet product quality and holding standards' },
+] as const
 const options = [
   { value: 'met', title: 'Pass', desc: 'Performed as expected', Icon: Check },
   { value: 'coaching', title: 'Needs coaching', desc: 'Further practice is needed', Icon: ArrowUpRight },
@@ -96,6 +102,7 @@ export default function AssessmentFlow() {
     <aside className="side"><div className="wordmark"><span className="brandmark"><ArrowUpRight size={17}/></span> Learning Pool <span>/ S2S</span></div><div className="eyebrow">EXERCISE 01 · ON THE FLOOR</div><h2 className="intro">Designing for<br/>the moment.</h2><p className="desc">Rosa’s practical assessment of Dre, during a busy shift. An interactive structure-first prototype before theming.</p><h2 className="railhead">Presentation controls</h2><VersionSwitcher current={2}/><h2 className="railhead">Screen flow</h2>{navigation}<div className="aside-card"><strong>Prototype boundaries</strong>Checklist rules are illustrative. No backend, identity verification or server sync is simulated as real.</div><h2 className="railhead">Testing shortcuts</h2>{tools}<a className="action outline spaced" href="?studio=1">Open Theme Studio</a></aside>
     <main className="stage"><div className="stage-label"><span>Rosa / Mobile-first assessment</span><button className={`toggle ${draft.offline ? 'offline' : ''}`} onClick={() => update({ offline: !draft.offline })}>{draft.offline ? <WifiOff size={14}/> : <Wifi size={14}/>} {draft.offline ? 'Offline demo' : 'Online demo'}</button></div>
       <div className="phone">
+      {screen === 'overview' && <header className="overview-topbar"><Button variant="ghost" size="icon" onClick={() => go('list')} aria-label="Back to assessments"><ChevronLeft aria-hidden="true"/></Button><p>Assessment overview</p></header>}
       {screen === 'assessment' && <header className="assessment-header" aria-label="Assessment progress">
         <div className="assessment-header-top"><h1 ref={titleRef} tabIndex={-1} className="assessment-name">Fryer station</h1><span className={`autosave-status ${draft.offline || saveError ? 'attention' : ''}`} role="status" aria-label={saveError ? 'Local save unavailable' : draft.offline ? 'Offline demo · local draft' : 'Saved on this device'}>{!saveError && !draft.offline && <Check size={13} aria-hidden="true"/>}{saveError ? 'Save unavailable' : draft.offline ? 'Offline · local draft' : 'Saved'}</span></div>
         <div className="assessment-header-progress"><span>{recorded} / {criteria.length} recorded</span><Progress className="flow-progress" value={recorded / criteria.length * 100} aria-label="Criteria recorded" aria-valuetext={`${recorded} of ${criteria.length} criteria recorded`}/><span>{Math.round(recorded / criteria.length * 100)}%</span></div>
@@ -104,13 +111,11 @@ export default function AssessmentFlow() {
       {screen === 'list' && <>{title('SHIFT ASSESSMENTS', 'Good afternoon, Rosa.', 'Your assigned on-the-floor assessments.')}<h2 className="section-label">Ready to assess <span className="pill">1 assigned</span></h2><div className="panel"><div className="row"><span className="pill warn">● Ready</span><span className="subtext">Fryer station</span></div><div className="person-wrap"><Person/></div><div className="hairline"/><div className="row"><span className="subtext">Practical skills assessment</span><b className="subtext">11 criteria</b></div><button className="action spaced" onClick={() => go('overview')}>View assessment <ArrowRight size={16}/></button></div>{draft.paused && <div className="notice warn">Your last observation session was saved. You can resume when ready.</div>}<h2 className="section-label">During this shift</h2><div className="panel soft"><b>Work on the floor, not at a desk</b><p className="page-sub spaced">Assess while observing, and save your progress whenever you’re interrupted.</p></div></>}
       {screen === 'overview' && <div className="overview-content">
         <header className="overview-intro">
-          <p className="overview-eyebrow">Assessment overview</p>
+
           <div className="overview-heading"><h1 ref={titleRef} tabIndex={-1}>Fryer Station</h1><span>{criteria.length} criteria</span></div>
           <p className="overview-category">Food Process &amp; Safety <span aria-hidden="true">•</span> Category 2</p>
-          <p className="overview-question">Is the fryer ready for safe operation and have the oil checks been completed?</p>
         </header>
         <Card className="overview-card">
-          <CardHeader><CardTitle><h2>Team Member</h2></CardTitle></CardHeader>
           <CardContent className="overview-member-content">
             <Button variant="ghost" className="overview-member" onClick={() => setSheet('member')} aria-label="View team member Dre Jackson">
               <span className="overview-avatar" aria-hidden="true"/>
@@ -125,8 +130,14 @@ export default function AssessmentFlow() {
           </CardContent>
         </Card>
         <Card className="overview-card">
-          <CardHeader><CardTitle><h2>Assessment overview</h2></CardTitle></CardHeader>
-          <CardContent><p className="overview-description">Observe Dre preparing the fryer, cooking safely and checking the finished product. Look for safe handling, correct oil checks and consistent food quality throughout the task.</p></CardContent>
+          <CardHeader><CardTitle><h2>Assessment description</h2></CardTitle></CardHeader>
+          <CardContent><p className="overview-description">Observe Dre completing the fryer task from preparation to handoff. Check safe working practices, the cooking process and the finished product against the station standard.</p></CardContent>
+        </Card>
+        <Card className="overview-card">
+          <CardHeader><CardTitle><h2>Goals</h2></CardTitle></CardHeader>
+          <CardContent>
+            <ul className="overview-goals">{assessmentGoals.map(({ Icon, label }) => <li key={label}><span className="overview-goal-icon"><Icon aria-hidden="true"/></span><span>{label}</span></li>)}</ul>
+          </CardContent>
         </Card>
         <Card className="overview-card overview-sections">
           <CardHeader><CardTitle><h2>What you will observe</h2></CardTitle></CardHeader>
