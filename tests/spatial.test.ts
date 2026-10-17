@@ -1,8 +1,8 @@
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import assert from 'node:assert/strict'
-import { emptySpatialDraft, normalizeSpatialDraft, spatialCompleteIndices, spatialStorageKey, spatialTheme } from '../src/data/spatial-flow.ts'
-import { flowCriteria, flowMissing, flowStorageKey } from '../src/data/flow-draft.ts'
+import { emptySpatialDraft, normalizeSpatialDraft, spatialCompleteIndices, spatialMissing, spatialEvidenceSatisfied, spatialEvidenceMessage, spatialStorageKey, spatialTheme } from '../src/data/spatial-flow.ts'
+import { flowCriteria, flowStorageKey } from '../src/data/flow-draft.ts'
 import { contrast, isTheme } from '../src/lib/theme.ts'
 
 test('V5 starts at assignments and isolates its normalized draft from V4 and earlier versions', () => {
@@ -23,17 +23,17 @@ test('segmented progress counts completed observations, never pass rate or unver
   const draft = emptySpatialDraft()
   draft.answers = Object.fromEntries(flowCriteria.map((_, index) => [index, index % 2 ? 'fail' : 'met']))
   assert.equal(spatialCompleteIndices(draft).length, 10, 'required evidence is still missing')
-  assert.deepEqual(flowMissing(draft), [8])
-  assert.equal(spatialCompleteIndices(draft, { 8: 1 }).length, 11)
+  assert.deepEqual(spatialMissing(draft), [8])
+  assert.equal(spatialCompleteIndices(draft, { 8: 1 }).length, 10)
   assert.equal(spatialCompleteIndices(draft).length, 10, 'reloading discards photo eligibility')
   draft.notes[8] = '   '
   assert.equal(spatialCompleteIndices(draft).length, 10)
   draft.notes[8] = 'Observed quality checks'
-  assert.equal(spatialCompleteIndices(draft).length, 11)
-  assert.deepEqual(flowMissing(draft), [])
+  assert.equal(spatialCompleteIndices(draft, {8:1}).length, 11)
+  assert.deepEqual(spatialMissing(draft, {8:1}), [])
   draft.answers[1] = 'notObserved'
-  assert.equal(spatialCompleteIndices(draft).length, 10)
-  assert.deepEqual(flowMissing(draft), [1])
+  assert.equal(spatialCompleteIndices(draft, {8:1}).length, 10)
+  assert.deepEqual(spatialMissing(draft, {8:1}), [1])
 })
 
 test('spatial reading surfaces and functional state colors meet AA text contrast', () => {
@@ -74,4 +74,20 @@ test('rendered CSS theme text and focus/control roles retain accessible contrast
   }
   assert.ok(contrast(resolve('control-line'), '#ffffff') >= 3)
   assert.ok(contrast(resolve('focus'), resolve('surface')) >= 3)
+})
+
+
+test('V5 evidence types enforce exactly the required modalities and name what is missing', () => {
+  for (const requirement of ['none', 'comment', 'photo', 'comment-and-photo'] as const) {
+    for (const note of ['', '   ', 'Observed quality']) for (const photos of [0, 1]) {
+      const expected = (requirement === 'none') || (requirement === 'comment' ? !!note.trim() : requirement === 'photo' ? photos > 0 : !!note.trim() && photos > 0)
+      assert.equal(spatialEvidenceSatisfied(requirement, note, photos), expected, `${requirement}: ${JSON.stringify(note)}, ${photos}`)
+    }
+  }
+  assert.equal(spatialEvidenceMessage('comment-and-photo', '', 0), 'Comment and photo required')
+  assert.equal(spatialEvidenceMessage('comment-and-photo', 'Observed', 0), 'Photo required')
+  assert.equal(spatialEvidenceMessage('comment-and-photo', '', 1), 'Comment required')
+  assert.equal(spatialEvidenceMessage('comment-and-photo', 'Observed', 1), 'Evidence recorded')
+  assert.equal(spatialEvidenceMessage('comment', '', 1), 'Comment required')
+  assert.equal(spatialEvidenceMessage('photo', 'Observed', 0), 'Photo required')
 })

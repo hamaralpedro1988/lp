@@ -1,5 +1,5 @@
 import { creatorTheme, type Theme } from '../lib/theme.ts'
-import { emptyFlowDraft, normalizeFlowDraft, flowCriteria, flowEvidenceOk, flowScreens, type FlowDraft } from './flow-draft.ts'
+import { emptyFlowDraft, normalizeFlowDraft, flowCriteria, flowScreens, type FlowDraft } from './flow-draft.ts'
 
 // V5 owns its state; never reads or rewrites V2–V4 storage.
 export const spatialStorageKey = 'lp-rosa-flow-v5-v01'
@@ -15,8 +15,27 @@ export function normalizeSpatialDraft(value: unknown): FlowDraft {
   }
   return result
 }
+export type SpatialEvidenceRequirement = 'none' | 'comment' | 'photo' | 'comment-and-photo'
+export function spatialEvidenceRequirement(index: number): SpatialEvidenceRequirement {
+  return 'evidence' in flowCriteria[index] ? 'comment-and-photo' : 'none'
+}
+export function spatialEvidenceSatisfied(requirement: SpatialEvidenceRequirement, note: string, photos: number) {
+  return (!(requirement === 'comment' || requirement === 'comment-and-photo') || !!note.trim()) &&
+    (!(requirement === 'photo' || requirement === 'comment-and-photo') || photos > 0)
+}
+export function spatialEvidenceMessage(requirement: SpatialEvidenceRequirement, note: string, photos: number) {
+  const commentMissing = (requirement === 'comment' || requirement === 'comment-and-photo') && !note.trim()
+  const photoMissing = (requirement === 'photo' || requirement === 'comment-and-photo') && photos <= 0
+  return commentMissing && photoMissing ? 'Comment and photo required' : commentMissing ? 'Comment required' : photoMissing ? 'Photo required' : requirement !== 'none' ? 'Evidence recorded' : photos > 0 ? 'Photo · session only' : 'Optional evidence'
+}
+export function spatialEvidenceOk(draft: FlowDraft, index: number, photos: Record<number, number> = {}) {
+  return spatialEvidenceSatisfied(spatialEvidenceRequirement(index), draft.notes[index] ?? '', photos[index] ?? 0)
+}
+export function spatialMissing(draft: FlowDraft, photos: Record<number, number> = {}) {
+  return flowCriteria.flatMap((_, index) => (draft.answers[index] !== 'met' && draft.answers[index] !== 'fail') || !spatialEvidenceOk(draft, index, photos) ? [index] : [])
+}
 export function spatialCompleteIndices(draft: FlowDraft, photos: Record<number, number> = {}) {
-  return flowCriteria.flatMap((_, index) => (draft.answers[index] === 'met' || draft.answers[index] === 'fail') && flowEvidenceOk(draft, index, photos) ? [index] : [])
+  return flowCriteria.flatMap((_, index) => (draft.answers[index] === 'met' || draft.answers[index] === 'fail') && spatialEvidenceOk(draft, index, photos) ? [index] : [])
 }
 
 // Opaque reading surfaces; translucent materials are reserved for navigation layers.
@@ -45,6 +64,6 @@ export const spatialTheme: Theme = {
 }
 
 export const spatialOptions = [
-  { value: 'met', title: 'Pass', description: 'Did meet the standard' },
-  { value: 'fail', title: 'Fail', description: 'Standard not met' },
+  { value: 'met', title: 'Pass', description: 'Met the standard' },
+  { value: 'fail', title: 'Fail', description: 'Did not meet the standard' },
 ] as const

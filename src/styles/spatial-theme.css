@@ -142,13 +142,13 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 /* V5 layout selectors intentionally carry greater specificity than legacy Flow
    CSS, independent of Vite async chunk load order. */
 /* Header and footer are fixed flex siblings on one continuous canvas. */
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {flex:none;padding:14px 16px 0;background:transparent;border:0;box-shadow:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {flex:none;padding:14px var(--spatial-space-gutter) 0;background:transparent;border:0;box-shadow:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-top {display:flex;align-items:center;gap:9px;min-height:44px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-back {width:44px;height:44px;flex:none;border-radius:15px;background:var(--spatial-surface);border:1px solid var(--spatial-input-line);color:var(--spatial-section-ink);box-shadow:0 1px 3px #4c41610c}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-name {flex:1;min-width:0;font-size:clamp(16px,4.5vw,20px);font-weight:780;letter-spacing:-.6px;line-height:1.15;margin:0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {display:flex;align-items:center;gap:7px;color:var(--spatial-ink);font-size:14px;font-weight:750;flex:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {width:35px;height:35px;display:grid;place-items:center;border-radius:50%;background:var(--spatial-section-bg);color:var(--spatial-section-ink);font-size:12px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;margin:14px -16px 0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;margin:14px 0 0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments>span {height:4px;border-radius:1px;background:var(--spatial-progress-track);transition:background-color var(--spatial-motion-progress)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments>span[data-state=complete] {background:var(--spatial-progress)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header .spatial-status {margin:8px 0 0;font-size:12px;padding:8px 10px}
@@ -191,7 +191,6 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer[data-required=true] .spatial-composer-help {color:var(--spatial-warning-ink);font-weight:650}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-camera {position:relative;flex:none;width:44px;height:44px;border-radius:13px;min-height:44px;background:var(--spatial-choice);border-color:var(--spatial-input-line);color:var(--spatial-section-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-camera svg {width:21px;height:21px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-camera[data-required=true] {background:var(--spatial-warning-bg);border-color:var(--spatial-warning-line);color:var(--spatial-warning-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-camera[data-attached=true] {background:var(--spatial-selected);border-color:var(--spatial-selected-line)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-camera-dot {position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:var(--spatial-iris);border:2px solid #fff}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-attachments:not(:empty) {margin-top:12px}
@@ -261,12 +260,12 @@ html[data-assessment-version="5"] .spatial-criterion-number>svg {width:14px;heig
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {padding-top:max(14px,env(safe-area-inset-top))}
 }
 @media(max-width:350px) {
-  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {padding:10px 12px}
+  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {padding:10px var(--spatial-space-gutter)}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {padding:20px 17px}
-  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {padding-inline:12px}
+  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {padding-inline:var(--spatial-space-gutter)}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {font-size:12px;gap:5px}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {width:30px;height:30px;font-size:10px}
-  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {margin-inline:-12px}
+  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments {margin-inline:0}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-navigation {grid-template-columns:minmax(0,1fr) 48px minmax(0,1.07fr);gap:8px}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-navigation .spatial-action {font-size:14px;gap:6px}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-metadata>div {flex-wrap:wrap}
@@ -374,3 +373,38 @@ html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialo
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .phonebottom {position:relative;z-index:2}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .phonebottom .subtext {font-size:var(--spatial-type-helper);line-height:1.5}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-description.spaced {margin-top:var(--spatial-space-3)}
+
+/* Participant app: one responsive journey, with no presentation or version controls. */
+.flow-app.flow-v5.participant-flow .workspace {display:block;height:100dvh;min-height:0;overflow:hidden}
+.flow-app.flow-v5.participant-flow .stage {height:100dvh;min-height:0;padding:0;gap:0;display:flex;align-items:center;justify-content:flex-start}
+.flow-app.flow-v5.participant-flow .phone {width:min(560px,100%);height:var(--visual-height,100dvh);min-height:0;border-radius:0;box-shadow:none}
+
+/* Galaxy A55-inspired hardware, decorative only; the actual mobile app stays full screen. */
+.device-shell-legacy {display:contents}
+.flow-app.flow-v5.participant-flow .device-shell {display:contents}
+.flow-app.flow-v5.participant-flow .device-camera,
+.flow-app.flow-v5.participant-flow .device-volume,
+.flow-app.flow-v5.participant-flow .device-power {display:none}
+@media(min-width:651px) {
+  .flow-app.flow-v5.participant-flow .stage {justify-content:center;padding:24px}
+  .flow-app.flow-v5.participant-flow .device-shell {
+    display:block;position:relative;flex:none;width:min(414px,calc((100dvh - 48px) * .47486));
+    height:min(871.84px,calc(100dvh - 48px));aspect-ratio:76.5 / 161.1;padding:8px;border:1px solid #989aa6;border-radius:38px;
+    background:linear-gradient(105deg,#9d9eaa 0%,#33343e 1%,#15151b 3%,#101014 97%,#72737e 99%,#b1b2bc 100%);
+    box-shadow:0 28px 65px #29203835,0 8px 18px #1c162b26,inset 0 0 0 2px #8d8e9855;
+  }
+  .flow-app.flow-v5.participant-flow .phone {position:relative;width:100%;height:100%;padding-top:28px;padding-bottom:16px;border:1px solid #030306;border-radius:30px;overflow:hidden;box-shadow:0 0 0 2px #09090e}
+  .flow-app.flow-v5.participant-flow .device-camera {display:block;position:absolute;z-index:5;pointer-events:none;top:18px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#34364a 0%,#12131d 30%,#030306 65%);box-shadow:0 0 0 2px #29293233}
+  .flow-app.flow-v5.participant-flow .device-volume,
+  .flow-app.flow-v5.participant-flow .device-power {display:block;position:absolute;pointer-events:none;right:-3px;width:3px;border-radius:0 2px 2px 0;background:linear-gradient(90deg,#33343d,#aaaab4,#5c5d68)}
+  .flow-app.flow-v5.participant-flow .device-volume {top:21%;height:10%}
+  .flow-app.flow-v5.participant-flow .device-power {top:34%;height:6%}
+  .flow-app.flow-v5.participant-flow .phone::after {content:"";position:absolute;pointer-events:none;bottom:6px;left:36%;right:36%;height:4px;border-radius:4px;background:#25233399}
+}
+
+/* Portal boundary follows the actual screen, including clipping and fixed-position coordinates. */
+.flow-app.flow-v5.participant-flow .phone {position:relative}
+.flow-app.flow-v5.participant-flow .device-overlay-root {position:absolute;inset:0;z-index:40;border-radius:inherit;overflow:hidden;pointer-events:none;transform:translateZ(0);isolation:isolate}
+.flow-app.flow-v5.participant-flow .device-overlay-root > * {pointer-events:auto}
+html[data-assessment-version="5"] .device-overlay-root [data-slot=sheet-content] {max-width:100%;max-height:calc(100% - 12px)}
+html[data-assessment-version="5"] .device-overlay-root :is([data-slot=dialog-content],[data-slot=alert-dialog-content]) {max-height:calc(100% - 32px);overflow-y:auto}
