@@ -220,3 +220,8 @@ html[data-assessment-version="2"] :is([data-slot=sheet-description],[data-slot=d
 html[data-assessment-version="2"] :is([data-slot=textarea],[data-slot=input]){font-size:16px}
 html[data-assessment-version="2"] [role=dialog] [data-slot=button]{font-size:16px}
 .flow-app .flow-card-heading{flex-wrap:wrap}
+
+.flow-app .choice{cursor:pointer}
+.flow-app .choice:focus-within{outline:3px solid var(--ring);outline-offset:2px}
+.flow-app .response-radio{width:17px;height:17px;color:inherit;border-color:currentColor;box-shadow:none}
+.flow-app .response-radio [data-slot=radio-group-indicator] svg{fill:currentColor}
