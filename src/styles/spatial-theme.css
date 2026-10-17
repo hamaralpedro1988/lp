@@ -379,3 +379,26 @@ html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialo
 .flow-app.flow-v5.participant-flow .workspace {display:block;height:100dvh;min-height:0;overflow:hidden}
 .flow-app.flow-v5.participant-flow .stage {height:100dvh;min-height:0;padding:0;gap:0;display:flex;align-items:center;justify-content:flex-start}
 .flow-app.flow-v5.participant-flow .phone {width:min(560px,100%);height:var(--visual-height,100dvh);min-height:0;border-radius:0;box-shadow:none}
+
+/* Galaxy A55-inspired hardware, decorative only; the actual mobile app stays full screen. */
+.device-shell-legacy {display:contents}
+.flow-app.flow-v5.participant-flow .device-shell {display:contents}
+.flow-app.flow-v5.participant-flow .device-camera,
+.flow-app.flow-v5.participant-flow .device-volume,
+.flow-app.flow-v5.participant-flow .device-power {display:none}
+@media(min-width:651px) {
+  .flow-app.flow-v5.participant-flow .stage {justify-content:center;padding:24px}
+  .flow-app.flow-v5.participant-flow .device-shell {
+    display:block;position:relative;flex:none;width:min(414px,calc((100dvh - 48px) * .47486));
+    aspect-ratio:76.5 / 161.1;padding:8px;border:1px solid #989aa6;border-radius:38px;
+    background:linear-gradient(105deg,#9d9eaa 0%,#33343e 1%,#15151b 3%,#101014 97%,#72737e 99%,#b1b2bc 100%);
+    box-shadow:0 28px 65px #29203835,0 8px 18px #1c162b26,inset 0 0 0 2px #8d8e9855;
+  }
+  .flow-app.flow-v5.participant-flow .phone {position:relative;width:100%;height:100%;padding-top:28px;padding-bottom:16px;border:1px solid #030306;border-radius:30px;overflow:hidden;box-shadow:0 0 0 2px #09090e}
+  .flow-app.flow-v5.participant-flow .device-camera {display:block;position:absolute;z-index:5;pointer-events:none;top:18px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#34364a 0%,#12131d 30%,#030306 65%);box-shadow:0 0 0 2px #29293233}
+  .flow-app.flow-v5.participant-flow .device-volume,
+  .flow-app.flow-v5.participant-flow .device-power {display:block;position:absolute;pointer-events:none;right:-3px;width:3px;border-radius:0 2px 2px 0;background:linear-gradient(90deg,#33343d,#aaaab4,#5c5d68)}
+  .flow-app.flow-v5.participant-flow .device-volume {top:21%;height:10%}
+  .flow-app.flow-v5.participant-flow .device-power {top:34%;height:6%}
+  .flow-app.flow-v5.participant-flow .phone::after {content:"";position:absolute;pointer-events:none;bottom:6px;left:36%;right:36%;height:4px;border-radius:4px;background:#25233399}
+}
