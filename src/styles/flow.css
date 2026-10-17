@@ -297,3 +297,9 @@ html[data-assessment-version="3"] [data-slot=tooltip-content]{font-size:14px}
 /* Follow the applied shadcn preset radius while keeping circular evidence controls. */
 .flow-app .overview-card,.flow-app .assessment-header{border-radius:calc(var(--radius) * 1.4)}
 .flow-app .action,.flow-app .overview-start,.flow-app textarea{border-radius:var(--radius)}
+
+/* V3 surface hierarchy: white canvas and gently tinted cards, like the reference. */
+.flow-v3 .overview-card,.flow-v3 .assessment-header{background:var(--card);border-color:transparent;box-shadow:none}
+.flow-v3 .choice:not(.selected){background:var(--card);border-color:transparent}
+.flow-v3 .saved-note{background:var(--card);border-color:transparent}
+@media(hover:hover){.flow-v3 .choice:not(.selected):hover{background:var(--accent);border-color:var(--ring)}}

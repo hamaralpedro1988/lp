@@ -208,3 +208,5 @@ Applied using `pnpm dlx shadcn@latest apply --preset b1tgce4ie --only theme,font
 The generated palette is synchronized into `src/styles/theme.css` and `src/data/creator-theme.json`, with the same radius used by the runtime theme model. This ensures assessment initialization uses the preset rather than overriding it with the earlier theme. Semantic success/warning colors, floating evidence states, draft data and the requested typography scale are retained. Cards and progress headers follow the preset radius.
 
 Validated production build, unit tests, lint and Chromium checks across all V3 screens, keyboard navigation, sign-off and required-evidence states.
+
+V3 adapts the preset surface hierarchy to the supplied UI reference: a white canvas and `#f7f8f8` cards. Main cards, the live progress header, saved notes and unselected response options use the tinted card token with transparent borders. Selected outcomes and required-evidence warning colors remain semantic. The override is scoped to the V3 runtime palette; V2 retains the unmodified preset surfaces.
