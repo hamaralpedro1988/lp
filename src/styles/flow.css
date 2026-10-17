@@ -337,3 +337,7 @@ html:is([data-assessment-version="3"],[data-assessment-version="4"]) [data-slot=
 }
 
 .flow-v4 .live-question .criterion-context{margin-bottom:16px}
+
+/* Shared V3/V4 color treatment for live response cards and navigation. */
+.flow-v3 .choice:not(.selected){border-color:var(--border)}
+.flow-v3 .phone:has(.assessment-screen) .phonebottom{background:var(--card)}
