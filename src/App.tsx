@@ -3,7 +3,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { applyTheme, isTheme, loadTheme } from '@/lib/theme'
 
 const AssessmentStep = lazy(() => import('@/pages/assessment-step'))
-const SpatialCatalog = lazy(() => import('@/pages/spatial-catalog'))
+const DesignSystem = lazy(() => import('@/pages/design-system'))
 const AssessmentFlow = lazy(() => import('@/pages/assessment-flow'))
 const Assessment = lazy(() => import('@/pages/assessment'))
 const ThemeStudio = lazy(() => import('@/pages/theme-studio'))
@@ -25,5 +25,5 @@ function Preview() {
 }
 export default function App() {
   const params = new URLSearchParams(location.search)
-  return <TooltipProvider><Suspense fallback={<p role="status" className="app-loading p-8 text-sm text-muted-foreground" style={params.get('version') === '5' ? { background: '#f3f0fb', color: '#59468f', minHeight: '100dvh', display: 'grid', placeItems: 'center' } : undefined}>{params.get('version') === '5' ? 'Preparing your assessment…' : 'A carregar…'}</p>}>{params.get('preview') === '1' ? <Preview/> : params.get('studio') === '1' ? <ThemeStudio/> : params.get('view') === 'step' ? <AssessmentStep/> : params.get('version') === '5' && params.get('catalog') === '1' ? <SpatialCatalog/> : params.get('version') === '5' ? <AssessmentFlow key="v5" version={5}/> : params.get('version') === '4' ? <AssessmentFlow key="v4" version={4}/> : params.get('version') === '3' ? <AssessmentFlow key="v3" version={3}/> : params.get('version') === '2' ? <AssessmentFlow key="v2"/> : <Assessment/>}</Suspense></TooltipProvider>
+  return <TooltipProvider><Suspense fallback={<p role="status" className="app-loading p-8 text-sm text-muted-foreground" style={params.get('version') === '5' ? { background: '#f3f0fb', color: '#59468f', minHeight: '100dvh', display: 'grid', placeItems: 'center' } : undefined}>{params.get('version') === '5' ? 'Preparing your assessment…' : 'A carregar…'}</p>}>{params.get('preview') === '1' ? <Preview/> : params.get('studio') === '1' ? <ThemeStudio/> : params.get('view') === 'design-system' ? <DesignSystem/> : params.get('view') === 'step' ? <AssessmentStep/> : params.get('version') === '5' && params.get('catalog') === '1' ? <DesignSystem/> : params.get('version') === '5' ? <AssessmentFlow key="v5" version={5}/> : params.get('version') === '4' ? <AssessmentFlow key="v4" version={4}/> : params.get('version') === '3' ? <AssessmentFlow key="v3" version={3}/> : params.get('version') === '2' ? <AssessmentFlow key="v2"/> : <Assessment/>}</Suspense></TooltipProvider>
 }

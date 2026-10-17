@@ -144,9 +144,9 @@ with sync_playwright() as pw:
   assert page.evaluate('(k)=>localStorage.getItem(k)',KEY)==saved_v5
  # Interactive theme catalog, including portals and keyboard focus return.
  page.set_viewport_size({'width':1100,'height':1000})
- page.goto(args.url+'/?version=5&catalog=1');capture('08-theme-catalog',full=True)
- trigger=page.get_by_role('button',name='Primary · open dialog');trigger.click();capture('08-theme-dialog');page.keyboard.press('Escape');expect(trigger).to_be_focused()
- nav('Secondary · open sheet');capture('08-theme-sheet');page.keyboard.press('Tab')
+ page.goto(args.url+'/?view=design-system&section=components&component=dialog');capture('08-theme-catalog',full=True)
+ trigger=page.get_by_role('button',name='Open dialog');trigger.click();capture('08-theme-dialog');page.keyboard.press('Escape');expect(trigger).to_be_focused()
+ page.goto(args.url+'/?view=design-system&section=components&component=sheet');nav('Open bottom sheet');capture('08-theme-sheet');page.keyboard.press('Tab')
  assert page.evaluate('document.activeElement.closest("[role=dialog]")!==null')
  page.keyboard.press('Escape')
  assert not errors,errors

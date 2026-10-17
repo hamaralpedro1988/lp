@@ -52,6 +52,13 @@ html[data-assessment-version="5"] {
   --spatial-radius-badge:9px;
   --spatial-space-1:4px;--spatial-space-2:8px;--spatial-space-3:12px;
   --spatial-space-4:16px;--spatial-space-5:20px;--spatial-space-6:24px;--spatial-space-8:32px;
+  --spatial-space-card-block:22px;--spatial-space-card-inline:21px;--spatial-space-context:24px;
+  --spatial-space-description:23px;--spatial-space-choices:13px;--spatial-space-evidence:22px;
+  --spatial-space-gutter:17px;--spatial-space-header-block:14px;--spatial-space-footer-gap:10px;
+  --spatial-type-instruction:15px;--spatial-type-response:15px;--spatial-type-helper:12px;
+  --spatial-leading-title:1.18;--spatial-leading-body:1.5;--spatial-track-title:-.9px;
+  --spatial-weight-title:790;--spatial-weight-response:740;
+  --spatial-motion-distance:24px;--spatial-motion-scale:.985;--spatial-motion-press-scale:.97;
   --spatial-font:"Inter Variable",sans-serif;
   --spatial-type-title:clamp(24px,6.5vw,29px);
   --spatial-type-body:16px;--spatial-type-secondary:14px;--spatial-type-label:11px;
@@ -117,7 +124,7 @@ html[data-assessment-version="5"] body {font-family:var(--spatial-font);color:va
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-context-chips {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-context-chips [data-slot=badge] {background:var(--spatial-warning-bg);color:var(--spatial-warning-ink);font-size:12px}
 html[data-assessment-version="5"] .spatial-action,:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .action,:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-start {border-radius:var(--spatial-radius-button);font-size:15px;font-weight:700;min-height:44px;transition:transform var(--spatial-motion-press),background-color var(--spatial-motion-press),box-shadow var(--spatial-motion-progress);touch-action:manipulation}
-html[data-assessment-version="5"] .spatial-action:active:not(:disabled) {transform:scale(.97)}
+html[data-assessment-version="5"] .spatial-action:active:not(:disabled) {transform:scale(var(--spatial-motion-press-scale))}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-start {height:auto;padding:15px 16px;white-space:normal;line-height:1.4;background:var(--spatial-primary);color:#fff}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .phonebottom {background:transparent;border:0;box-shadow:none;backdrop-filter:none;padding:10px 16px max(16px,env(safe-area-inset-bottom))}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .phonebottom .action {min-height:55px}
@@ -141,25 +148,25 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments>span {height:4px;border-radius:1px;background:var(--spatial-progress-track);transition:background-color var(--spatial-motion-progress)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-segments>span[data-state=complete] {background:var(--spatial-progress)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header .spatial-status {margin:8px 0 0;font-size:12px;padding:8px 10px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {display:flex;flex-direction:column;overflow:hidden;padding:12px 17px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {flex:1;min-height:0;display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:22px 21px 24px;margin:0;border-radius:var(--spatial-radius-card);border-color:#fff;animation:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {display:flex;flex-direction:column;overflow:hidden;padding:12px var(--spatial-space-gutter)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {flex:1;min-height:0;display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:var(--spatial-space-card-block) var(--spatial-space-card-inline) var(--spatial-space-6);margin:0;border-radius:var(--spatial-radius-card);border-color:#fff;animation:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card::-webkit-scrollbar {display:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body {animation:spatial-next var(--spatial-motion-question) var(--spatial-ease) both}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body[data-direction=back] {animation-name:spatial-back}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-criterion-context {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:24px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-criterion-context {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:var(--spatial-space-context)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badges {display:flex;gap:6px;flex-wrap:wrap;min-width:0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badge {font-size:11px;font-weight:750;line-height:1.4;border:0;border-radius:var(--spatial-radius-badge);padding:6px 9px;background:var(--spatial-section-bg);color:var(--spatial-section-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badge[data-tone=critical] {background:var(--spatial-warning-bg);color:var(--spatial-warning-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-position {font-size:11px;white-space:nowrap;font-weight:750;color:var(--spatial-muted);font-variant-numeric:tabular-nums}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-title {font-size:var(--spatial-type-title);line-height:1.18;letter-spacing:-.9px;font-weight:790;margin:0 0 24px;outline:none;overflow-wrap:break-word}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-description {font-size:15px;line-height:1.5;color:var(--spatial-muted);margin:0 0 23px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choices {display:grid;gap:13px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-title {font-size:var(--spatial-type-title);line-height:var(--spatial-leading-title);letter-spacing:var(--spatial-track-title);font-weight:var(--spatial-weight-title);margin:0 0 24px;outline:none;overflow-wrap:break-word}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-description {font-size:var(--spatial-type-instruction);line-height:var(--spatial-leading-body);color:var(--spatial-muted);margin:0 0 var(--spatial-space-description)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choices {display:grid;gap:var(--spatial-space-choices)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice {min-height:76px;display:flex;align-items:center;gap:14px;padding:11px 14px;border:1px solid var(--spatial-choice-line);border-radius:var(--spatial-radius-choice);background:var(--spatial-choice);cursor:pointer;transition:transform var(--spatial-motion-press),border-color var(--spatial-motion-press),box-shadow var(--spatial-motion-progress),background-color var(--spatial-motion-press)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice:active {transform:scale(.98)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-selected=true] {border-color:var(--spatial-selected-line);background:var(--spatial-selected);box-shadow:var(--spatial-shadow-selected)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-selected=true][data-outcome=fail] {border-color:var(--spatial-fail-line);background:var(--spatial-fail-bg);box-shadow:0 0 0 2px #f0b7bf46,0 7px 19px #c5788420}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice-copy {flex:1;min-width:0}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice-copy strong {display:block;font-size:15px;line-height:1.4;font-weight:740}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice-copy strong {display:block;font-size:var(--spatial-type-response);line-height:1.4;font-weight:var(--spatial-weight-response)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice-copy small {display:block;font-size:12px;line-height:1.45;color:var(--spatial-muted);margin-top:2px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-radio {width:23px;height:23px;min-width:23px;min-height:23px;border:1.7px solid var(--spatial-control-line);background:#fff;box-shadow:none;color:var(--spatial-iris)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-radio[data-state=checked] {border-color:var(--spatial-iris)}
@@ -169,7 +176,7 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-selected=true] .spatial-choice-confirm {opacity:1}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-outcome=fail] .spatial-choice-confirm {color:var(--spatial-fail-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice:has(:focus-visible) {outline:3px solid var(--spatial-focus);outline-offset:3px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-evidence {margin-top:22px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-evidence {margin-top:var(--spatial-space-evidence)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer {border:1px solid var(--spatial-input-line);border-radius:var(--spatial-radius-composer);background:linear-gradient(135deg,var(--spatial-surface) 75%,#faf9ff);box-shadow:0 2px 10px #51487908;transition:border-color var(--spatial-motion-press),box-shadow var(--spatial-motion-press)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer:focus-within {border-color:var(--spatial-focus);box-shadow:0 0 0 3px #9781dd24}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer textarea {display:block;font-size:16px;line-height:1.45;width:100%;min-height:62px;height:62px;resize:vertical;border:0;background:transparent;padding:14px 15px 2px;color:var(--spatial-ink);border-radius:17px;box-shadow:none;outline:none;scrollbar-width:none}
@@ -235,8 +242,8 @@ html[data-assessment-version="5"] .spatial-criterion-link>svg {width:16px;flex:n
 html[data-assessment-version="5"] .spatial-criterion-number {display:grid;place-items:center;width:26px;height:26px;flex:none;border:1px solid var(--spatial-input-line);border-radius:50%;font-size:12px;color:var(--spatial-section-ink)}
 html[data-assessment-version="5"] .spatial-criterion-number[data-complete=true] {background:var(--spatial-selected);border-color:var(--spatial-selected-line)}
 html[data-assessment-version="5"] .spatial-criterion-number>svg {width:14px;height:14px}
-@keyframes spatial-next {from {opacity:.15;transform:translateX(24px) scale(.985)} to {opacity:1;transform:none}}
-@keyframes spatial-back {from {opacity:.15;transform:translateX(-24px) scale(.985)} to {opacity:1;transform:none}}
+@keyframes spatial-next {from {opacity:.15;transform:translateX(var(--spatial-motion-distance)) scale(var(--spatial-motion-scale))} to {opacity:1;transform:none}}
+@keyframes spatial-back {from {opacity:.15;transform:translateX(calc(-1 * var(--spatial-motion-distance))) scale(var(--spatial-motion-scale))} to {opacity:1;transform:none}}
 @keyframes spatial-screen {from {opacity:.2;transform:translateY(12px)} to {opacity:1;transform:none}}
 @media(hover:hover) {
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice:hover {border-color:var(--spatial-selected-line);background:var(--spatial-selected)}
@@ -311,3 +318,5 @@ html[data-assessment-version="5"] :is(.flow-app.flow-v5,.flow-v5.spatial-catalog
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .mobile-version-switcher {display:block}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .mobile-version-switcher [data-slot=button] {width:44px;height:44px;padding:0;color:var(--spatial-section-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .mobile-version-switcher [data-slot=button]>span {display:none}
+/* Disabled response is a real shared state, available to product and catalog. */
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-disabled=true] {opacity:.55;cursor:not-allowed}

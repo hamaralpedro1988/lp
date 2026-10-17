@@ -1,0 +1,84 @@
+/* Explorer layout only. Component materials/states/motion stay in spatial-theme.css. */
+.flow-v5.spatial-catalog.ds-explorer {padding:0;min-height:100dvh;background:var(--spatial-canvas-gradient)}
+.ds-explorer .ds-layout {background:transparent}
+.ds-explorer .ds-layout>header {background:color-mix(in srgb,var(--spatial-canvas) 94%,transparent);border-color:var(--spatial-line);backdrop-filter:blur(12px)}
+.ds-explorer .ds-layout>header>div {max-width:1540px}
+.ds-explorer .ds-layout>div.mx-auto {max-width:1540px;grid-template-columns:230px minmax(0,1fr)}
+.ds-explorer .ds-layout aside {border-color:var(--spatial-line)}
+.ds-explorer .ds-layout aside nav a[aria-current=page] {background:var(--spatial-selected);color:var(--spatial-section-ink);font-weight:700}
+.ds-app-links {display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 24px;padding:10px max(20px,calc((100vw - 1440px)/2));border-bottom:1px solid var(--spatial-line);font-size:13px}
+.ds-app-links a {display:inline-flex;align-items:center;gap:6px;min-height:36px;color:var(--spatial-section-ink);font-weight:650}
+.ds-side-note {margin-top:36px;padding:20px 12px;border-top:1px solid var(--spatial-line);color:var(--spatial-muted)}
+.ds-side-note p {font-size:14px;font-weight:650;line-height:1.5}
+.ds-side-note small {font-size:12px;line-height:1.8}
+.ds-explorer .ds-hero {margin:0 0 48px;padding-bottom:32px;border-bottom:1px solid var(--spatial-line)}
+.ds-explorer .ds-hero h1 {font-size:clamp(32px,4.5vw,58px);font-weight:790;letter-spacing:-2px;margin:16px 0;line-height:1.05}
+.ds-hero h1 em {font-style:normal;color:var(--spatial-iris)}
+.ds-hero>p {max-width:650px;font-size:16px;line-height:1.7;margin-bottom:24px}
+.ds-eyebrow {font-size:10px;font-weight:750;letter-spacing:1.7px;color:var(--spatial-section-ink)}
+.ds-section-heading {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.ds-section-heading h2 {font-size:30px;line-height:1.2;font-weight:750;letter-spacing:-.9px;margin-top:8px;outline:none}
+.ds-wrap {display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:12px 0}
+.ds-stack {display:grid;gap:12px}
+.ds-muted,.ds-preview-status {font-size:13px;line-height:1.6;color:var(--spatial-muted)}
+.ds-preview-status {min-height:24px;margin-top:16px}
+.ds-filters {display:flex;gap:12px;margin-bottom:20px}
+.ds-filters>[data-slot=select-trigger] {width:190px;flex:none}
+.ds-search {display:flex;align-items:center;gap:10px;flex:1;min-width:0;border:1px solid var(--spatial-input-line);border-radius:var(--spatial-radius-button);padding:0 14px;background:var(--spatial-surface)}
+.ds-search svg {color:var(--spatial-muted);flex:none}
+.ds-search [data-slot=input] {border:0;background:transparent;box-shadow:none;width:100%;min-width:0;padding-inline:0}
+.ds-token-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:24px 0}
+.ds-explorer .ds-token {padding:16px;gap:8px;margin:0;min-width:0;box-shadow:var(--spatial-shadow-small);border-radius:var(--spatial-radius-choice)}
+.ds-token-swatch {height:64px;min-height:64px;border:1px solid var(--spatial-line);border-radius:12px;margin-bottom:8px}
+.ds-token strong {font-size:14px;font-weight:700;text-transform:capitalize}
+.ds-token code {font-size:11px;color:var(--spatial-section-ink);overflow-wrap:anywhere}
+.ds-token small,.ds-token-value {font-size:11px;color:var(--spatial-muted);overflow-wrap:anywhere}
+.ds-token [data-slot=button] {align-self:start;justify-content:flex-start;width:fit-content;font-size:12px;padding:0 8px;gap:8px}
+.ds-material-sample {height:64px;display:grid;place-items:center;font-size:24px;font-weight:750;background:var(--spatial-surface);border:1px solid var(--spatial-line);margin:12px}
+.ds-token-sample {height:36px;min-width:4px;display:block;background:var(--spatial-selected);color:var(--spatial-section-ink);font-size:24px;margin-block:10px}
+.ds-foundation-detail,.ds-comparison,.ds-usage-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:32px}
+.ds-explorer .ds-foundation-detail>.spatial-surface,.ds-explorer .ds-usage-grid>.spatial-surface {margin:0}
+.ds-foundation-detail [data-slot=card-title] h3,.ds-usage-grid h3 {font-size:18px;font-weight:720}
+.ds-motion-window {overflow:hidden;padding:20px;background:var(--spatial-choice);border:1px solid var(--spatial-line);border-radius:18px;margin-bottom:16px}
+.ds-subheading {font-size:22px;font-weight:750;letter-spacing:-.5px;margin-top:40px}
+.ds-comparison-pane {background:var(--background);color:var(--foreground);border:1px solid var(--border);padding:20px;border-radius:20px;min-width:0}
+.ds-comparison-pane h3 {font-size:16px;font-weight:700;margin-bottom:16px}
+.ds-comparison-pane [data-slot=input] {color:var(--foreground);border-color:var(--input);background:var(--background)}
+.ds-comparison-pane [data-slot=card] {box-shadow:none}
+.ds-browser {display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;margin-top:24px;align-items:start}
+.ds-component-index {display:grid;gap:5px;position:sticky;top:100px;max-height:calc(100dvh - 120px);overflow-y:auto;scrollbar-width:thin}
+.ds-component-index button {text-align:left;padding:12px;border:1px solid transparent;border-radius:12px;min-height:52px;cursor:pointer;line-height:1.4;color:var(--spatial-ink);width:100%}
+.ds-component-index button:hover {background:var(--spatial-choice)}
+.ds-component-index button[aria-current=true] {background:var(--spatial-selected);border-color:var(--spatial-input-line);color:var(--spatial-section-ink)}
+.ds-component-index span {display:block;font-size:13px;font-weight:650}
+.ds-component-index small {display:block;font-size:10px;color:var(--spatial-muted);margin-top:4px}
+.ds-component-detail {min-width:0}
+.ds-detail-title {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ds-detail-title h3 {font-size:24px;font-weight:750;letter-spacing:-.6px}
+.ds-component-detail>p {font-size:14px;line-height:1.7}
+.ds-explorer .ds-live-preview {padding:24px;margin:24px 0;gap:16px;box-shadow:var(--spatial-shadow-small);overflow:visible}
+.ds-live-preview>[data-slot=card] {min-width:0}
+.ds-control-row {display:flex;align-items:center;gap:12px;font-size:14px;min-height:44px;line-height:1.5}
+.ds-guidance-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-block:28px}
+.ds-guidance-grid h4,.ds-guidance-grid dt {font-size:12px;font-weight:750;color:var(--spatial-ink);margin-bottom:8px}
+.ds-guidance-grid p,.ds-guidance-grid dd {font-size:13px;line-height:1.65;color:var(--spatial-muted)}
+.ds-code {font-size:12px;line-height:1.7;padding:20px;background:var(--spatial-primary);color:var(--spatial-surface);border-radius:15px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;margin:16px 0}
+.ds-source {display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:13px;font-weight:650;color:var(--spatial-section-ink)}
+.ds-component-detail summary {font-size:13px;font-weight:650;cursor:pointer;min-height:44px;display:flex;align-items:center}
+.ds-story-controls {display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:16px 0}
+.ds-story-controls label {font-size:12px;font-weight:650}
+.ds-story-controls [data-slot=select-trigger] {min-width:150px;max-width:100%;width:auto}
+.ds-rosa-layout {display:flex;justify-content:center;padding:24px 0;min-width:0}
+.ds-device.flow-app {width:100%;max-width:390px;min-height:0;border:1px solid var(--spatial-line);border-radius:28px;background:var(--spatial-canvas-gradient);box-shadow:var(--spatial-shadow);overflow:clip}
+.ds-pattern-canvas {display:grid;gap:20px;padding:20px;min-width:0}
+.ds-pattern-canvas.ds-live-canvas {height:720px;padding:0;display:flex;flex-direction:column;gap:0}
+.ds-copy-status {display:flex;align-items:start;gap:8px;font-size:12px;color:var(--spatial-muted);padding:16px;border:1px solid var(--spatial-line);border-radius:15px;margin-top:40px;overflow-wrap:anywhere}
+.ds-copy-status svg {flex:none;margin-top:2px;color:var(--spatial-iris)}
+.ds-copy-fallback {width:100%;font-size:13px;min-height:120px;margin-top:12px;border:1px solid var(--spatial-input-line);border-radius:15px;padding:16px;background:var(--spatial-surface)}
+@media(max-width:1200px) {.ds-explorer .ds-layout>div.mx-auto {grid-template-columns:190px minmax(0,1fr)}.ds-token-grid {grid-template-columns:repeat(2,minmax(0,1fr))}.ds-browser {grid-template-columns:150px minmax(0,1fr);gap:20px}.ds-foundation-detail {grid-template-columns:1fr}}
+@media(max-width:1023px) {.ds-explorer .ds-layout>div.mx-auto {display:block}.ds-explorer .ds-layout aside {position:static;height:auto}.ds-side-note {display:none}.ds-explorer .ds-layout aside>p:last-child {display:none}.ds-app-links {justify-content:flex-start}.ds-explorer .ds-layout main {padding-top:28px}}
+@media(max-width:700px) {.ds-explorer .ds-hero {margin-bottom:32px}.ds-browser {grid-template-columns:1fr}.ds-component-index {position:static;max-height:210px;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;border-bottom:1px solid var(--spatial-line);padding-bottom:12px}.ds-foundation-detail,.ds-comparison,.ds-usage-grid,.ds-guidance-grid {grid-template-columns:1fr}.ds-hero h1 {letter-spacing:-1.2px}.ds-section-heading {align-items:flex-start;flex-wrap:wrap}.ds-section-heading h2 {font-size:26px}.ds-filters {flex-wrap:wrap}.ds-filters>[data-slot=select-trigger] {width:100%}.ds-search {flex-basis:100%}.ds-token-grid {gap:12px}.ds-explorer .ds-token {padding:12px}.ds-token strong {font-size:12px}.ds-layout>header>div {flex-wrap:wrap;height:auto;min-height:72px;padding-block:12px}.ds-layout>header>div>a {font-size:14px}.ds-layout>header>div>[data-slot=badge] {font-size:10px}.ds-explorer .ds-live-preview {padding:16px}.ds-pattern-canvas {padding:16px}.ds-rosa-layout {padding:16px 0}.ds-app-links {gap:4px 16px;font-size:12px}.ds-guidance-grid {gap:16px}.ds-code {padding:14px;font-size:11px}}
+@media(max-width:350px) {.ds-token-grid {grid-template-columns:1fr}.ds-pattern-canvas {padding:12px}.ds-pattern-canvas.ds-live-canvas {height:680px}}
+.ds-explorer:not([data-area=foundations]) .ds-hero {display:none}
+.ds-explorer .ds-comparison-pane [data-slot=input] {color:var(--foreground);border-color:var(--input);background:var(--background)}
+.ds-component-index button:focus-visible,.ds-source:focus-visible,.ds-app-links a:focus-visible {outline:3px solid var(--spatial-focus);outline-offset:3px}

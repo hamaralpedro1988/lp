@@ -31,6 +31,7 @@ export default function ComponentPlayground() {
   const [notice, setNotice] = useState('')
   const invalid = submitted && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   return <PlaygroundLayout>
+    <nav className="mb-6 flex flex-wrap gap-5 text-sm" aria-label="Design tools"><a href="?view=design-system">Spatial Design System</a><a href="?studio=1">Theme Studio</a><a href="?version=5">Rosa V5 Flow</a></nav>
     <section id="foundations" className="pb-10">
       <div className="mb-5 flex items-center gap-2"><Badge variant="secondary">UI foundations</Badge><span className="text-xs text-muted-foreground">01 / Component library</span></div>
       <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">Small details.<br/><span className="text-muted-foreground">A consistent experience.</span></h1>
