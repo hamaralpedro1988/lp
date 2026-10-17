@@ -166,7 +166,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
     <aside className="side"><div className="wordmark"><span className="brandmark"><ArrowUpRight size={17}/></span> Learning Pool <span>/ S2S</span></div><div className="eyebrow">EXERCISE 01 · ON THE FLOOR</div><h2 className="intro">{spatial ? <>Spatial<br/><em>Flow.</em></> : <>Designing for<br/>the moment.</>}</h2><p className="desc">Rosa’s practical assessment of Dre, during a busy shift. A mobile-first flow for observation, evidence and feedback.</p><h2 className="railhead">Presentation controls</h2><VersionSwitcher current={version}/><h2 className="railhead">Screen flow</h2>{navigation}<div className="aside-card"><strong>Prototype boundaries</strong>Checklist rules are illustrative. No backend, identity verification or server sync is simulated as real.</div>{spatial && <a className="action outline spaced" href="?view=design-system">Spatial Design System</a>}<h2 className="railhead">Testing shortcuts</h2>{tools}<a className="action outline spaced" href="?studio=1">Open Theme Studio</a></aside>
     <main className="stage"><div className="stage-label"><span>Rosa / Mobile-first assessment</span><button className={`toggle ${draft.offline ? 'offline' : ''}`} onClick={() => update({ offline: !draft.offline })}>{draft.offline ? <WifiOff size={14}/> : <Wifi size={14}/>} {draft.offline ? 'Offline demo' : 'Online demo'}</button></div>
       <div className="phone">
-      {screen !== 'assessment' && <header className="overview-topbar">{screen !== 'list' ? <ActionButton variant="ghost" size="icon" onClick={back} aria-label={screen === 'overview' ? 'Back to assessments' : screen === 'review' ? 'Back to checklist' : 'Back to review'}><ChevronLeft aria-hidden="true"/></ActionButton> : <span/>}<p>{pageLabels[screen]}</p><div className="mobile-version-switcher"><VersionSwitcher current={version}/></div></header>}
+      {screen !== 'assessment' && <header className="overview-topbar">{screen !== 'list' ? <ActionButton variant="ghost" size="icon" className={spatial ? 'spatial-header-back' : undefined} onClick={back} aria-label={screen === 'overview' ? 'Back to assessments' : screen === 'review' ? 'Back to checklist' : 'Back to review'}><ChevronLeft aria-hidden="true"/></ActionButton> : <span/>}<p>{pageLabels[screen]}</p><div className="mobile-version-switcher"><VersionSwitcher current={version}/></div></header>}
       {screen === 'assessment' && !spatial && <header className="assessment-header" aria-label="Assessment progress">
         <ActionButton variant="ghost" size="icon" className="assessment-back" onClick={back} aria-label="Back to overview"><ChevronLeft aria-hidden="true"/></ActionButton><div className="assessment-header-copy"><div className="assessment-header-top"><h1 ref={floatingEvidence ? undefined : titleRef} tabIndex={-1} className="assessment-name">Fryer Station</h1><span className={`autosave-status ${draft.offline || saveError ? 'attention' : ''}`} role="status" aria-label={saveError ? 'Local save unavailable' : draft.offline ? 'Offline demo · local draft' : 'Saved on this device'}>{saveError ? 'Save unavailable' : draft.offline ? 'Offline · local draft' : 'Saved Automatically'}</span></div>
         <div className="assessment-header-progress"><span>{recorded} / {criteria.length} recorded</span><Progress className="flow-progress" value={recorded / criteria.length * 100} aria-label="Criteria recorded" aria-valuetext={`${recorded} of ${criteria.length} criteria recorded`}/><span>{Math.round(recorded / criteria.length * 100)}%</span></div>
@@ -177,7 +177,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
       {screen === 'list' && <div className="flow-page-content">
         {title('Your assessments', 'Observe, support and review your team’s practical skills.')}
         {spatial ? <SpatialAssignmentCard status={assessmentStatus} onOpen={() => go('overview')}/> : <>
-        <Surface className="overview-card">
+        <Surface data-elevation="quiet" className="overview-card">
           <CardHeader><CardTitle><h2>Ready to assess</h2></CardTitle></CardHeader>
           <CardContent>
             <div className="flow-card-heading"><h3>Fryer Station</h3><Badge variant="outline" className="overview-status">{assessmentStatus}</Badge></div>
@@ -190,7 +190,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
         </Surface>
         </>}
         {draft.paused && <p className="notice">Your observations are saved on this device. Resume when you’re ready.</p>}
-        <Surface className="overview-card"><CardContent className="flow-tip"><span className="overview-goal-icon"><Clock3 aria-hidden="true"/></span><div><h2>At your own pace</h2><p className="overview-description">Record observations as you go. You can leave the checklist and return to your saved draft.</p></div></CardContent></Surface>
+        <Surface data-elevation="quiet" className="overview-card"><CardContent className="flow-tip"><span className="overview-goal-icon"><Clock3 aria-hidden="true"/></span><div><h2>At your own pace</h2><p className="overview-description">Record observations as you go. You can leave the checklist and return to your saved draft.</p></div></CardContent></Surface>
       </div>}
       {screen === 'overview' && <div className="overview-content">
         <header className="overview-intro">
@@ -199,7 +199,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
           <p className="overview-category">Food Process &amp; Safety <span aria-hidden="true">•</span> Category 2</p>
         </header>
         {spatial ? <SpatialPeopleCard status={assessmentStatus} onMember={() => setSheet('member')}/> : <>
-        <Surface className="overview-card">
+        <Surface data-elevation="quiet" className="overview-card">
           <CardContent className="overview-member-content">
             <ActionButton variant="ghost" className="overview-member" onClick={() => setSheet('member')} aria-label="View team member Dre Jackson">
               <span className="overview-avatar" aria-hidden="true">{floatingEvidence && <UserRound/>}</span>
@@ -214,18 +214,18 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
           </CardContent>
         </Surface>
         </>}
-        <Surface className="overview-card">
+        <Surface data-elevation="quiet" className="overview-card">
           <CardHeader><CardTitle><h2>Assessment description</h2></CardTitle></CardHeader>
           <CardContent><p className="overview-description">Observe Dre completing the fryer task from preparation to handoff. Check safe working practices, the cooking process and the finished product against the station standard.</p></CardContent>
         </Surface>
-        {spatial && <Surface className="overview-card spatial-context-card"><CardHeader><CardTitle><h2>Before you begin</h2></CardTitle></CardHeader><CardContent><div className="spatial-context-chips"><Badge variant="secondary"><ShieldCheck aria-hidden="true"/>{criteria.filter(item => 'critical' in item).length} critical checks</Badge><Badge variant="secondary"><FileText aria-hidden="true"/>Comment or photo</Badge></div><p className="overview-description">Observe safe handling throughout. The finished-product quality check requires a comment or photo before sign-off.</p></CardContent></Surface>}
-        <Surface className="overview-card">
+        {spatial && <Surface data-elevation="quiet" className="overview-card spatial-context-card"><CardHeader><CardTitle><h2>Before you begin</h2></CardTitle></CardHeader><CardContent><div className="spatial-context-chips"><Badge variant="secondary"><ShieldCheck aria-hidden="true"/>{criteria.filter(item => 'critical' in item).length} critical checks</Badge><Badge variant="secondary"><FileText aria-hidden="true"/>Comment or photo</Badge></div><p className="overview-description">Observe safe handling throughout. The finished-product quality check requires a comment or photo before sign-off.</p></CardContent></Surface>}
+        <Surface data-elevation="quiet" className="overview-card">
           <CardHeader><CardTitle><h2>Goals</h2></CardTitle></CardHeader>
           <CardContent>
             <ul className="overview-goals">{assessmentGoals.map(({ Icon, label }) => <li key={label}><span className="overview-goal-icon"><Icon aria-hidden="true"/></span><span>{label}</span></li>)}</ul>
           </CardContent>
         </Surface>
-        <Surface className="overview-card overview-sections">
+        <Surface data-elevation="quiet" className="overview-card overview-sections">
           <CardHeader><CardTitle><h2>What you will observe</h2></CardTitle></CardHeader>
           <CardContent>
             {(['Preparation', 'Frying', 'Completion'] as const).map((section, i) => <div key={section}>
@@ -255,21 +255,21 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
       {screen === 'review' && spatial && <div className="flow-page-content">{title('Review observations', 'Fryer Station · Dre Jackson')}<SpatialReviewSummary draft={draft} photos={photos}/><SpatialReviewList draft={draft} photos={photos} onEdit={edit}/></div>}
       {screen === 'review' && !spatial && <div className="flow-page-content">
         {title('Review observations', 'Fryer Station · Dre Jackson')}
-        <Surface className="overview-card"><CardHeader><CardTitle><h2>Assessment summary</h2></CardTitle></CardHeader><CardContent><div className="review-stats">{[{ count: met, label: 'Pass', Icon: Check }, { count: failed, label: 'Fail', Icon: X }, ...(!spatial ? [{ count: coaching, label: 'Needs coaching', Icon: MessageSquare }] : []), { count: missing.length, label: 'Incomplete', Icon: ClipboardCheck }].map(({ count, label, Icon }) => <div className="review-stat" data-result={label} key={label}><span className="overview-goal-icon"><Icon aria-hidden="true"/></span><b>{count}</b><small>{label}</small></div>)}</div></CardContent></Surface>
+        <Surface data-elevation="quiet" className="overview-card"><CardHeader><CardTitle><h2>Assessment summary</h2></CardTitle></CardHeader><CardContent><div className="review-stats">{[{ count: met, label: 'Pass', Icon: Check }, { count: failed, label: 'Fail', Icon: X }, ...(!spatial ? [{ count: coaching, label: 'Needs coaching', Icon: MessageSquare }] : []), { count: missing.length, label: 'Incomplete', Icon: ClipboardCheck }].map(({ count, label, Icon }) => <div className="review-stat" data-result={label} key={label}><span className="overview-goal-icon"><Icon aria-hidden="true"/></span><b>{count}</b><small>{label}</small></div>)}</div></CardContent></Surface>
         <p role="status" className={`notice ${missing.length ? 'warn' : ''}`}>{missing.length ? `${missing.length} ${spatial && missing.length === 1 ? 'criterion needs' : 'criteria need'} attention. Record each result and add required evidence before sign-off.` : (spatial ? 'All observations and required evidence are complete. Review the results with Dre; this is not an overall pass.' : 'All required observations and evidence are recorded. Review the results with Dre.')}</p>
-        <Surface className="overview-card overview-sections"><CardHeader><CardTitle><h2>Checklist summary</h2></CardTitle></CardHeader><CardContent>
+        <Surface data-elevation="quiet" className="overview-card overview-sections"><CardHeader><CardTitle><h2>Checklist summary</h2></CardTitle></CardHeader><CardContent>
           {(['Preparation', 'Frying', 'Completion'] as const).map((section, sectionIndex) => <section className="review-section" key={section} aria-labelledby={`review-section-${sectionIndex}`}><h3 id={`review-section-${sectionIndex}`}><span className="overview-section-number">{sectionIndex + 1}</span>{section}</h3>{criteria.map((item, i) => item.section === section && <ActionButton key={item.title} variant="ghost" className="review-item" onClick={() => edit(i)} aria-label={`Edit: ${item.title}`}><span className={`dot ${draft.answers[i] ?? ''}`} aria-hidden="true"/><span><strong>{item.title}{'critical' in item && <span className="critical-mark" title="Critical"> ◆</span>}</strong><small>{!draft.answers[i] ? 'Not recorded' : !flowEvidenceOk(draft, i, photos) ? 'Evidence required' : draft.answers[i] === 'notObserved' ? 'Response needed' : options.find(option => option.value === draft.answers[i])?.title}{spatial && (draft.notes[i]?.trim() || photos[i]) ? ` · ${draft.notes[i]?.trim() ? 'Comment recorded' : 'Photo · session only'}` : ''}</small></span><ChevronRight aria-hidden="true"/></ActionButton>)}</section>)}
         </CardContent></Surface>
       </div>}
       {screen === 'signoff' && spatial && <div className="flow-page-content">{title('Share feedback', 'Fryer Station · Dre Jackson')}<SpatialFeedbackCard draft={draft} onFeedback={feedback => update({ feedback }, true)}/><SpatialApprovals confirmed={draft.assessorConfirmed}/><p className={`notice signoff-notice ${offline ? 'warn' : ''}`}>{offline ? 'Offline: saved on this device. No sync or certification occurs.' : 'Demo only · assessor review is saved on this device, not submitted. Employee acknowledgement and manager countersign depend on configured rules. No certification is issued.'}</p></div>}
       {screen === 'signoff' && !spatial && <div className="flow-page-content">
         {title(floatingEvidence ? 'Share feedback' : 'Feedback & sign-off', 'Fryer Station · Dre Jackson')}
-        <Surface className="overview-card"><CardHeader><CardTitle><h2>{followUp ? 'Next steps for Dre' : 'What went well'}</h2></CardTitle></CardHeader><CardContent>
+        <Surface data-elevation="quiet" className="overview-card"><CardHeader><CardTitle><h2>{followUp ? 'Next steps for Dre' : 'What went well'}</h2></CardTitle></CardHeader><CardContent>
           <Badge variant="outline" className={`pill ${followUp ? 'warn' : 'good'}`}>{failed ? 'Feedback needed' : coaching ? 'Further coaching indicated' : 'Observations complete'}</Badge>
           <p className="overview-description spaced">{followUp ? 'Discuss the steps that need more practice and agree on the next opportunity to demonstrate them.' : 'Share the strengths you observed and discuss the results together.'}</p>
           <label className="fieldlabel" htmlFor="flow-feedback">Coaching / feedback note</label><Textarea id="flow-feedback" value={draft.feedback} onChange={event => update({ feedback: event.target.value }, true)} placeholder="What went well? What should Dre practise next?"/>
         </CardContent></Surface>
-        <Surface className="overview-card overview-sections"><CardHeader><CardTitle><h2>{spatial ? 'Workflow approvals' : 'Required approvals'}</h2></CardTitle></CardHeader><CardContent>{[
+        <Surface data-elevation="quiet" className="overview-card overview-sections"><CardHeader><CardTitle><h2>{spatial ? 'Workflow approvals' : 'Required approvals'}</h2></CardTitle></CardHeader><CardContent>{[
           { name: 'Rosa Thompson', role: 'Qualified assessor', description: 'Identity and role require verification.', confirmed: draft.assessorConfirmed, Icon: ClipboardCheck },
           { name: 'Dre Jackson', role: 'Team member', description: 'Confirmation depends on configured requirements.', confirmed: false, Icon: UserRound },
           { name: 'Manager', role: 'Countersign', description: 'Required only when specified by assessment rules.', confirmed: false, Icon: ShieldCheck },

@@ -10,8 +10,8 @@ import { flowCriteria, flowEvidenceOk, type FlowDraft, type FlowAnswer } from '@
 import { spatialCompleteIndices, spatialOptions } from '@/data/spatial-flow'
 
 /** All primitives consume semantic tokens; brand aliases live in spatial-theme.css. */
-export function SpatialSurface({ className, ...props }: ComponentProps<typeof Card>) {
-  return <Card className={cn('spatial-surface', className)} {...props}/>
+export function SpatialSurface({ className, elevation = 'raised', ...props }: ComponentProps<typeof Card> & { elevation?: 'raised' | 'quiet' }) {
+  return <Card data-elevation={elevation} className={cn('spatial-surface', className)} {...props}/>
 }
 export function SpatialActionButton({ className, ...props }: ComponentProps<typeof Button>) {
   return <Button className={cn('spatial-action', className)} {...props}/>

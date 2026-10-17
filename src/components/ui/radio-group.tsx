@@ -7,12 +7,32 @@ import { RadioGroup as RadioGroupPrimitive } from "radix-ui"
 
 function RadioGroup({
   className,
+  onKeyDownCapture,
   ...props
 }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
   return (
     <RadioGroupPrimitive.Root
       data-slot="radio-group"
       className={cn("grid gap-3", className)}
+      onKeyDownCapture={event => {
+        onKeyDownCapture?.(event)
+        if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return
+        if (!["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return
+        const radios = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="radio"]:not(:disabled):not([aria-disabled="true"])')).filter(item => item.closest('[role="radiogroup"]') === event.currentTarget)
+        const current = radios.indexOf(event.target as HTMLButtonElement)
+        if (current < 0 || !radios.length) return
+        const rtl = (props.dir ?? getComputedStyle(event.currentTarget).direction) === "rtl"
+        const forward = event.key === "ArrowDown" || event.key === (rtl ? "ArrowLeft" : "ArrowRight")
+        const next = event.key === "Home" ? 0 : event.key === "End" ? radios.length - 1 : current + (forward ? 1 : -1)
+        if (props.loop === false && (next < 0 || next >= radios.length)) return
+        event.preventDefault()
+        event.stopPropagation()
+        // Select explicitly: relying on the document keydown/focus ordering can
+        // leave a moved radio unselected on a newly mounted group.
+        const target = radios[(next + radios.length) % radios.length]
+        target.focus()
+        target.click()
+      }}
       {...props}
     />
   )

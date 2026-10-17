@@ -1,0 +1,21 @@
+Rosa UI refinement — production-build verification
+
+npm run build: PASS
+npm run lint: PASS (three existing Fast Refresh warnings)
+npm test: PASS (27 tests)
+
+Flow browser suite:
+PASS all five React screens at 320px
+PASS all five React screens at 375px
+PASS all five React screens at 390px
+PASS all five React screens at 419px
+PASS all five React screens at 1440px
+PASS binary flow, real media, required evidence, persistence, review/sign-off, focus, reduced motion, large text, offline/error, migration, catalog and V2–V4 regressions.
+
+Explorer/Theme Studio suite:
+PASS inventory, token export/copy, all installed primitives and real portal interactions
+PASS foundations/core/Rosa at 320px
+PASS foundations/core/Rosa at 375px
+PASS foundations/core/Rosa at 390px
+PASS foundations/core/Rosa at 419px
+PASS shared Rosa patterns, safe media/sign-off, storage isolation, token parity, accessibility, Theme Studio editing/export and V2–V4 regression.

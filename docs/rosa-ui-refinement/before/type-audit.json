@@ -1,0 +1,364 @@
+{
+  "list": [
+    {
+      "text": "Your assessments",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "28px",
+      "weight": "780",
+      "line": "33.04px",
+      "padding": "0px"
+    },
+    {
+      "text": "Ready to assess",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "Fryer Station",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "24px",
+      "weight": "650",
+      "line": "28.8px",
+      "padding": "0px"
+    },
+    {
+      "text": "At your own pace",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "600",
+      "line": "25.2px",
+      "padding": "0px"
+    },
+    {
+      "text": "Record observations as you go. You can leave ",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "line": "25.6px",
+      "padding": "0px"
+    }
+  ],
+  "overview": [
+    {
+      "text": "Fryer Station",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "28px",
+      "weight": "780",
+      "line": "33.04px",
+      "padding": "0px"
+    },
+    {
+      "text": "Dre JacksonCrew Floor Member",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "650",
+      "line": "24px",
+      "padding": "0px"
+    },
+    {
+      "text": "Assessment StatusReady to StartQualified Asse",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "400",
+      "line": "21px",
+      "padding": "14px 22px 22px"
+    },
+    {
+      "text": "Assessment description",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "Observe Dre completing the fryer task from pr",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "line": "25.6px",
+      "padding": "0px"
+    },
+    {
+      "text": "Before you begin",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "Observe safe handling throughout. The finishe",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "line": "25.6px",
+      "padding": "0px"
+    },
+    {
+      "text": "Goals",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "What you will observe",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    }
+  ],
+  "assessment": [
+    {
+      "text": "Fryer Station",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "17.55px",
+      "weight": "780",
+      "line": "20.1825px",
+      "padding": "0px"
+    },
+    {
+      "text": "Checks fryer readiness and oil conditions",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "25.35px",
+      "weight": "790",
+      "line": "29.913px",
+      "padding": "0px"
+    },
+    {
+      "text": "Observe the applicable safety checks before s",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "15px",
+      "weight": "400",
+      "line": "22.5px",
+      "padding": "0px"
+    },
+    {
+      "text": "Pass",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "15px",
+      "weight": "740",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Fail",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "15px",
+      "weight": "740",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "line": "23.2px",
+      "padding": "14px 15px 2px"
+    }
+  ],
+  "review": [
+    {
+      "text": "Review observations",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "28px",
+      "weight": "780",
+      "line": "33.04px",
+      "padding": "0px"
+    },
+    {
+      "text": "Assessment summary",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "Checklist summary",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "1Preparation",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "750",
+      "line": "21px",
+      "padding": "14px 20px"
+    },
+    {
+      "text": "Prepares a safe, clean work area",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Checks fryer readiness and oil conditions ◆",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Selects the correct product and portion",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "2Frying",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "750",
+      "line": "21px",
+      "padding": "14px 20px"
+    },
+    {
+      "text": "Loads the basket without overfilling",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Lowers the basket safely ◆",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Selects the approved cooking programme",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Monitors the cycle and follows alerts",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Lifts and drains the basket safely ◆",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "3Completion",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "750",
+      "line": "21px",
+      "padding": "14px 20px"
+    },
+    {
+      "text": "Checks the finished product quality",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Transfers product to the correct area",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    },
+    {
+      "text": "Follows the approved holding guidance",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "14px",
+      "weight": "500",
+      "line": "21px",
+      "padding": "0px"
+    }
+  ],
+  "signoff": [
+    {
+      "text": "Share feedback",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "28px",
+      "weight": "780",
+      "line": "33.04px",
+      "padding": "0px"
+    },
+    {
+      "text": "Next steps for Dre",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "Discuss the steps that need more practice and",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "line": "25.6px",
+      "padding": "0px"
+    },
+    {
+      "text": "Review safe basket handling with Dre.",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "line": "25.6px",
+      "padding": "8px 12px"
+    },
+    {
+      "text": "Workflow approvals",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "18px",
+      "weight": "720",
+      "line": "23.4px",
+      "padding": "0px"
+    },
+    {
+      "text": "Rosa Thompson",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "550",
+      "line": "24px",
+      "padding": "0px"
+    },
+    {
+      "text": "Dre Jackson",
+      "font": "\"Inter Variable\", sans-serif",
+      "size": "16px",
+      "weight": "550",
+      "line": "24px",
+      "padding": "0px"
+    }
+  ]
+}
