@@ -1,3 +1,5 @@
+> Historical V5.0 implementation notes. Superseded by [V5.6 React Spatial Flow](../rosa-v5-6/README.md).
+
 # Rosa V5 review guide
 
 Implements [issue #1](https://github.com/hamaralpedro1988/lp/issues/1) on `feat/rosa-v5-spatial-flow`. Open `?version=5` in the branch preview. Main is not changed by this implementation.

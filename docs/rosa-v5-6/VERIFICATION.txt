@@ -1,0 +1,6 @@
+PASS all five React screens at 320px
+PASS all five React screens at 375px
+PASS all five React screens at 390px
+PASS all five React screens at 419px
+PASS all five React screens at 1440px
+PASS binary flow, real media, required evidence, persistence, review/sign-off, focus, reduced motion, large text, offline/error, migration, catalog and V2–V4 regressions.
