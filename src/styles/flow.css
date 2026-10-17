@@ -182,3 +182,22 @@ html[data-assessment-version="2"] [data-slot="sheet-title"]{font-size:var(--text
   .flow-app .approval-row>div{flex-basis:calc(100% - 42px)}
   .flow-app .approval-row [data-slot=badge]{margin-left:42px;max-width:none}
 }
+
+/* A single compact progress header for live observations. */
+.flow-app .assessment-header{display:flex;align-items:center;gap:8px;margin-top:max(16px,env(safe-area-inset-top));padding:12px 12px 12px 6px}
+.flow-app .assessment-back{flex:none;width:36px;min-height:44px}
+.flow-app .assessment-back svg{width:24px;height:24px}
+.flow-app .assessment-header-copy{flex:1;min-width:0}
+.flow-app .assessment-header-top{gap:8px}
+.flow-app .assessment-name{font-size:17px;font-weight:550;letter-spacing:-.3px}
+.flow-app .autosave-status{font-size:11px;color:var(--flow-muted)}
+.flow-app .assessment-header-progress{margin-top:5px;gap:8px;font-size:12px}
+.flow-app .assessment-header-progress .flow-progress{height:6px;border-radius:999px}
+.flow-app .assessment-header-progress [data-slot=progress-indicator]{background:#287d24}
+@media(max-width:360px){
+  .flow-app .assessment-header{margin-inline:12px;gap:4px;padding:10px 10px 10px 4px}
+  .flow-app .assessment-back{width:32px}
+  .flow-app .assessment-name{font-size:15px}
+  .flow-app .autosave-status{font-size:10px}
+  .flow-app .assessment-header-progress{gap:6px;font-size:11px}
+}
