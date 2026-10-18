@@ -1,3 +1,4 @@
+import { SpatialCriterionGuidance } from './spatial-guidance'
 import { useSpatialSwipe } from '@/hooks/use-spatial-swipe'
 import type { SwipeDirection } from '@/lib/spatial-swipe'
 import { useId, useLayoutEffect, useRef, useState, type ComponentProps, type ReactNode, type Ref } from 'react'
@@ -96,6 +97,7 @@ export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, 
       <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer}/>
     </div>
     <SpatialEvidenceComposer note={draft.notes[draft.index] ?? ''} count={photos[draft.index] ?? 0} requirement={requirement} onNote={onNote} onCamera={onCamera} galleryRef={galleryRef}/>
+    <SpatialCriterionGuidance key={`guidance-${draft.index}`} index={draft.index}/>
   </SpatialSurface><div className="spatial-swipe-feedback" role="status" aria-live="polite" aria-atomic="true" data-visible={!!feedback}>{feedback}</div><span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{criterion.section}, criterion {draft.index + 1} of {flowCriteria.length}. {criterion.title}</span></>
 }
 export function SpatialNavigation({ index, canContinue, sectionsRef, onBack, onSections, onNext }: { index: number; canContinue: boolean; sectionsRef: Ref<HTMLButtonElement>; onBack: () => void; onSections: () => void; onNext: () => void }) {

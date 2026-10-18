@@ -1,3 +1,4 @@
+import { SpatialCriterionGuidance } from '@/components/assessment/spatial-guidance'
 import { spatialMissing, spatialNavigationBlock } from '@/data/spatial-flow'
 import { createPortal } from 'react-dom'
 import { useRef, useState } from 'react'
@@ -59,6 +60,7 @@ export function RosaPreview({ pattern }: { pattern: string }) {
         {pattern === 'people' && <SpatialPeopleCard status={assignmentStatus} onMember={() => setNotice('Dre Jackson · Crew Floor Member · preview context only.')}/>}
         {pattern === 'header' && <><SpatialSystemChrome mode="preview"/><SpatialAssessmentHeader draft={draft} photos={photos} saveError={scenario === 'Save error'} onBack={() => setNotice('Overview Back selected. Footer Back instead moves one criterion.')}/></>}
         {(pattern === 'card' || editing) && live}
+        {pattern === 'guidance' && <SpatialCriterionGuidance key={draft.index} index={draft.index}/>}
         {pattern === 'choices' && <SpatialChoices value={draft.answers[draft.index] ?? ''} disabled={scenario === 'Disabled'} onChange={onAnswer}/>}
         {pattern === 'evidence' && <><SpatialEvidenceComposer note={draft.notes[draft.index] ?? ''} count={attached ? 1:0} requirement={scenario === 'Required evidence' ? 'comment-and-photo' : 'none'} onNote={onNote} onCamera={camera}/>{attachment}</>}
         {pattern === 'footer' && <><SpatialStatus>{canContinue ? 'Response and configured evidence complete.' : 'Next is disabled until the response and required evidence are recorded.'}</SpatialStatus><SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer}/>{scenario === 'Required evidence' && <SpatialEvidenceComposer note={draft.notes[draft.index] ?? ''} count={photos[draft.index] ?? 0} requirement="comment-and-photo" onNote={onNote} onCamera={camera}/>}<footer className="phonebottom">{footer}</footer></>}

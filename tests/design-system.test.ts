@@ -42,7 +42,7 @@ test('Rosa fixtures use real validation and stay independently editable', () => 
   assert.ok(!Object.values(complete.answers).includes('coaching'))
 })
 test('Rosa pattern references resolve to the same exports used by the product', () => {
-  const sources=['spatial-primitives','spatial-journey'].map(file=>readFileSync(new URL(`../src/components/assessment/${file}.tsx`,import.meta.url),'utf8')).join('\n')
+  const sources=['spatial-primitives','spatial-journey','spatial-guidance'].map(file=>readFileSync(new URL(`../src/components/assessment/${file}.tsx`,import.meta.url),'utf8')).join('\n')
   for(const pattern of rosaPatterns) {
     for(const name of pattern.component.split(' + '))assert.ok(sources.includes(`export function ${name}(`),name)
     assert.ok(pattern.purpose && pattern.anatomy && pattern.states && pattern.rationale && pattern.screens)
