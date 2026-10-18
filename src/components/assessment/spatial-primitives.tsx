@@ -1,3 +1,4 @@
+import dreAvatar from '@/assets/dre-jackson.png'
 import { SpatialCriterionGuidance } from './spatial-guidance'
 import { useSpatialSwipe } from '@/hooks/use-spatial-swipe'
 import type { SwipeDirection } from '@/lib/spatial-swipe'
@@ -43,8 +44,9 @@ export function SpatialFlowHeader({ title, onBack, backLabel, end, subtitle, chi
     {children}
   </header>
 }
-export function SpatialAssessmentHeader({ draft, photos, saveError, onBack }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; onBack: () => void }) {
-  return <><SpatialProgress draft={draft} photos={photos}/><SpatialFlowHeader title="Fryer Station" subtitle="Food Process & Safety" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<span className="spatial-person"><span aria-hidden="true">DR</span>Dre</span>}>
+export function SpatialAssessmentHeader({ draft, photos, saveError, onBack, onMember }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; onBack: () => void; onMember: () => void }) {
+  const [photoFailed, setPhotoFailed] = useState(false)
+  return <><SpatialProgress draft={draft} photos={photos}/><SpatialFlowHeader title="Fryer Station" subtitle="Food Process & Safety" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<SpatialActionButton variant="outline" size="icon" className="spatial-person" onClick={onMember} aria-label="View team member Dre Jackson" aria-haspopup="dialog">{photoFailed ? <span aria-hidden="true">DJ</span> : <img src={dreAvatar} alt="" width={32} height={32} onError={() => setPhotoFailed(true)}/>}</SpatialActionButton>}>
     {saveError ? <SpatialStatus tone="error">Unable to save on this device. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · draft saved on this device only.</SpatialStatus>}
   </SpatialFlowHeader></>
 }

@@ -153,8 +153,6 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-top {display:flex;align-items:center;gap:9px;min-height:44px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-back {width:44px;height:44px;flex:none;border-radius:15px;background:var(--spatial-surface);border:1px solid var(--spatial-input-line);color:var(--spatial-section-ink);box-shadow:0 1px 3px #4c41610c}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-name {flex:1;min-width:0;font-size:clamp(16px,4.5vw,20px);font-weight:780;letter-spacing:-.6px;line-height:1.15;margin:0}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {display:flex;align-items:center;gap:7px;color:var(--spatial-ink);font-size:14px;font-weight:750;flex:none}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {width:35px;height:35px;display:grid;place-items:center;border-radius:50%;background:var(--spatial-section-bg);color:var(--spatial-section-ink);font-size:12px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header .spatial-status {margin:8px 0 0;font-size:12px;padding:8px 10px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {display:flex;flex-direction:column;overflow:visible;padding:12px var(--spatial-space-gutter)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {flex:1;min-height:0;display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:var(--spatial-space-card-block) var(--spatial-space-card-inline) var(--spatial-space-6);margin:0;border-radius:var(--spatial-radius-card);border-color:#fff;animation:none}
@@ -427,8 +425,7 @@ html[data-assessment-version="5"] .device-overlay-root :is([data-slot=dialog-con
 
 /* Branding decor is separate from neutral workflow stages and fixed semantic states. */
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-goal-icon,
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-avatar,
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {background:var(--spatial-brand-accent-subtle);color:var(--spatial-brand-accent-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-avatar {background:var(--spatial-brand-accent-subtle);color:var(--spatial-brand-accent-ink)}
 html[data-assessment-version="5"] [data-slot=progress] {background:var(--spatial-progress-track)}
 html[data-assessment-version="5"] [data-slot=progress-indicator] {background:var(--spatial-success-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-top-progress {position:relative;padding-bottom:16px}
@@ -466,3 +463,8 @@ html[data-assessment-version="5"] .spatial-guidance-body li {display:flex;align-
 html[data-assessment-version="5"] .spatial-guidance-body li>span {width:6px;height:6px;flex:none;border-radius:50%;background:var(--spatial-control-line)}
 html[data-assessment-version="5"] .spatial-guidance-body p.spatial-guidance-note {border-top:1px solid var(--spatial-line);padding-top:14px;font-size:12px}
 html[data-assessment-version="5"] .spatial-guidance-body>button {width:100%;background:var(--spatial-surface)}
+
+/* A white circular profile action matches the navigation buttons across brands. */
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {width:44px;height:44px;min-width:44px;flex:none;padding:5px;border-radius:50%;border:1px solid var(--spatial-input-line);background:var(--spatial-surface);color:var(--spatial-section-ink);box-shadow:0 1px 3px #4c41610c;overflow:hidden}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person img {display:block;width:32px;height:32px;max-width:none;border-radius:50%;object-fit:cover}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {display:grid;place-items:center;width:32px;height:32px;font-size:12px;font-weight:750}
