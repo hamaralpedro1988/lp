@@ -146,7 +146,8 @@ html[data-assessment-version="5"] .spatial-status[data-tone=success] {background
 html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:var(--spatial-fail-bg);color:var(--spatial-fail-ink);border-color:var(--spatial-fail-line)}
 /* V5 layout selectors intentionally carry greater specificity than legacy Flow
    CSS, independent of Vite async chunk load order. */
-/* Header and footer are fixed flex siblings on one continuous canvas. */
+/* Header and footer are fixed flex siblings on one continuous canvas.
+   The live card owns scrolling; its shadow must extend behind the transparent footer. */
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header {flex:none;padding:14px var(--spatial-space-gutter) 0;background:transparent;border:0;box-shadow:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-top {display:flex;align-items:center;gap:9px;min-height:44px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-back {width:44px;height:44px;flex:none;border-radius:15px;background:var(--spatial-surface);border:1px solid var(--spatial-input-line);color:var(--spatial-section-ink);box-shadow:0 1px 3px #4c41610c}
@@ -154,7 +155,7 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {display:flex;align-items:center;gap:7px;color:var(--spatial-ink);font-size:14px;font-weight:750;flex:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {width:35px;height:35px;display:grid;place-items:center;border-radius:50%;background:var(--spatial-section-bg);color:var(--spatial-section-ink);font-size:12px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header .spatial-status {margin:8px 0 0;font-size:12px;padding:8px 10px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {display:flex;flex-direction:column;overflow:hidden;padding:12px var(--spatial-space-gutter)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {display:flex;flex-direction:column;overflow:visible;padding:12px var(--spatial-space-gutter)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {flex:1;min-height:0;display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:var(--spatial-space-card-block) var(--spatial-space-card-inline) var(--spatial-space-6);margin:0;border-radius:var(--spatial-radius-card);border-color:#fff;animation:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card::-webkit-scrollbar {display:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body {animation:spatial-next var(--spatial-motion-question) var(--spatial-ease) both}
