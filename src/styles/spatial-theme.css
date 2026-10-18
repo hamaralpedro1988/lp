@@ -502,12 +502,17 @@ html[data-assessment-version="5"] .spatial-guidance-body>button {width:100%;back
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .review-item small.spatial-review-evidence-warning {color:var(--spatial-warning-ink);margin-top:8px}
 
 /* Review exploration: one filter, unchanged observations, read-only detail sheet. */
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters {display:flex;gap:6px;overflow-x:auto;max-width:100%;padding:4px 3px;margin:12px -3px 0;scrollbar-width:none;overscroll-behavior-x:contain}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-tabs {gap:0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-tabs [data-slot=tabs-content] {margin:0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters {overflow-x:auto;max-width:100%;padding:3px;margin:10px -3px -3px;scrollbar-width:none;overscroll-behavior-x:contain}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters::-webkit-scrollbar {display:none}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters>button {flex:none;min-height:44px;padding:8px 10px;gap:6px;border-radius:999px;font-size:12px;background:var(--spatial-surface);border-color:var(--spatial-line);color:var(--spatial-section-ink)}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters>button[aria-pressed=true] {background:var(--spatial-selected);border-color:var(--spatial-selected-line);color:var(--spatial-ink)}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters>button>span {font-size:11px;font-variant-numeric:tabular-nums}
-@media(hover:hover) {:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters>button:hover {background:var(--spatial-choice);border-color:var(--spatial-selected-line)}}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters [data-slot=tabs-list] {display:flex;width:max-content;min-width:100%;height:36px;gap:0;padding:3px;border-radius:12px;background:var(--spatial-choice);color:var(--spatial-muted)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters [data-slot=tabs-trigger] {flex:1 0 auto;height:30px;min-height:30px;padding:4px 8px;gap:5px;border-radius:9px;font-size:12px;line-height:1.25;border-color:transparent;background:transparent;color:var(--spatial-section-ink);box-shadow:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters [data-slot=tabs-trigger][data-state=active] {background:var(--spatial-surface);color:var(--spatial-ink);box-shadow:var(--spatial-shadow-small)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-tab-count {display:inline-grid;place-items:center;min-width:15px;height:15px;padding:0 3px;border-radius:999px;background:var(--spatial-section-bg);color:var(--spatial-section-ink);font-size:10px;line-height:1;font-variant-numeric:tabular-nums}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-item-meta .spatial-review-evidence-tag {display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:4px 5px;border:0;border-radius:8px;background:var(--spatial-section-bg);color:var(--spatial-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-evidence-tag>svg {width:14px;height:14px}
+@media(hover:hover) {:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters [data-slot=tabs-trigger]:hover {color:var(--spatial-ink)}}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-row-outcome[data-result=Incomplete] {background:var(--spatial-warning-bg);color:var(--spatial-warning-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filter-empty {display:grid;justify-items:center;gap:12px;padding:24px;color:var(--spatial-muted);text-align:center;font-size:14px;line-height:1.5}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filter-empty>svg {width:24px;height:24px}

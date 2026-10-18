@@ -1,6 +1,6 @@
 # Rosa Review — Tasks exploration
 
-The existing React/shadcn Review now supports single-selection **All / Passed / Failed / Critical** filters and a read-only observation sheet. The assessment data, live response mechanism, summary, feedback, sign-off and V2–V4 stay intact.
+The existing React/shadcn Review now supports compact shadcn Tabs for **All / Failed / Passed / Critical** filters and a read-only observation sheet. The assessment data, live response mechanism, summary, feedback, sign-off and V2–V4 stay intact.
 
 ## Shared components
 
@@ -10,7 +10,7 @@ The existing React/shadcn Review now supports single-selection **All / Passed / 
 - Clicking a row opens a shadcn Sheet. It shows the original instruction, task position, section/critical badges, read-only result and the original comment with whitespace preserved.
 - Photos use the existing EvidencePanel gallery portal, object URLs, EvidenceAttachment and preview sheet. Review hides the removal action. No photo is copied into storage or simulated in the participant app; existing session-only media behavior is preserved.
 - Escape, native/browser Back, Close and a downward drag on the handle dismiss the sheet. Focus returns to the row without scrolling it. The Review filter and scroll context remain mounted. Only **Edit observation** invokes the existing assessment navigation.
-- Chips use native button keyboard behavior and `aria-pressed`; only one is selected. Horizontal overflow hides the scrollbar. Empty filters have neutral feedback.
+- The segmented tab bar is 36px high, with native Radix arrow-key navigation, a single `aria-selected` tab and an associated tabpanel. Horizontal overflow hides the scrollbar on narrow screens. Photo/comment indicators are icon-only shadcn badges; their labels remain available to assistive technology. Empty filters have neutral feedback.
 - Sheet scrolling, device portal containment, safe areas, existing Spatial motion/reduced motion, semantic colors and branding tokens are reused.
 
 ## Mobile screenshots
