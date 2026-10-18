@@ -1,0 +1,17 @@
+{
+  "spatial": {
+    "canvas": "linear-gradient(155deg,#f8f7fd 0%,#efedf8 60%,#f0eef9 100%)",
+    "accent": "#7363bd",
+    "progress": "#427764"
+  },
+  "mcdonalds": {
+    "canvas": "linear-gradient(155deg,#fbf7fb 0%,#fef5f5 60%,#fcf3f5 100%)",
+    "accent": "#db0007",
+    "progress": "#427764"
+  },
+  "burger-king": {
+    "canvas": "linear-gradient(155deg,#fbf9fb 0%,#fdf9f6 60%,#fbf7f6 100%)",
+    "accent": "#d66a12",
+    "progress": "#427764"
+  }
+}

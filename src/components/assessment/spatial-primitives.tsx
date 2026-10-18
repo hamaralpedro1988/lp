@@ -33,7 +33,7 @@ export function SpatialProgress({ draft, photos }: { draft: FlowDraft; photos: R
   const completed = spatialCompleteIndices(draft, photos)
   return <div className="spatial-top-progress"><div className="spatial-progress" role="progressbar" aria-label="Criteria complete" aria-valuemin={0} aria-valuemax={flowCriteria.length} aria-valuenow={completed.length} aria-valuetext={`${completed.length} of ${flowCriteria.length} criteria complete, including required evidence`}>
     <span aria-hidden="true" style={{ width: `${completed.length / flowCriteria.length * 100}%` }}/>
-  </div></div>
+  </div><span className="spatial-progress-percent" aria-hidden="true">{Math.round(completed.length / flowCriteria.length * 100)}%</span></div>
 }
 /** Shared navigation chrome for every participant screen; progress is a contextual content. */
 export function SpatialFlowHeader({ title, onBack, backLabel, end, subtitle, children, label = 'Assessment navigation' }: { title: string; onBack?: () => void; backLabel?: string; end?: ReactNode; subtitle?: string; children?: ReactNode; label?: string }) {

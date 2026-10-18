@@ -5,7 +5,7 @@
 .ds-explorer .ds-layout>header>div {max-width:1540px}
 .ds-explorer .ds-layout>div.mx-auto {max-width:1540px;grid-template-columns:230px minmax(0,1fr)}
 .ds-explorer .ds-layout aside {border-color:var(--spatial-line)}
-.ds-explorer .ds-layout aside nav a[aria-current=page] {background:var(--spatial-selected);color:var(--spatial-section-ink);font-weight:700}
+.ds-explorer .ds-layout aside nav a[aria-current=page] {background:var(--spatial-brand-accent-subtle);color:var(--spatial-brand-accent-ink);font-weight:700}
 .ds-app-links {display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 24px;padding:10px max(20px,calc((100vw - 1440px)/2));border-bottom:1px solid var(--spatial-line);font-size:13px}
 .ds-app-links a {display:inline-flex;align-items:center;gap:6px;min-height:36px;color:var(--spatial-section-ink);font-weight:650}
 .ds-side-note {margin-top:36px;padding:20px 12px;border-top:1px solid var(--spatial-line);color:var(--spatial-muted)}
