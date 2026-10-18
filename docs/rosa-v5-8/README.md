@@ -29,3 +29,11 @@ Mock time/connectivity/battery indicators are decorative (`aria-hidden`) and do 
 - `check-participant-navigation.py`: five headers, back destinations, no internal participant controls and measured progress gutter alignment.
 
 Physical-device access is unavailable in this environment. Mobile checks use browser touch emulation, not a claimed physical Samsung/iPhone test. The safe-area screenshot uses explicit simulated insets, not proof of native OS execution.
+
+## Deployment verification
+
+[Actual React V5.8 preview](https://lp-git-feat-rosa-v5-8-spatial-swipe-hamaralpedro1988.vercel.app/?version=5) · [Draft PR #9](https://github.com/hamaralpedro1988/lp/pull/9)
+
+The existing Vercel GitHub integration reports **Ready/success** for implementation commit `6f327f570f33e9c70a792c6b5d6c768021c579a7`; its bot supplies the public preview URL above. This routes to React `?version=5`, not a standalone HTML reference path. All interactive browser checks ran against the local production build of that code.
+
+Direct public HTTP/browser verification from this workspace is blocked by its outbound proxy (`CONNECT ... 403 Forbidden`), including after network permission was granted. Deployment status and URL are verified through Vercel's GitHub status/comment; public-page rendering is not independently verified here. No merge or production deployment was performed.
