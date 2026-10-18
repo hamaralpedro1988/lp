@@ -33,7 +33,9 @@ with sync_playwright() as pw:
  expect(page.get_by_role('radio')).to_have_count(2)
  expect(page.get_by_role('button',name='Next',exact=True)).to_be_disabled()
  expect(page.get_by_role('radio',name='Pass',exact=True)).not_to_be_checked()
- assert page.locator('.spatial-header').inner_text()=='Fryer Station\nDR\nDre'
+ expect(page.locator('.spatial-header .assessment-name')).to_have_text('Fryer Station')
+ expect(page.locator('.spatial-header-subtitle')).to_have_text('Food Process & Safety')
+ expect(page.locator('.spatial-person')).to_contain_text('Dre')
  for sel in ['.spatial-header','.phonebottom']:
   assert page.locator(sel).evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgba(0, 0, 0, 0)',sel
  page.get_by_role('radio',name='Pass',exact=True).focus();page.keyboard.press('ArrowDown')

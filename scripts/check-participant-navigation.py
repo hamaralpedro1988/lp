@@ -27,7 +27,7 @@ with sync_playwright() as pw:
     assert 'Category 2' not in page.locator('.phone').inner_text()
    if screen == 'assessment':
     aligned=page.evaluate('''() => {
-      const progress=document.querySelector('.spatial-segments').getBoundingClientRect();
+      const progress=document.querySelector('.spatial-progress').getBoundingClientRect();
       const screen=document.querySelector('.screen');const box=screen.getBoundingClientRect();const css=getComputedStyle(screen);
       return Math.abs(progress.left-box.left-parseFloat(css.paddingLeft))<1 && Math.abs(box.right-progress.right-parseFloat(css.paddingRight))<1;
     }''')
