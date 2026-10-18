@@ -36,7 +36,7 @@ with sync_playwright() as pw:
  stroke(-155,dragshot='03-valid-drag');pos(2);expect(page.locator('#live-question-title')).to_be_focused()
  assert page.evaluate('JSON.parse(localStorage.getItem("lp-rosa-flow-v5-v01")).index')==1
  box=page.locator('.spatial-question-title').bounding_box();stroke(140,xy=(box['x']+40,box['y']+25));pos(1)
- stroke(140,xy=(box['x']+40,box['y']+25));pos(1);expect(page.locator('.spatial-swipe-feedback')).to_contain_text('first criterion')
+ stroke(140,xy=(box['x']+40,box['y']+25));pos(1);expect(page.locator('.spatial-swipe-feedback')).to_contain_text('first task')
  # A vertical CDP gesture scrolls the WHOLE card and never changes criterion.
  page.set_viewport_size({'width':390,'height':520});settle();card=page.locator('.spatial-live-card');box=card.bounding_box()
  stroke(-5,-130,xy=(box['x']+box['width']/2,box['y']+box['height']-35));pos(1)

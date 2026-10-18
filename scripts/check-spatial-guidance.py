@@ -37,4 +37,4 @@ with sync_playwright() as pw:
  # Explorer uses the actual export, not a duplicate implementation.
  page.goto(args.url+'/?view=design-system&section=rosa&pattern=guidance');page.get_by_role('button',name='Open step guidance').click();expect(page.get_by_role('dialog',name='Step guidance')).to_be_visible();capture('explorer-guidance')
  assert not errors,errors
- context.close();b.close();print('PASS all eleven criteria, strict evidence preserved, reduced motion and shared Explorer guidance')
+ context.close();b.close();print('PASS all eleven tasks, strict evidence preserved, reduced motion and shared Explorer guidance')

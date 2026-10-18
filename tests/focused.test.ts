@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import {focusedCriteria as criteria,validAnswer,isComplete,answerSummary} from '../src/data/focused-criteria.ts'
 import {migrateCompactDraft,normalizeFocusedDraft} from '../src/data/focused-draft.ts'
 const item=(id:string)=>criteria.find(c=>c.id===id)!
-test('V2.3 supplied criteria cover nine entries and five distinct response types',()=>{
+test('V2.3 supplied tasks cover nine entries and five distinct response types',()=>{
   assert.equal(criteria.length,9)
   assert.equal(new Set(criteria.map(c=>c.id)).size,9)
   assert.equal(new Set(criteria.map(c=>c.type)).size,5)

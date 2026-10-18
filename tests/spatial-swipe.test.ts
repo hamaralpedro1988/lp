@@ -17,7 +17,7 @@ test('horizontal intent, thresholds and flick velocity reject vertical and accid
 test('buttons and swipe share unanswered, first-criterion and strict two-part evidence guards', () => {
   const draft = emptySpatialDraft()
   assert.match(spatialNavigationBlock(draft, {}, 'next')!, /Choose Pass or Fail/)
-  assert.match(spatialNavigationBlock(draft, {}, 'back')!, /first criterion/)
+  assert.match(spatialNavigationBlock(draft, {}, 'back')!, /first task/)
   draft.answers[0] = 'fail'
   assert.equal(spatialNavigationBlock(draft, {}, 'next'), null)
   draft.index = 8; draft.answers[8] = 'met'

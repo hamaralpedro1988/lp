@@ -20,7 +20,7 @@ test('review filters derive disjoint outcomes and independent criticality from r
   assert.equal(spatialReviewIndices(draft, { 8: 1 }, 'passed').length, 10)
   draft.answers[1] = 'notObserved'
   assert.equal(spatialReviewResult(draft, {}, 1), 'Incomplete')
-  assert.ok(spatialReviewIndices(draft, {}, 'critical').includes(1), 'critical includes incomplete criteria')
+  assert.ok(spatialReviewIndices(draft, {}, 'critical').includes(1), 'critical includes incomplete tasks')
   assert.ok(!spatialReviewIndices(draft, {}, 'passed').includes(1))
   assert.ok(!spatialReviewIndices(draft, {}, 'failed').includes(1))
 })

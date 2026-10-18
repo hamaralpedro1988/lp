@@ -53,7 +53,7 @@ with sync_playwright() as pw:
     assert frames[0][-1]['transform'].endswith('scale(0.98)')
     assert 'scale(' not in frames[1][0]['transform']
     assert frames[0][-1]['opacity'] == frames[1][0]['opacity'] == 1
-    page.get_by_role('button', name='Previous criterion', exact=True).click()
+    page.get_by_role('button', name='Previous task', exact=True).click()
     expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('1 of 11')
     page.wait_for_function("!document.querySelector('.spatial-live-card').dataset.swipe")
     frames = page.evaluate('window.cardMotion')
