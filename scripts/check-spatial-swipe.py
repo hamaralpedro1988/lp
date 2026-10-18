@@ -15,7 +15,7 @@ with sync_playwright() as pw:
  def seed(index=0,answers=None,notes=None):
   page.goto(args.url+'/?version=5&systemChrome=preview');page.locator('.screen').wait_for()
   page.evaluate('d=>localStorage.setItem("lp-rosa-flow-v5-v01",JSON.stringify(d))',{'screen':'assessment','index':index,'answers':{str(k):v for k,v in (answers or {}).items()},'notes':{str(k):v for k,v in (notes or {}).items()},'feedback':'','offline':False,'paused':False,'assessorConfirmed':False});page.reload();page.locator('.spatial-live-card').wait_for();settle()
- def pos(n): expect(page.locator('.spatial-position')).to_have_text(f'{n:02d} / 11')
+ def pos(n): expect(page.locator('.spatial-position')).to_have_text(f'{n} of 11')
  def point():
   box=page.locator('.spatial-question-title').bounding_box();return (box['x']+box['width']*.75,box['y']+min(35,box['height']/2))
  def stroke(dx,dy=0,xy=None,dragshot=None):
@@ -53,7 +53,7 @@ with sync_playwright() as pw:
  seed(8,{8:'fail'});stroke(-155);pos(9);expect(page.locator('.spatial-swipe-feedback')).to_contain_text('Comment and photo required')
  page.get_by_role('textbox',name='Comment',exact=True).fill('Quality checked against station standard.');stroke(-155);pos(9);expect(page.locator('.spatial-swipe-feedback')).to_contain_text('Photo required');shot('05-evidence-snapback')
  # Real local photo plus comment permits swipe; deleting either would block again.
- fixture=out/'photo.png';page.screenshot(path=str(fixture));page.get_by_role('button',name='Add photo',exact=True).click();page.locator('input[aria-label="Take photo"]').nth(8).set_input_files(str(fixture));page.keyboard.press('Escape');card.evaluate('e=>e.scrollTop=0');stroke(-155);pos(10)
+ fixture=out/'photo.png';page.screenshot(path=str(fixture));page.get_by_role('button',name='Add photo',exact=True).click();page.locator('input[aria-label="Take photo"]').nth(8).set_input_files(str(fixture));page.keyboard.press('Escape');expect(page.get_by_role('dialog')).to_have_count(0);settle();card.evaluate('e=>e.scrollTop=0');stroke(-155);pos(10)
  # Reduced motion still navigates with no drag transform or lingering animations.
  page.emulate_media(reduced_motion='reduce');page.get_by_role('radio',name='Fail',exact=True).check();stroke(-155);pos(11)
  assert page.locator('.spatial-live-card').evaluate('e=>getComputedStyle(e).transform')=='none'

@@ -40,7 +40,7 @@ with sync_playwright() as pw:
   assert page.locator(sel).evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgba(0, 0, 0, 0)',sel
  page.get_by_role('radio',name='Pass',exact=True).focus();page.keyboard.press('ArrowDown')
  expect(page.get_by_role('radio',name='Fail',exact=True)).to_be_checked();complete(1)
- expect(page.locator('.spatial-position')).to_have_text('01 / 11')
+ expect(page.locator('.spatial-position')).to_have_text('1 of 11')
  page.keyboard.press('ArrowUp');expect(page.get_by_role('radio',name='Pass',exact=True)).to_be_checked()
  nav('Next');expect(page.locator('#live-question-title')).to_be_focused()
  expect(page.get_by_role('button',name='Next',exact=True)).to_be_disabled()
@@ -80,7 +80,7 @@ with sync_playwright() as pw:
  page.get_by_role('button',name='Edit: Prepares a safe, clean work area',exact=True).click()
  for i in range(11):
   page.get_by_role('radio',name='Fail' if i in [4,8] else 'Pass',exact=True).check()
-  expect(page.locator('.spatial-position')).to_have_text(f'{i+1:02d} / 11')
+  expect(page.locator('.spatial-position')).to_have_text(f'{i+1} of 11')
   nav('Review' if i==10 else 'Next')
  expect(page.get_by_role('heading',name='Review observations',exact=True)).to_be_visible()
  expect(page.locator('.review-stat')).to_have_count(3)

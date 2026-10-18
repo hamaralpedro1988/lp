@@ -4,6 +4,16 @@ Implements [issue #8](https://github.com/hamaralpedro1988/lp/issues/8) on top of
 
 Use `?version=5` for the actual React app; `?view=design-system&tab=rosa&pattern=card` explores its shared card/navigation. Production and main remain untouched.
 
+## Latest visual refinement
+
+Live counters now read “2 of 11”, including section totals. Pass selection uses fixed semantic green tokens for its surface, outline, radio and shadow, independent of branding; Fail keeps semantic red. Both response rows rely on the selected radio and no longer render a redundant trailing tick.
+
+The comment textarea now owns the whole composer surface, with reserved text space to the left of the top-right camera button. There is no separate non-clickable bottom toolbar or “Optional evidence” label. Required-evidence and attachment/session messages remain visible with pointer events disabled so clicking them focuses the underlying field. Evidence rules, photo controls and swipe exclusion remain unchanged.
+
+[Pass + full comment field](refinement/pass-composer-390.png) · [Fail](refinement/fail-390.png) · [Required evidence](refinement/required-390.png) · [320px](refinement/pass-composer-320.png) · [419px](refinement/pass-composer-419.png)
+
+`check-spatial-refinement.py` verifies settled green colors remain identical under red brand aliases, standard radio selection without ticks, “of” counters, lower-field/helper click-to-focus, the top camera action, and strict evidence messages at 320/390/419px. Full flow, touch swipe and Design System/Theme Studio regressions pass too.
+
 ## Screens for review
 
 | Assignments | Overview | Live Assessment | Review | Sign-off |

@@ -19,3 +19,12 @@
 6. **Movimento com propósito.** Tokens partilhados: saída 180ms, entrada 320ms e retorno 210ms. Movimento reduzido elimina transformações e animações gestuais. Só o conteúdo se move; cabeçalho/rodapé ficam estáveis. O novo critério recebe foco e anúncio acessível. Erros de salvamento continuam visíveis.
 7. **Chrome de sistema explícito.** A barra ilustrativa aparece por padrão apenas no desktop e fica oculta em mobile com ponteiro coarse; `systemChrome=preview`/`native=1` permitem revisão explícita. Safe areas e viewport visual respeitam barras e teclado reais. Não se afirma teste em aparelho físico.
 8. **Explorer partilhado.** O catálogo usa os mesmos componentes, hook e validação do produto. Fixtures e mídia ilustrativa ficam em memória, sem alterar drafts ou simular upload/certificação.
+
+
+## Follow-up refinement — English
+
+Use explicit “N of 11” counters to avoid date-like notation. Keep Pass green and Fail red independently of client brand colors, and use the selected native radio without duplicate tick icons. Make the comment surface fully editable, reserve text space to the left of the top-right camera, remove optional helper chrome, and retain actionable mandatory evidence messages without intercepting clicks. The catalog consumes these same components.
+
+## Refinamento posterior — Português
+
+Usar contadores “N of 11” para evitar aparência de data. Manter Pass verde e Fail vermelho independentemente da marca, com o radio selecionado sem ticks redundantes. Tornar toda a área do comentário editável, reservar espaço à esquerda da câmera no topo direito, remover o label opcional e manter mensagens de evidência obrigatória sem bloquear cliques. O catálogo usa os mesmos componentes.
