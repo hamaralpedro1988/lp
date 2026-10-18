@@ -1,0 +1,30 @@
+# UX decisions — English
+
+1. **One real flow.** Extend PR #7's React components and shared Spatial tokens. Keep Assignments, Overview, Live, Review and Sign-off, V2–V4 storage and strict evidence rules. The HTML is the visual/gesture reference, not an alternate implementation.
+2. **Seamless screen.** Remove the handset/bezel, camera, side keys, gesture bar and outer rounded mask. Retain the raised rounded card, choices, composer and sheets. Desktop uses the reference's centered 430px responsive app column without editorial rails; mobile is edge to edge.
+3. **Quiet, truthful progress.** The inset 4px continuous line precedes the compact title/subtitle/person header. Its numerator counts valid observations, including Fail, only after configured evidence is complete. It never reflects current index or a pass score. The progressbar exposes count and required-evidence context to assistive technology.
+4. **One validation path.** Footer and swipes both invoke the same guarded navigation callback. A blocked left swipe resists and snaps back with actionable, politely announced feedback. Partial comment/photo evidence cannot be skipped. Header Back still leaves for Overview; footer/right swipe moves one criterion back.
+5. **Protect observation and scrolling.** Touch/pen gestures are limited to noninteractive card content, with horizontal intent/distance/velocity thresholds. Inputs, labels, radios, camera/composer, attachments and modal interactions are excluded. Vertical scrolling, OS edge starts, mouse text selection and keyboard stay native. Multi-touch, cancellation, blur, disabled/changed criterion and unmount clean up capture and animation.
+6. **Purposeful motion.** Use shared 180ms exit, 320ms entry and 210ms snap tokens, with finger-follow feedback. Reduced motion suppresses drag transforms and navigation animation. Only question/card content moves; chrome remains fixed. Newly selected criteria receive heading focus plus a live context announcement. Existing local save and errors remain visible.
+7. **Mock OS chrome is explicit.** Decorative preview status defaults to desktop only, automatically hides on coarse-pointer mobile, and supports `systemChrome=preview`/`native=1`. Real safe areas and the visual viewport handle device bars/keyboard. No physical-mobile test is claimed.
+8. **Shared Explorer.** The catalog uses the same progress, header, card, gesture hook, guard and navigation components. Its fixtures stay in memory; sample media and local-review examples do not touch real drafts or claim upload/certification.
+
+# Decisões de UX — Português
+
+1. **Um fluxo real.** Evoluir os componentes React do PR #7 e os tokens Spatial partilhados. Preservar Assignments, Overview, Live, Review e Sign-off, o armazenamento V2–V4 e as regras de evidência. O HTML serve de referência visual e gestual.
+2. **Tela contínua.** Remover moldura, câmera, teclas, barra gestual e máscara arredondada exterior. Manter os cantos dos cartões, respostas, campos e painéis. Desktop usa a coluna responsiva de 430px da referência, sem painéis de apresentação; mobile ocupa toda a tela.
+3. **Progresso discreto e verdadeiro.** A linha contínua de 4px, com margens, fica antes do cabeçalho compacto. Conta observações válidas, incluindo Fail, apenas com a evidência exigida. Não representa índice atual nem taxa de aprovação. O progressbar comunica contagem e contexto acessível.
+4. **Uma validação.** Botões e gestos usam a mesma navegação protegida. Um gesto à esquerda bloqueado oferece resistência, retorna à posição inicial e explica o que falta. Comentário ou foto isolados não satisfazem a exigência de ambos. Voltar no cabeçalho abre Overview; no rodapé/gesto à direita recua um critério.
+5. **Proteger observação e rolagem.** Gestos touch/pen ficam no conteúdo não interativo do cartão, com limiares de intenção, distância e velocidade. Campos, radios, câmera, evidências e modais ficam excluídos. Preservar rolagem vertical, bordas do sistema, seleção por mouse e teclado. Cancelar captura/animação em multitouch, interrupção, mudança de critério ou saída.
+6. **Movimento com propósito.** Tokens partilhados: saída 180ms, entrada 320ms e retorno 210ms. Movimento reduzido elimina transformações e animações gestuais. Só o conteúdo se move; cabeçalho/rodapé ficam estáveis. O novo critério recebe foco e anúncio acessível. Erros de salvamento continuam visíveis.
+7. **Chrome de sistema explícito.** A barra ilustrativa aparece por padrão apenas no desktop e fica oculta em mobile com ponteiro coarse; `systemChrome=preview`/`native=1` permitem revisão explícita. Safe areas e viewport visual respeitam barras e teclado reais. Não se afirma teste em aparelho físico.
+8. **Explorer partilhado.** O catálogo usa os mesmos componentes, hook e validação do produto. Fixtures e mídia ilustrativa ficam em memória, sem alterar drafts ou simular upload/certificação.
+
+
+## Follow-up refinement — English
+
+Use explicit “N of 11” counters to avoid date-like notation. Keep Pass green and Fail red independently of client brand colors, and use the selected native radio without duplicate tick icons. Make the comment surface fully editable, reserve text space to the left of the top-right camera, remove optional helper chrome, and retain actionable mandatory evidence messages without intercepting clicks. The catalog consumes these same components.
+
+## Refinamento posterior — Português
+
+Usar contadores “N of 11” para evitar aparência de data. Manter Pass verde e Fail vermelho independentemente da marca, com o radio selecionado sem ticks redundantes. Tornar toda a área do comentário editável, reservar espaço à esquerda da câmera no topo direito, remover o label opcional e manter mensagens de evidência obrigatória sem bloquear cliques. O catálogo usa os mesmos componentes.

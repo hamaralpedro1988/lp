@@ -19,7 +19,7 @@ test('V5 starts at assignments and isolates its normalized draft from V4 and ear
   assert.equal(Object.keys(saved.answers).length, 4, 'normalization must not mutate its source')
 })
 
-test('segmented progress counts completed observations, never pass rate or unverified media', () => {
+test('continuous progress counts completed observations, never pass rate or unverified media', () => {
   const draft = emptySpatialDraft()
   draft.answers = Object.fromEntries(flowCriteria.map((_, index) => [index, index % 2 ? 'fail' : 'met']))
   assert.equal(spatialCompleteIndices(draft).length, 10, 'required evidence is still missing')

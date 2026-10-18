@@ -34,6 +34,13 @@ export function spatialEvidenceOk(draft: FlowDraft, index: number, photos: Recor
 export function spatialMissing(draft: FlowDraft, photos: Record<number, number> = {}) {
   return flowCriteria.flatMap((_, index) => (draft.answers[index] !== 'met' && draft.answers[index] !== 'fail') || !spatialEvidenceOk(draft, index, photos) ? [index] : [])
 }
+/** One guard shared by button and gesture navigation. */
+export function spatialNavigationBlock(draft: FlowDraft, photos: Record<number, number>, direction: 'next' | 'back'): string | null {
+  if (direction === 'back') return draft.index === 0 ? 'You are at the first criterion.' : null
+  if (draft.answers[draft.index] !== 'met' && draft.answers[draft.index] !== 'fail') return 'Choose Pass or Fail before continuing.'
+  if (!spatialEvidenceOk(draft, draft.index, photos)) return spatialEvidenceMessage(spatialEvidenceRequirement(draft.index), draft.notes[draft.index] ?? '', photos[draft.index] ?? 0) + ' before continuing.'
+  return null
+}
 export function spatialCompleteIndices(draft: FlowDraft, photos: Record<number, number> = {}) {
   return flowCriteria.flatMap((_, index) => (draft.answers[index] === 'met' || draft.answers[index] === 'fail') && spatialEvidenceOk(draft, index, photos) ? [index] : [])
 }

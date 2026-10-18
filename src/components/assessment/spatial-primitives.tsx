@@ -1,4 +1,6 @@
-import { useId, useLayoutEffect, useRef, type ComponentProps, type ReactNode, type Ref } from 'react'
+import { useSpatialSwipe } from '@/hooks/use-spatial-swipe'
+import type { SwipeDirection } from '@/lib/spatial-swipe'
+import { useId, useLayoutEffect, useRef, useState, type ComponentProps, type ReactNode, type Ref } from 'react'
 import { ArrowRight, Camera, Check, ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -7,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
 import { flowCriteria, type FlowDraft, type FlowAnswer } from '@/data/flow-draft'
-import { spatialCompleteIndices, spatialOptions, spatialEvidenceRequirement, spatialEvidenceSatisfied, spatialEvidenceMessage, spatialEvidenceOk, type SpatialEvidenceRequirement } from '@/data/spatial-flow'
+import { spatialCompleteIndices, spatialOptions, spatialEvidenceRequirement, spatialEvidenceSatisfied, spatialEvidenceMessage, spatialEvidenceOk, spatialNavigationBlock, type SpatialEvidenceRequirement } from '@/data/spatial-flow'
 
 /** All primitives consume semantic tokens; brand aliases live in spatial-theme.css. */
 export function SpatialSurface({ className, elevation = 'raised', ...props }: ComponentProps<typeof Card> & { elevation?: 'raised' | 'quiet' }) {
@@ -19,31 +21,37 @@ export function SpatialActionButton({ className, ...props }: ComponentProps<type
 export function SpatialStatus({ children, tone = 'neutral', className, ...props }: ComponentProps<'p'> & { tone?: 'neutral' | 'warning' | 'success' | 'error' }) {
   return <p className={cn('spatial-status', className)} data-tone={tone} role={tone === 'error' ? 'alert' : 'status'} {...props}>{children}</p>
 }
+/** Decorative preview chrome is automatic only on desktop, never on a native phone. */
+export function SpatialSystemChrome({ mode = 'auto' }: { mode?: 'auto' | 'preview' | 'native' }) {
+  return <div className="spatial-system-chrome" data-mode={mode} aria-hidden="true"><span>9:41</span><div>
+    <svg viewBox="0 0 20 15" width="20" height="15" fill="currentColor"><path d="M1 12h3v3H1zM6 9h3v6H6zM11 5h3v10h-3zM16 1h3v14h-3z"/></svg>
+    <svg viewBox="0 0 18 15" width="18" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M2 5a11 11 0 0 1 14 0M5 8a7 7 0 0 1 8 0M8.2 11.5a2 2 0 0 1 1.6 0"/></svg>
+    <svg viewBox="0 0 29 15" width="29" height="15"><rect x="1" y="1" width="24" height="13" rx="3.5" fill="none" stroke="currentColor" strokeOpacity=".65" strokeWidth="1.5"/><rect x="3.5" y="3.5" width="19" height="8" rx="1.8" fill="currentColor"/><rect x="26.5" y="5" width="2" height="5" rx="1" fill="currentColor" opacity=".65"/></svg>
+  </div></div>
+}
 export function SpatialProgress({ draft, photos }: { draft: FlowDraft; photos: Record<number, number> }) {
   const completed = spatialCompleteIndices(draft, photos)
-  return <div className="spatial-segments" role="progressbar" aria-label="Criteria complete" aria-valuemin={0} aria-valuemax={flowCriteria.length} aria-valuenow={completed.length} aria-valuetext={`${completed.length} of ${flowCriteria.length} criteria complete, including required evidence`}>
-    {flowCriteria.map((criterion, index) => <span key={criterion.title} aria-hidden="true" data-state={completed.includes(index) ? 'complete' : 'pending'}/>)}
-  </div>
+  return <div className="spatial-top-progress"><div className="spatial-progress" role="progressbar" aria-label="Criteria complete" aria-valuemin={0} aria-valuemax={flowCriteria.length} aria-valuenow={completed.length} aria-valuetext={`${completed.length} of ${flowCriteria.length} criteria complete, including required evidence`}>
+    <span aria-hidden="true" style={{ width: `${completed.length / flowCriteria.length * 100}%` }}/>
+  </div></div>
 }
-/** Shared navigation chrome for every participant screen; progress is a contextual subrow. */
-export function SpatialFlowHeader({ title, onBack, backLabel, end, children, label = 'Assessment navigation' }: { title: string; onBack?: () => void; backLabel?: string; end?: ReactNode; children?: ReactNode; label?: string }) {
+/** Shared navigation chrome for every participant screen; progress is a contextual content. */
+export function SpatialFlowHeader({ title, onBack, backLabel, end, subtitle, children, label = 'Assessment navigation' }: { title: string; onBack?: () => void; backLabel?: string; end?: ReactNode; subtitle?: string; children?: ReactNode; label?: string }) {
   return <header className="spatial-header" aria-label={label}>
-    <div className="spatial-header-top">{onBack && <SpatialActionButton variant="outline" size="icon" className="spatial-header-back" onClick={onBack} aria-label={backLabel ?? 'Back'}><ChevronLeft aria-hidden="true"/></SpatialActionButton>}<h1 className="assessment-name">{title}</h1>{end}</div>
+    <div className="spatial-header-top">{onBack && <SpatialActionButton variant="outline" size="icon" className="spatial-header-back" onClick={onBack} aria-label={backLabel ?? 'Back'}><ChevronLeft aria-hidden="true"/></SpatialActionButton>}<div className="spatial-header-copy"><h1 className="assessment-name">{title}</h1>{subtitle && <p className="spatial-header-subtitle">{subtitle}</p>}</div>{end}</div>
     {children}
   </header>
 }
 export function SpatialAssessmentHeader({ draft, photos, saveError, onBack }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; onBack: () => void }) {
-  return <SpatialFlowHeader title="Fryer Station" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<span className="spatial-person"><span aria-hidden="true">DR</span>Dre</span>}>
-    <SpatialProgress draft={draft} photos={photos}/>
+  return <><SpatialProgress draft={draft} photos={photos}/><SpatialFlowHeader title="Fryer Station" subtitle="Food Process & Safety" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<span className="spatial-person"><span aria-hidden="true">DR</span>Dre</span>}>
     {saveError ? <SpatialStatus tone="error">Unable to save on this device. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · draft saved on this device only.</SpatialStatus>}
-  </SpatialFlowHeader>
+  </SpatialFlowHeader></>
 }
 export function SpatialChoice({ value, title, description, selected, disabled = false }: { value: 'met' | 'fail'; title: string; description: string; selected: boolean; disabled?: boolean }) {
   const id = useId()
   return <label className="spatial-choice" data-disabled={disabled || undefined} data-outcome={value} data-selected={selected} htmlFor={id}>
     <RadioGroupItem id={id} disabled={disabled} value={value} aria-label={title} className="spatial-radio"/>
     <span className="spatial-choice-copy"><strong>{title}</strong><small>{description}</small></span>
-    <Check className="spatial-choice-confirm" aria-hidden="true"/>
   </label>
 }
 /** Explicit roving selection keeps Radix radio behavior consistent on touch browsers. */
@@ -61,29 +69,34 @@ export function SpatialChoices({ value, onChange, label = 'Observation result', 
 export function SpatialEvidenceComposer({ note, count, requirement, onNote, onCamera, galleryRef }: { note: string; count: number; requirement: SpatialEvidenceRequirement; onNote: (value: string) => void; onCamera: () => void; galleryRef?: Ref<HTMLDivElement> }) {
   const id = useId()
   const pending = !spatialEvidenceSatisfied(requirement, note, count)
+  const showHelp = requirement !== 'none' || count > 0
   return <section className="spatial-evidence" aria-label="Observation evidence">
-    <div className="spatial-composer" data-required={pending || undefined}>
-      <Textarea id={`${id}-comment`} aria-label="Comment" aria-describedby={`${id}-help`} placeholder="Add a comment…" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
-      <div className="spatial-composer-bottom"><span id={`${id}-help`} className="spatial-composer-help" role="status">{spatialEvidenceMessage(requirement, note, count)}</span>
-        <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby={`${id}-help`}><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
-      </div>
+    <div className="spatial-composer" data-required={pending || undefined} data-help={showHelp || undefined}>
+      <Textarea id={`${id}-comment`} aria-label="Comment" aria-describedby={showHelp ? `${id}-help` : undefined} placeholder="Add a comment…" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
+      <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby={showHelp ? `${id}-help` : undefined}><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
+      {showHelp && <span id={`${id}-help`} className="spatial-composer-help" role="status">{spatialEvidenceMessage(requirement, note, count)}</span>}
     </div>
     <div className="flow-gallery spatial-attachments" ref={galleryRef}/>
   </section>
 }
-export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, onNote, onCamera, galleryRef }: { draft: FlowDraft; photos: Record<number, number>; direction: 'next' | 'back'; titleRef: Ref<HTMLHeadingElement>; onAnswer: (value: FlowAnswer) => void; onNote: (value: string) => void; onCamera: () => void; galleryRef: Ref<HTMLDivElement> }) {
+export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, onNote, onCamera, galleryRef, onNavigate, swipeEnabled = true }: { draft: FlowDraft; photos: Record<number, number>; direction: 'next' | 'back'; titleRef: Ref<HTMLHeadingElement>; onAnswer: (value: FlowAnswer) => void; onNote: (value: string) => void; onCamera: () => void; galleryRef: Ref<HTMLDivElement>; onNavigate?: (direction: SwipeDirection) => void; swipeEnabled?: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null)
+  const evidenceKey = `${draft.index}:${draft.answers[draft.index]}:${draft.notes[draft.index]}:${photos[draft.index]}`
+  const [notice, setNotice] = useState({ key: '', message: '' })
+  const feedback = notice.key === evidenceKey ? notice.message : ''
+  useSpatialSwipe(cardRef, { criterion: draft.index, enabled: swipeEnabled && !!onNavigate, block: direction => spatialNavigationBlock(draft, photos, direction), navigate: direction => onNavigate?.(direction), announce: message => setNotice({ key: evidenceKey, message }) })
   const criterion = flowCriteria[draft.index]
   const requirement = spatialEvidenceRequirement(draft.index)
   useLayoutEffect(() => { cardRef.current?.scrollTo({ top: 0 }) }, [draft.index])
-  return <SpatialSurface className="spatial-live-card" ref={cardRef} aria-label="Current criterion">
+  return <><SpatialSurface className="spatial-live-card" ref={cardRef} aria-label="Current criterion" aria-describedby="spatial-swipe-help">
+    <span id="spatial-swipe-help" className="sr-only">Swipe left for next or right for previous. Back, Sections and Next buttons are also available.</span>
     <div className="spatial-question-body" key={draft.index} data-direction={direction}>
-      <div className="spatial-criterion-context"><div className="spatial-badges"><Badge className="spatial-badge" variant="secondary">{criterion.section}</Badge>{'critical' in criterion && <Badge className="spatial-badge" data-tone="critical" variant="secondary">◆ Critical</Badge>}</div><span className="spatial-position">{String(draft.index + 1).padStart(2, '0')} / {String(flowCriteria.length).padStart(2, '0')}</span></div>
+      <div className="spatial-criterion-context"><div className="spatial-badges"><Badge className="spatial-badge" variant="secondary">{criterion.section}</Badge>{'critical' in criterion && <Badge className="spatial-badge" data-tone="critical" variant="secondary">◆ Critical</Badge>}</div><span className="spatial-position">{draft.index + 1} of {flowCriteria.length}</span></div>
       <h2 id="live-question-title" className="spatial-question-title" ref={titleRef} tabIndex={-1}>{criterion.title}</h2><p className="spatial-question-description">{criterion.desc}</p>
       <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer}/>
     </div>
     <SpatialEvidenceComposer note={draft.notes[draft.index] ?? ''} count={photos[draft.index] ?? 0} requirement={requirement} onNote={onNote} onCamera={onCamera} galleryRef={galleryRef}/>
-  </SpatialSurface>
+  </SpatialSurface><div className="spatial-swipe-feedback" role="status" aria-live="polite" aria-atomic="true" data-visible={!!feedback}>{feedback}</div><span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{criterion.section}, criterion {draft.index + 1} of {flowCriteria.length}. {criterion.title}</span></>
 }
 export function SpatialNavigation({ index, canContinue, sectionsRef, onBack, onSections, onNext }: { index: number; canContinue: boolean; sectionsRef: Ref<HTMLButtonElement>; onBack: () => void; onSections: () => void; onNext: () => void }) {
   return <nav className="spatial-navigation" aria-label="Criterion navigation">
@@ -97,7 +110,7 @@ export function SpatialSections({ draft, photos, onJump }: { draft: FlowDraft; p
   return <nav className="spatial-section-list" aria-label="All assessment criteria">
     {(['Preparation', 'Frying', 'Completion'] as const).map(section => {
       const items = flowCriteria.map((criterion, index) => ({ ...criterion, index })).filter(item => item.section === section)
-      return <section key={section}><h3>{section}<span>{items.filter(item => completed.includes(item.index)).length} / {items.length} complete</span></h3>
+      return <section key={section}><h3>{section}<span>{items.filter(item => completed.includes(item.index)).length} of {items.length} complete</span></h3>
         {items.map(item => {
           const done = completed.includes(item.index)
           const status = done ? 'Complete' : !draft.answers[item.index] || draft.answers[item.index] === 'notObserved' ? 'Not recorded' : !spatialEvidenceOk(draft, item.index, photos) ? 'Evidence needed' : 'Not recorded'

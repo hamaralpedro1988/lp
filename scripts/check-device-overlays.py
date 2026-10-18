@@ -27,7 +27,7 @@ with sync_playwright() as pw:
   page.get_by_role('button',name='Start Assessment',exact=True).click()
   page.get_by_role('button',name='Sections',exact=True).click();bounds(f'sections-{width}')
   expect(page.locator('.spatial-criterion-link')).to_have_count(11)
-  page.locator('.spatial-criterion-link').nth(10).click();expect(page.locator('.spatial-position')).to_have_text('11 / 11');expect(page.locator('#live-question-title')).to_be_focused()
+  page.locator('.spatial-criterion-link').nth(10).click();expect(page.locator('.spatial-position')).to_have_text('11 of 11');expect(page.locator('#live-question-title')).to_be_focused()
   page.get_by_role('button',name='Sections',exact=True).click();page.keyboard.press('Escape');expect(page.get_by_role('button',name='Sections',exact=True)).to_be_focused()
   page.get_by_role('button',name='Add photo',exact=True).click();bounds(f'photo-{width}');page.keyboard.press('Escape');expect(page.get_by_role('button',name='Add photo',exact=True)).to_be_focused()
   if width==1440:
