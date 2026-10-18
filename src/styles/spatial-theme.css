@@ -406,7 +406,7 @@ html[data-assessment-version="5"] .device-overlay-root :is([data-slot=dialog-con
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-swipe-feedback[data-visible=false] {padding:0;box-shadow:none}
 @media(min-width:781px) {
   .flow-app.flow-v5.participant-flow .stage {padding:25px 32px}
-  .flow-app.flow-v5.participant-flow .phone {height:min(840px,calc(var(--visual-height,100dvh) - 50px))}
+  .flow-app.flow-v5.participant-flow .phone {height:min(840px,calc(var(--visual-height,100dvh) - 50px));border-radius:36px;box-shadow:0 20px 60px #0005}
 }
 @media(max-width:780px) {.flow-app.flow-v5.participant-flow .phone {width:100%;height:var(--visual-height,100dvh)}}
 @media(hover:none) and (pointer:coarse) {
