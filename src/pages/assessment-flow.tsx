@@ -1,3 +1,5 @@
+import { useSpatialBrand } from '@/hooks/use-spatial-brand'
+import { SpatialBrandStyles, SpatialBrandSwitcher } from '@/components/design-system/brand-switcher'
 import { OverlayContainerContext } from '@/lib/overlay-container'
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { FileText, UserRound, MessageSquare, Clock3, LayoutGrid, CirclePlus, ShieldCheck, Droplets, CookingPot, ClipboardCheck, ChevronLeft, ChevronRight, ArrowLeft, ArrowRight, ArrowUpRight, Check, List, Camera, X, Wifi, WifiOff } from 'lucide-react'
@@ -54,6 +56,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
   const floatingEvidence = version >= 3
   const wireframe = version >= 4
   const spatial = version === 5
+  const { brand, setBrand } = useSpatialBrand(spatial)
   const Surface = spatial ? SpatialSurface : Card
   const ActionButton = spatial ? SpatialActionButton : Button
   const storageKey = spatial ? spatialStorageKey : version === 4 ? 'lp-rosa-flow-v4-v01' : floatingEvidence ? 'lp-rosa-flow-v3-v01' : flowStorageKey
@@ -171,11 +174,12 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
   const [overlayContainer, setOverlayContainer] = useState<HTMLDivElement | null>(null)
   const navigation = <nav className="flow-nav" aria-label="Screen flow">{flowScreens.map((id, i) => <button key={id} className={screen === id ? 'active' : ''} aria-current={screen === id ? 'step' : undefined} onClick={() => go(id)}><span className="number">0{i + 1}</span>{screenNames[id]}{id === 'signoff' && missing.length > 0 && <span className="sr-only"> (requires complete checklist)</span>}</button>)}</nav>
   const tools = <div className="stack"><ActionButton variant="outline" className="action outline" onClick={sample}>Load sample observations <ArrowUpRight size={15}/></ActionButton><ActionButton variant="outline" className="action outline" onClick={() => setSheet('reset')}>Reset prototype</ActionButton></div>
-  return <OverlayContainerContext.Provider value={spatial ? overlayContainer : undefined}><div className={`flow-app ${floatingEvidence && !spatial ? 'flow-v3' : ''} ${wireframe && !spatial ? 'flow-v4' : ''} ${spatial ? 'flow-v5 participant-flow' : ''}`}><div className="workspace">
+  return <OverlayContainerContext.Provider value={spatial ? overlayContainer : undefined}>{spatial && <SpatialBrandStyles/>}<div className={`flow-app ${floatingEvidence && !spatial ? 'flow-v3' : ''} ${wireframe && !spatial ? 'flow-v4' : ''} ${spatial ? 'flow-v5 participant-flow' : ''}`}><div className="workspace">
     {!spatial && <aside className="side"><div className="wordmark"><span className="brandmark"><ArrowUpRight size={17}/></span> Learning Pool <span>/ S2S</span></div><div className="eyebrow">EXERCISE 01 · ON THE FLOOR</div><h2 className="intro">{spatial ? <>Spatial<br/><em>Flow.</em></> : <>Designing for<br/>the moment.</>}</h2><p className="desc">Rosa’s practical assessment of Dre, during a busy shift. A mobile-first flow for observation, evidence and feedback.</p><h2 className="railhead">Presentation controls</h2><VersionSwitcher current={version}/><h2 className="railhead">Screen flow</h2>{navigation}<div className="aside-card"><strong>Prototype boundaries</strong>Checklist rules are illustrative. No backend, identity verification or server sync is simulated as real.</div>{spatial && <a className="action outline spaced" href="?view=design-system">Spatial Design System</a>}<h2 className="railhead">Testing shortcuts</h2>{tools}<a className="action outline spaced" href="?studio=1">Open Theme Studio</a></aside>}
     <main className="stage">{!spatial && <div className="stage-label"><span>Rosa / Mobile-first assessment</span><button className={`toggle ${draft.offline ? 'offline' : ''}`} onClick={() => update({ offline: !draft.offline })}>{draft.offline ? <WifiOff size={14}/> : <Wifi size={14}/>} {draft.offline ? 'Offline demo' : 'Online demo'}</button></div>}
       <div className={spatial ? 'participant-surface' : 'device-shell-legacy'}>
       <div className="phone">
+      {spatial && new URLSearchParams(location.search).get('brandDemo') === '1' && <div className="spatial-brand-demo"><SpatialBrandSwitcher brand={brand} onChange={setBrand}/></div>}
       {spatial && <SpatialSystemChrome mode={new URLSearchParams(location.search).get('native') === '1' ? 'native' : new URLSearchParams(location.search).get('systemChrome') === 'preview' ? 'preview' : 'auto'}/>}
       {screen !== 'assessment' && spatial && <SpatialFlowHeader title={pageLabels[screen]} onBack={screen === 'list' ? undefined : back} backLabel={screen === 'overview' ? 'Back to assessments' : screen === 'review' ? 'Back to checklist' : 'Back to review'}/> }
       {screen !== 'assessment' && !spatial && <header className="overview-topbar">{screen !== 'list' ? <ActionButton variant="ghost" size="icon" className={spatial ? 'spatial-header-back' : undefined} onClick={back} aria-label={screen === 'overview' ? 'Back to assessments' : screen === 'review' ? 'Back to checklist' : 'Back to review'}><ChevronLeft aria-hidden="true"/></ActionButton> : <span/>}<p>{pageLabels[screen]}</p><div className="mobile-version-switcher"><VersionSwitcher current={version}/></div></header>}
