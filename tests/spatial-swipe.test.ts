@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { committedSwipe, swipeAxis } from '../src/lib/spatial-swipe.ts'
+import { committedSwipe, spatialMotionMilliseconds, swipeAxis } from '../src/lib/spatial-swipe.ts'
 import { emptySpatialDraft, spatialNavigationBlock } from '../src/data/spatial-flow.ts'
 
 test('horizontal intent, thresholds and flick velocity reject vertical and accidental swipes', () => {
@@ -29,4 +29,13 @@ test('buttons and swipe share unanswered, first-criterion and strict two-part ev
   assert.match(spatialNavigationBlock(draft, {8:1}, 'next')!, /Comment required/)
   assert.equal(spatialNavigationBlock(draft, {}, 'back'), null)
   assert.equal(draft.answers[8], 'met', 'navigation does not infer or change an answer')
+})
+
+test('motion tokens retain duration when production CSS converts milliseconds to seconds', () => {
+  assert.equal(spatialMotionMilliseconds('700ms', 320), 700)
+  assert.equal(spatialMotionMilliseconds(' .7s ', 320), 700)
+  assert.equal(spatialMotionMilliseconds('0.21s', 320), 210)
+  assert.equal(spatialMotionMilliseconds('0ms', 320), 0)
+  assert.equal(spatialMotionMilliseconds('', 320), 320)
+  assert.equal(spatialMotionMilliseconds('-1s', 320), 320)
 })

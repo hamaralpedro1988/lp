@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, type RefObject } from 'react'
-import { committedSwipe, swipeAxis, type SwipeDirection } from '@/lib/spatial-swipe'
+import { committedSwipe, spatialMotionMilliseconds, swipeAxis, type SwipeDirection } from '@/lib/spatial-swipe'
 
 const excluded = 'button,a,input,textarea,select,label,[role=radio],[role=radiogroup],[contenteditable]:not([contenteditable=false]),.spatial-evidence,.flow-gallery,[role=dialog],[role=alertdialog]'
 type Options = { criterion: number; enabled: boolean; block: (direction: SwipeDirection) => string | null; navigate: (direction: SwipeDirection) => void; announce: (message: string) => void }
@@ -7,37 +7,56 @@ type Options = { criterion: number; enabled: boolean; block: (direction: SwipeDi
 export function useSpatialSwipe(ref: RefObject<HTMLDivElement | null>, options: Options) {
   const current = useRef(options)
   const cancel = useRef<() => void>(() => {})
-  const enter = useRef<SwipeDirection | null>(null)
+  const enter = useRef<{ direction: SwipeDirection; snapshot: HTMLElement; offset: number } | null>(null)
+  const departing = useRef<HTMLElement | null>(null)
+  const departureAnimation = useRef<Animation | null>(null)
   const animation = useRef<Animation | null>(null)
   const busy = useRef(false)
   const request = useRef<(direction: SwipeDirection) => void>(() => {})
   useLayoutEffect(() => { current.current = options })
   useLayoutEffect(() => {
+    const transition = enter.current
+    enter.current = null
     cancel.current()
     const node = ref.current
-    const direction = enter.current
-    enter.current = null
-    if (!node || !direction || matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const duration = parseFloat(getComputedStyle(node).getPropertyValue('--spatial-motion-swipe-in')) || 320
+    if (!node || !transition) return
+    const { direction, snapshot, offset } = transition
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { snapshot.remove(); return }
+    departing.current = snapshot
+    const duration = spatialMotionMilliseconds(getComputedStyle(node).getPropertyValue('--spatial-motion-swipe-in'), 700)
+    const distance = node.offsetWidth + 24
+    const sign = direction === 'next' ? 1 : -1
+    const timing = { duration, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'both' as const }
     busy.current = true
     node.dataset.swipe = 'transitioning'
-    animation.current = node.animate([{ transform: `translateX(${direction === 'next' ? '' : '-'}${node.clientWidth + 40}px)`, opacity: 1 }, { transform: 'translateX(0)', opacity: 1 }], { duration, easing: 'cubic-bezier(.16,1,.3,1)' })
+    departureAnimation.current = snapshot.animate([
+      { transform: `translateX(${offset}px)`, opacity: 1 },
+      { transform: `translateX(${-sign * distance}px)`, opacity: 1 },
+    ], timing)
+    animation.current = node.animate([
+      { transform: `translateX(${sign * distance + offset}px)`, opacity: 1 },
+      { transform: 'translateX(0)', opacity: 1 },
+    ], timing)
     const active = animation.current
-    void active.finished.catch(() => {}).then(() => { if (animation.current === active) { busy.current = false; delete node.dataset.swipe } })
+    void active.finished.catch(() => {}).then(() => {
+      if (animation.current === active) cancel.current()
+    })
   }, [options.criterion, options.enabled, ref])
   useEffect(() => {
     const node = ref.current
     if (!node) return
     let gesture: { id: number; x: number; y: number; time: number; axis: ReturnType<typeof swipeAxis>; dx: number } | null = null
-    let operation = 0
     const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches
     const modal = () => !!document.querySelector('[role=dialog][data-state=open],[role=alertdialog][data-state=open]')
     function reset() {
-      operation++
       const id = gesture?.id
       gesture = null
       if (id !== undefined && node!.hasPointerCapture(id)) node!.releasePointerCapture(id)
-      animation.current?.cancel(); animation.current = null; busy.current = false
+      animation.current?.cancel(); animation.current = null
+      departureAnimation.current?.cancel(); departureAnimation.current = null
+      departing.current?.remove(); departing.current = null
+      enter.current?.snapshot.remove(); enter.current = null
+      busy.current = false
       node!.style.removeProperty('transform'); node!.style.removeProperty('opacity'); delete node!.dataset.swipe
     }
     cancel.current = reset
@@ -45,7 +64,7 @@ export function useSpatialSwipe(ref: RefObject<HTMLDivElement | null>, options: 
       const transform = node!.style.transform, opacity = node!.style.opacity
       reset()
       if (!transform || reduced()) return
-      const duration = parseFloat(getComputedStyle(node!).getPropertyValue('--spatial-motion-swipe-snap')) || 210
+      const duration = spatialMotionMilliseconds(getComputedStyle(node!).getPropertyValue('--spatial-motion-swipe-snap'), 210)
       animation.current = node!.animate([{ transform, opacity }, { transform: 'translateX(0)', opacity: 1 }], { duration, easing: 'cubic-bezier(.2,.8,.2,1)' })
     }
     function start(event: PointerEvent) {
@@ -84,21 +103,38 @@ export function useSpatialSwipe(ref: RefObject<HTMLDivElement | null>, options: 
       if (!direction) { snap(); return }
       await travel(direction)
     }
-    async function travel(direction: SwipeDirection) {
+    function travel(direction: SwipeDirection) {
       if (busy.current || !current.current.enabled || modal()) return
       const message = current.current.block(direction)
       if (message) { current.current.announce(message); snap(); return }
       busy.current = true; node!.dataset.swipe = 'transitioning'
-      const id = ++operation
       if (!reduced()) {
-        const duration = parseFloat(getComputedStyle(node!).getPropertyValue('--spatial-motion-swipe-out')) || 180
-        animation.current = node!.animate([{ transform: node!.style.transform || 'translateX(0)', opacity: 1 }, { transform: `translateX(${direction === 'next' ? '-' : ''}${node!.clientWidth + 40}px)`, opacity: 1 }], { duration, easing: 'cubic-bezier(.4,0,1,1)' })
-        await animation.current.finished.catch(() => {})
+        // Inert visual snapshot keeps the departing card visible while React mounts
+        // the next criterion. It never owns state, focus, evidence or event handlers.
+        const snapshot = node!.cloneNode(true) as HTMLElement
+        snapshot.removeAttribute('id')
+        snapshot.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'))
+        snapshot.setAttribute('aria-hidden', 'true')
+        snapshot.inert = true
+        snapshot.dataset.cardDeparture = 'true'
+        snapshot.removeAttribute('data-swipe')
+        const offset = new DOMMatrixReadOnly(getComputedStyle(node!).transform).m41
+        Object.assign(snapshot.style, {
+          position: 'absolute', left: `${node!.offsetLeft}px`, top: `${node!.offsetTop}px`,
+          width: `${node!.offsetWidth}px`, height: `${node!.offsetHeight}px`,
+          margin: '0', transform: `translateX(${offset}px)`, pointerEvents: 'none',
+        })
+        snapshot.querySelectorAll('textarea').forEach((field, index) => {
+          field.value = node!.querySelectorAll('textarea')[index].value
+        })
+        node!.parentElement!.append(snapshot)
+        snapshot.scrollTop = node!.scrollTop
+        enter.current = { direction, snapshot, offset }
       }
-      if (id !== operation || !current.current.enabled || modal()) { reset(); return }
-      const latestBlock = current.current.block(direction)
-      if (latestBlock) { current.current.announce(latestBlock); snap(); return }
-      reset(); enter.current = direction; current.current.navigate(direction)
+      current.current.navigate(direction)
+      // The final criterion leaves this screen instead of starting another card.
+      // Unmount cleanup removes its snapshot as well.
+      if (reduced()) reset()
     }
     request.current = direction => { void travel(direction) }
     function otherPointer(event: PointerEvent) { if (gesture && event.pointerId !== gesture.id) snap() }
