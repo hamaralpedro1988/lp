@@ -9,7 +9,7 @@ import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
 
 export type EvidenceActions = { openNote: () => void; openMedia: () => void }
 type Evidence = { id: string; name: string; url: string; video: boolean }
-export function EvidencePanel({ note, onNoteChange, onCountChange, onPhotoCountChange, controllerRef, context, persistentNote = false, photosOnly = false, compact = false, onOverlayClosed, externalGallery = false, galleryTarget }: { note: string; onNoteChange: (value: string) => void; onCountChange?: (count: number) => void; onPhotoCountChange?: (count: number) => void; controllerRef?: Ref<EvidenceActions>; context?: string; persistentNote?: boolean; photosOnly?: boolean; compact?: boolean; onOverlayClosed?: () => void; externalGallery?: boolean; galleryTarget?: HTMLElement | null }) {
+export function EvidencePanel({ note, onNoteChange, onCountChange, onPhotoCountChange, controllerRef, context, persistentNote = false, photosOnly = false, compact = false, onOverlayClosed, externalGallery = false, galleryTarget, galleryReadOnly = false }: { note: string; onNoteChange: (value: string) => void; onCountChange?: (count: number) => void; onPhotoCountChange?: (count: number) => void; controllerRef?: Ref<EvidenceActions>; context?: string; persistentNote?: boolean; photosOnly?: boolean; compact?: boolean; onOverlayClosed?: () => void; externalGallery?: boolean; galleryTarget?: HTMLElement | null; galleryReadOnly?: boolean }) {
   const uniqueId = useId()
   const externalTrigger = useRef<HTMLElement | null>(null)
   const [open, setOpen] = useState(false)
@@ -42,7 +42,7 @@ export function EvidencePanel({ note, onNoteChange, onCountChange, onPhotoCountC
     onPhotoCountChange?.(files.filter(item => !item.video).length + valid.filter(file => file.type.startsWith('image/')).length)
     event.target.value = ''
   }
-  const gallery = <>{files.length > 0 && <div className="grid grid-cols-2 gap-3">{files.map(file => <EvidenceAttachment key={file.id} file={file} onPreview={event => { externalTrigger.current=event.currentTarget; setPreview(file) }} onRemove={() => remove(file.id)}/>)}</div>}
+  const gallery = <>{files.length > 0 && <div className="grid grid-cols-2 gap-3">{files.map(file => <EvidenceAttachment key={file.id} file={file} onPreview={event => { externalTrigger.current=event.currentTarget; setPreview(file) }} onRemove={galleryReadOnly ? undefined : () => remove(file.id)}/>)}</div>}
     {error && <p role="alert" className="text-xs text-destructive">{error}</p>}</>
   return <section aria-labelledby={`${uniqueId}-title`} className="space-y-4">
     <div hidden={compact} className="flex items-center justify-between"><h2 id={`${uniqueId}-title`} className="text-sm">Add evidence</h2><span className="text-xs text-muted-foreground">Optional</span></div>
@@ -63,6 +63,6 @@ export function EvidencePanel({ note, onNoteChange, onCountChange, onPhotoCountC
   </section>
 }
 
-export function EvidenceAttachment({ file, onPreview, onRemove }: { file: Pick<Evidence, 'name' | 'url' | 'video'>; onPreview: (event: React.MouseEvent<HTMLButtonElement>) => void; onRemove: () => void }) {
-  return <div className="min-w-0 overflow-hidden rounded-lg border"><button className="flex aspect-video w-full items-center justify-center bg-muted" aria-label={`Preview ${file.name}`} onClick={onPreview}>{file.video ? <Play className="size-8"/> : <img src={file.url} alt={file.name} className="h-full w-full object-cover"/>}</button><div className="flex items-center gap-1 px-2 py-1"><span className="min-w-0 flex-1 truncate text-xs">{file.name}</span><Button variant="ghost" size="icon" aria-label={`Remove ${file.name}`} onClick={onRemove}><Trash2 className="size-4"/></Button></div></div>
+export function EvidenceAttachment({ file, onPreview, onRemove }: { file: Pick<Evidence, 'name' | 'url' | 'video'>; onPreview: (event: React.MouseEvent<HTMLButtonElement>) => void; onRemove?: () => void }) {
+  return <div className="min-w-0 overflow-hidden rounded-lg border"><button className="flex aspect-video w-full items-center justify-center bg-muted" aria-label={`Preview ${file.name}`} onClick={onPreview}>{file.video ? <Play className="size-8"/> : <img src={file.url} alt={file.name} className="h-full w-full object-cover"/>}</button><div className="flex items-center gap-1 px-2 py-1"><span className="min-w-0 flex-1 truncate text-xs">{file.name}</span>{onRemove && <Button variant="ghost" size="icon" aria-label={`Remove ${file.name}`} onClick={onRemove}><Trash2 className="size-4"/></Button>}</div></div>
 }

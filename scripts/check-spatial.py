@@ -79,7 +79,7 @@ with sync_playwright() as pw:
  nav('Sections');nav('Review all');capture('04-review-incomplete-390')
  expect(page.get_by_role('button',name='Continue to feedback & sign-off')).to_be_disabled()
  expect(page.get_by_role('radio',name='Needs coaching',exact=True)).to_have_count(0)
- page.get_by_role('button',name='Edit: Prepares a safe, clean work area',exact=True).click()
+ page.get_by_role('button',name='View: Prepares a safe, clean work area',exact=True).click();nav('Edit observation')
  for i in range(11):
   page.get_by_role('radio',name='Fail' if i in [4,8] else 'Pass',exact=True).check()
   expect(page.locator('.spatial-position')).to_have_text(f'{i+1} of 11')

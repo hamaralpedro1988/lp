@@ -1,7 +1,10 @@
 import dreAvatar from '@/assets/dre-jackson.png'
-import { spatialEvidenceOk, spatialMissing, spatialEvidenceMessage, spatialEvidenceRequirement } from '@/data/spatial-flow'
-import { useId, useState } from 'react'
+import { spatialMissing, spatialEvidenceMessage, spatialEvidenceRequirement } from '@/data/spatial-flow'
+import { useCallback, useId, useRef, useState, type ReactNode } from 'react'
 import { Camera, Check, ChevronRight, ClipboardCheck, MessageSquare, ShieldCheck, UserRound, X } from 'lucide-react'
+import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
+import { spatialReviewIndices, spatialReviewResult, type SpatialReviewFilter } from '@/data/spatial-review'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { Badge } from '@/components/ui/badge'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -31,19 +34,44 @@ export function SpatialReviewNextSteps({ draft }: { draft: FlowDraft }) {
   return <SpatialSurface className="overview-card spatial-review-next"><CardHeader><CardTitle><h2>What next</h2></CardTitle></CardHeader><CardContent><ol>{steps.map((step, i) => <li key={step}><span aria-hidden="true">{i + 1}</span><p>{step}</p></li>)}</ol></CardContent></SpatialSurface>
 }
 
-export function SpatialReviewList({ draft, photos, onEdit }: { draft: FlowDraft; photos: Record<number, number>; onEdit: (index: number) => void }) {
-  const id = useId()
-  return <SpatialSurface elevation="quiet" className="overview-card overview-sections spatial-review-list"><CardHeader><CardTitle><h2>Criteria</h2></CardTitle></CardHeader><CardContent>{flowCriteria.map((item, i) => {
-    const answer = draft.answers[i]
-    const result = answer === 'met' ? 'Pass' : answer === 'fail' ? 'Fail' : 'Response needed'
-    const Icon = answer === 'met' ? Check : answer === 'fail' ? X : ClipboardCheck
-    const evidenceMissing = !spatialEvidenceOk(draft, i, photos)
-    const comment = !!draft.notes[i]?.trim()
-    const count = photos[i] ?? 0
-    return <SpatialActionButton key={item.title} variant="ghost" className="review-item" onClick={() => onEdit(i)} aria-label={`Edit: ${item.title}`} aria-describedby={`${id}-${i}`}><span id={`${id}-${i}`} className="spatial-review-row-outcome" data-result={result}><Icon aria-hidden="true"/><span className="sr-only">{result}</span></span><span className="spatial-review-item-copy"><strong>{item.title}</strong><span className="spatial-review-item-meta"><Badge variant="secondary" className="spatial-badge">{item.section}</Badge>{'critical' in item && <Badge variant="secondary" className="spatial-badge" data-tone="critical">Critical</Badge>}{comment && <span><MessageSquare aria-hidden="true"/>Comment</span>}{count > 0 && <span><Camera aria-hidden="true"/>{count} {count === 1 ? 'photo' : 'photos'}</span>}</span>{evidenceMissing && <small className="spatial-review-evidence-warning">{spatialEvidenceMessage(spatialEvidenceRequirement(i), draft.notes[i] ?? '', count)}</small>}</span><ChevronRight aria-hidden="true"/></SpatialActionButton>
-  })}</CardContent></SpatialSurface>
+export type ReviewEvidenceTarget = (index: number, node: HTMLDivElement | null) => void
+export function SpatialReviewFilters({ value, onChange, draft, photos }: { value: SpatialReviewFilter; onChange: (value: SpatialReviewFilter) => void; draft: FlowDraft; photos: Record<number, number> }) {
+  const filters = [{ value: 'all', label: 'All' }, { value: 'passed', label: 'Passed' }, { value: 'failed', label: 'Failed' }, { value: 'critical', label: 'Critical' }] as const
+  return <div className="spatial-review-filters" role="group" aria-label="Filter criteria">{filters.map(filter => <SpatialActionButton key={filter.value} variant="outline" aria-pressed={value === filter.value} onClick={() => onChange(filter.value)}>{filter.label}<span>{spatialReviewIndices(draft, photos, filter.value).length}</span></SpatialActionButton>)}</div>
 }
-
+export function SpatialReviewCriterionRow({ index, draft, photos, onOpen }: { index: number; draft: FlowDraft; photos: Record<number, number>; onOpen: (trigger: HTMLButtonElement) => void }) {
+  const id = useId(), item = flowCriteria[index]
+  const result = spatialReviewResult(draft, photos, index)
+  const Icon = result === 'Pass' ? Check : result === 'Fail' ? X : ClipboardCheck
+  const comment = !!draft.notes[index]?.trim(), count = photos[index] ?? 0
+  return <SpatialActionButton variant="ghost" className="review-item" onClick={event => onOpen(event.currentTarget)} aria-label={`View: ${item.title}`} aria-describedby={id} aria-haspopup="dialog"><span id={id} className="spatial-review-row-outcome" data-result={result}><Icon aria-hidden="true"/><span className="sr-only">{result}</span></span><span className="spatial-review-item-copy"><strong>{item.title}</strong><span className="spatial-review-item-meta"><Badge variant="secondary" className="spatial-badge">{item.section}</Badge>{'critical' in item && <Badge variant="secondary" className="spatial-badge" data-tone="critical">Critical</Badge>}{comment && <span><MessageSquare aria-hidden="true"/>Comment</span>}{count > 0 && <span><Camera aria-hidden="true"/>{count} {count === 1 ? 'photo' : 'photos'}</span>}</span>{result === 'Incomplete' && <small className="spatial-review-evidence-warning">{!draft.answers[index] || !['met','fail'].includes(draft.answers[index]) ? 'Response needed' : spatialEvidenceMessage(spatialEvidenceRequirement(index), draft.notes[index] ?? '', count)}</small>}</span><ChevronRight aria-hidden="true"/></SpatialActionButton>
+}
+export function SpatialReviewDetails({ index, draft, photos, onClose, onEdit, onEvidenceTarget, evidence, onRestoreFocus }: { index: number; draft: FlowDraft; photos: Record<number, number>; onClose: () => void; onEdit: () => void; onEvidenceTarget?: ReviewEvidenceTarget; evidence?: ReactNode; onRestoreFocus: (event: Event) => void }) {
+  const criterion = flowCriteria[index], result = spatialReviewResult(draft, photos, index)
+  const title = useRef<HTMLHeadingElement>(null)
+  const swipe = useRef<{ id: number; x: number; y: number } | null>(null)
+  const gallery = useCallback((node: HTMLDivElement | null) => onEvidenceTarget?.(index, node), [index, onEvidenceTarget])
+  const requirement = spatialEvidenceRequirement(index)
+  const requirements = { none: 'No evidence required.', comment: 'Comment required.', photo: 'Photo required.', 'comment-and-photo': 'Comment and photo required.' }
+  return <SheetContent side="bottom" className="mobile-sheet flow-sheet spatial-review-details mx-auto" onCloseAutoFocus={onRestoreFocus} onOpenAutoFocus={event => { event.preventDefault(); title.current?.focus({ preventScroll: true }) }}>
+    <SpatialActionButton variant="ghost" className="spatial-review-sheet-handle" aria-label="Close criterion details" onClick={onClose} onPointerDown={event => { if (!event.isPrimary || event.button !== 0) return; swipe.current = { id: event.pointerId, x: event.clientX, y: event.clientY }; event.currentTarget.setPointerCapture(event.pointerId) }} onPointerUp={event => { const from = swipe.current; swipe.current = null; if (from?.id !== event.pointerId) return; const dx = event.clientX - from.x, dy = event.clientY - from.y; if (dy > 48 && dy > Math.abs(dx) * 1.25) onClose() }} onPointerCancel={() => { swipe.current = null }}><span aria-hidden="true"/></SpatialActionButton>
+    <SheetHeader><SheetTitle ref={title} tabIndex={-1} className="outline-none">Criterion details</SheetTitle><SheetDescription>{index + 1} of {flowCriteria.length} · {criterion.section}</SheetDescription></SheetHeader>
+    <div className="spatial-review-detail-body"><section aria-label="Criterion"><div className="spatial-badges"><Badge variant="secondary" className="spatial-badge">{criterion.section}</Badge>{'critical' in criterion && <Badge variant="secondary" className="spatial-badge" data-tone="critical">Critical</Badge>}</div><h3>{criterion.title}</h3><p>{criterion.desc}</p></section>
+    <section aria-label="Recorded result"><h4>Recorded result</h4><Badge variant="outline" className="spatial-review-outcome" data-result={result}>{result}</Badge>{result === 'Incomplete' && <p>{draft.answers[index] === 'met' || draft.answers[index] === 'fail' ? `Recorded response: ${draft.answers[index] === 'met' ? 'Pass' : 'Fail'}. ${spatialEvidenceMessage(requirement, draft.notes[index] ?? '', photos[index] ?? 0)}.` : 'No Pass or Fail response recorded.'}</p>}</section>
+    <section aria-label="Context"><h4>Context</h4><p>Section: {criterion.section}.</p>{'critical' in criterion && <p>This criterion is marked critical.</p>}<p>{requirements[requirement]}</p></section><Separator/>
+    <section aria-label="Rosa’s observation"><h4>Rosa’s observation</h4><p className="spatial-review-original-note">{draft.notes[index]?.trim() ? draft.notes[index] : 'No observation added.'}</p></section>
+    {(photos[index] ?? 0) > 0 && <section aria-label="Attached photos"><h4>Attached photos</h4><div ref={gallery} className="flow-gallery spatial-attachments">{evidence}</div><p className="spatial-review-photo-note">Photos are available in this page session.</p></section>}
+    </div><div className="spatial-review-detail-actions"><SpatialActionButton variant="outline" onClick={onClose}>Close</SpatialActionButton><SpatialActionButton onClick={onEdit}>Edit observation<ChevronRight aria-hidden="true"/></SpatialActionButton></div>
+  </SheetContent>
+}
+export function SpatialReviewList({ draft, photos, onEdit, onEvidenceTarget, evidence }: { draft: FlowDraft; photos: Record<number, number>; onEdit: (index: number) => void; onEvidenceTarget?: ReviewEvidenceTarget; evidence?: (index: number) => ReactNode }) {
+  const [filter, setFilter] = useState<SpatialReviewFilter>('all')
+  const [selected, setSelected] = useState<number | null>(null)
+  const trigger = useRef<HTMLButtonElement | null>(null)
+  const indices = spatialReviewIndices(draft, photos, filter)
+  useMobileOverlay(selected !== null, () => { setSelected(null); return true })
+  return <><SpatialSurface elevation="quiet" className="overview-card overview-sections spatial-review-list"><CardHeader><CardTitle><h2>Criteria</h2></CardTitle><SpatialReviewFilters value={filter} onChange={setFilter} draft={draft} photos={photos}/></CardHeader><CardContent><span role="status" className="sr-only">{indices.length} {filter === 'all' ? '' : filter} criteria shown.</span>{indices.map(index => <SpatialReviewCriterionRow key={index} index={index} draft={draft} photos={photos} onOpen={button => { trigger.current = button; setSelected(index) }}/>) }{!indices.length && <div className="spatial-review-filter-empty"><ClipboardCheck aria-hidden="true"/><p>No {filter} criteria to review.</p></div>}</CardContent></SpatialSurface><Sheet open={selected !== null} onOpenChange={open => { if (!open) setSelected(null) }}>{selected !== null && <SpatialReviewDetails index={selected} draft={draft} photos={photos} onClose={() => setSelected(null)} onEdit={() => { const index = selected; setSelected(null); onEdit(index) }} onEvidenceTarget={onEvidenceTarget} evidence={evidence?.(selected)} onRestoreFocus={event => { if (trigger.current?.isConnected) { event.preventDefault(); trigger.current.focus({ preventScroll: true }) } }}/>}</Sheet></>
+}
 export function SpatialFeedbackCard({ draft, onFeedback }: { draft: FlowDraft; onFeedback: (value: string) => void }) {
   const id = useId()
   const failed = Object.values(draft.answers).includes('fail')
