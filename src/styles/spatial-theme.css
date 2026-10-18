@@ -158,8 +158,8 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {display:flex;flex-direction:column;overflow:visible;padding:12px var(--spatial-space-gutter)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {flex:1;min-height:0;display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:var(--spatial-space-card-block) var(--spatial-space-card-inline) var(--spatial-space-6);margin:0;border-radius:var(--spatial-radius-card);border-color:#fff;animation:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card::-webkit-scrollbar {display:none}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body {animation:spatial-next var(--spatial-motion-question) var(--spatial-ease) both}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body[data-direction=back] {animation-name:spatial-back}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body {animation:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body[data-direction=back] {animation:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-criterion-context {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:var(--spatial-space-context)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badges {display:flex;gap:6px;flex-wrap:wrap;min-width:0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badge {font-size:11px;font-weight:750;line-height:1.4;border:0;border-radius:var(--spatial-radius-badge);padding:6px 9px;background:var(--spatial-section-bg);color:var(--spatial-section-ink)}

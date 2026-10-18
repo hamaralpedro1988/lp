@@ -1,7 +1,7 @@
 import { SpatialCriterionGuidance } from './spatial-guidance'
 import { useSpatialSwipe } from '@/hooks/use-spatial-swipe'
 import type { SwipeDirection } from '@/lib/spatial-swipe'
-import { useId, useLayoutEffect, useRef, useState, type ComponentProps, type ReactNode, type Ref } from 'react'
+import { useId, useLayoutEffect, useRef, useState, type ComponentProps, type ReactNode, type Ref, type RefObject } from 'react'
 import { ArrowRight, Camera, Check, ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -80,12 +80,17 @@ export function SpatialEvidenceComposer({ note, count, requirement, onNote, onCa
     <div className="flow-gallery spatial-attachments" ref={galleryRef}/>
   </section>
 }
-export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, onNote, onCamera, galleryRef, onNavigate, swipeEnabled = true }: { draft: FlowDraft; photos: Record<number, number>; direction: 'next' | 'back'; titleRef: Ref<HTMLHeadingElement>; onAnswer: (value: FlowAnswer) => void; onNote: (value: string) => void; onCamera: () => void; galleryRef: Ref<HTMLDivElement>; onNavigate?: (direction: SwipeDirection) => void; swipeEnabled?: boolean }) {
+export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, onNote, onCamera, galleryRef, onNavigate, navigationRef, swipeEnabled = true }: { draft: FlowDraft; photos: Record<number, number>; direction: 'next' | 'back'; titleRef: Ref<HTMLHeadingElement>; onAnswer: (value: FlowAnswer) => void; onNote: (value: string) => void; onCamera: () => void; galleryRef: Ref<HTMLDivElement>; onNavigate?: (direction: SwipeDirection) => void; swipeEnabled?: boolean; navigationRef?: RefObject<((direction: SwipeDirection) => void) | null> }) {
   const cardRef = useRef<HTMLDivElement>(null)
   const evidenceKey = `${draft.index}:${draft.answers[draft.index]}:${draft.notes[draft.index]}:${photos[draft.index]}`
   const [notice, setNotice] = useState({ key: '', message: '' })
   const feedback = notice.key === evidenceKey ? notice.message : ''
-  useSpatialSwipe(cardRef, { criterion: draft.index, enabled: swipeEnabled && !!onNavigate, block: direction => spatialNavigationBlock(draft, photos, direction), navigate: direction => onNavigate?.(direction), announce: message => setNotice({ key: evidenceKey, message }) })
+  const requestNavigation = useSpatialSwipe(cardRef, { criterion: draft.index, enabled: swipeEnabled && !!onNavigate, block: direction => spatialNavigationBlock(draft, photos, direction), navigate: direction => onNavigate?.(direction), announce: message => setNotice({ key: evidenceKey, message }) })
+  useLayoutEffect(() => {
+    if (!navigationRef) return
+    navigationRef.current = requestNavigation
+    return () => { navigationRef.current = null }
+  }, [navigationRef, requestNavigation])
   const criterion = flowCriteria[draft.index]
   const requirement = spatialEvidenceRequirement(draft.index)
   useLayoutEffect(() => { cardRef.current?.scrollTo({ top: 0 }) }, [draft.index])

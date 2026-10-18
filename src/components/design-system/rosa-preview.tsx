@@ -28,6 +28,7 @@ export function RosaPreview({ pattern }: { pattern: string }) {
   const [manager, setManager] = useState(false)
   const [notice, setNotice] = useState('Preview only · no assessment data is changed.')
   const titleRef = useRef<HTMLHeadingElement>(null)
+  const criterionNavigation = useRef<((direction: 'next' | 'back') => void) | null>(null)
   const sectionsRef = useRef<HTMLButtonElement>(null)
   const mediaTrigger = useRef<HTMLElement | null>(null)
   const photos = Object.fromEntries(Object.entries(photo).map(([key,value])=>[key,value?1:0]))
@@ -50,8 +51,8 @@ export function RosaPreview({ pattern }: { pattern: string }) {
     setDraft(previous => ({ ...previous, index: previous.index + (direction === 'next' ? 1 : -1) }))
   }
   const attachment = attached && <div className="flow-gallery spatial-attachments"><div className="grid grid-cols-2 gap-3"><EvidenceAttachment file={{ name:'Preview illustration.svg',url:sampleImage,video:false }} onPreview={() => { mediaTrigger.current=document.activeElement as HTMLElement; setPreview(true) }} onRemove={() => setPhoto(previous=>({...previous,[draft.index]:false}))}/></div></div>
-  const footer = <SpatialNavigation index={draft.index} canContinue={canContinue} sectionsRef={sectionsRef} onBack={() => navigateCriterion('back')} onSections={() => setSections(true)} onNext={() => navigateCriterion('next')}/>
-  const live = <><SpatialSystemChrome mode="preview"/><SpatialAssessmentHeader draft={draft} photos={photos} saveError={scenario === 'Save error'} onBack={() => setNotice('Header Back returns to Overview in the real flow.')}/><div className="assessment-screen screen"><SpatialLiveCard draft={draft} photos={photos} direction="next" titleRef={titleRef} onAnswer={onAnswer} onNote={onNote} onCamera={camera} galleryRef={setGalleryTarget} onNavigate={navigateCriterion} swipeEnabled={!sections && !media && !preview}/>{galleryTarget&&createPortal(attachment,galleryTarget)}</div><footer className="phonebottom">{footer}</footer></>
+  const footer = <SpatialNavigation index={draft.index} canContinue={canContinue} sectionsRef={sectionsRef} onBack={() => (criterionNavigation.current ?? navigateCriterion)('back')} onSections={() => setSections(true)} onNext={() => (criterionNavigation.current ?? navigateCriterion)('next')}/>
+  const live = <><SpatialSystemChrome mode="preview"/><SpatialAssessmentHeader draft={draft} photos={photos} saveError={scenario === 'Save error'} onBack={() => setNotice('Header Back returns to Overview in the real flow.')}/><div className="assessment-screen screen"><SpatialLiveCard draft={draft} photos={photos} direction="next" titleRef={titleRef} onAnswer={onAnswer} onNote={onNote} onCamera={camera} galleryRef={setGalleryTarget} onNavigate={navigateCriterion} navigationRef={criterionNavigation} swipeEnabled={!sections && !media && !preview}/>{galleryTarget&&createPortal(attachment,galleryTarget)}</div><footer className="phonebottom">{footer}</footer></>
   return <>
     <div className="ds-story-controls"><label htmlFor="rosa-scenario">Story state</label><Select value={scenario} onValueChange={value => { const next=value as ExplorerScenario;setScenario(next);setDraft(createExplorerDraft(next));setPhoto(next === 'Complete' ? {8:true} : {});setEditing(false) }}><SelectTrigger id="rosa-scenario"><SelectValue/></SelectTrigger><SelectContent>{scenarioOptions.map(value => <SelectItem key={value} value={value}>{value}</SelectItem>)}</SelectContent></Select><Badge variant="outline">In-memory fixture</Badge></div>
     <div className="ds-rosa-layout"><div className="ds-device flow-app flow-v5" data-pattern={pattern}>
