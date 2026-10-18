@@ -437,6 +437,9 @@ html[data-assessment-version="5"] [data-slot=progress-indicator] {background:var
 html[data-assessment-version="5"] .spatial-brand-switcher {display:flex;align-items:center;gap:10px;font-size:12px;color:var(--spatial-muted)}
 html[data-assessment-version="5"] .spatial-brand-switcher label {white-space:nowrap}
 html[data-assessment-version="5"] .spatial-brand-switcher [data-slot=select-trigger] {width:148px;min-height:44px;background:var(--spatial-surface)}
+/* Neutral presentation canvas stays outside the branded application surface. */
+.flow-app.flow-v5.participant-flow.has-brand-preview,
+.flow-app.flow-v5.participant-flow.has-brand-preview .workspace {background:#252528}
 html[data-assessment-version="5"] .spatial-brand-demo {position:fixed;z-index:10;top:24px;right:24px;width:260px;padding:16px;border:1px solid var(--spatial-line);border-radius:var(--spatial-radius-button);background:var(--spatial-surface);box-shadow:var(--spatial-shadow-small)}
 html[data-assessment-version="5"] .spatial-brand-demo .spatial-brand-switcher {justify-content:space-between}
 

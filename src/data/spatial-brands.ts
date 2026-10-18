@@ -33,10 +33,4 @@ export function resolveSpatialBrand(value: string | null | undefined): SpatialBr
 export function brandTokenDeclarations(brand: SpatialBrand) {
   return Object.entries(brand.tokens).map(([key, value]) => `${key}:${value};`).join('')
 }
-// Presentation canvas only: never inherited by the app surface or its tokens.
-export const spatialBrandCSS = spatialBrands.map(brand => {
-  const root = `html[data-assessment-version="5"][data-spatial-brand="${brand.id}"]`
-  const presentation = `${root} .flow-app.flow-v5.has-brand-preview`
-  const backdrop = `radial-gradient(ellipse at 18% 12%,${mix(brand.accent, '#ffffff', .8)},transparent 65%),linear-gradient(135deg,${brand.accent},${mix(brand.accent, '#161223', .72)})`
-  return `${root}{${brandTokenDeclarations(brand)}}\n${presentation},${presentation} .workspace{background:${backdrop};}`
-}).join('\n')
+export const spatialBrandCSS = spatialBrands.map(brand => `html[data-assessment-version="5"][data-spatial-brand="${brand.id}"]{${brandTokenDeclarations(brand)}}`).join('\n')
