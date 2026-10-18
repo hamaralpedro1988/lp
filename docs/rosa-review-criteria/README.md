@@ -7,7 +7,7 @@ The existing React/shadcn Review now supports single-selection **All / Passed / 
 `SpatialReviewList`, `SpatialReviewFilters`, `SpatialReviewCriterionRow` and `SpatialReviewDetails` live in `src/components/assessment/spatial-journey.tsx`. The actual components are mounted in Rosa and in the [Review story](https://lp-git-feat-rosa-criterion-guidance-hamaralpedro1988.vercel.app/?view=design-system&section=rosa&pattern=review).
 
 - Counts and filtering use `src/data/spatial-review.ts`, the real criteria and existing evidence validation. Missing answers or required evidence appear as **Incomplete** and do not enter Passed/Failed filters. Critical includes any result.
-- Clicking a row opens a shadcn Sheet. It shows the original instruction, criterion position, section/critical badges, read-only result, configured evidence requirement and the original comment with whitespace preserved.
+- Clicking a row opens a shadcn Sheet. It shows the original instruction, criterion position, section/critical badges, read-only result and the original comment with whitespace preserved.
 - Photos use the existing EvidencePanel gallery portal, object URLs, EvidenceAttachment and preview sheet. Review hides the removal action. No photo is copied into storage or simulated in the participant app; existing session-only media behavior is preserved.
 - Escape, native/browser Back, Close and a downward drag on the handle dismiss the sheet. Focus returns to the row without scrolling it. The Review filter and scroll context remain mounted. Only **Edit observation** invokes the existing assessment navigation.
 - Chips use native button keyboard behavior and `aria-pressed`; only one is selected. Horizontal overflow hides the scrollbar. Empty filters have neutral feedback.
