@@ -33,7 +33,7 @@ with sync_playwright() as pw:
       for (const card of cards) for (const animation of card.getAnimations()) {
         animation.pause();
         const duration = animation.effect.getTiming().duration;
-        if (duration !== 500) throw new Error('Expected 500ms card transition, got '+duration);
+        if (duration !== 300) throw new Error('Expected 300ms card transition, got '+duration);
         animation.currentTime = duration * .5;
       }
       return cards.map(card => ({x:card.getBoundingClientRect().x, width:card.offsetWidth}));
@@ -67,5 +67,5 @@ with sync_playwright() as pw:
     assert page.evaluate('window.cardMotion.length') == 4
     expect(page.get_by_role('button', name='Next', exact=True)).to_be_disabled()
     expect(page.locator('[data-card-departure]')).to_have_count(0)
-    print('PASS simultaneous 500ms card slides with 98% exit depth in both directions, rapid-click guard, saved note, unanswered guard and reduced motion')
+    print('PASS simultaneous 300ms card slides with 98% exit depth in both directions, rapid-click guard, saved note, unanswered guard and reduced motion')
     browser.close()

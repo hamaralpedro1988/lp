@@ -23,7 +23,7 @@ export function useSpatialSwipe(ref: RefObject<HTMLDivElement | null>, options: 
     const { direction, snapshot, offset } = transition
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { snapshot.remove(); return }
     departing.current = snapshot
-    const duration = spatialMotionMilliseconds(getComputedStyle(node).getPropertyValue('--spatial-motion-swipe-in'), 500)
+    const duration = spatialMotionMilliseconds(getComputedStyle(node).getPropertyValue('--spatial-motion-swipe-in'), 300)
     const exitScale = parseFloat(getComputedStyle(node).getPropertyValue('--spatial-motion-card-exit-scale')) || .98
     const distance = node.offsetWidth + 24
     const sign = direction === 'next' ? 1 : -1
