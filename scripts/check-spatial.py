@@ -21,7 +21,9 @@ with sync_playwright() as pw:
  def capture(name,full=False):
   settle();page.mouse.move(1,1);page.screenshot(path=str(shots/(name+'.png')),full_page=full)
  def complete(n):expect(page.get_by_role('progressbar',name='Criteria complete')).to_have_attribute('aria-valuenow',str(n))
- def nav(name):page.get_by_role('button',name=name,exact=True).click()
+ def nav(name):
+  page.get_by_role('button',name=name,exact=True).click()
+  settle()
  page.goto(args.url+'/?version=5')
  expect(page.get_by_role('heading',name='Your assessments',exact=True)).to_be_visible()
  capture('01-assignments-390')
@@ -35,7 +37,7 @@ with sync_playwright() as pw:
  expect(page.get_by_role('radio',name='Pass',exact=True)).not_to_be_checked()
  expect(page.locator('.spatial-header .assessment-name')).to_have_text('Fryer Station')
  expect(page.locator('.spatial-header-subtitle')).to_have_text('Food Process & Safety')
- expect(page.locator('.spatial-person')).to_contain_text('Dre')
+ expect(page.get_by_role('button',name='View team member Dre Jackson',exact=True)).to_be_visible()
  for sel in ['.spatial-header','.phonebottom']:
   assert page.locator(sel).evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgba(0, 0, 0, 0)',sel
  page.get_by_role('radio',name='Pass',exact=True).focus();page.keyboard.press('ArrowDown')
@@ -83,7 +85,8 @@ with sync_playwright() as pw:
   expect(page.locator('.spatial-position')).to_have_text(f'{i+1} of 11')
   nav('Review' if i==10 else 'Next')
  expect(page.get_by_role('heading',name='Review observations',exact=True)).to_be_visible()
- expect(page.locator('.review-stat')).to_have_count(3)
+ expect(page.locator('.review-stat')).to_have_count(2)
+ expect(page.get_by_text('Incomplete',exact=True)).to_have_count(0)
  expect(page.get_by_role('button',name='Continue to feedback & sign-off')).to_be_enabled()
  capture('04-review-390')
  page.locator('.screen').evaluate('(e)=>e.scrollTop=e.scrollHeight');capture('04-review-details-390')

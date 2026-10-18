@@ -468,3 +468,27 @@ html[data-assessment-version="5"] .spatial-guidance-body>button {width:100%;back
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person {width:44px;height:44px;min-width:44px;flex:none;padding:5px;border-radius:50%;border:1px solid var(--spatial-input-line);background:var(--spatial-surface);color:var(--spatial-section-ink);box-shadow:0 1px 3px #4c41610c;overflow:hidden}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person img {display:block;width:32px;height:32px;max-width:none;border-radius:50%;object-fit:cover}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-person>span {display:grid;place-items:center;width:32px;height:32px;font-size:12px;font-weight:750}
+
+/* Review uses the same quiet surfaces, semantic outcomes and spacing as the live card. */
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .review-stats {grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .review-stat {display:grid;grid-template-columns:24px 1fr;justify-items:start;align-items:center;gap:4px 10px;padding:16px;text-align:left;background:var(--spatial-success-bg);color:var(--spatial-success-ink);border:1px solid var(--spatial-success-line);border-radius:var(--spatial-radius-choice)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .review-stat[data-result=Fail] {background:var(--spatial-fail-bg);color:var(--spatial-fail-ink);border-color:var(--spatial-fail-line)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .review-stat>svg {width:20px;height:20px;grid-row:1 / 3}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .review-stat b {font-size:30px;line-height:1.15}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .review-stat small {color:inherit;font-size:14px;margin:0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-caption {margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--spatial-muted)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-note {display:flex;align-items:flex-start;gap:10px;margin:16px 0 0;font-size:14px;line-height:1.5;color:var(--spatial-muted)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-note>svg {width:18px;height:18px;flex:none;margin-top:2px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-note[data-attention=true] {color:var(--spatial-warning-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-list .review-section h3 {display:flex;justify-content:space-between;gap:12px;padding:16px var(--spatial-space-card-inline) 8px;background:transparent;font-size:16px;font-weight:740}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-list .review-section h3>span {font-size:12px;font-weight:450;color:var(--spatial-muted);white-space:nowrap}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-list .review-item {display:flex;justify-content:space-between;gap:12px;padding:16px var(--spatial-space-card-inline)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-item-copy {flex:1;min-width:0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-item-meta {display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px;color:var(--spatial-muted);font-size:12px;line-height:1.5;font-weight:450}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-item-meta>span {display:inline-flex;align-items:center;gap:4px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-item-meta svg {width:14px;height:14px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-result {padding:3px 8px;border-radius:var(--spatial-radius-badge);background:var(--spatial-section-bg);color:var(--spatial-section-ink);font-weight:650}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-result[data-result=Pass] {background:var(--spatial-success-bg);color:var(--spatial-success-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-result[data-result=Fail] {background:var(--spatial-fail-bg);color:var(--spatial-fail-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-critical {color:var(--spatial-warning-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .review-item small.spatial-review-evidence-warning {color:var(--spatial-warning-ink);margin-top:8px}
