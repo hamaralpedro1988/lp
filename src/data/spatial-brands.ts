@@ -14,9 +14,9 @@ function atmosphere(accent: string): Record<string, string> {
     '--spatial-brand-iris': mix(accent, '#242339', .45),
     '--spatial-brand-iris-deep': mix(accent, '#242339', .3),
     '--spatial-brand-canvas': mix(accent, '#f9f9fc', .035),
-    '--spatial-brand-canvas-start': mix(accent, '#fcfcff', .018),
-    '--spatial-brand-canvas-mid': mix(accent, '#ffffff', .04),
-    '--spatial-brand-canvas-end': mix(accent, '#fdfdff', .04),
+    '--spatial-brand-canvas-start': mix(accent, '#fcfcff', .025),
+    '--spatial-brand-canvas-mid': mix(accent, '#ffffff', .065),
+    '--spatial-brand-canvas-end': mix(accent, '#fdfdff', .06),
     '--spatial-brand-glow': mix(accent, '#f3f2fa', .085) + '50',
   }
 }
