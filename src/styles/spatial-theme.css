@@ -14,7 +14,8 @@ html[data-assessment-version="5"] {
   --spatial-surface:#ffffff;
   --spatial-surface-gradient:linear-gradient(155deg,var(--spatial-surface) 0%,#fdfcff 70%,var(--spatial-surface-tint) 100%);
   --spatial-ink:#242339;
-  --spatial-muted:#706a83;
+  --spatial-brand-secondary-ink:#706a83;
+  --spatial-muted:var(--spatial-brand-secondary-ink);
   --spatial-iris:var(--spatial-brand-iris);
   --spatial-iris-deep:var(--spatial-brand-iris-deep);
   --spatial-progress:var(--spatial-success-ink);

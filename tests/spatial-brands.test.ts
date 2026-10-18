@@ -16,7 +16,7 @@ test('branding configuration preserves default and never writes semantic or prod
     const t = brand.tokens
     assert.ok(contrast(t['--spatial-brand-accent-ink'], t['--spatial-brand-accent-subtle']) >= 4.5)
     for (const stop of ['canvas', 'canvas-start', 'canvas-mid', 'canvas-end']) {
-      assert.ok(contrast('#706a83', t[`--spatial-brand-${stop}`]) >= 4.5, `${brand.name} ${stop}`)
+      assert.ok(contrast(t['--spatial-brand-secondary-ink'], t[`--spatial-brand-${stop}`]) >= 4.5, `${brand.name} ${stop}`)
     }
   }
   assert.ok(spatialBrandCSS.includes('html[data-assessment-version="5"][data-spatial-brand="mcdonalds"]'))
