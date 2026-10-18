@@ -10,7 +10,7 @@ with sync_playwright() as pw:
  def select(name):
   page.get_by_role('combobox',name='Brand preview',exact=True).click();page.get_by_role('option',name=name,exact=True).click();settle()
  def roles():return page.evaluate('''()=>{const s=getComputedStyle(document.documentElement);return Object.fromEntries(['primary','primary-hover','line','input-line','surface-gradient','choice','section-bg','section-ink','success-bg','success-ink','success-line','fail-bg','fail-ink','warning-bg','warning-ink','focus','progress-track'].map(x=>[x,s.getPropertyValue('--spatial-'+x).trim()]))}''')
- page.goto(args.url+'/?version=5&brandDemo=1');page.locator('.screen').wait_for();page.evaluate('()=>localStorage.removeItem("lp-rosa-flow-v5-v01")');page.reload();page.locator('.screen').wait_for();baseline=roles()
+ page.goto(args.url+'/?version=5&brandDemo=1');page.locator('.screen').wait_for();page.evaluate('()=>localStorage.removeItem("lp-rosa-flow-v5-v01")');page.reload();page.locator('.screen').wait_for();baseline=roles();expect(page.locator('.phone .spatial-brand-demo')).to_have_count(0)
  fixture=out/'photo.png';page.screenshot(path=str(fixture))
  for brand,name in [('spatial','Spatial'),('mcdonalds',"McDonald's"),('burger-king','Burger King')]:
   page.evaluate('()=>localStorage.removeItem("lp-rosa-flow-v5-v01")');page.reload();page.locator('.screen').wait_for();page.evaluate('()=>window.__brandReloadSentinel="still-here"');select(name)

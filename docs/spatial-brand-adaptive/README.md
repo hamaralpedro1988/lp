@@ -4,7 +4,7 @@ One existing React/shadcn application, with a narrowly scoped brand atmosphere l
 
 ## Brand demo
 
-The Design System always exposes **Brand preview**. The actual assessment exposes the same switcher only with `?version=5&brandDemo=1`; the default user-testing URL remains free of prototype controls. `brand=mcdonalds` or `brand=burger-king` deep-links a brand without exposing the switcher. Omit `brand` for the approved Spatial default. Switching uses React state plus a URL parameter, never a reload or tenant/assessment localStorage write. This is demonstration configuration, not real tenant discovery or authentication.
+The Design System always exposes **Brand preview**. The actual assessment exposes the same switcher in an external preview panel only with `?version=5&brandDemo=1`; the default user-testing URL remains free of prototype controls. `brand=mcdonalds` or `brand=burger-king` deep-links a brand without exposing the switcher. Omit `brand` for the approved Spatial default. Switching uses React state plus a URL parameter, never a reload or tenant/assessment localStorage write. This is demonstration configuration, not real tenant discovery or authentication.
 
 Configuration lives in `src/data/spatial-brands.ts`. Its allowlisted output contains only brand color variables. Three configurations reuse the same components and CSS geometry:
 
@@ -66,3 +66,10 @@ Production build, unit suites and lint pass (three existing Fast Refresh warning
 Browser checks cover all five screens under all three brands, Sections portals, 320/390/419px, switching without reload, draft preservation, fixed product/semantic token values, matching green Pass/progress, visible percentage, shared core Progress, selected-brand CSS export and the absence of controls in the default participant app. Existing full-flow, touch/swipe and Design System/Theme Studio regressions are run separately, including V2–V4.
 
 No physical device or live tenant integration is available; mobile checks use browser emulation. Presets demonstrate atmospheric adaptation, not licensed logos or a final corporate brand manual. Arbitrary color entry is intentionally absent: new configurations should undergo the same contrast review.
+
+
+## External preview controls
+
+The explicit brand demo control is a sibling of the app stage, never a child of the phone screen. At desktop widths it sits in a separate panel to the right; at widths up to 1100px it follows the app in document flow below it, keeping the phone viewport intact instead of overlaying or shrinking it. It remains absent from the standard participant URL.
+
+Verified at 390/900/1440px: app width and height match the URL without controls; the panel is geometrically outside the app; selecting McDonald's still updates the theme. [Desktop](external-controls/1440.png) · [Tablet](external-controls/900.png) · [Mobile](external-controls/390.png). Production build and lint pass, with the same three existing Fast Refresh warnings.
