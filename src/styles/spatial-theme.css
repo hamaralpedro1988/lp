@@ -56,7 +56,7 @@ html[data-assessment-version="5"] {
   --spatial-radius-badge:9px;
   --spatial-space-1:4px;--spatial-space-2:8px;--spatial-space-3:12px;
   --spatial-space-4:16px;--spatial-space-5:20px;--spatial-space-6:24px;--spatial-space-8:32px;
-  --spatial-space-card-block:22px;--spatial-space-card-inline:21px;--spatial-space-context:24px;
+  --spatial-space-card-block:22px;--spatial-space-card-inline:21px;--spatial-space-context:16px;
   --spatial-space-description:23px;--spatial-space-choices:13px;--spatial-space-evidence:22px;
   --spatial-space-gutter:17px;--spatial-space-header-block:14px;--spatial-space-footer-gap:10px;
   --spatial-type-instruction:15px;--spatial-type-response:15px;--spatial-type-helper:12px;
@@ -164,7 +164,7 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badge {font-size:11px;font-weight:750;line-height:1.4;border:0;border-radius:var(--spatial-radius-badge);padding:6px 9px;background:var(--spatial-section-bg);color:var(--spatial-section-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badge[data-tone=critical] {background:var(--spatial-warning-bg);color:var(--spatial-warning-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-position {font-size:11px;white-space:nowrap;font-weight:750;color:var(--spatial-muted);font-variant-numeric:tabular-nums}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-title {font-size:var(--spatial-type-title);line-height:var(--spatial-leading-title);letter-spacing:var(--spatial-track-title);font-weight:var(--spatial-weight-title);margin:0 0 24px;outline:none;overflow-wrap:break-word}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-title {font-size:var(--spatial-type-title);line-height:var(--spatial-leading-title);letter-spacing:var(--spatial-track-title);font-weight:var(--spatial-weight-title);margin:0 0 var(--spatial-space-4);outline:none;overflow-wrap:break-word}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-description {font-size:var(--spatial-type-instruction);line-height:var(--spatial-leading-body);color:var(--spatial-muted);margin:0 0 var(--spatial-space-description)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choices {display:grid;gap:var(--spatial-space-choices)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice {min-height:76px;display:flex;align-items:center;gap:14px;padding:11px 14px;border:1px solid var(--spatial-choice-line);border-radius:var(--spatial-radius-choice);background:var(--spatial-choice);cursor:pointer;transition:transform var(--spatial-motion-press),border-color var(--spatial-motion-press),box-shadow var(--spatial-motion-progress),background-color var(--spatial-motion-press)}
