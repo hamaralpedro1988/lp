@@ -33,7 +33,7 @@ with sync_playwright() as pw:
       for (const card of cards) for (const animation of card.getAnimations()) {
         animation.pause();
         const duration = animation.effect.getTiming().duration;
-        if (duration < 650) throw new Error('Card transition too fast: '+duration+' '+animation.constructor.name+' '+card.outerHTML.slice(0,180));
+        if (duration !== 500) throw new Error('Expected 500ms card transition, got '+duration);
         animation.currentTime = duration * .5;
       }
       return cards.map(card => ({x:card.getBoundingClientRect().x, width:card.offsetWidth}));
@@ -50,6 +50,8 @@ with sync_playwright() as pw:
     assert len(frames) == 2, frames
     assert frames[0][-1]['transform'].startswith('translateX(-')
     assert not frames[1][0]['transform'].startswith('translateX(-')
+    assert frames[0][-1]['transform'].endswith('scale(0.98)')
+    assert 'scale(' not in frames[1][0]['transform']
     assert frames[0][-1]['opacity'] == frames[1][0]['opacity'] == 1
     page.get_by_role('button', name='Previous criterion', exact=True).click()
     expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('1 of 11')
@@ -65,5 +67,5 @@ with sync_playwright() as pw:
     assert page.evaluate('window.cardMotion.length') == 4
     expect(page.get_by_role('button', name='Next', exact=True)).to_be_disabled()
     expect(page.locator('[data-card-departure]')).to_have_count(0)
-    print('PASS simultaneous slow opaque card slides in both directions, rapid-click guard, saved note, unanswered guard and reduced motion')
+    print('PASS simultaneous 500ms card slides with 98% exit depth in both directions, rapid-click guard, saved note, unanswered guard and reduced motion')
     browser.close()

@@ -23,15 +23,16 @@ export function useSpatialSwipe(ref: RefObject<HTMLDivElement | null>, options: 
     const { direction, snapshot, offset } = transition
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { snapshot.remove(); return }
     departing.current = snapshot
-    const duration = spatialMotionMilliseconds(getComputedStyle(node).getPropertyValue('--spatial-motion-swipe-in'), 700)
+    const duration = spatialMotionMilliseconds(getComputedStyle(node).getPropertyValue('--spatial-motion-swipe-in'), 500)
+    const exitScale = parseFloat(getComputedStyle(node).getPropertyValue('--spatial-motion-card-exit-scale')) || .98
     const distance = node.offsetWidth + 24
     const sign = direction === 'next' ? 1 : -1
-    const timing = { duration, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'both' as const }
+    const timing = { duration, easing: 'cubic-bezier(.25,.1,.25,1)', fill: 'both' as const }
     busy.current = true
     node.dataset.swipe = 'transitioning'
     departureAnimation.current = snapshot.animate([
-      { transform: `translateX(${offset}px)`, opacity: 1 },
-      { transform: `translateX(${-sign * distance}px)`, opacity: 1 },
+      { transform: `translateX(${offset}px) scale(1)`, opacity: 1 },
+      { transform: `translateX(${-sign * distance}px) scale(${exitScale})`, opacity: 1 },
     ], timing)
     animation.current = node.animate([
       { transform: `translateX(${sign * distance + offset}px)`, opacity: 1 },

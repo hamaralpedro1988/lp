@@ -70,7 +70,8 @@ html[data-assessment-version="5"] {
   --spatial-font:"Inter Variable",sans-serif;
   --spatial-type-title:clamp(24px,6.5vw,29px);
   --spatial-type-body:16px;--spatial-type-secondary:14px;--spatial-type-label:11px;
-  --spatial-motion-swipe-out:700ms;--spatial-motion-swipe-in:700ms;--spatial-motion-swipe-snap:210ms;
+  --spatial-motion-card-exit-scale:.98;
+  --spatial-motion-swipe-out:500ms;--spatial-motion-swipe-in:500ms;--spatial-motion-swipe-snap:210ms;
   --spatial-motion-press:160ms;--spatial-motion-progress:260ms;--spatial-motion-sheet:280ms;--spatial-motion-question:340ms;--spatial-motion-screen:360ms;
   --spatial-ease:cubic-bezier(.2,.85,.25,1);
   --background:var(--spatial-canvas);--foreground:var(--spatial-ink);
