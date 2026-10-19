@@ -619,3 +619,11 @@ html[data-assessment-version="5"] .spatial-finish-summary {gap:16px;padding:20px
 .spatial-finish-summary .review-stat b {font-size:30px;line-height:1.2;color:var(--spatial-ink)}
 .spatial-finish-summary .review-stat small {grid-column:1/-1;font-size:14px;color:var(--spatial-muted);text-align:left}
 html[data-assessment-version="5"] .spatial-finish-sheet .spatial-slide-handle {background:var(--spatial-primary);color:white;border-color:var(--spatial-primary)}
+
+.spatial-preview-library {display:flex;align-items:center;justify-content:space-between;min-height:44px;margin-top:12px;font-size:14px;color:var(--spatial-ink);text-decoration:underline;text-underline-offset:3px}
+.spatial-preview-pages {display:grid;gap:8px;margin-top:8px}
+.spatial-preview-pages button {justify-content:flex-start;min-height:40px;font-size:13px;white-space:normal;text-align:left}
+.spatial-preview-pages button[aria-current=page] {border-color:var(--spatial-primary);background:var(--spatial-section-bg)}
+.spatial-preview-note {display:block;margin-top:12px;font-size:12px;line-height:1.5;color:var(--spatial-muted)}
+html[data-assessment-version="5"] .spatial-brand-demo {max-height:calc(100dvh - 48px);overflow-y:auto}
+@media(max-width:1100px) {html[data-assessment-version="5"] .spatial-brand-demo {max-height:none}}
