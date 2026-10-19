@@ -1,6 +1,6 @@
 export const rosaPatterns = [
   { id:'assignment', name:'Assignment tile', component:'SpatialAssignmentCard', screens:'Assignments', purpose:'Make the next assigned assessment easy to enter.', anatomy:'Station · status · employee · assessor · tasks · action', states:'Ready / in progress / local review', rationale:'One clear entry action keeps the task easy to find.' },
-  { id:'people', name:'People & context', component:'SpatialPeopleCard', screens:'Overview', purpose:'Confirm who is being observed and who is assessing.', anatomy:'Team member action · status · qualified assessor', states:'Ready / saved draft / review recorded', rationale:'Keep identity context visible without claiming verified identity.' },
+  { id:'people', name:'People & context', component:'SpatialStationHeading + SpatialPeopleCard + SpatialLearningScore', screens:'Overview', purpose:'Confirm who is being observed and who is assessing.', anatomy:'Station photo · task count · member action · sample learning result · status · assessor', states:'Ready / saved draft / review recorded', rationale:'Keep identity context visible without claiming verified identity.' },
   { id:'header', name:'Assessment header', component:'SpatialAssessmentHeader', screens:'Live Assessment', purpose:'Keep station, employee and completion available.', anatomy:'Continuous inset progress · Overview Back · station/subtitle · Dre', states:'Empty / partial / complete / offline / save error', rationale:'Transparent chrome preserves a continuous canvas and scarce mobile space.' },
   { id:'card', name:'Spatial assessment card', component:'SpatialLiveCard', screens:'Live Assessment', purpose:'Observe one task at a time without losing evidence context.', anatomy:'Section · Critical · position · title · description · choices · evidence helper · touch swipe', states:'Unanswered / answered / required evidence / valid swipe / blocked snapback / reduced motion', rationale:'The whole card scrolls; optional evidence never pins itself above the navigation.' },
   { id:'choices', name:'Binary response', component:'SpatialChoices', screens:'Live Assessment', purpose:'Record a mutually exclusive observation.', anatomy:'Radio · label · supporting copy · semantic green Pass / red Fail outline', states:'Unselected / Pass / Fail / keyboard focus / disabled', rationale:'Never preselect, infer a result or auto-advance. Coaching is not a V5 result.' },
@@ -17,7 +17,7 @@ export const rosaPatterns = [
 export function rosaExample(id: string) {
   const examples: Record<string,string> = {
     assignment:'<SpatialAssignmentCard status="Ready to Start" onOpen={openOverview} />',
-    people:'<SpatialPeopleCard status="Saved draft" onMember={openMember} />',
+    people:'<SpatialStationHeading />\n<SpatialPeopleCard status="Ready to start" learning={learningResult} onMember={openMember} />',
     header:'<SpatialAssessmentHeader draft={draft} photos={photos} saveError={saveError} onBack={openOverview} />',
     card:'<SpatialLiveCard draft={draft} photos={photos} direction="next" titleRef={titleRef} onAnswer={onAnswer} onNote={onNote} onCamera={openCamera} galleryRef={setGalleryTarget} onNavigate={navigateCriterion} />',
     choices:'<SpatialChoices value={draft.answers[draft.index] ?? ""} onChange={onAnswer} disabled={false} />',

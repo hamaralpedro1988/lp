@@ -1,3 +1,4 @@
+import { spatialOverviewLearning } from '@/data/spatial-overview'
 import { useSpatialBrand } from '@/hooks/use-spatial-brand'
 import { SpatialBrandStyles, SpatialBrandSwitcher } from '@/components/design-system/brand-switcher'
 import { OverlayContainerContext } from '@/lib/overlay-container'
@@ -17,7 +18,7 @@ import { VersionSwitcher } from '@/components/layout/version-switcher'
 import { flowCriteria as criteria, flowScreens, flowStorageKey, emptyFlowDraft, normalizeFlowDraft, flowEvidenceOk, flowMissing, type FlowDraft, type FlowScreen, type FlowAnswer } from '@/data/flow-draft'
 import { useMobileOverlay, useMobileViewport } from '@/hooks/use-mobile-overlay'
 import { spatialNavigationBlock, spatialEvidenceOk, spatialMissing, spatialTheme, spatialStorageKey, emptySpatialDraft, normalizeSpatialDraft } from '@/data/spatial-flow'
-import { SpatialAssignmentCard, SpatialPeopleCard, SpatialReviewSummary, SpatialReviewNextSteps, SpatialReviewList, SpatialFeedbackCard, SpatialApprovals } from '@/components/assessment/spatial-journey'
+import { SpatialAssignmentCard, SpatialPeopleCard, SpatialStationHeading, SpatialReviewSummary, SpatialReviewNextSteps, SpatialReviewList, SpatialFeedbackCard, SpatialApprovals } from '@/components/assessment/spatial-journey'
 import { SpatialSystemChrome, SpatialFlowHeader, SpatialAssessmentHeader, SpatialLiveCard, SpatialActionButton, SpatialSurface, SpatialNavigation, SpatialSections } from '@/components/assessment/spatial-primitives'
 import { applyTheme, creatorTheme, loadTheme } from '@/lib/theme'
 import '@/styles/flow.css'
@@ -173,7 +174,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
     go(screen === 'signoff' ? 'review' : screen === 'review' ? 'assessment' : 'list')
   }
   const assessmentStatus = spatial && draft.assessorConfirmed && missing.length === 0 ? 'Review saved on this device' : draft.paused ? 'Saved draft' : recorded ? 'In progress' : spatial ? 'Ready to start' : 'Ready to Start'
-  const pageLabels: Record<FlowScreen, string> = { list: 'Assessments', overview: 'Assessment overview', assessment: 'Assessment', review: spatial ? 'Review' : 'Assessment review', signoff: 'Feedback & sign-off' }
+  const pageLabels: Record<FlowScreen, string> = { list: 'Assessments', overview: spatial ? 'Assessment Overview' : 'Assessment overview', assessment: 'Assessment', review: spatial ? 'Review' : 'Assessment review', signoff: 'Feedback & sign-off' }
 
   const [overlayContainer, setOverlayContainer] = useState<HTMLDivElement | null>(null)
   const navigation = <nav className="flow-nav" aria-label="Screen flow">{flowScreens.map((id, i) => <button key={id} className={screen === id ? 'active' : ''} aria-current={screen === id ? 'step' : undefined} onClick={() => go(id)}><span className="number">0{i + 1}</span>{screenNames[id]}{id === 'signoff' && missing.length > 0 && <span className="sr-only"> (requires complete checklist)</span>}</button>)}</nav>
@@ -212,12 +213,12 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
         <Surface data-elevation="quiet" className="overview-card"><CardContent className="flow-tip"><span className="overview-goal-icon"><Clock3 aria-hidden="true"/></span><div><h2>At your own pace</h2><p className="overview-description">Record observations as you go. You can leave the checklist and return to your saved draft.</p></div></CardContent></Surface>
       </div>}
       {screen === 'overview' && <div className="overview-content">
-        <header className="overview-intro">
+        <>{spatial ? <SpatialStationHeading titleRef={titleRef}/> : <header className="overview-intro">
 
           <div className="overview-heading"><h1 ref={titleRef} tabIndex={-1}>Fryer Station</h1><span>{criteria.length} tasks</span></div>
           <p className="overview-category">Food Process &amp; Safety{!spatial && <> <span aria-hidden="true">•</span> Category 2</>}</p>
-        </header>
-        {spatial ? <SpatialPeopleCard status={assessmentStatus} onMember={() => setSheet('member')}/> : <>
+        </header>}</>
+        {spatial ? <SpatialPeopleCard status={assessmentStatus} learning={spatialOverviewLearning} onMember={() => setSheet('member')}/> : <>
         <Surface data-elevation="quiet" className="overview-card">
           <CardContent className="overview-member-content">
             <ActionButton variant="ghost" className="overview-member" onClick={() => setSheet('member')} aria-label="View team member Dre Jackson">
@@ -234,8 +235,8 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
         </Surface>
         </>}
         <Surface data-elevation="quiet" className="overview-card">
-          <CardHeader><CardTitle><h2>Assessment description</h2></CardTitle></CardHeader>
-          <CardContent><p className="overview-description">Observe Dre completing the fryer task from preparation to handoff. Check safe working practices, the cooking process and the finished product against the station standard.</p></CardContent>
+          <CardHeader><CardTitle><h2>{spatial ? 'The assessment' : 'Assessment description'}</h2></CardTitle></CardHeader>
+          <CardContent>{spatial ? <div className="spatial-overview-description"><p className="overview-description">Observe Dre completing the fryer task from preparation to handoff.</p><p className="overview-description">Check safe working practices, the cooking process and the finished product against the station standard.</p></div> : <p className="overview-description">Observe Dre completing the fryer task from preparation to handoff. Check safe working practices, the cooking process and the finished product against the station standard.</p>}</CardContent>
         </Surface>
         <Surface data-elevation="quiet" className="overview-card">
           <CardHeader><CardTitle><h2>Goals</h2></CardTitle></CardHeader>
@@ -244,7 +245,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
           </CardContent>
         </Surface>
         <Surface data-elevation="quiet" className="overview-card overview-sections">
-          <CardHeader><CardTitle><h2>What you will observe</h2></CardTitle></CardHeader>
+          <CardHeader><CardTitle><h2>{spatial ? 'What you will observe by step' : 'What you will observe'}</h2></CardTitle></CardHeader>
           <CardContent>
             {(['Preparation', 'Frying', 'Completion'] as const).map((section, i) => <div key={section}>
               {i > 0 && <Separator/>}

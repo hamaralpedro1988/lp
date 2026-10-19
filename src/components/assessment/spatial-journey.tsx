@@ -1,10 +1,12 @@
+import fryerPhoto from '@/assets/fryer-station.png'
+import type { SpatialLearningResult } from '@/data/spatial-overview'
 import dreAvatar from '@/assets/dre-jackson.png'
 import { spatialMissing, spatialEvidenceMessage, spatialEvidenceRequirement } from '@/data/spatial-flow'
-import { useCallback, useId, useRef, useState, type ReactNode } from 'react'
-import { Camera, Check, ChevronRight, ClipboardCheck, MessageCircle, ShieldCheck, UserRound, X } from 'lucide-react'
+import { useCallback, useId, useRef, useState, type ReactNode, type Ref } from 'react'
+import { Camera, CookingPot, Check, ChevronRight, ClipboardCheck, MessageCircle, ShieldCheck, UserRound, X } from 'lucide-react'
 import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
 import { spatialReviewIndices, spatialReviewResult, type SpatialReviewFilter } from '@/data/spatial-review'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -16,9 +18,18 @@ import { SpatialActionButton, SpatialSurface } from './spatial-primitives'
 export function SpatialAssignmentCard({ status, onOpen }: { status: string; onOpen: () => void }) {
   return <SpatialSurface className="overview-card"><CardHeader><CardTitle><h2>Assigned assessment</h2></CardTitle></CardHeader><CardContent><div className="flow-card-heading"><h3>Fryer Station</h3><Badge variant="outline" className="overview-status">{status}</Badge></div><p className="overview-category">Food Process &amp; Safety</p><div className="flow-person"><span className="overview-goal-icon"><UserRound aria-hidden="true"/></span><div><strong>Dre Jackson</strong><small>Crew Floor Member</small></div></div><Separator className="my-4"/><div className="flow-card-detail"><span>{flowCriteria.length} tasks</span><span>Assessor · Rosa Thompson</span></div><SpatialActionButton className="overview-start spaced" onClick={onOpen}>View Assessment<ChevronRight aria-hidden="true"/></SpatialActionButton></CardContent></SpatialSurface>
 }
-export function SpatialPeopleCard({ status, onMember, compact = false }: { status: string; onMember: () => void; compact?: boolean }) {
+export function SpatialStationHeading({ titleRef }: { titleRef?: Ref<HTMLHeadingElement> }) {
+  const [imageFailed, setImageFailed] = useState(false)
+  return <header className="spatial-overview-station"><span className="spatial-station-image" aria-hidden="true">{imageFailed ? <CookingPot/> : <img src={fryerPhoto} alt="" width={60} height={60} decoding="async" onError={() => setImageFailed(true)}/>}</span><div><h1 ref={titleRef} tabIndex={-1}>Fryer Station</h1><p>Food Process &amp; Safety</p></div><span className="spatial-station-task-count">{flowCriteria.length} Tasks</span></header>
+}
+export function SpatialLearningScore({ result }: { result: SpatialLearningResult }) {
+  const [open, setOpen] = useState(false)
+  useMobileOverlay(open, () => { setOpen(false); return true })
+  return <Sheet open={open} onOpenChange={setOpen}><SheetTrigger asChild><SpatialActionButton variant="ghost" className="spatial-learning-row" aria-label="View e-learning activity score for Dre Jackson"><span>E-learning Activity Score</span><strong>{result.score}</strong><ChevronRight aria-hidden="true"/></SpatialActionButton></SheetTrigger><SheetContent side="bottom" className="mobile-sheet flow-sheet spatial-learning-sheet mx-auto"><SheetHeader><SheetTitle>E-learning activity</SheetTitle><SheetDescription>Dre Jackson · {result.activity}</SheetDescription></SheetHeader><div className="spatial-learning-detail"><span>Activity score</span><strong>{result.score}</strong>{result.example && <p>Example learning result for this prototype.</p>}<SpatialActionButton variant="outline" onClick={() => setOpen(false)}>Back to overview</SpatialActionButton></div></SheetContent></Sheet>
+}
+export function SpatialPeopleCard({ status, onMember, compact = false, learning }: { status: string; onMember: () => void; compact?: boolean; learning?: SpatialLearningResult }) {
   const [photoFailed, setPhotoFailed] = useState(false)
-  return <SpatialSurface className={`overview-card ${compact ? 'spatial-review-member' : ''}`}><CardContent className="overview-member-content"><SpatialActionButton variant="ghost" className="overview-member" onClick={onMember} aria-label="View team member Dre Jackson"><span className="overview-avatar" aria-hidden="true">{compact && !photoFailed ? <img src={dreAvatar} alt="" width={40} height={40} onError={() => setPhotoFailed(true)}/> : <UserRound/>}</span><span className="overview-person-copy"><span>Dre Jackson</span><small>Crew Floor Member</small></span><ChevronRight aria-hidden="true"/></SpatialActionButton></CardContent>{!compact && <><Separator/><CardContent className="overview-metadata"><div><span>Assessment status</span><Badge variant="outline" className="overview-status">{status}</Badge></div><div><span>Qualified assessor</span><strong>Rosa Thompson (you)</strong></div></CardContent></>}</SpatialSurface>
+  return <SpatialSurface className={`overview-card ${compact ? 'spatial-review-member' : learning ? 'spatial-overview-people' : ''}`}><CardContent className="overview-member-content"><SpatialActionButton variant="ghost" className="overview-member" onClick={onMember} aria-label="View team member Dre Jackson"><span className="overview-avatar" aria-hidden="true">{(compact || learning) && !photoFailed ? <img src={dreAvatar} alt="" width={40} height={40} onError={() => setPhotoFailed(true)}/> : <UserRound/>}</span><span className="overview-person-copy"><span>Dre Jackson</span><small>Crew Floor Member</small></span><ChevronRight aria-hidden="true"/></SpatialActionButton></CardContent>{!compact && <><Separator/><CardContent className="overview-metadata">{learning && <SpatialLearningScore result={learning}/>}<div><span>Assessment Status</span><Badge variant="outline" className="overview-status" data-status={status === 'Ready to start' ? 'ready' : 'progress'}>{status}</Badge></div><div><span>{learning ? 'Assessor' : 'Qualified assessor'}</span><strong>Rosa Thompson (me)</strong></div></CardContent></>}</SpatialSurface>
 }
 export function SpatialReviewSummary({ draft, photos }: { draft: FlowDraft; photos: Record<number, number> }) {
   const missing = spatialMissing(draft, photos)
