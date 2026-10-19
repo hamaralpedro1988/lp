@@ -20,8 +20,9 @@ export function SpatialSlideComplete({ disabled, onComplete }: { disabled: boole
   }
   return <div className="spatial-slide-confirm">
     <div ref={track} className="spatial-slide-track" data-disabled={disabled || undefined} data-complete={complete || undefined}>
-      <span className="spatial-slide-fill" style={{ width: `calc(56px + (100% - 56px) * ${progress})` }} aria-hidden="true"/>
+      <span className="spatial-slide-fill" style={{ width: `${progress * 100}%` }} aria-hidden="true"/>
       <span className="spatial-slide-label" aria-hidden="true">{complete ? 'Assessment completed' : armed ? 'Press again to complete' : 'Slide to complete'}</span>
+      <span className="spatial-slide-label spatial-slide-label-inverse" style={{ clipPath: `inset(0 ${(1 - progress) * 100}% 0 0)` }} aria-hidden="true">{complete ? 'Assessment completed' : armed ? 'Press again to complete' : 'Slide to complete'}</span>
       <Button variant="outline" className="spatial-slide-handle" disabled={disabled || complete} aria-label={armed ? 'Confirm complete assessment' : 'Complete assessment'} aria-describedby={hint}
         style={{ left: `calc(4px + (100% - 64px) * ${progress})` }}
         onPointerDown={event => {
