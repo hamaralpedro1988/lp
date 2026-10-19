@@ -12,3 +12,10 @@ export function spatialReviewIndices(draft: FlowDraft, photos: Record<number, nu
     return filter === 'all' || (filter === 'critical' ? 'critical' in criterion : result === (filter === 'passed' ? 'Pass' : 'Fail')) ? [index] : []
   })
 }
+
+
+export function spatialAssessmentOutcome(draft: FlowDraft, photos: Record<number, number>) {
+  const criticalFailed = flowCriteria.filter((task, index) => 'critical' in task && draft.answers[index] === 'fail').length
+  if (flowCriteria.some((_, index) => spatialReviewResult(draft, photos, index) === 'Incomplete')) return 'Pending'
+  return criticalFailed ? 'Fail' : 'Pass'
+}

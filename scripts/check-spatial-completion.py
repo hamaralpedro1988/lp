@@ -1,0 +1,44 @@
+import re
+from pathlib import Path
+from playwright.sync_api import sync_playwright,expect
+with sync_playwright() as pw:
+ b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+ p=b.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
+ errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
+ p.goto('http://127.0.0.1:5181/?version=5&brandDemo=1')
+ p.locator('.screen').wait_for()
+ draft={'screen':'assessment','index':10,'answers':{str(i):'met' for i in range(11)},'notes':{'8':'Quality checked'},'feedback':'','offline':False,'paused':False,'assessorConfirmed':False}
+ p.evaluate('(d)=>localStorage.setItem("lp-rosa-flow-v5-v01",JSON.stringify(d))',draft);p.reload()
+ p.get_by_role('button',name='Finish checklist').click()
+ dialog=p.get_by_role('dialog',name='Ready to finish assessment?')
+ expect(dialog).to_be_visible();expect(dialog.get_by_role('button',name='Complete assessment')).to_be_disabled()
+ dialog.get_by_role('button',name='Continue assessing').click()
+ expect(p.locator('.spatial-live-card')).to_be_visible()
+ Path('work/result/photo.png').write_bytes(__import__('base64').b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aD1sAAAAASUVORK5CYII='))
+ p.screenshot(path='work/result/photo-real.png');p.locator('input[aria-label="Take photo"]').nth(8).set_input_files('work/result/photo-real.png');p.wait_for_timeout(300)
+ # Resume last task through saved state without losing actual mounted evidence.
+ p.get_by_role('button',name=re.compile('All tasks|Sections')).first.click()
+ p.get_by_role('button',name=re.compile('Follows the approved holding guidance')).click()
+ p.get_by_role('button',name='Finish checklist').click()
+ expect(p.get_by_role('button',name='Complete assessment')).to_be_enabled()
+ p.screenshot(path='docs/rosa-assessment-result/confirmation.png')
+ p.get_by_role('button',name='Continue assessing').click()
+ expect(p.locator('.spatial-live-card')).to_be_visible()
+ p.get_by_role('button',name='Finish checklist').click();p.get_by_role('button',name='Complete assessment').click()
+ expect(p.locator('.spatial-review-summary')).to_contain_text('Pass')
+ expect(p.get_by_role('button',name='Back to checklist')).to_have_count(0)
+ expect(p.locator('.review-item')).to_have_count(4)
+ p.get_by_role('button',name='View All',exact=True).click();expect(p.locator('.review-item')).to_have_count(11)
+ p.locator('.review-item').first.click();expect(p.get_by_role('button',name='Edit observation')).to_have_count(0)
+ p.keyboard.press('Escape')
+ p.reload();expect(p.locator('.spatial-review-summary')).to_contain_text('Pass')
+ for width in [320,390,419]:
+  p.set_viewport_size({'width':width,'height':844})
+  p.screenshot(path=f'docs/rosa-assessment-result/pass-{width}.png',full_page=True)
+  assert p.evaluate('document.documentElement.scrollWidth <= innerWidth')
+ p.get_by_role('button',name='See Insights').click();expect(p.get_by_role('dialog',name='Assessment insights')).to_be_visible()
+ p.keyboard.press('Escape');p.get_by_role('button',name='Sign Off',exact=True).click()
+ expect(p.get_by_text('Feedback for Dre',exact=True)).to_be_visible()
+ assert not errors,errors
+ print('PASS confirmation cancel, missing evidence guard, completion, read-only result, reload lock, 320/390/419, insights, sign-off')
+ b.close()

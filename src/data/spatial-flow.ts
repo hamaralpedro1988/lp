@@ -13,6 +13,14 @@ export function normalizeSpatialDraft(value: unknown): FlowDraft {
   for (const [key, answer] of Object.entries(result.answers)) {
     if (answer === 'coaching') { delete result.answers[Number(key)]; result.assessorConfirmed = false }
   }
+  const receipt = (value as FlowDraft).completion
+  if (receipt && typeof receipt.at === 'string' && Number.isFinite(Date.parse(receipt.at))) {
+    const counts = Object.fromEntries(flowCriteria.map((_, i) => [i, Number.isInteger(receipt.photos?.[i]) && receipt.photos[i] > 0 ? receipt.photos[i] : 0]))
+    if (spatialMissing(result, counts).length === 0) {
+      result.completion = { at: receipt.at, photos: counts }
+      if (result.screen !== 'signoff' && result.screen !== 'list') result.screen = 'review'
+    }
+  }
   return result
 }
 export type SpatialEvidenceRequirement = 'none' | 'comment' | 'photo' | 'comment-and-photo'
@@ -29,13 +37,14 @@ export function spatialEvidenceMessage(requirement: SpatialEvidenceRequirement, 
   return commentMissing && photoMissing ? 'Comment and photo required' : commentMissing ? 'Comment required' : photoMissing ? 'Photo required' : requirement !== 'none' ? 'Evidence recorded' : photos > 0 ? 'Photo · session only' : 'Optional evidence'
 }
 export function spatialEvidenceOk(draft: FlowDraft, index: number, photos: Record<number, number> = {}) {
-  return spatialEvidenceSatisfied(spatialEvidenceRequirement(index), draft.notes[index] ?? '', photos[index] ?? 0)
+  return spatialEvidenceSatisfied(spatialEvidenceRequirement(index), draft.notes[index] ?? '', draft.completion?.photos[index] ?? photos[index] ?? 0)
 }
 export function spatialMissing(draft: FlowDraft, photos: Record<number, number> = {}) {
   return flowCriteria.flatMap((_, index) => (draft.answers[index] !== 'met' && draft.answers[index] !== 'fail') || !spatialEvidenceOk(draft, index, photos) ? [index] : [])
 }
 /** One guard shared by button and gesture navigation. */
 export function spatialNavigationBlock(draft: FlowDraft, photos: Record<number, number>, direction: 'next' | 'back'): string | null {
+  if (draft.completion) return 'This assessment is complete and cannot be changed.'
   if (direction === 'back') return draft.index === 0 ? 'You are at the first task.' : null
   if (draft.answers[draft.index] !== 'met' && draft.answers[draft.index] !== 'fail') return 'Choose Pass or Fail before continuing.'
   if (!spatialEvidenceOk(draft, draft.index, photos)) return spatialEvidenceMessage(spatialEvidenceRequirement(draft.index), draft.notes[draft.index] ?? '', photos[draft.index] ?? 0) + ' before continuing.'
@@ -74,3 +83,9 @@ export const spatialOptions = [
   { value: 'met', title: 'Pass', description: 'Met the standard' },
   { value: 'fail', title: 'Fail', description: 'Did not meet the standard' },
 ] as const
+
+/** Capture eligibility only after validating the real, current-session evidence. */
+export function completeSpatialAssessment(draft: FlowDraft, photos: Record<number, number>): FlowDraft | null {
+  if (draft.completion || spatialMissing(draft, photos).length) return null
+  return { ...draft, screen: 'review', paused: false, completion: { at: new Date().toISOString(), photos: { ...photos } } }
+}

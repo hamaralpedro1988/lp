@@ -567,3 +567,11 @@ html[data-assessment-version="5"] .spatial-learning-detail>strong {font-size:36p
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card>.spatial-guidance-trigger {flex:none;margin-top:0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer[data-help=true] textarea {min-height:108px;height:108px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-camera {background:var(--spatial-surface)}
+
+/* Assessment Result uses the same surfaces, spacing and semantic tokens as Live. */
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary > div:first-child {display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:8px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary > div:first-child button {padding:4px 0;min-height:44px;white-space:nowrap;font-size:14px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .spatial-review-outcome {position:relative;min-height:64px;padding-inline:48px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .spatial-review-outcome > svg {position:absolute;left:16px;width:28px;height:28px;padding:5px;border-radius:50%;background:color-mix(in srgb,currentColor 10%,transparent)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-view-all {padding:16px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-view-all button {width:100%;min-height:36px;border-radius:999px}
