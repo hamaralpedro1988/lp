@@ -68,7 +68,7 @@ export const spatialTheme: Theme = {
     popover: '#fcfbff', 'popover-foreground': '#242339',
     primary: '#28253c', 'primary-foreground': '#ffffff',
     secondary: '#eeeaf7', 'secondary-foreground': '#514467',
-    muted: '#f0edf8', 'muted-foreground': '#706a83',
+    muted: '#f0edf8', 'muted-foreground': '#6b657d',
     accent: '#eee8fc', 'accent-foreground': '#59468f',
     destructive: '#a44d60', border: '#e8e5f0', input: '#d9d3e9', ring: '#7363bd',
     success: '#edf7f1', 'success-foreground': '#32614f',

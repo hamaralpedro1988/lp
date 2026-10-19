@@ -1,0 +1,569 @@
+[
+  {
+    "brand": "spatial",
+    "state": "notification",
+    "violations": 0,
+    "automatedPassNodes": 43,
+    "requiresComplementaryReview": 7
+  },
+  {
+    "brand": "spatial",
+    "state": "overview",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 40
+  },
+  {
+    "brand": "spatial",
+    "state": "step-Preparation",
+    "violations": 0,
+    "automatedPassNodes": 46,
+    "requiresComplementaryReview": 34
+  },
+  {
+    "brand": "spatial",
+    "state": "step-Frying",
+    "violations": 0,
+    "automatedPassNodes": 47,
+    "requiresComplementaryReview": 38
+  },
+  {
+    "brand": "spatial",
+    "state": "step-Completion",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 34
+  },
+  {
+    "brand": "spatial",
+    "state": "dnd-toast",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 41
+  },
+  {
+    "brand": "spatial",
+    "state": "live",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 11
+  },
+  {
+    "brand": "spatial",
+    "state": "pass",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 12
+  },
+  {
+    "brand": "spatial",
+    "state": "fail",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 12
+  },
+  {
+    "brand": "spatial",
+    "state": "guidance",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 21
+  },
+  {
+    "brand": "spatial",
+    "state": "sections",
+    "violations": 0,
+    "automatedPassNodes": 64,
+    "requiresComplementaryReview": 18
+  },
+  {
+    "brand": "spatial",
+    "state": "add-photo",
+    "violations": 0,
+    "automatedPassNodes": 46,
+    "requiresComplementaryReview": 15
+  },
+  {
+    "brand": "spatial",
+    "state": "finish",
+    "violations": 0,
+    "automatedPassNodes": 53,
+    "requiresComplementaryReview": 14
+  },
+  {
+    "brand": "spatial",
+    "state": "result",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 37
+  },
+  {
+    "brand": "spatial",
+    "state": "insights",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 42
+  },
+  {
+    "brand": "spatial",
+    "state": "task-details",
+    "violations": 0,
+    "automatedPassNodes": 47,
+    "requiresComplementaryReview": 44
+  },
+  {
+    "brand": "spatial",
+    "state": "submission",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 16
+  },
+  {
+    "brand": "spatial",
+    "state": "signature",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 21
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "notification",
+    "violations": 0,
+    "automatedPassNodes": 43,
+    "requiresComplementaryReview": 7
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "overview",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 40
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "step-Preparation",
+    "violations": 0,
+    "automatedPassNodes": 46,
+    "requiresComplementaryReview": 34
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "step-Frying",
+    "violations": 0,
+    "automatedPassNodes": 47,
+    "requiresComplementaryReview": 38
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "step-Completion",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 34
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "dnd-toast",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 41
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "live",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 11
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "pass",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 12
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "fail",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 12
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "guidance",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 21
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "sections",
+    "violations": 0,
+    "automatedPassNodes": 64,
+    "requiresComplementaryReview": 18
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "add-photo",
+    "violations": 0,
+    "automatedPassNodes": 46,
+    "requiresComplementaryReview": 15
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "finish",
+    "violations": 0,
+    "automatedPassNodes": 53,
+    "requiresComplementaryReview": 14
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "result",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 37
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "insights",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 42
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "task-details",
+    "violations": 0,
+    "automatedPassNodes": 47,
+    "requiresComplementaryReview": 33
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "submission",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 16
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "signature",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 21
+  },
+  {
+    "brand": "burger-king",
+    "state": "notification",
+    "violations": 0,
+    "automatedPassNodes": 43,
+    "requiresComplementaryReview": 7
+  },
+  {
+    "brand": "burger-king",
+    "state": "overview",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 40
+  },
+  {
+    "brand": "burger-king",
+    "state": "step-Preparation",
+    "violations": 0,
+    "automatedPassNodes": 46,
+    "requiresComplementaryReview": 34
+  },
+  {
+    "brand": "burger-king",
+    "state": "step-Frying",
+    "violations": 0,
+    "automatedPassNodes": 47,
+    "requiresComplementaryReview": 38
+  },
+  {
+    "brand": "burger-king",
+    "state": "step-Completion",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 34
+  },
+  {
+    "brand": "burger-king",
+    "state": "dnd-toast",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 41
+  },
+  {
+    "brand": "burger-king",
+    "state": "live",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 11
+  },
+  {
+    "brand": "burger-king",
+    "state": "pass",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 12
+  },
+  {
+    "brand": "burger-king",
+    "state": "fail",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 12
+  },
+  {
+    "brand": "burger-king",
+    "state": "guidance",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 21
+  },
+  {
+    "brand": "burger-king",
+    "state": "sections",
+    "violations": 0,
+    "automatedPassNodes": 64,
+    "requiresComplementaryReview": 18
+  },
+  {
+    "brand": "burger-king",
+    "state": "add-photo",
+    "violations": 0,
+    "automatedPassNodes": 46,
+    "requiresComplementaryReview": 15
+  },
+  {
+    "brand": "burger-king",
+    "state": "finish",
+    "violations": 0,
+    "automatedPassNodes": 53,
+    "requiresComplementaryReview": 14
+  },
+  {
+    "brand": "burger-king",
+    "state": "result",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 37
+  },
+  {
+    "brand": "burger-king",
+    "state": "insights",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 42
+  },
+  {
+    "brand": "burger-king",
+    "state": "task-details",
+    "violations": 0,
+    "automatedPassNodes": 47,
+    "requiresComplementaryReview": 33
+  },
+  {
+    "brand": "burger-king",
+    "state": "submission",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 16
+  },
+  {
+    "brand": "burger-king",
+    "state": "signature",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 21
+  },
+  {
+    "brand": "spatial",
+    "state": "member",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 35
+  },
+  {
+    "brand": "spatial",
+    "state": "learning",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "spatial",
+    "state": "required-evidence-empty",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "spatial",
+    "state": "required-photo",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "spatial",
+    "state": "composer-focus",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "spatial",
+    "state": "tab-failed",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 32
+  },
+  {
+    "brand": "spatial",
+    "state": "tab-passed",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 37
+  },
+  {
+    "brand": "spatial",
+    "state": "tab-critical",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "spatial",
+    "state": "primary-focus",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "member",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 35
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "learning",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "required-evidence-empty",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "required-photo",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "composer-focus",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "tab-failed",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 32
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "tab-passed",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 37
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "tab-critical",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "mcdonalds",
+    "state": "primary-focus",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "burger-king",
+    "state": "member",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 35
+  },
+  {
+    "brand": "burger-king",
+    "state": "learning",
+    "violations": 0,
+    "automatedPassNodes": 45,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "burger-king",
+    "state": "required-evidence-empty",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "burger-king",
+    "state": "required-photo",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "burger-king",
+    "state": "composer-focus",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 13
+  },
+  {
+    "brand": "burger-king",
+    "state": "tab-failed",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 32
+  },
+  {
+    "brand": "burger-king",
+    "state": "tab-passed",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 37
+  },
+  {
+    "brand": "burger-king",
+    "state": "tab-critical",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 36
+  },
+  {
+    "brand": "burger-king",
+    "state": "primary-focus",
+    "violations": 0,
+    "automatedPassNodes": 44,
+    "requiresComplementaryReview": 36
+  }
+]
