@@ -10,7 +10,7 @@ with sync_playwright() as pw:
  draft={'screen':'assessment','index':10,'answers':{str(i):'met' for i in range(11)},'notes':{'8':'Quality checked'},'feedback':'','offline':False,'paused':False,'assessorConfirmed':False}
  p.evaluate('(d)=>localStorage.setItem("lp-rosa-flow-v5-v01",JSON.stringify(d))',draft);p.reload()
  p.get_by_role('button',name='Finish checklist').click()
- dialog=p.get_by_role('dialog',name='Ready to finish assessment?')
+ dialog=p.get_by_role('dialog',name='Finish assessment?')
  expect(dialog).to_be_visible();expect(dialog.get_by_role('button',name='Complete assessment')).to_be_disabled()
  dialog.get_by_role('button',name='Close',exact=True).click()
  expect(p.locator('.spatial-live-card')).to_be_visible()
@@ -26,7 +26,7 @@ with sync_playwright() as pw:
  expect(p.locator('.spatial-live-card')).to_be_visible()
  p.get_by_role('button',name='Finish checklist').click()
  handle=p.get_by_role('button',name='Complete assessment',exact=True)
- handle.click();expect(p.get_by_role('dialog',name='Ready to finish assessment?')).to_be_visible()
+ handle.click();expect(p.get_by_role('dialog',name='Finish assessment?')).to_be_visible()
  p.evaluate('()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))')
  box=handle.bounding_box();track=p.locator('.spatial-slide-track').bounding_box()
  x=box['x']+box['width']/2;y=box['y']+box['height']/2
