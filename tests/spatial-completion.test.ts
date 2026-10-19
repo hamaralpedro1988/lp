@@ -41,3 +41,15 @@ test('only critical failures determine the completed assessment outcome', () => 
   assert.equal(spatialAssessmentOutcome({...completed, answers:{...completed.answers, 1:'fail'}}, {}), 'Fail')
   assert.equal(spatialAssessmentOutcome(emptySpatialDraft(), {}), 'Pending')
 })
+
+test('a completed assessment restores its local signature without accepting malformed drawings', () => {
+  const draft = emptySpatialDraft()
+  draft.answers = Object.fromEntries(flowCriteria.map((_, i) => [i, 'met']))
+  draft.notes[8] = 'Quality observed'
+  const completed = completeSpatialAssessment(draft, {8:1})!
+  const signature = {name:'Dre Michael',at:new Date().toISOString(),strokes:['10,10 20,20 35,15']}
+  const restored = normalizeSpatialDraft({...completed,signature})
+  assert.deepEqual(restored.signature, signature)
+  assert.equal(normalizeSpatialDraft({...completed,signature:{...signature,strokes:['<script>']}}).signature, undefined)
+  assert.equal(normalizeSpatialDraft({...draft,signature}).signature, undefined)
+})

@@ -1,3 +1,4 @@
+import { SpatialSubmission } from '@/components/assessment/spatial-submission'
 import { spatialOverviewLearning } from '@/data/spatial-overview'
 import { SpatialCriterionGuidance } from '@/components/assessment/spatial-guidance'
 import { spatialMissing, spatialNavigationBlock } from '@/data/spatial-flow'
@@ -5,14 +6,13 @@ import { createPortal } from 'react-dom'
 import { useRef, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { EvidenceAttachment } from '@/components/assessment/evidence-panel'
 import { SpatialSystemChrome, SpatialAssessmentHeader, SpatialChoices, SpatialEvidenceComposer, SpatialLiveCard, SpatialNavigation, SpatialProgress, SpatialSections, SpatialStatus } from '@/components/assessment/spatial-primitives'
-import { SpatialApprovals, SpatialAssignmentCard, SpatialFeedbackCard, SpatialPeopleCard, SpatialStationHeading, SpatialReviewList, SpatialReviewSummary, SpatialReviewNextSteps } from '@/components/assessment/spatial-journey'
+import { SpatialAssignmentCard, SpatialPeopleCard, SpatialStationHeading, SpatialReviewList, SpatialReviewSummary, SpatialReviewNextSteps } from '@/components/assessment/spatial-journey'
 import { type FlowAnswer } from '@/data/flow-draft'
 import { createExplorerDraft, explorerScenarios, type ExplorerScenario } from '@/data/design-system/fixtures'
 
@@ -27,7 +27,6 @@ export function RosaPreview({ pattern }: { pattern: string }) {
   const [preview, setPreview] = useState(false)
   const [editing, setEditing] = useState(false)
   const [member, setMember] = useState(false)
-  const [manager, setManager] = useState(false)
   const [notice, setNotice] = useState('Preview only · no assessment data is changed.')
   const titleRef = useRef<HTMLHeadingElement>(null)
   const criterionNavigation = useRef<((direction: 'next' | 'back') => void) | null>(null)
@@ -70,7 +69,7 @@ export function RosaPreview({ pattern }: { pattern: string }) {
         {pattern === 'sections' && <Sheet open={sections} onOpenChange={setSections}><SheetTrigger asChild><Button variant="outline">Open Sections</Button></SheetTrigger><SheetContent side="bottom" className="flow-sheet mobile-sheet mx-auto"><SheetHeader><SheetTitle>All tasks</SheetTitle><SheetDescription>Preview-only jump. Existing observations in Rosa remain unchanged.</SheetDescription></SheetHeader><div className="overflow-y-auto px-5 pb-5"><SpatialSections draft={draft} photos={photos} onJump={index => { setDraft(previous => ({ ...previous,index }));setSections(false);setNotice(`Preview jumped to task ${index+1}.`) }}/></div></SheetContent></Sheet>}
         {pattern === 'progress' && <><SpatialSystemChrome mode="preview"/><SpatialProgress draft={draft} photos={photos}/><SpatialStatus>{spatialMissing(draft,photos).length} tasks incomplete. A recorded Fail counts toward completion; a Pass without required evidence does not.</SpatialStatus></>}
         {pattern === 'review' && !editing && <><SpatialPeopleCard compact status="" onMember={() => setMember(true)}/><SpatialReviewSummary draft={draft} photos={photos}/><SpatialReviewNextSteps draft={draft}/><SpatialReviewList draft={draft} photos={photos} evidence={index => photo[index] ? <EvidenceAttachment file={{name:'Preview illustration.svg',url:sampleImage,video:false}} onPreview={event => {mediaTrigger.current=event.currentTarget;setPreview(true)}}/> : null} onEdit={index => { setDraft(previous => ({ ...previous,index }));setEditing(true) }}/></>}
-        {pattern === 'signoff' && <><SpatialFeedbackCard draft={draft} onFeedback={feedback => setDraft(previous => ({ ...previous,feedback,assessorConfirmed:false }))}/><label className="ds-control-row"><Checkbox checked={manager} onCheckedChange={value => setManager(value === true)}/>Manager required in this preview configuration</label><SpatialApprovals confirmed={draft.assessorConfirmed} managerRequired={manager}/><Button disabled={spatialMissing(draft,photos).length > 0} onClick={() => {setDraft(previous => ({ ...previous,assessorConfirmed:true }));setNotice('Preview local review confirmed. No real signature or submission.') }}>Confirm preview review</Button><SpatialStatus>No identity verification, server submission or certification. Choose Complete to enable this preview confirmation.</SpatialStatus></>}
+        {pattern === 'signoff' && <><SpatialSubmission draft={draft} onFeedback={feedback => setDraft(previous => ({ ...previous, feedback }))} onSignature={signature => setDraft(previous => ({ ...previous, signature }))}/><Button disabled={!draft.signature || spatialMissing(draft,photos).length > 0} onClick={() => setNotice('Submission saved in this preview only. Nothing was sent to a manager.')}>Submit assessment</Button><SpatialStatus>Local signature and feedback demonstration. No server submission or certification.</SpatialStatus></>}
         {pattern === 'system' && <><SpatialStatus>Local draft · stored on this device in the real flow.</SpatialStatus><SpatialStatus tone="warning">Offline · draft saved on this device only.</SpatialStatus><SpatialStatus tone="error">Unable to save on this device. Keep this page open.</SpatialStatus><SpatialStatus tone="warning">Comment and photo required before continuing.</SpatialStatus><SpatialStatus tone="success">Required observations recorded. This is not an overall pass.</SpatialStatus><div className="spatial-empty-state">No attachments yet.</div><div role="status" aria-label="Preparing assessment example"><Skeleton className="h-5 w-40"/><p>Preparing assessment… · loading example</p></div><SpatialStatus>Pending sync is an architectural boundary, not an implemented server state. No “synced” claim is shown.</SpatialStatus></>}
         {editing && <Button variant="outline" onClick={() => setEditing(false)}>Back to review preview</Button>}
       </div>
