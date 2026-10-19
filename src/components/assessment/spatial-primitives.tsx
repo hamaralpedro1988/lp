@@ -46,7 +46,7 @@ export function SpatialFlowHeader({ title, onBack, backLabel, end, subtitle, chi
 }
 export function SpatialAssessmentHeader({ draft, photos, saveError, onBack, onMember }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; onBack: () => void; onMember: () => void }) {
   const [photoFailed, setPhotoFailed] = useState(false)
-  return <><SpatialProgress draft={draft} photos={photos}/><SpatialFlowHeader title="Fryer Station" subtitle="Food Process & Safety" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<SpatialActionButton variant="outline" size="icon" className="spatial-person" onClick={onMember} aria-label="View team member Dre Jackson" aria-haspopup="dialog">{photoFailed ? <span aria-hidden="true">DJ</span> : <img src={dreAvatar} alt="" width={32} height={32} onError={() => setPhotoFailed(true)}/>}</SpatialActionButton>}>
+  return <><SpatialProgress draft={draft} photos={photos}/><SpatialFlowHeader title="Fryer Station" subtitle="Food Process & Safety" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<SpatialActionButton variant="outline" size="icon" className="spatial-person" onClick={onMember} aria-label="View team member Dre Michael" aria-haspopup="dialog">{photoFailed ? <span aria-hidden="true">DM</span> : <img src={dreAvatar} alt="" width={32} height={32} onError={() => setPhotoFailed(true)}/>}</SpatialActionButton>}>
     {saveError ? <SpatialStatus tone="error">Unable to save on this device. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · draft saved on this device only.</SpatialStatus>}
   </SpatialFlowHeader></>
 }

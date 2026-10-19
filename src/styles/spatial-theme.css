@@ -575,3 +575,19 @@ html[data-assessment-version="5"] .spatial-learning-detail>strong {font-size:36p
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .spatial-review-outcome > svg {position:absolute;left:16px;width:28px;height:28px;padding:5px;border-radius:50%;background:color-mix(in srgb,currentColor 10%,transparent)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-view-all {padding:16px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-view-all button {width:100%;min-height:36px;border-radius:999px}
+
+.flow-app.flow-v5 .screen.spatial-notification-screen {padding:0;display:flex;overflow:auto}
+.flow-app.flow-v5 .phonebottom[hidden] {display:none}
+.spatial-notification-entry {position:relative;display:flex;flex:1;min-height:460px;flex-direction:column;align-items:center;padding:44px 20px 48px;background:radial-gradient(ellipse at 15% 30%,color-mix(in srgb,var(--spatial-brand-accent,#7363bd) 24%,transparent),transparent 65%),radial-gradient(ellipse at 90% 85%,color-mix(in srgb,var(--spatial-brand-accent,#7363bd) 18%,transparent),transparent 70%);color:var(--spatial-ink)}
+.spatial-lock-clock {display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:44px}
+.spatial-lock-clock > svg {width:20px;height:20px;opacity:.7}
+.spatial-lock-clock p {font-size:16px;margin:0}
+.spatial-lock-clock > span {font-size:76px;line-height:1;font-weight:600;letter-spacing:-4px}
+.flow-app.flow-v5 .spatial-push-notification {display:flex;flex-direction:column;align-items:stretch;gap:8px;width:100%;height:auto;padding:18px;text-align:left;white-space:normal;border:1px solid var(--spatial-line);border-radius:24px;background:color-mix(in srgb,var(--spatial-surface) 92%,transparent);box-shadow:var(--spatial-shadow-small);color:var(--spatial-ink)}
+.spatial-push-app {display:flex;justify-content:space-between;align-items:center}
+.spatial-push-app > span {display:flex;gap:8px;align-items:center;font-size:12px}
+.spatial-push-app svg {width:24px;height:24px;padding:4px;border-radius:7px;background:var(--spatial-section-bg);color:var(--spatial-section-ink)}
+.spatial-push-notification strong {font-size:16px}
+.spatial-push-notification > span:not(.spatial-push-app) {font-size:16px;line-height:1.5;font-weight:400}
+.spatial-push-notification small {font-size:12px;color:var(--spatial-muted);font-weight:400}
+.spatial-lock-home {position:absolute;bottom:14px;width:100px;height:4px;border-radius:99px;background:var(--spatial-ink);opacity:.3}
