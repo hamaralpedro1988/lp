@@ -1,3 +1,4 @@
+import { useDeviceClock } from '@/hooks/use-device-clock'
 import dreAvatar from '@/assets/dre-jackson.png'
 import { SpatialCriterionGuidance } from './spatial-guidance'
 import { useSpatialSwipe } from '@/hooks/use-spatial-swipe'
@@ -25,7 +26,8 @@ export function SpatialStatus({ children, tone = 'neutral', className, ...props 
 }
 /** Decorative preview chrome is automatic only on desktop, never on a native phone. */
 export function SpatialSystemChrome({ mode = 'auto' }: { mode?: 'auto' | 'preview' | 'native' }) {
-  return <div className="spatial-system-chrome" data-mode={mode} aria-hidden="true"><span>9:41</span><div>
+  const { time } = useDeviceClock()
+  return <div className="spatial-system-chrome" data-mode={mode} aria-hidden="true"><span>{time}</span><div>
     <svg viewBox="0 0 20 15" width="20" height="15" fill="currentColor"><path d="M1 12h3v3H1zM6 9h3v6H6zM11 5h3v10h-3zM16 1h3v14h-3z"/></svg>
     <svg viewBox="0 0 18 15" width="18" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M2 5a11 11 0 0 1 14 0M5 8a7 7 0 0 1 8 0M8.2 11.5a2 2 0 0 1 1.6 0"/></svg>
     <svg viewBox="0 0 29 15" width="29" height="15"><rect x="1" y="1" width="24" height="13" rx="3.5" fill="none" stroke="currentColor" strokeOpacity=".65" strokeWidth="1.5"/><rect x="3.5" y="3.5" width="19" height="8" rx="1.8" fill="currentColor"/><rect x="26.5" y="5" width="2" height="5" rx="1" fill="currentColor" opacity=".65"/></svg>
