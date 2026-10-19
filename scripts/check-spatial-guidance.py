@@ -25,7 +25,7 @@ with sync_playwright() as pw:
   page.get_by_role('button',name='Back to assessment',exact=True).click();expect(page.get_by_role('dialog')).to_have_count(0);expect(trigger).to_be_focused();expect(page.get_by_role('button',name='Next',exact=True)).to_be_disabled()
   trigger.focus();page.keyboard.press('Enter');expect(page.get_by_role('dialog')).to_be_visible();page.keyboard.press('Escape');expect(page.get_by_role('dialog')).to_have_count(0);expect(trigger).to_be_focused()
   trigger.click();expect(page.get_by_role('dialog')).to_be_visible();page.go_back();expect(page.get_by_role('dialog')).to_have_count(0);expect(page.locator('.screen')).to_have_attribute('data-screen','assessment')
-  swipe_handle(dx=-100,dy=0);expect(page.get_by_role('dialog')).to_have_count(0);expect(page.locator('.spatial-position')).to_have_text('1 of 11')
+  swipe_handle(dx=-100,dy=0);expect(page.get_by_role('dialog')).to_have_count(0);expect(page.locator('.spatial-position')).to_have_text('Task 1 of 11')
   print(f'PASS tap/up-swipe/keyboard/back, isolated state and sheet bounds at {width}x{height}',flush=True)
  # All criteria expose their own context and guidance; evidence requirements stay mandatory.
  page.set_viewport_size({'width':390,'height':844});seed(8);page.get_by_role('radio',name='Fail',exact=True).check();page.get_by_role('textbox',name='Comment',exact=True).fill('Quality observation saved.')

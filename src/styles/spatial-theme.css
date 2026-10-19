@@ -155,9 +155,9 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-name {flex:1;min-width:0;font-size:clamp(16px,4.5vw,20px);font-weight:780;letter-spacing:-.6px;line-height:1.15;margin:0}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header .spatial-status {margin:8px 0 0;font-size:12px;padding:8px 10px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .assessment-screen {display:flex;flex-direction:column;overflow:visible;padding:12px var(--spatial-space-gutter)}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {flex:1;min-height:0;display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:var(--spatial-space-card-block) var(--spatial-space-card-inline) var(--spatial-space-6);margin:0;border-radius:var(--spatial-radius-card);border-color:#fff;animation:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card {flex:1;min-height:0;display:flex;flex-direction:column;gap:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:var(--spatial-space-card-block) var(--spatial-space-card-inline) var(--spatial-space-4);margin:0;border-radius:var(--spatial-radius-card);border-color:#fff;animation:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card::-webkit-scrollbar {display:none}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body {animation:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body {animation:none;flex:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-body[data-direction=back] {animation:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-criterion-context {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:var(--spatial-space-context)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-badges {display:flex;gap:6px;flex-wrap:wrap;min-width:0}
@@ -167,7 +167,7 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-title {font-size:var(--spatial-type-title);line-height:var(--spatial-leading-title);letter-spacing:var(--spatial-track-title);font-weight:var(--spatial-weight-title);margin:0 0 var(--spatial-space-4);outline:none;overflow-wrap:break-word}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-question-description {font-size:var(--spatial-type-instruction);line-height:var(--spatial-leading-body);color:var(--spatial-muted);margin:0 0 var(--spatial-space-description)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choices {display:grid;gap:var(--spatial-space-choices)}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice {min-height:76px;display:flex;align-items:center;gap:14px;padding:11px 14px;border:1px solid var(--spatial-choice-line);border-radius:var(--spatial-radius-choice);background:var(--spatial-choice);cursor:pointer;transition:transform var(--spatial-motion-press),border-color var(--spatial-motion-press),box-shadow var(--spatial-motion-progress),background-color var(--spatial-motion-press)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice {min-height:72px;display:flex;align-items:center;gap:14px;padding:11px 14px;border:1px solid var(--spatial-choice-line);border-radius:var(--spatial-radius-choice);background:var(--spatial-choice);cursor:pointer;transition:transform var(--spatial-motion-press),border-color var(--spatial-motion-press),box-shadow var(--spatial-motion-progress),background-color var(--spatial-motion-press)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice:active {transform:scale(.98)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-selected=true] {border-color:var(--spatial-success-line);background:var(--spatial-success-bg);box-shadow:var(--spatial-shadow-pass)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-selected=true][data-outcome=fail] {border-color:var(--spatial-fail-line);background:var(--spatial-fail-bg);box-shadow:0 0 0 2px #f0b7bf46,0 7px 19px #c5788420}
@@ -182,7 +182,7 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-evidence {margin-top:var(--spatial-space-evidence)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer {position:relative;border:1px solid var(--spatial-input-line);border-radius:var(--spatial-radius-composer);background:linear-gradient(135deg,var(--spatial-surface) 75%,#faf9ff);box-shadow:0 2px 10px #51487908;transition:border-color var(--spatial-motion-press),box-shadow var(--spatial-motion-press)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer:focus-within {border-color:var(--spatial-focus);box-shadow:0 0 0 3px #9781dd24}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer textarea {display:block;font-size:16px;line-height:1.45;width:100%;min-height:120px;height:120px;resize:vertical;border:0;background:transparent;padding:14px 72px 14px 15px;color:var(--spatial-ink);border-radius:17px;box-shadow:none;outline:none;scrollbar-width:none}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer textarea {display:block;font-size:16px;line-height:1.45;width:100%;min-height:88px;height:88px;resize:vertical;border:0;background:transparent;padding:14px 72px 14px 15px;color:var(--spatial-ink);border-radius:17px;box-shadow:none;outline:none;scrollbar-width:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer textarea:focus-visible {box-shadow:none;outline:none}
 .flow-v5 textarea::placeholder {color:var(--spatial-muted);opacity:1}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer-help {position:absolute;left:15px;right:15px;bottom:12px;pointer-events:none;font-size:11px;line-height:1.45;color:var(--spatial-muted)}
@@ -392,8 +392,8 @@ html[data-assessment-version="5"] .device-overlay-root :is([data-slot=dialog-con
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-system-chrome>div {display:flex;align-items:center;gap:5px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-system-chrome[data-mode=native] {display:none}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-top-progress {flex:none;padding:0 var(--spatial-space-gutter);z-index:3}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-progress {position:relative;height:4px;line-height:0;background:var(--spatial-progress-track);border-radius:0;overflow:hidden}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-progress>span {display:block;height:100%;background:var(--spatial-progress);transition:width var(--spatial-motion-question) var(--spatial-ease);border-radius:0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-progress {position:relative;height:4px;line-height:0;background:var(--spatial-progress-track);border-radius:999px;overflow:hidden}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-progress>span {display:block;height:100%;background:var(--spatial-progress);transition:width var(--spatial-motion-question) var(--spatial-ease);border-radius:inherit}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-top-progress+.spatial-header {padding-top:16px;padding-bottom:3px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-top {gap:10px;min-height:49px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-header-copy {flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
@@ -429,7 +429,6 @@ html[data-assessment-version="5"] .device-overlay-root :is([data-slot=dialog-con
 html[data-assessment-version="5"] [data-slot=progress] {background:var(--spatial-progress-track)}
 html[data-assessment-version="5"] [data-slot=progress-indicator] {background:var(--spatial-success-ink)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-top-progress {position:relative;padding-bottom:16px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-progress-percent {position:absolute;right:var(--spatial-space-gutter);top:8px;font-size:11px;line-height:12px;color:var(--spatial-muted);font-variant-numeric:tabular-nums}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-top-progress+.spatial-header {padding-top:0}
 html[data-assessment-version="5"] .spatial-brand-switcher {display:flex;align-items:center;gap:10px;font-size:12px;color:var(--spatial-muted)}
 html[data-assessment-version="5"] .spatial-brand-switcher label {white-space:nowrap}
@@ -558,3 +557,13 @@ html[data-assessment-version="5"] .spatial-review-detail-actions {display:grid;g
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-description {display:grid;gap:20px}
 html[data-assessment-version="5"] .spatial-learning-detail {display:grid;gap:12px;padding:0 var(--spatial-space-card-inline) max(20px,env(safe-area-inset-bottom));color:var(--spatial-muted);font-size:14px;line-height:1.5}
 html[data-assessment-version="5"] .spatial-learning-detail>strong {font-size:36px;line-height:1.1;color:var(--spatial-ink)}
+
+/* Task cards: fixed outcome symbols, native radios and evidence at the card foot. */
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice-symbol {display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;background:var(--spatial-surface);color:var(--spatial-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice-symbol svg {width:18px;height:18px;stroke-width:2}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-selected=true][data-outcome=met] .spatial-choice-symbol {background:color-mix(in srgb,var(--spatial-success-line) 18%,var(--spatial-surface));color:var(--spatial-success-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice[data-selected=true][data-outcome=fail] .spatial-choice-symbol {background:color-mix(in srgb,var(--spatial-fail-line) 24%,var(--spatial-surface));color:var(--spatial-fail-ink)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card>.spatial-evidence {flex:none;margin-top:auto;padding-top:var(--spatial-space-evidence)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-live-card>.spatial-guidance-trigger {flex:none;margin-top:0}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-composer[data-help=true] textarea {min-height:108px;height:108px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-camera {background:var(--spatial-surface)}

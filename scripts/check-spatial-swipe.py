@@ -15,7 +15,7 @@ with sync_playwright() as pw:
  def seed(index=0,answers=None,notes=None):
   page.goto(args.url+'/?version=5&systemChrome=preview');page.locator('.screen').wait_for()
   page.evaluate('d=>localStorage.setItem("lp-rosa-flow-v5-v01",JSON.stringify(d))',{'screen':'assessment','index':index,'answers':{str(k):v for k,v in (answers or {}).items()},'notes':{str(k):v for k,v in (notes or {}).items()},'feedback':'','offline':False,'paused':False,'assessorConfirmed':False});page.reload();page.locator('.spatial-live-card').wait_for();settle()
- def pos(n): expect(page.locator('.spatial-position')).to_have_text(f'{n} of 11')
+ def pos(n): expect(page.locator('.spatial-position')).to_have_text(f'Task {n} of 11')
  def point():
   box=page.locator('.spatial-question-title').bounding_box();return (box['x']+box['width']*.75,box['y']+min(35,box['height']/2))
  def stroke(dx,dy=0,xy=None,dragshot=None):

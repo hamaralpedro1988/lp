@@ -44,7 +44,7 @@ with sync_playwright() as pw:
     assert page.locator('[data-card-departure]').evaluate('e=>e.inert && e.getAttribute("aria-hidden")==="true"')
     expect(page.get_by_role('textbox', name='Comment', exact=True)).to_have_count(1)
     page.evaluate('document.getAnimations().forEach(a=>a.finish())')
-    expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('2 of 11')
+    expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('Task 2 of 11')
     page.wait_for_function("!document.querySelector('.spatial-live-card').dataset.swipe")
     frames = page.evaluate('window.cardMotion')
     assert len(frames) == 2, frames
@@ -54,7 +54,7 @@ with sync_playwright() as pw:
     assert 'scale(' not in frames[1][0]['transform']
     assert frames[0][-1]['opacity'] == frames[1][0]['opacity'] == 1
     page.get_by_role('button', name='Previous task', exact=True).click()
-    expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('1 of 11')
+    expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('Task 1 of 11')
     page.wait_for_function("!document.querySelector('.spatial-live-card').dataset.swipe")
     frames = page.evaluate('window.cardMotion')
     assert len(frames) == 4
@@ -63,7 +63,7 @@ with sync_playwright() as pw:
     expect(page.get_by_role('textbox', name='Comment', exact=True)).to_have_value('Preserve this note through the animation.')
     page.emulate_media(reduced_motion='reduce')
     page.get_by_role('button', name='Next', exact=True).click()
-    expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('2 of 11')
+    expect(page.locator('.spatial-live-card:not([data-card-departure]) .spatial-position')).to_have_text('Task 2 of 11')
     assert page.evaluate('window.cardMotion.length') == 4
     expect(page.get_by_role('button', name='Next', exact=True)).to_be_disabled()
     expect(page.locator('[data-card-departure]')).to_have_count(0)

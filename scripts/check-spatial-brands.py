@@ -23,7 +23,7 @@ with sync_playwright() as pw:
   page.get_by_role('textbox',name='Comment',exact=True).fill('Brand switching must preserve this observation.')
   saved=page.evaluate('localStorage.getItem("lp-rosa-flow-v5-v01")');select('Spatial' if brand!='spatial' else "McDonald's");assert saved==page.evaluate('localStorage.getItem("lp-rosa-flow-v5-v01")');select(name)
   expect(page.get_by_role('radio',name='Pass',exact=True)).to_be_checked();expect(page.get_by_role('textbox',name='Comment',exact=True)).to_have_value('Brand switching must preserve this observation.')
-  expect(page.locator('.spatial-progress-percent')).to_have_text('9%')
+  expect(page.get_by_role('progressbar',name='Tasks complete')).to_have_attribute('aria-valuenow','1')
   fill=page.locator('.spatial-progress>span').evaluate('e=>getComputedStyle(e).backgroundColor')
   green=page.locator('.spatial-choice[data-outcome=met] [role=radio]').evaluate('e=>getComputedStyle(e).color');assert fill==green,(brand,fill,green)
   capture(brand+'-live')
