@@ -50,7 +50,7 @@ export function SpatialReviewSummary({ draft, photos }: { draft: FlowDraft; phot
 export function SpatialReviewNextSteps({ draft }: { draft: FlowDraft }) {
   const failed = Object.values(draft.answers).includes('fail')
   const steps = [failed ? 'Share feedback with Dre and agree on further practice.' : 'Share the results and feedback with Dre.', 'Continue to sign-off and collect the required acknowledgements.']
-  return <SpatialSurface className="overview-card spatial-review-next"><CardHeader><CardTitle><h2>Next Steps</h2></CardTitle></CardHeader><CardContent><ol>{steps.map((step, i) => <li key={step}><span aria-hidden="true">{i + 1}</span><p>{step}</p></li>)}</ol></CardContent></SpatialSurface>
+  return <SpatialSurface className="overview-card spatial-review-next"><CardHeader><CardTitle><h2>Next steps</h2></CardTitle></CardHeader><CardContent><ol>{steps.map((step, i) => <li key={step}><span aria-hidden="true">{i + 1}</span><p>{step}</p></li>)}</ol></CardContent></SpatialSurface>
 }
 
 export type ReviewEvidenceTarget = (index: number, node: HTMLDivElement | null) => void
