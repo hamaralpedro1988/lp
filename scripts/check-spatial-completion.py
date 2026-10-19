@@ -23,7 +23,7 @@ with sync_playwright() as pw:
  expect(p.get_by_role('button',name='Complete assessment')).to_be_enabled()
  p.evaluate('()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))')
  p.screenshot(path='work/result/slide-confirmation.png')
- p.get_by_role('dialog').get_by_role('button',name='Close',exact=True).click()
+ p.get_by_role('dialog').get_by_role('button',name='Back to assessment',exact=True).click()
  expect(p.locator('.spatial-live-card')).to_be_visible()
  p.get_by_role('button',name='Finish checklist').click()
  handle=p.get_by_role('button',name='Complete assessment',exact=True)
