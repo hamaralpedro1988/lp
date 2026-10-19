@@ -112,7 +112,7 @@ export function SpatialNavigation({ index, canContinue, sectionsRef, onBack, onS
   return <nav className="spatial-navigation" aria-label="Task navigation">
     <SpatialActionButton variant="outline" disabled={index === 0} aria-label="Previous task" onClick={onBack}>Back</SpatialActionButton>
     <SpatialActionButton variant="outline" className="spatial-sections-trigger" ref={sectionsRef} aria-label="Sections" title="Sections" aria-haspopup="dialog" onClick={onSections}><LayoutGrid aria-hidden="true"/></SpatialActionButton>
-    <SpatialActionButton disabled={!canContinue} onClick={onNext} aria-label={index === flowCriteria.length - 1 ? 'Finish checklist' : undefined}>{index === flowCriteria.length - 1 ? 'Finish' : 'Next'}</SpatialActionButton>
+    <SpatialActionButton disabled={!canContinue} onClick={onNext} aria-label={index === flowCriteria.length - 1 ? 'Finish checklist' : undefined}>{index === flowCriteria.length - 1 ? 'Finish' : <>Next<ChevronRight size={18} aria-hidden="true"/></>}</SpatialActionButton>
   </nav>
 }
 export function SpatialSections({ draft, photos, onJump }: { draft: FlowDraft; photos: Record<number, number>; onJump: (index: number) => void }) {
