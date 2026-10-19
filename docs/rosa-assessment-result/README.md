@@ -4,8 +4,9 @@ React/shadcn implementation on the existing cumulative V5 branch. V2–V4 retain
 
 - Final Finish button and forward swipe open the same confirmation sheet.
 - All eleven responses and required comment plus real session photo are validated before completion.
-- Continue assessing cancels completion; if evidence is missing it returns to the first unfinished task.
-- Complete assessment records a local completion receipt and opens Assessment Result.
+- Close or Escape cancels completion and returns to assessing.
+- Slide to complete requires dragging the handle fully right and releasing. A partial drag or ordinary click never completes. Keyboard/screen-reader activation uses two explicit confirmations; blur or Escape cancels the armed state. A brief green completed state precedes Assessment Result.
+- Completion records a local completion receipt and opens Assessment Result.
 - Responses, comments, navigation to the checklist, reset and observation editing are locked after completion, including after reload.
 - A Pass requires no failed critical tasks. Noncritical failures remain visible and included in counts.
 - Result shares the actual station heading, surfaces, tokens, filters, task rows and detail sheets with the design system.
