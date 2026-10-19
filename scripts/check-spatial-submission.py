@@ -7,6 +7,8 @@ with sync_playwright() as pw:
  expect(p.get_by_text('Assessment submission',exact=True)).to_be_visible()
  expect(p.get_by_role('heading',name='Signature & feedback')).to_be_visible()
  expect(p.get_by_role('button',name='Submit assessment',exact=True)).to_be_disabled()
+ p.evaluate('()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))')
+ assert p.get_by_role('button',name='Submit assessment',exact=True).evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(231, 229, 238)'
  p.get_by_role('textbox',name='Feedback for Dre').fill('Agree on further practice with Alex.')
  expect(p.get_by_role('textbox',name='Feedback for Dre')).to_have_value('Agree on further practice with Alex.')
  p.get_by_role('button',name='Collect signature',exact=True).click()
