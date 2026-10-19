@@ -633,3 +633,7 @@ html[data-assessment-version="5"] .spatial-finish-sheet .spatial-finish-back {wi
 
 html[data-assessment-version="5"] .spatial-finish-sheet::before {display:none}
 html[data-assessment-version="5"] .spatial-finish-sheet .spatial-finish-summary .review-stat[data-result] b {color:var(--spatial-ink)}
+
+.spatial-step-task-heading {display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:4px}
+.spatial-step-task-heading strong {flex:1 1 180px}
+.spatial-step-task-heading .spatial-badge {flex:none}
