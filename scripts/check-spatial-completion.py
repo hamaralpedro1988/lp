@@ -30,7 +30,10 @@ with sync_playwright() as pw:
  p.evaluate('()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))')
  box=handle.bounding_box();track=p.locator('.spatial-slide-track').bounding_box()
  x=box['x']+box['width']/2;y=box['y']+box['height']/2
- p.mouse.move(x,y);p.mouse.down();p.mouse.move(x+50,y,steps=5);p.mouse.up()
+ p.mouse.move(x,y);p.mouse.down();p.mouse.move(x+50,y,steps=5)
+ moved=handle.bounding_box()
+ assert abs(moved['x']-box['x']-50)<2, 'Handle must track the pointer immediately'
+ p.mouse.up()
  expect(p.locator('.spatial-slide-track')).not_to_have_attribute('data-complete','true')
  handle.focus();p.keyboard.press('Enter')
  expect(p.get_by_role('button',name='Confirm complete assessment')).to_be_visible()
@@ -40,7 +43,11 @@ with sync_playwright() as pw:
  p.evaluate('()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{})))')
  box=handle.bounding_box();track=p.locator('.spatial-slide-track').bounding_box()
  x=box['x']+box['width']/2;y=box['y']+box['height']/2
- p.mouse.move(x,y);p.mouse.down();p.mouse.move(x+track['width']-64,y,steps=12);p.mouse.up()
+ cdp=p.context.new_cdp_session(p)
+ cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'x':x,'y':y}]})
+ for i in range(1,13):
+  cdp.send('Input.dispatchTouchEvent',{'type':'touchMove','touchPoints':[{'x':x+(track['width']-64)*i/12,'y':y}]})
+ cdp.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]})
  expect(p.locator('.spatial-review-summary')).to_contain_text('Pass')
  expect(p.get_by_role('button',name='Back to checklist')).to_have_count(0)
  expect(p.locator('.review-item')).to_have_count(4)
