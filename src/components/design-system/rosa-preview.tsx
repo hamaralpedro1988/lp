@@ -1,3 +1,4 @@
+import { SpatialBeforeStart } from '@/components/assessment/spatial-before-start'
 import { SpatialSubmission } from '@/components/assessment/spatial-submission'
 import { spatialOverviewLearning } from '@/data/spatial-overview'
 import { SpatialCriterionGuidance } from '@/components/assessment/spatial-guidance'
@@ -59,6 +60,7 @@ export function RosaPreview({ pattern }: { pattern: string }) {
     <div className="ds-rosa-layout"><div className="ds-device flow-app flow-v5" data-pattern={pattern}>
       <div className={`ds-pattern-canvas ${pattern === 'card' || editing ? 'ds-live-canvas' : ''}`}>
         {pattern === 'assignment' && <SpatialAssignmentCard status={draft.assessorConfirmed ? 'Local review' : assignmentStatus} onOpen={() => setNotice('View Assessment opens Overview in Rosa V5. This story stays isolated.')}/>}
+        {pattern === 'before-start' && <SpatialBeforeStart/>}
         {pattern === 'people' && <><SpatialStationHeading/><SpatialPeopleCard status={assignmentStatus} learning={spatialOverviewLearning} onMember={() => setMember(true)}/></>}
         {pattern === 'header' && <><SpatialSystemChrome mode="preview"/><SpatialAssessmentHeader draft={draft} photos={photos} saveError={scenario === 'Save error'} onMember={() => setMember(true)} onBack={() => setNotice('Overview Back selected. Footer Back instead moves one task.')}/></>}
         {(pattern === 'card' || editing) && live}

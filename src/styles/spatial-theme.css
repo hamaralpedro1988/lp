@@ -653,3 +653,19 @@ html[data-assessment-version="5"] .spatial-finish-sheet .spatial-finish-summary 
 
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters [data-slot=tabs-trigger][data-state=active] .spatial-review-tab-count {background:rgb(255 255 255 / 18%);color:#fff}
 @media(hover:hover) {:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-filters [data-slot=tabs-trigger][data-state=active]:hover {color:#fff}}
+
+.spatial-before-start ul {margin:0;padding:0;list-style:none}
+.spatial-before-start-row {display:flex;align-items:center;gap:var(--spatial-space-3);padding:var(--spatial-space-4) var(--spatial-space-card-inline);min-height:80px}
+.spatial-before-start-row .overview-goal-icon {flex:none;display:grid;place-items:center;border:0}
+.spatial-before-start-row .overview-section-copy {flex:1;min-width:0}
+.spatial-before-start-row label {cursor:pointer}
+.spatial-dnd-switch {display:inline-flex;align-items:center;width:40px;height:24px;min-width:40px;flex:none;padding:2px;border:1px solid var(--spatial-input-line);border-radius:999px;background:var(--spatial-disabled);touch-action:manipulation}
+.spatial-dnd-switch[data-state=checked] {background:var(--spatial-primary);border-color:var(--spatial-primary)}
+.spatial-dnd-thumb {display:block;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0002;transform:translateX(0);transition:transform 150ms ease}
+.spatial-dnd-thumb[data-state=checked] {transform:translateX(16px)}
+.spatial-android-toast {position:absolute;z-index:45;bottom:calc(88px + env(safe-area-inset-bottom));left:24px;right:24px;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:24px;background:#303033;color:#fff;box-shadow:0 4px 16px #0003;font-size:14px;line-height:1.4;pointer-events:none}
+.spatial-android-toast[data-visible=false] {display:none}
+.spatial-android-toast svg {width:20px;height:20px;flex:none}
+@media(prefers-reduced-motion:reduce) {.spatial-dnd-thumb {transition:none}}
+.spatial-dnd-switch {position:relative}
+.spatial-dnd-switch::before {content:"";position:absolute;inset:-10px -2px}

@@ -1,4 +1,5 @@
 export const rosaPatterns = [
+  { id:'before-start', name:'Before you start', component:'SpatialBeforeStart', screens:'Overview', purpose:'Prepare the assessor with session guidance before observation.', anatomy:'Goal-sized icons · step-style title/subtitle · Do Not Disturb preview switch · Android-style feedback', states:'Off / preview on / preview off / keyboard focus', rationale:'Shared product component; web previews do not change native phone settings or promise server sync.' },
   { id:'assignment', name:'Assignment tile', component:'SpatialAssignmentCard', screens:'Assignments', purpose:'Make the next assigned assessment easy to enter.', anatomy:'Station · status · employee · assessor · tasks · action', states:'Ready / in progress / local review', rationale:'One clear entry action keeps the task easy to find.' },
   { id:'people', name:'People & context', component:'SpatialStationHeading + SpatialPeopleCard + SpatialLearningScore', screens:'Overview', purpose:'Confirm who is being observed and who is assessing.', anatomy:'Station photo · task count · member action · sample learning result · status · assessor', states:'Ready / saved draft / review recorded', rationale:'Keep identity context visible without claiming verified identity.' },
   { id:'header', name:'Assessment header', component:'SpatialAssessmentHeader', screens:'Live Assessment', purpose:'Keep station, employee and completion available.', anatomy:'Continuous inset progress · Overview Back · station/subtitle · Dre', states:'Empty / partial / complete / offline / save error', rationale:'Transparent chrome preserves a continuous canvas and scarce mobile space.' },
@@ -18,6 +19,7 @@ export function rosaExample(id: string) {
   const examples: Record<string,string> = {
     assignment:'<SpatialAssignmentCard status="Ready to Start" onOpen={openOverview} />',
     people:'<SpatialStationHeading />\n<SpatialPeopleCard status="Ready to start" learning={learningResult} onMember={openMember} />',
+    'before-start':'<SpatialBeforeStart />',
     header:'<SpatialAssessmentHeader draft={draft} photos={photos} saveError={saveError} onBack={openOverview} />',
     card:'<SpatialLiveCard draft={draft} photos={photos} direction="next" titleRef={titleRef} onAnswer={onAnswer} onNote={onNote} onCamera={openCamera} galleryRef={setGalleryTarget} onNavigate={navigateCriterion} />',
     choices:'<SpatialChoices value={draft.answers[draft.index] ?? ""} onChange={onAnswer} disabled={false} />',
