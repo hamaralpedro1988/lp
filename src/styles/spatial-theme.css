@@ -548,7 +548,7 @@ html[data-assessment-version="5"] .spatial-review-detail-actions {display:grid;g
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-avatar {width:44px;height:44px;padding:3px;border-radius:50%;border:1px solid var(--spatial-input-line);background:var(--spatial-surface);overflow:hidden}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-avatar img {width:36px;height:36px;border-radius:50%;object-fit:cover}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-member {min-height:54px}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-metadata {padding:var(--spatial-space-card-block) var(--spatial-space-card-inline);gap:var(--spatial-space-3)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-metadata {padding:var(--spatial-space-card-block) var(--spatial-space-card-inline);gap:6px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-metadata>div {grid-template-columns:minmax(0,1fr) auto;font-size:14px;min-height:30px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-metadata strong {font-size:var(--spatial-type-secondary);font-weight:var(--spatial-weight-row)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-status[data-status=ready] {background:var(--spatial-brand-accent-subtle);color:var(--spatial-brand-accent-ink);border-color:transparent;font-size:12px}
