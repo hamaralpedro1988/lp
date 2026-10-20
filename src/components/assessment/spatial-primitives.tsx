@@ -1,10 +1,13 @@
+import { spatialActiveIndex, spatialChecklistItem } from '@/data/spatial-checklist'
+import { SpatialTaskPreviewContent } from './spatial-assessment-preview'
+import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
 import { useDeviceClock } from '@/hooks/use-device-clock'
 import dreAvatar from '@/assets/dre-jackson.png'
 import { SpatialCriterionGuidance } from './spatial-guidance'
 import { useSpatialSwipe } from '@/hooks/use-spatial-swipe'
 import type { SwipeDirection } from '@/lib/spatial-swipe'
 import { useId, useLayoutEffect, useRef, useState, type ComponentProps, type ReactNode, type Ref, type RefObject } from 'react'
-import { Camera, Check, ChevronLeft, ChevronRight, LayoutGrid, X } from 'lucide-react'
+import { Camera, Check, ChevronLeft, ChevronRight, LayoutGrid, X, Eye, PencilLine, CircleDot } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -12,7 +15,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
 import { flowCriteria, type FlowDraft, type FlowAnswer } from '@/data/flow-draft'
-import { spatialCompleteIndices, spatialOptions, spatialEvidenceRequirement, spatialEvidenceSatisfied, spatialEvidenceMessage, spatialEvidenceOk, spatialNavigationBlock, type SpatialEvidenceRequirement } from '@/data/spatial-flow'
+import { spatialCompleteIndices, spatialOptions, spatialEvidenceRequirement, spatialEvidenceSatisfied, spatialEvidenceMessage, spatialNavigationBlock, type SpatialEvidenceRequirement } from '@/data/spatial-flow'
 
 /** All primitives consume semantic tokens; brand aliases live in spatial-theme.css. */
 export function SpatialSurface({ className, elevation = 'raised', ...props }: ComponentProps<typeof Card> & { elevation?: 'raised' | 'quiet' }) {
@@ -107,8 +110,9 @@ export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, 
   const reason = spatialNavigationBlock(draft, photos, 'next')
   useLayoutEffect(() => { cardRef.current?.scrollTo({ top: 0 }) }, [draft.index])
   return <><SpatialSurface className="spatial-live-card" ref={cardRef} aria-label="Current task" aria-describedby="spatial-swipe-help">
-    <span id="spatial-swipe-help" className="sr-only">Swipe left for next or right for previous. Back, Sections and Next/Finish buttons are also available.</span>
+    <span id="spatial-swipe-help" className="sr-only">Swipe left for next or right for previous. Back, All tasks and Next/Finish buttons are also available.</span>
     <div className="spatial-question-body" key={draft.index} data-direction={direction}>
+      {draft.index !== spatialActiveIndex(draft) && <p className="spatial-reviewing-sequence">Reviewing task {draft.index + 1}. Current assessment: task {spatialActiveIndex(draft) + 1}.</p>}
       <SpatialTaskHeading index={draft.index} titleRef={titleRef} titleId="live-question-title" completed={spatialCompleteIndices(draft, photos).length}/>
       <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer} labelledBy="live-question-title" describedBy={reason ? validationId : undefined}/><p id={validationId} className="spatial-validation" data-visual={false} role="status" aria-live="polite" aria-atomic="true">{reason ?? 'Response recorded. You can continue.'}</p>
     </div>
@@ -116,28 +120,55 @@ export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, 
     <SpatialCriterionGuidance key={`guidance-${draft.index}`} index={draft.index}/>
   </SpatialSurface><div className="spatial-swipe-feedback" role="status" aria-live="polite" aria-atomic="true" data-visible={!!feedback}>{feedback}</div></>
 }
-export function SpatialNavigation({ index, canContinue, sectionsRef, onBack, onSections, onNext }: { index: number; canContinue: boolean; sectionsRef: Ref<HTMLButtonElement>; onBack: () => void; onSections: () => void; onNext: () => void }) {
+export function SpatialNavigation({ index, reviewing = false, canContinue, sectionsRef, onBack, onSections, onNext }: { index: number; reviewing?: boolean; canContinue: boolean; sectionsRef: Ref<HTMLButtonElement>; onBack: () => void; onSections: () => void; onNext: () => void }) {
   return <nav className="spatial-navigation" aria-label="Task navigation">
     <SpatialActionButton variant="outline" disabled={index === 0} aria-label="Previous task" onClick={onBack}>Back</SpatialActionButton>
-    <SpatialActionButton variant="outline" className="spatial-sections-trigger" ref={sectionsRef} aria-label="Sections" title="Sections" aria-haspopup="dialog" onClick={onSections}><LayoutGrid aria-hidden="true"/></SpatialActionButton>
-    <SpatialActionButton disabled={!canContinue} onClick={onNext} aria-label={index === flowCriteria.length - 1 ? 'Finish checklist' : undefined}>{index === flowCriteria.length - 1 ? 'Finish' : <>Next<ChevronRight size={18} aria-hidden="true"/></>}</SpatialActionButton>
+    <SpatialActionButton variant="outline" className="spatial-sections-trigger" ref={sectionsRef} aria-label="All tasks" title="All tasks" aria-haspopup="dialog" onClick={onSections}><LayoutGrid aria-hidden="true"/></SpatialActionButton>
+    <SpatialActionButton disabled={!canContinue} onClick={onNext} aria-label={reviewing ? 'Return to current task' : index === flowCriteria.length - 1 ? 'Finish checklist' : undefined}>{reviewing ? 'Return to current task' : index === flowCriteria.length - 1 ? 'Finish' : <>Next<ChevronRight size={18} aria-hidden="true"/></>}</SpatialActionButton>
   </nav>
 }
-export function SpatialSections({ draft, photos, onJump }: { draft: FlowDraft; photos: Record<number, number>; onJump: (index: number) => void }) {
+export function SpatialSections({ draft, photos, onJump, registerPreviewBack }: { draft: FlowDraft; photos: Record<number, number>; onJump: (index: number) => void; registerPreviewBack?: (back: (() => boolean) | null) => void }) {
   const completed = spatialCompleteIndices(draft, photos)
-  return <nav className="spatial-section-list" aria-label="All assessment tasks">
+  const [preview, setPreview] = useState<number | null>(null)
+  const heading = useRef<HTMLHeadingElement>(null)
+  const root = useRef<HTMLDivElement>(null)
+  const previous = useRef<{ index: number; scroll: number } | null>(null)
+  useMobileOverlay(preview !== null, () => { setPreview(null); return true })
+  useLayoutEffect(() => {
+    registerPreviewBack?.(preview === null ? null : () => { setPreview(null); return true })
+    return () => registerPreviewBack?.(null)
+  }, [preview, registerPreviewBack])
+  useLayoutEffect(() => {
+    const scroll = root.current?.parentElement
+    if (preview !== null) { scroll?.scrollTo({ top: 0 }); heading.current?.focus({ preventScroll: true }) }
+    else if (previous.current) {
+      scroll?.scrollTo({ top: previous.current.scroll })
+      root.current?.querySelector<HTMLButtonElement>(`[data-task-index="${previous.current.index}"]`)?.focus({ preventScroll: true })
+    }
+  }, [preview])
+  return <div ref={root}>{preview !== null ? <section className="spatial-checklist-preview" aria-label="Task preview">
+    <SpatialActionButton variant="outline" onClick={() => setPreview(null)}>Back to checklist</SpatialActionButton>
+    <p className="spatial-comment-visibility">Preview only · Your current task and progress will not change.</p>
+    <SpatialTaskPreviewContent index={preview} titleRef={heading}/>
+  </section> : <nav className="spatial-section-list" aria-label="All assessment tasks">
     {(['Preparation', 'Frying', 'Completion'] as const).map(section => {
       const items = flowCriteria.map((criterion, index) => ({ ...criterion, index })).filter(item => item.section === section)
       return <section key={section}><h3>{section}<span>{items.filter(item => completed.includes(item.index)).length} of {items.length} complete</span></h3>
         {items.map(item => {
-          const done = completed.includes(item.index)
-          const status = done ? 'Complete' : !draft.answers[item.index] || draft.answers[item.index] === 'notObserved' ? 'Not recorded' : !spatialEvidenceOk(draft, item.index, photos) ? 'Evidence needed' : 'Not recorded'
-          return <SpatialActionButton key={item.index} variant="ghost" className="spatial-criterion-link" data-current={draft.index === item.index || undefined} onClick={() => onJump(item.index)} aria-current={draft.index === item.index ? 'step' : undefined}>
-            <span className="spatial-criterion-number" data-complete={done || undefined}>{done ? <Check aria-hidden="true"/> : item.index + 1}</span>
-            <span><strong>{item.title}</strong><small>{draft.index === item.index ? 'Current · ' : ''}{status}{'critical' in item ? ' · Critical' : ''}</small></span><ChevronRight aria-hidden="true"/>
+          const state = spatialChecklistItem(draft, photos, item.index)
+          const current = item.index === spatialActiveIndex(draft)
+          const status = current ? `Current task${state.complete ? ' · Complete' : ''}` : state.complete ? 'Complete' : state.kind === 'recorded' ? (draft.answers[item.index] === 'met' || draft.answers[item.index] === 'fail' ? 'Evidence needed · Review' : 'Response needed · Review') : 'Upcoming · Preview only'
+          const action = state.previewOnly ? 'Preview task' : current ? 'Continue assessment' : 'Review or edit task'
+          const Icon = state.previewOnly ? Eye : current ? ChevronRight : PencilLine
+          return <SpatialActionButton key={item.index} variant="ghost" className="spatial-criterion-link" data-task-index={item.index} data-current={current || undefined} onClick={() => {
+            if (state.previewOnly) { previous.current = { index: item.index, scroll: root.current?.parentElement?.scrollTop ?? 0 }; setPreview(item.index) }
+            else onJump(item.index)
+          }} aria-current={current ? 'step' : undefined}>
+            <span className="spatial-criterion-number" data-complete={state.complete || undefined}>{state.complete ? <Check aria-hidden="true"/> : current ? <CircleDot aria-hidden="true"/> : item.index + 1}</span>
+            <span><strong>{item.title}</strong><small>{status}{'critical' in item ? ' · Critical' : ''}</small><span className="sr-only">{action}</span></span><Icon aria-hidden="true"/>
           </SpatialActionButton>
         })}
       </section>
     })}
-  </nav>
+  </nav>}</div>
 }

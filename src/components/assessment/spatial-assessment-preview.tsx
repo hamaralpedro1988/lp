@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState, type Ref } from 'react'
 import { Camera, ChevronLeft, ChevronRight, Eye, MessageCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
@@ -8,15 +8,27 @@ import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
 import { SpatialActionButton, SpatialTaskHeading } from './spatial-primitives'
 import { SpatialCriterionGuidance } from './spatial-guidance'
 
+/** Shared read-only content, with no draft or mutation callbacks. */
+export function SpatialTaskPreviewContent({ index, titleRef }: { index: number; titleRef?: Ref<HTMLHeadingElement> }) {
+  const requirement = spatialEvidenceRequirement(index)
+  const photoRequired = requirement === 'photo' || requirement === 'comment-and-photo'
+  const commentRequired = requirement === 'comment' || requirement === 'comment-and-photo'
+  return <>
+    <SpatialTaskHeading index={index} titleRef={titleRef}/>
+    <section className="spatial-preview-requirements" aria-label="Evidence requirements"><h3>Evidence</h3><div className="spatial-preview-evidence-tags">
+      <Badge variant="secondary" className="spatial-badge" data-required={photoRequired || undefined}><Camera aria-hidden="true"/>{photoRequired ? 'Photo required' : 'Photo optional'}</Badge>
+      <Badge variant="secondary" className="spatial-badge" data-required={commentRequired || undefined}><MessageCircle aria-hidden="true"/>{commentRequired ? 'Comment required' : 'Comment optional'}</Badge>
+    </div></section>
+    <SpatialCriterionGuidance key={index} index={index} presentation="button" returnLabel="Back to preview"/>
+  </>
+}
+
 /** Read-only task browsing. Deliberately receives no draft or mutation callbacks. */
 export function SpatialAssessmentPreview() {
   const [open, setOpen] = useState(false)
   const [index, setIndex] = useState(0)
   const heading = useRef<HTMLHeadingElement>(null)
   const body = useRef<HTMLDivElement>(null)
-  const requirement = spatialEvidenceRequirement(index)
-  const photoRequired = requirement === 'photo' || requirement === 'comment-and-photo'
-  const commentRequired = requirement === 'comment' || requirement === 'comment-and-photo'
   useMobileOverlay(open, () => { setOpen(false); return true })
   useLayoutEffect(() => {
     if (!open) return
@@ -28,14 +40,7 @@ export function SpatialAssessmentPreview() {
     <SheetContent side="bottom" className="mobile-sheet flow-sheet spatial-assessment-preview mx-auto" onOpenAutoFocus={event => { event.preventDefault(); heading.current?.focus({ preventScroll: true }) }}>
       <SheetHeader><SheetTitle>Assessment preview</SheetTitle><SheetDescription>Explore the tasks before you start. Your assessment progress will not change.</SheetDescription></SheetHeader>
       <div ref={body} className="spatial-assessment-preview-body">
-        <SpatialTaskHeading index={index} titleRef={heading}/>
-        <section className="spatial-preview-requirements" aria-label="Evidence requirements">
-          <h3>Evidence</h3><div className="spatial-preview-evidence-tags">
-            <Badge variant="secondary" className="spatial-badge" data-required={photoRequired || undefined}><Camera aria-hidden="true"/>{photoRequired ? 'Photo required' : 'Photo optional'}</Badge>
-            <Badge variant="secondary" className="spatial-badge" data-required={commentRequired || undefined}><MessageCircle aria-hidden="true"/>{commentRequired ? 'Comment required' : 'Comment optional'}</Badge>
-          </div>
-        </section>
-        <SpatialCriterionGuidance key={index} index={index} presentation="button" returnLabel="Back to preview"/>
+        <SpatialTaskPreviewContent index={index} titleRef={heading}/>
       </div>
       <nav className="spatial-assessment-preview-actions" aria-label="Preview task navigation">
         <SpatialActionButton variant="outline" disabled={index === 0} onClick={() => setIndex(value => Math.max(0, value - 1))}><ChevronLeft aria-hidden="true"/>Previous</SpatialActionButton>
