@@ -1,0 +1,17 @@
+/* Immutable semantic meanings. Shared by Spatial and Fluid, independent of customer branding. */
+html[data-assessment-version="5"] {
+  --spatial-progress:var(--spatial-success-ink);
+  --spatial-progress-track:#e3e4e8;
+  --spatial-section-bg:#f1f2f5;
+  --spatial-section-ink:#535365;
+  --spatial-warning-bg:#fff1e2;
+  --spatial-warning-ink:#8d5228;
+  --spatial-warning-line:#dfb589;
+  --spatial-success-bg:#edf7f1;
+  --spatial-success-ink:#427764;
+  --spatial-success-line:#54846d;
+  --spatial-shadow-pass:0 0 0 2px #b8d9c746,0 7px 19px #42776418;
+  --spatial-fail-bg:#fff2f2;
+  --spatial-fail-ink:#9d4255;
+  --spatial-fail-line:#c67585;
+}

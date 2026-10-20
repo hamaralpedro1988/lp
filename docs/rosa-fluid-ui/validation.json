@@ -1,0 +1,146 @@
+[
+  {
+    "width": 320,
+    "theme": "spatial",
+    "brand": "spatial",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 320,
+    "theme": "spatial",
+    "brand": "crimson",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 320,
+    "theme": "spatial",
+    "brand": "ocean",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 320,
+    "theme": "fluid",
+    "brand": "spatial",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 320,
+    "theme": "fluid",
+    "brand": "crimson",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 320,
+    "theme": "fluid",
+    "brand": "ocean",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "theme": "spatial",
+    "brand": "spatial",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "theme": "spatial",
+    "brand": "crimson",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "theme": "spatial",
+    "brand": "ocean",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "theme": "fluid",
+    "brand": "spatial",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "theme": "fluid",
+    "brand": "crimson",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "theme": "fluid",
+    "brand": "ocean",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 419,
+    "theme": "spatial",
+    "brand": "spatial",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 419,
+    "theme": "spatial",
+    "brand": "crimson",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 419,
+    "theme": "spatial",
+    "brand": "ocean",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 419,
+    "theme": "fluid",
+    "brand": "spatial",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 419,
+    "theme": "fluid",
+    "brand": "crimson",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  },
+  {
+    "width": 419,
+    "theme": "fluid",
+    "brand": "ocean",
+    "screens": 5,
+    "semanticStates": "pass/fail/critical",
+    "errors": []
+  }
+]

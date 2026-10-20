@@ -10,7 +10,7 @@ test('branding configuration preserves default and never writes semantic or prod
   assert.equal(spatialBrands.length, 3)
   for (const brand of spatialBrands) {
     for (const key of Object.keys(brand.tokens)) {
-      assert.ok(['accent','accent-subtle','accent-ink','canvas','canvas-start','canvas-mid','canvas-end','glow'].some(role => key === '--spatial-brand-' + role), 'Brand may only override icon decor or canvas: ' + key)
+      assert.ok(['accent','accent-subtle','accent-ink','canvas','canvas-start','canvas-mid','canvas-end','glow','wash-a','wash-b'].some(role => key === '--spatial-brand-' + role), 'Brand may only override icon decor or canvas: ' + key)
       assert.ok(!/progress|success|fail|warning|primary|section|border|input/.test(key), key)
     }
     if (brand.id === 'spatial') continue

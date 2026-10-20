@@ -1,0 +1,60 @@
+/* Adaptive Liquid Semantic V2 → Fluid React materials.
+   Identity lives in --spatial-brand-*. State colors live only in semantic-tokens.css.
+   No glass is applied to answers, evidence, results or signature content. */
+html[data-assessment-version="5"][data-visual-theme="fluid"] {
+  --fluid-glass:linear-gradient(145deg,#ffffffed,#f9fcffaf 60%,#ffffffb8);
+  --fluid-glass-line:#ffffff;
+  --fluid-glass-blur:24px;
+  --fluid-glass-shadow:0 9px 23px #586d831c,0 2px 4px #75839a11,inset 0 1px 0 #fff,inset 0 -1px 0 #ffffff80;
+  --fluid-card-shadow:0 28px 52px #52677a1b,0 3px 15px #596e8210;
+  --fluid-sheet-shadow:0 -16px 42px #25334433;
+  --fluid-reflection:radial-gradient(ellipse 65% 80% at 50% 0%,#ffffffc9,transparent);
+  --fluid-radius-navigation:999px;
+  --fluid-motion-press:170ms;
+  --fluid-motion-sheet:320ms;
+  --fluid-ease:cubic-bezier(.2,.8,.22,1);
+  --fluid-wash-a:var(--spatial-brand-wash-a,#d5e3f3b5);
+  --fluid-wash-b:var(--spatial-brand-wash-b,#dae7e7a2);
+  --spatial-canvas:#f4f6fa;
+  --spatial-canvas-gradient:radial-gradient(ellipse 95% 60% at 99% 0%,var(--fluid-wash-a),transparent 70%),radial-gradient(ellipse 95% 60% at 7% 91%,var(--fluid-wash-b),transparent 72%),var(--spatial-canvas);
+  --spatial-surface-tint:#fcfdff;
+  --spatial-surface-gradient:linear-gradient(165deg,#fff 0%,#fff 56%,#fcfdff 100%);
+  --spatial-ink:#253144;
+  /* Approved AA secondary copy, independent of identity. */
+  --spatial-muted:#625c75;
+  --spatial-primary:#252c3b;--spatial-primary-hover:#343e51;
+  --spatial-line:#dfe5ed;
+  --spatial-shadow:var(--fluid-card-shadow);
+  --spatial-shadow-small:0 6px 21px #63738c17,0 1px 2px #57697e16;
+  --spatial-shadow-sheet:var(--fluid-sheet-shadow);
+  --spatial-overlay:#2633415d;
+  --spatial-motion-sheet:var(--fluid-motion-sheet);
+  --spatial-motion-press:var(--fluid-motion-press);
+  --spatial-ease:var(--fluid-ease);
+}
+/* Root scope deliberately includes every Radix portal and Explorer story. */
+html[data-assessment-version="5"][data-visual-theme="fluid"] :is(.spatial-header-back,.overview-topbar>[data-slot=button],.flow-v5 .phonebottom [data-slot=button],.spatial-navigation>[data-slot=button],[data-slot=select-trigger]) {
+  position:relative;isolation:isolate;
+  background:var(--fluid-glass);border:1px solid var(--fluid-glass-line);
+  -webkit-backdrop-filter:blur(var(--fluid-glass-blur)) saturate(1.7);
+  backdrop-filter:blur(var(--fluid-glass-blur)) saturate(1.7);
+  box-shadow:var(--fluid-glass-shadow);
+  transition:transform var(--fluid-motion-press) var(--fluid-ease),box-shadow var(--fluid-motion-press),background var(--fluid-motion-press);
+}
+html[data-assessment-version="5"][data-visual-theme="fluid"] :is(.spatial-header-back,.overview-topbar>[data-slot=button]) {border-radius:19px;background:linear-gradient(142deg,#ffffffef,#ffffffe0 36%,#f6faff90 78%)}
+html[data-assessment-version="5"][data-visual-theme="fluid"] .flow-v5 .phonebottom [data-slot=button] {border-radius:var(--fluid-radius-navigation)}
+html[data-assessment-version="5"][data-visual-theme="fluid"] .flow-v5 .phonebottom [data-slot=button][data-variant=default]:not(:disabled) {background:linear-gradient(162deg,#343e51,#202a3b 65%);color:#fff;box-shadow:0 10px 20px #26364832,inset 0 1px 0 #ffffff21}
+html[data-assessment-version="5"][data-visual-theme="fluid"] .flow-v5 .phonebottom [data-slot=button]:disabled {background:var(--spatial-disabled);color:var(--spatial-disabled-ink);box-shadow:none;backdrop-filter:none}
+html[data-assessment-version="5"][data-visual-theme="fluid"] :is(.spatial-header-back,.flow-v5 .phonebottom [data-slot=button]):not(:disabled):active {transform:scale(.97)}
+html[data-assessment-version="5"][data-visual-theme="fluid"] :is(.spatial-header-back,.flow-v5 .phonebottom [data-slot=button][data-variant=outline])::after {content:'';position:absolute;top:1px;left:10%;width:76%;height:48%;background:var(--fluid-reflection);pointer-events:none;opacity:.65;border-radius:inherit}
+html[data-assessment-version="5"][data-visual-theme="fluid"] :is([data-slot=sheet-content],[data-slot=dialog-content],[data-slot=alert-dialog-content]) {background:linear-gradient(155deg,#fffffff5,#f9fbfff2);border-color:#fff;-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:var(--fluid-sheet-shadow)}
+/* Sheet chrome is glass; integrity-sensitive body content is an opaque reading surface. */
+html[data-assessment-version="5"][data-visual-theme="fluid"] :is(.spatial-review-detail-body,.spatial-guidance-body,.spatial-signature-pad,.spatial-assessment-preview-body) {background:#fff;border-radius:18px}
+html[data-assessment-version="5"][data-visual-theme="fluid"] :is(.spatial-live-card,.spatial-surface,[data-slot=card]) {background:var(--spatial-surface-gradient);box-shadow:var(--fluid-card-shadow)}
+html[data-assessment-version="5"][data-visual-theme="fluid"] .spatial-composer {background:#fff}
+@media (prefers-reduced-transparency:reduce) {
+  html[data-assessment-version="5"][data-visual-theme="fluid"] {--fluid-glass:#fff;--fluid-glass-blur:0px}
+}
+@media (prefers-reduced-motion:reduce) {
+  html[data-assessment-version="5"][data-visual-theme="fluid"] :is(.flow-v5,[data-slot=sheet-content],[data-slot=dialog-content]) * {transition-duration:0ms!important;animation-duration:0ms!important;scroll-behavior:auto!important}
+}
