@@ -742,11 +742,10 @@ html[data-assessment-version="5"] .spatial-observation-actions [data-slot=button
 html[data-assessment-version="5"] .spatial-review-detail-body .spatial-review-required {font-size:var(--spatial-type-secondary);color:var(--spatial-warning-ink)}
 html[data-assessment-version="5"] [data-slot=sheet-content].spatial-review-details {max-height:min(88dvh,var(--visual-height,88dvh));}
 
-/* Existing checklist sheet, with read-only upcoming content and a quiet review cue. */
+/* Existing checklist sheet, with read-only upcoming content. */
 html[data-assessment-version="5"] .spatial-checklist-preview {display:grid;gap:16px;min-width:0}
 html[data-assessment-version="5"] .spatial-checklist-preview .spatial-question-title {font-size:24px;margin:0}
 html[data-assessment-version="5"] .spatial-checklist-preview .spatial-question-description {margin:0}
 html[data-assessment-version="5"] .spatial-checklist-preview .spatial-preview-evidence-tags {display:flex;flex-wrap:wrap;gap:8px}
 html[data-assessment-version="5"] .spatial-checklist-preview .spatial-preview-evidence-tags svg {width:16px;height:16px}
-html[data-assessment-version="5"] .spatial-reviewing-sequence {margin:0 0 12px;font-size:var(--spatial-type-secondary);color:var(--spatial-muted)}
 html[data-assessment-version="5"] .spatial-navigation [data-slot=button] {white-space:normal}

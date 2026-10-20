@@ -112,7 +112,6 @@ export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, 
   return <><SpatialSurface className="spatial-live-card" ref={cardRef} aria-label="Current task" aria-describedby="spatial-swipe-help">
     <span id="spatial-swipe-help" className="sr-only">Swipe left for next or right for previous. Back, All tasks and Next/Finish buttons are also available.</span>
     <div className="spatial-question-body" key={draft.index} data-direction={direction}>
-      {draft.index !== spatialActiveIndex(draft) && <p className="spatial-reviewing-sequence">Reviewing task {draft.index + 1}. Current assessment: task {spatialActiveIndex(draft) + 1}.</p>}
       <SpatialTaskHeading index={draft.index} titleRef={titleRef} titleId="live-question-title" completed={spatialCompleteIndices(draft, photos).length}/>
       <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer} labelledBy="live-question-title" describedBy={reason ? validationId : undefined}/><p id={validationId} className="spatial-validation" data-visual={false} role="status" aria-live="polite" aria-atomic="true">{reason ?? 'Response recorded. You can continue.'}</p>
     </div>
@@ -124,7 +123,7 @@ export function SpatialNavigation({ index, reviewing = false, canContinue, secti
   return <nav className="spatial-navigation" aria-label="Task navigation">
     <SpatialActionButton variant="outline" disabled={index === 0} aria-label="Previous task" onClick={onBack}>Back</SpatialActionButton>
     <SpatialActionButton variant="outline" className="spatial-sections-trigger" ref={sectionsRef} aria-label="All tasks" title="All tasks" aria-haspopup="dialog" onClick={onSections}><LayoutGrid aria-hidden="true"/></SpatialActionButton>
-    <SpatialActionButton disabled={!canContinue} onClick={onNext} aria-label={reviewing ? 'Return to current task' : index === flowCriteria.length - 1 ? 'Finish checklist' : undefined}>{reviewing ? 'Return to current task' : index === flowCriteria.length - 1 ? 'Finish' : <>Next<ChevronRight size={18} aria-hidden="true"/></>}</SpatialActionButton>
+    <SpatialActionButton disabled={!canContinue} onClick={onNext} aria-label={!reviewing && index === flowCriteria.length - 1 ? 'Finish checklist' : undefined}>{!reviewing && index === flowCriteria.length - 1 ? 'Finish' : <>Next<ChevronRight size={18} aria-hidden="true"/></>}</SpatialActionButton>
   </nav>
 }
 export function SpatialSections({ draft, photos, onJump, registerPreviewBack }: { draft: FlowDraft; photos: Record<number, number>; onJump: (index: number) => void; registerPreviewBack?: (back: (() => boolean) | null) => void }) {

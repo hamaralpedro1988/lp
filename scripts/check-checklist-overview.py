@@ -48,19 +48,19 @@ with sync_playwright() as pw:
    if width==390:s.screenshot(path=str(OUT/f'{theme}-partial-checklist.png'))
    # Reopening a completed Fail stays editable and leaves the active task at 2.
    row(s,0).click();expect(p.locator('.spatial-position')).to_have_text('Task 1 of 11')
-   expect(p.get_by_role('button',name='Return to current task',exact=True)).to_be_enabled()
+   expect(p.get_by_role('button',name='Next',exact=True)).to_be_enabled()
    p.get_by_role('radio',name='Pass',exact=True).check();p.get_by_role('textbox',name='Comment',exact=True).fill('Corrected observation')
    d=p.evaluate('JSON.parse(localStorage.getItem("'+KEY+'"))');assert d['activeIndex']==1 and d['index']==0 and d['answers']['0']=='met'
    p.reload();expect(p.get_by_role('textbox',name='Comment',exact=True)).to_have_value('Corrected observation')
    if width==390:p.screenshot(path=str(OUT/f'{theme}-review-completed.png'))
-   p.get_by_role('button',name='Return to current task',exact=True).click();expect(p.locator('.spatial-position')).to_have_text('Task 2 of 11')
+   p.get_by_role('button',name='Next',exact=True).click();expect(p.locator('.spatial-position')).to_have_text('Task 2 of 11')
    # A legacy partial section retains later observations. Preview never rewrites it.
    seed(2,{'0':'met','1':'fail','4':'met'},{'4':'Keep later data'})
    s=open_all();expect(s.locator('h3').first).to_contain_text('2 of 3 complete')
    saved=p.evaluate('localStorage.getItem("'+KEY+'")');row(s,8).click();s.get_by_role('button',name='Back to checklist',exact=True).click();assert p.evaluate('localStorage.getItem("'+KEY+'")')==saved
    # Completed legacy future item can be reviewed, never promotes active frontier.
    row(s,4).click();expect(p.get_by_role('textbox',name='Comment',exact=True)).to_have_value('Keep later data')
-   p.get_by_role('radio',name='Fail',exact=True).check();p.get_by_role('button',name='Return to current task',exact=True).click()
+   p.get_by_role('radio',name='Fail',exact=True).check();p.get_by_role('button',name='Next',exact=True).click()
    expect(p.locator('.spatial-position')).to_have_text('Task 3 of 11');assert p.evaluate('JSON.parse(localStorage.getItem("'+KEY+'")).answers[4]')=='fail'
    # Required evidence: an answered Fail is incomplete until both modalities exist.
    seed(8,{'8':'fail'})
@@ -76,9 +76,9 @@ with sync_playwright() as pw:
    s=open_all()
    for i,n in enumerate([3,5,3]):expect(s.locator('h3').nth(i)).to_contain_text(f'{n} of {n} complete')
    row(s,8).click();p.get_by_role('textbox',name='Comment',exact=True).fill('')
-   expect(p.get_by_role('button',name='Return to current task',exact=True)).to_be_disabled()
+   expect(p.get_by_role('button',name='Next',exact=True)).to_be_disabled()
    s=open_all();expect(row(s,8)).to_contain_text('Evidence needed · Review');row(s,8).click()
-   p.get_by_role('textbox',name='Comment',exact=True).fill('Corrected evidence');p.get_by_role('button',name='Return to current task',exact=True).click()
+   p.get_by_role('textbox',name='Comment',exact=True).fill('Corrected evidence');p.get_by_role('button',name='Next',exact=True).click()
    expect(p.locator('.spatial-position')).to_have_text('Task 11 of 11');assert p.evaluate('JSON.parse(localStorage.getItem("'+KEY+'")).notes[10]')=='Later task note'
    # Keyboard navigation / focus restoration / geometry.
    trigger=p.get_by_role('button',name='All tasks',exact=True);trigger.focus();p.keyboard.press('Enter');s=p.get_by_role('dialog',name='All tasks')
