@@ -16,7 +16,7 @@ test('WCAG AA text across every gradient stop and brand, including selected rows
     for (const surface of ['canvas','brand-canvas-start','brand-canvas-mid','brand-canvas-end','surface','surface-tint','choice','selected']) {
       for (const ink of ['ink','muted']) check(color(ink),color(surface),4.5,ink + ' on ' + surface)
     }
-    for (const [ink, surface] of [['section-ink','section-bg'],['warning-ink','warning-bg'],['success-ink','success-bg'],['fail-ink','fail-bg'],['brand-accent-ink','brand-accent-subtle']]) check(color(ink),color(surface),4.5,ink)
+    for (const [ink, surface] of [['section-ink','section-bg'],['status-ready-ink','status-ready-bg'],['warning-ink','warning-bg'],['success-ink','success-bg'],['fail-ink','fail-bg'],['brand-accent-ink','brand-accent-subtle']]) check(color(ink),color(surface),4.5,ink)
     check('#ffffff',color('primary'),4.5,'primary button and active tab')
     check('#ffffff',color('primary-hover'),4.5,'primary hover')
     check('#ffffff','#303033',4.5,'Android-style toast')

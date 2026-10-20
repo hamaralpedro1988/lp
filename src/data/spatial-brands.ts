@@ -1,4 +1,4 @@
-/** Brand atmosphere only. Product controls and semantic states are deliberately absent. */
+/** Branding changes icon decor and canvas atmosphere only; product/text/status roles stay fixed. */
 export type SpatialBrandId = 'spatial' | 'mcdonalds' | 'burger-king'
 export type SpatialBrand = { id: SpatialBrandId; name: string; accent: string; tokens: Record<string, string> }
 function mix(accent: string, base: string, amount: number) {
@@ -11,9 +11,6 @@ function atmosphere(accent: string): Record<string, string> {
     '--spatial-brand-accent': accent,
     '--spatial-brand-accent-subtle': mix(accent, '#fafafd', .065),
     '--spatial-brand-accent-ink': mix(accent, '#242339', .45),
-    '--spatial-brand-iris': mix(accent, '#242339', .45),
-    '--spatial-brand-iris-deep': mix(accent, '#242339', .3),
-    '--spatial-brand-secondary-ink': '#625c75',
     '--spatial-brand-canvas': mix(accent, '#f9f9fc', .035),
     '--spatial-brand-canvas-start': mix(accent, '#fcfcff', .06),
     '--spatial-brand-canvas-mid': mix(accent, '#ffffff', .12),

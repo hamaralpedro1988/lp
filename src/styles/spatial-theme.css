@@ -2,8 +2,6 @@
    Override --spatial-brand-* to adapt a client brand without rebuilding components. */
 html[data-assessment-version="5"] {
   --spatial-brand-canvas:#f3f0fb;
-  --spatial-brand-iris:#7363bd;
-  --spatial-brand-iris-deep:#6453b0;
   --spatial-brand-canvas-start:#f8f7fd;--spatial-brand-canvas-mid:#efedf8;--spatial-brand-canvas-end:#f0eef9;
   --spatial-surface-tint:#f9f7ff;
   --spatial-brand-accent:#7363bd;--spatial-brand-accent-subtle:#f0edfa;--spatial-brand-accent-ink:#6555a9;
@@ -14,10 +12,9 @@ html[data-assessment-version="5"] {
   --spatial-surface:#ffffff;
   --spatial-surface-gradient:linear-gradient(155deg,var(--spatial-surface) 0%,#fdfcff 70%,var(--spatial-surface-tint) 100%);
   --spatial-ink:#242339;
-  --spatial-brand-secondary-ink:#6b657d;
-  --spatial-muted:var(--spatial-brand-secondary-ink);
-  --spatial-iris:var(--spatial-brand-iris);
-  --spatial-iris-deep:var(--spatial-brand-iris-deep);
+  --spatial-muted:#625c75;
+  --spatial-iris:#7363bd;
+  --spatial-iris-deep:#6453b0;
   --spatial-progress:var(--spatial-success-ink);
   --spatial-progress-track:#e3e4e8;
   --spatial-choice:#f9f8fd;
@@ -32,6 +29,7 @@ html[data-assessment-version="5"] {
   --spatial-primary-hover:#3b3456;
   --spatial-disabled:#e7e5ee;
   --spatial-disabled-ink:#726c81;
+  --spatial-status-ready-bg:#f0edfa;--spatial-status-ready-ink:#6555a9;
   --spatial-section-bg:#f1f2f5;
   --spatial-section-ink:#535365;
   --spatial-warning-bg:#fff1e2;
@@ -551,7 +549,7 @@ html[data-assessment-version="5"] .spatial-review-detail-actions {display:grid;g
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-metadata {padding:var(--spatial-space-card-block) var(--spatial-space-card-inline);gap:6px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-metadata>div {grid-template-columns:minmax(0,1fr) auto;font-size:14px;min-height:28px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-metadata strong {font-size:var(--spatial-type-secondary);font-weight:var(--spatial-weight-row)}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-status[data-status=ready] {background:var(--spatial-brand-accent-subtle);color:var(--spatial-brand-accent-ink);border-color:transparent;font-size:12px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-status[data-status=ready] {background:var(--spatial-status-ready-bg);color:var(--spatial-status-ready-ink);border-color:transparent;font-size:12px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-learning-row {position:relative;display:flex;align-items:center;justify-content:space-between;gap:var(--spatial-space-3);width:100%;min-height:28px;height:auto;margin:0;padding:0;border:0;background:transparent;white-space:normal;text-align:left;border-radius:8px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-learning-row>span {flex:1;color:var(--spatial-muted);font-size:var(--spatial-type-secondary);font-weight:400;line-height:1.5}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-learning-row>strong {flex:none;font-size:16px;color:var(--spatial-ink)}
@@ -679,3 +677,6 @@ html[data-assessment-version="5"] .spatial-review-detail-body .spatial-review-ph
 
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-overview-people .overview-status {padding:3px 8px}
 .spatial-learning-row::before {content:"";position:absolute;inset:-8px 0}
+
+/* Outline controls must not inherit the brand-adaptive page background. */
+html[data-assessment-version="5"] :where([data-slot=button][data-variant=outline]) {background:var(--spatial-surface)}
