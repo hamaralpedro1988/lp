@@ -78,10 +78,11 @@ export function SpatialEvidenceComposer({ note, count, requirement, onNote, onCa
   const showHelp = requirement !== 'none' || count > 0
   return <section className="spatial-evidence" aria-label="Observation evidence">
     <div className="spatial-composer" data-required={pending || undefined} data-help={showHelp || undefined}>
-      <Textarea id={`${id}-comment`} aria-label="Comment" aria-required={requirement === 'comment' || requirement === 'comment-and-photo'} aria-invalid={pending && (requirement === 'comment' || requirement === 'comment-and-photo') && !note.trim() || undefined} aria-describedby={showHelp ? `${id}-help` : undefined} placeholder="Add a comment" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
+      <Textarea id={`${id}-comment`} aria-label="Comment" aria-required={requirement === 'comment' || requirement === 'comment-and-photo'} aria-invalid={pending && (requirement === 'comment' || requirement === 'comment-and-photo') && !note.trim() || undefined} aria-describedby={`${id}-visibility${showHelp ? ` ${id}-help` : ''}`} placeholder="Add a comment..." value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
       <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby={showHelp ? `${id}-help` : undefined}><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
       {showHelp && <span id={`${id}-help`} className="spatial-composer-help" role="status">{spatialEvidenceMessage(requirement, note, count)}</span>}
     </div>
+    <p id={`${id}-visibility`} className="spatial-comment-visibility">Visible to Dre and other authorised users</p>
     <div className="flow-gallery spatial-attachments" ref={galleryRef}/>
   </section>
 }

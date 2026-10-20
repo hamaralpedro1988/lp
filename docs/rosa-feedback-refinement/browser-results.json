@@ -1,0 +1,90 @@
+{
+  "checks": [
+    {
+      "theme": "spatial",
+      "width": 320,
+      "height": 844,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "spatial",
+      "width": 390,
+      "height": 844,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "spatial",
+      "width": 419,
+      "height": 844,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "spatial",
+      "width": 390,
+      "height": 440,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "spatial",
+      "width": 1440,
+      "height": 1000,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "spatial",
+      "width": 390,
+      "height": 844,
+      "largeText": true,
+      "result": "pass"
+    },
+    {
+      "theme": "fluid",
+      "width": 320,
+      "height": 844,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "fluid",
+      "width": 390,
+      "height": 844,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "fluid",
+      "width": 419,
+      "height": 844,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "fluid",
+      "width": 390,
+      "height": 440,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "fluid",
+      "width": 1440,
+      "height": 1000,
+      "largeText": false,
+      "result": "pass"
+    },
+    {
+      "theme": "fluid",
+      "width": 390,
+      "height": 844,
+      "largeText": true,
+      "result": "pass"
+    }
+  ],
+  "errors": [],
+  "interactionChecks": "Overview, DND, composer, first/existing/empty notes, cancel/save/discard, focus, persistence, required evidence, Live consistency, signature/submission, submitted read-only, storage failure"
+}
