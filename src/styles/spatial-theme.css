@@ -732,3 +732,12 @@ html[data-assessment-version="5"] .spatial-signature-sheet [data-slot=input] {he
 html[data-assessment-version="5"] .spatial-signature-sheet>button {width:auto;height:auto;min-height:0;padding:0}
 html[data-assessment-version="5"] .spatial-signature-sheet [data-slot=button],
 html[data-assessment-version="5"] .spatial-submission [data-slot=button] {white-space:nowrap}
+
+/* Shared observation visibility: secondary, persistent, without enlarging the input. */
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-comment-visibility,
+html[data-assessment-version="5"] .spatial-review-detail-body .spatial-comment-visibility {margin:4px 0 0;font-size:var(--spatial-type-secondary);line-height:1.5;color:var(--spatial-muted);font-weight:400}
+html[data-assessment-version="5"] .spatial-review-observation textarea {width:100%;min-height:88px;font-size:var(--spatial-type-body);line-height:var(--spatial-leading-body);resize:vertical;scroll-margin-block:16px}
+html[data-assessment-version="5"] .spatial-observation-actions {display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-top:12px}
+html[data-assessment-version="5"] .spatial-observation-actions [data-slot=button] {min-height:44px;white-space:normal}
+html[data-assessment-version="5"] .spatial-review-detail-body .spatial-review-required {font-size:var(--spatial-type-secondary);color:var(--spatial-warning-ink)}
+html[data-assessment-version="5"] [data-slot=sheet-content].spatial-review-details {max-height:min(88dvh,var(--visual-height,88dvh));}

@@ -2,11 +2,12 @@ import fryerPhoto from '@/assets/fryer-station.png'
 import type { SpatialLearningResult } from '@/data/spatial-overview'
 import dreAvatar from '@/assets/dre-jackson.png'
 import { spatialMissing, spatialEvidenceMessage, spatialEvidenceRequirement } from '@/data/spatial-flow'
-import { useCallback, useId, useRef, useState, type ReactNode, type Ref } from 'react'
+import { useCallback, useId, useLayoutEffect, useRef, useState, type ReactNode, type Ref } from 'react'
 import { Camera, CookingPot, Check, ChevronRight, ClipboardCheck, MessageCircle, ShieldCheck, UserRound, X } from 'lucide-react'
 import { useMobileOverlay } from '@/hooks/use-mobile-overlay'
 import { spatialAssessmentOutcome, spatialReviewIndices, spatialReviewResult, type SpatialReviewFilter } from '@/data/spatial-review'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/components/ui/alert-dialog'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -65,31 +66,66 @@ export function SpatialReviewCriterionRow({ index, draft, photos, onOpen }: { in
   const comment = !!draft.notes[index]?.trim(), count = draft.completion?.photos[index] ?? photos[index] ?? 0
   return <SpatialActionButton variant="ghost" className="review-item" onClick={event => onOpen(event.currentTarget)} aria-label={`View: ${item.title}`} aria-describedby={`${id}${comment ? ` ${id}-comment` : ''}${count > 0 ? ` ${id}-photo` : ''}`} aria-haspopup="dialog"><span id={id} className="spatial-review-row-outcome" data-result={result}><Icon aria-hidden="true"/><span className="sr-only">{result}</span></span><span className="spatial-review-item-copy"><strong>{item.title}</strong><span className="spatial-review-item-meta"><Badge variant="secondary" className="spatial-badge">{item.section}</Badge>{'critical' in item && <Badge variant="secondary" className="spatial-badge" data-tone="critical">Critical</Badge>}{count > 0 && <Badge id={`${id}-photo`} variant="secondary" className="spatial-review-evidence-tag"><Camera aria-hidden="true"/><span className="sr-only">{count} {count === 1 ? 'photo attached' : 'photos attached'}</span></Badge>}{comment && <Badge id={`${id}-comment`} variant="secondary" className="spatial-review-evidence-tag"><MessageCircle aria-hidden="true"/><span className="sr-only">Comment recorded</span></Badge>}</span>{result === 'Incomplete' && <small className="spatial-review-evidence-warning">{!draft.answers[index] || !['met','fail'].includes(draft.answers[index]) ? 'Response needed' : spatialEvidenceMessage(spatialEvidenceRequirement(index), draft.notes[index] ?? '', count)}</small>}</span><ChevronRight aria-hidden="true"/></SpatialActionButton>
 }
-export function SpatialReviewDetails({ index, draft, photos, onClose, onEdit, onEvidenceTarget, evidence, onRestoreFocus }: { index: number; draft: FlowDraft; photos: Record<number, number>; onClose: () => void; onEdit: () => void; onEvidenceTarget?: ReviewEvidenceTarget; evidence?: ReactNode; onRestoreFocus: (event: Event) => void }) {
-  const criterion = flowCriteria[index], result = spatialReviewResult(draft, photos, index)
+export function SpatialReviewDetails({ index, draft, photos, onClose, onEdit, onEvidenceTarget, evidence, onRestoreFocus, onSaveObservation, registerClose }: { index: number; draft: FlowDraft; photos: Record<number, number>; onClose: () => void; onEdit: () => void; onEvidenceTarget?: ReviewEvidenceTarget; evidence?: ReactNode; onRestoreFocus: (event: Event) => void; onSaveObservation?: SaveObservation; registerClose: (request: (() => boolean) | null) => void }) {
+  const criterion = flowCriteria[index], validation = spatialReviewResult(draft, photos, index)
+  const result = draft.answers[index] === 'met' ? 'Pass' : draft.answers[index] === 'fail' ? 'Fail' : validation
   const title = useRef<HTMLHeadingElement>(null)
   const swipe = useRef<{ id: number; x: number; y: number } | null>(null)
   const gallery = useCallback((node: HTMLDivElement | null) => onEvidenceTarget?.(index, node), [index, onEvidenceTarget])
   const requirement = spatialEvidenceRequirement(index)
-  return <SheetContent side="bottom" className="mobile-sheet flow-sheet spatial-review-details mx-auto" onCloseAutoFocus={onRestoreFocus} onOpenAutoFocus={event => { event.preventDefault(); title.current?.focus({ preventScroll: true }) }}>
-    <SpatialActionButton variant="ghost" className="spatial-review-sheet-handle" aria-label="Close task details" onClick={onClose} onPointerDown={event => { if (!event.isPrimary || event.button !== 0) return; swipe.current = { id: event.pointerId, x: event.clientX, y: event.clientY }; event.currentTarget.setPointerCapture(event.pointerId) }} onPointerUp={event => { const from = swipe.current; swipe.current = null; if (from?.id !== event.pointerId) return; const dx = event.clientX - from.x, dy = event.clientY - from.y; if (dy > 48 && dy > Math.abs(dx) * 1.25) onClose() }} onPointerCancel={() => { swipe.current = null }}><span aria-hidden="true"/></SpatialActionButton>
+  const observationId = useId()
+  const [text, setText] = useState(draft.notes[index] ?? '')
+  const [status, setStatus] = useState('')
+  const [discard, setDiscard] = useState(false)
+  const pendingAction = useRef<(() => void) | null>(null)
+  const returnFocus = useRef<HTMLElement | null>(null)
+  const textarea = useRef<HTMLTextAreaElement>(null)
+  const saved = draft.notes[index] ?? ''
+  const editable = !draft.assessorConfirmed && !!onSaveObservation
+  const dirty = editable && text !== saved
+  const required = requirement === 'comment' || requirement === 'comment-and-photo'
+  function request(action: () => void): boolean {
+    if (!dirty) { action(); return true }
+    returnFocus.current = document.activeElement as HTMLElement
+    pendingAction.current = action; setDiscard(true); return false
+  }
+  useLayoutEffect(() => {
+    registerClose(() => request(onClose))
+    return () => registerClose(null)
+  })
+  useMobileOverlay(discard, () => { setDiscard(false); return true })
+  return <><SheetContent side="bottom" className="mobile-sheet flow-sheet spatial-review-details mx-auto" onCloseAutoFocus={onRestoreFocus} onOpenAutoFocus={event => { event.preventDefault(); title.current?.focus({ preventScroll: true }) }}>
+    <SpatialActionButton variant="ghost" className="spatial-review-sheet-handle" aria-label="Close task details" onClick={() => request(onClose)} onPointerDown={event => { if (!event.isPrimary || event.button !== 0) return; swipe.current = { id: event.pointerId, x: event.clientX, y: event.clientY }; event.currentTarget.setPointerCapture(event.pointerId) }} onPointerUp={event => { const from = swipe.current; swipe.current = null; if (from?.id !== event.pointerId) return; const dx = event.clientX - from.x, dy = event.clientY - from.y; if (dy > 48 && dy > Math.abs(dx) * 1.25) request(onClose) }} onPointerCancel={() => { swipe.current = null }}><span aria-hidden="true"/></SpatialActionButton>
     <SheetHeader><SheetTitle ref={title} tabIndex={-1} className="outline-none">Task details</SheetTitle><SheetDescription>{index + 1} of {flowCriteria.length} · {criterion.section}</SheetDescription></SheetHeader>
     <div className="spatial-review-detail-body"><section aria-label="Task"><div className="spatial-badges"><Badge variant="secondary" className="spatial-badge">{criterion.section}</Badge>{'critical' in criterion && <Badge variant="secondary" className="spatial-badge" data-tone="critical">Critical</Badge>}</div><h3>{criterion.title}</h3><p>{criterion.desc}</p></section>
-    <section aria-label="Recorded result"><h4>Recorded result</h4><Badge variant="outline" className="spatial-review-outcome" data-result={result}>{result}</Badge>{result === 'Incomplete' && <p>{draft.answers[index] === 'met' || draft.answers[index] === 'fail' ? `Recorded response: ${draft.answers[index] === 'met' ? 'Pass' : 'Fail'}. ${spatialEvidenceMessage(requirement, draft.notes[index] ?? '', photos[index] ?? 0)}.` : 'No Pass or Fail response recorded.'}</p>}</section>
+    <section aria-label="Recorded result"><h4>Recorded result</h4><Badge variant="outline" className="spatial-review-outcome" data-result={result}>{result}</Badge>{validation === 'Incomplete' && <p role="status">{draft.answers[index] === 'met' || draft.answers[index] === 'fail' ? `Recorded response: ${draft.answers[index] === 'met' ? 'Pass' : 'Fail'}. ${spatialEvidenceMessage(requirement, draft.notes[index] ?? '', photos[index] ?? 0)}.` : 'No Pass or Fail response recorded.'}</p>}</section>
     <Separator/>
-    <section aria-label="Rosa’s observation"><h4>Rosa’s observation</h4><p className="spatial-review-original-note">{draft.notes[index]?.trim() ? draft.notes[index] : 'No observation added.'}</p></section>
+    <section aria-labelledby={`${observationId}-label`} className="spatial-review-observation"><h4 id={`${observationId}-label`}>Rosa’s observation<span className="sr-only">: {criterion.title}</span></h4>{editable ? <>
+      <Textarea ref={textarea} value={text} onChange={event => { setText(event.target.value); setStatus('') }} placeholder="Add a comment..." aria-labelledby={`${observationId}-label`} aria-describedby={`${observationId}-visibility${required ? ` ${observationId}-required` : ''}`} aria-required={required} aria-invalid={required && !text.trim() || undefined} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
+      <p id={`${observationId}-visibility`} className="spatial-comment-visibility">Visible to Dre and other authorised users</p>
+      {required && <p id={`${observationId}-required`} className="spatial-review-required">{!text.trim() ? 'Comment required before submission. You can save this draft and add it later.' : 'Comment required'}</p>}
+      {dirty && <div className="spatial-observation-actions"><SpatialActionButton variant="outline" onClick={() => { setText(saved); setStatus('Changes cancelled.'); textarea.current?.focus({ preventScroll: true }) }}>Cancel</SpatialActionButton><SpatialActionButton onClick={() => {
+        if (onSaveObservation?.(index, text)) { setStatus('Comment saved on this device.'); textarea.current?.focus({ preventScroll: true }) }
+        else setStatus('Unable to save changes. Keep this sheet open and try again.')
+      }}>Save changes</SpatialActionButton></div>}
+      <span role="status" aria-live="polite" className={status.startsWith('Unable') ? 'spatial-review-required' : 'sr-only'}>{status || (dirty ? 'Unsaved comment changes.' : '')}</span>
+    </> : <><p className="spatial-review-original-note">{saved.trim() ? saved : 'No observation added.'}</p><p className="spatial-comment-visibility">Visible to Dre and other authorised users</p></>}</section>
     {(photos[index] ?? 0) > 0 && <section aria-label="Attached photos"><h4>Attached photos</h4><div ref={gallery} className="flow-gallery spatial-attachments">{evidence}</div><p className="spatial-review-photo-note">Photos are available in this page session.</p></section>}{draft.completion && (draft.completion.photos[index] ?? 0) > 0 && !(photos[index] > 0) && <p className="spatial-review-photo-note">Photo evidence was recorded at completion. The original photo is unavailable in this page session.</p>}
-    </div><div className="spatial-review-detail-actions"><SpatialActionButton variant="outline" onClick={onClose}>Close</SpatialActionButton>{!draft.completion && <SpatialActionButton onClick={onEdit}>Edit observation<ChevronRight aria-hidden="true"/></SpatialActionButton>}</div>
-  </SheetContent>
+    </div><div className="spatial-review-detail-actions"><SpatialActionButton variant="outline" onClick={() => request(onClose)}>Close</SpatialActionButton>{!draft.completion && !draft.assessorConfirmed && <SpatialActionButton onClick={() => request(onEdit)}>Edit observation<ChevronRight aria-hidden="true"/></SpatialActionButton>}</div>
+  </SheetContent><AlertDialog open={discard} onOpenChange={setDiscard}><AlertDialogContent onCloseAutoFocus={event => { event.preventDefault(); if (returnFocus.current?.isConnected) returnFocus.current.focus({ preventScroll: true }) }}><AlertDialogHeader><AlertDialogTitle>Discard comment changes?</AlertDialogTitle><AlertDialogDescription>Your unsaved comment will be lost. The saved observation will stay unchanged.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Keep editing</AlertDialogCancel><AlertDialogAction onClick={() => { setDiscard(false); pendingAction.current?.() }}>Discard changes</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog></>
 }
-export function SpatialReviewList({ draft, photos, onEdit, onEvidenceTarget, evidence }: { draft: FlowDraft; photos: Record<number, number>; onEdit: (index: number) => void; onEvidenceTarget?: ReviewEvidenceTarget; evidence?: (index: number) => ReactNode }) {
+export type SaveObservation = (index: number, value: string) => boolean
+export function SpatialReviewList({ draft, photos, onEdit, onEvidenceTarget, evidence, onSaveObservation }: { draft: FlowDraft; photos: Record<number, number>; onEdit: (index: number) => void; onEvidenceTarget?: ReviewEvidenceTarget; evidence?: (index: number) => ReactNode; onSaveObservation?: SaveObservation }) {
   const [expanded, setExpanded] = useState(false)
   const [filter, setFilter] = useState<SpatialReviewFilter>('all')
   const [selected, setSelected] = useState<number | null>(null)
   const trigger = useRef<HTMLButtonElement | null>(null)
+  const list = useRef<HTMLDivElement>(null)
+  const closeRequest = useRef<(() => boolean) | null>(null)
+  const registerClose = useCallback((request: (() => boolean) | null) => { closeRequest.current = request }, [])
   const indices = spatialReviewIndices(draft, photos, filter)
-  useMobileOverlay(selected !== null, () => { setSelected(null); return true })
-  return <><SpatialSurface elevation="quiet" className="overview-card overview-sections spatial-review-list"><Tabs value={filter} onValueChange={value => { setFilter(value as SpatialReviewFilter); setExpanded(false) }} className="spatial-review-tabs"><CardHeader><CardTitle><h2>Tasks</h2></CardTitle><SpatialReviewFilters draft={draft} photos={photos}/></CardHeader><TabsContent value={filter}><CardContent><span role="status" className="sr-only">{indices.length} {filter === 'all' ? '' : filter} tasks shown.</span>{(draft.completion && !expanded ? indices.slice(0, 4) : indices).map(index => <SpatialReviewCriterionRow key={index} index={index} draft={draft} photos={photos} onOpen={button => { trigger.current = button; setSelected(index) }}/>) }{draft.completion && indices.length > 4 && <div className="spatial-review-view-all"><SpatialActionButton variant="outline" onClick={() => setExpanded(value => !value)}>{expanded ? 'Show Less' : 'View All'}</SpatialActionButton></div>}{!indices.length && <div className="spatial-review-filter-empty"><ClipboardCheck aria-hidden="true"/><p>No {filter} tasks to review.</p></div>}</CardContent></TabsContent></Tabs></SpatialSurface><Sheet open={selected !== null} onOpenChange={open => { if (!open) setSelected(null) }}>{selected !== null && <SpatialReviewDetails index={selected} draft={draft} photos={photos} onClose={() => setSelected(null)} onEdit={() => { const index = selected; setSelected(null); onEdit(index) }} onEvidenceTarget={onEvidenceTarget} evidence={evidence?.(selected)} onRestoreFocus={event => { if (trigger.current?.isConnected) { event.preventDefault(); trigger.current.focus({ preventScroll: true }) } }}/>}</Sheet></>
+  useMobileOverlay(selected !== null, () => closeRequest.current?.() ?? true)
+  return <><SpatialSurface ref={list} elevation="quiet" className="overview-card overview-sections spatial-review-list"><Tabs value={filter} onValueChange={value => { setFilter(value as SpatialReviewFilter); setExpanded(false) }} className="spatial-review-tabs"><CardHeader><CardTitle><h2>Tasks</h2></CardTitle><SpatialReviewFilters draft={draft} photos={photos}/></CardHeader><TabsContent value={filter}><CardContent><span role="status" className="sr-only">{indices.length} {filter === 'all' ? '' : filter} tasks shown.</span>{(draft.completion && !expanded ? indices.slice(0, 4) : indices).map(index => <SpatialReviewCriterionRow key={index} index={index} draft={draft} photos={photos} onOpen={button => { trigger.current = button; setSelected(index) }}/>) }{draft.completion && indices.length > 4 && <div className="spatial-review-view-all"><SpatialActionButton variant="outline" onClick={() => setExpanded(value => !value)}>{expanded ? 'Show Less' : 'View All'}</SpatialActionButton></div>}{!indices.length && <div className="spatial-review-filter-empty"><ClipboardCheck aria-hidden="true"/><p>No {filter} tasks to review.</p></div>}</CardContent></TabsContent></Tabs></SpatialSurface><Sheet open={selected !== null} onOpenChange={open => { if (!open) closeRequest.current?.() }}>{selected !== null && <SpatialReviewDetails key={selected} index={selected} registerClose={registerClose} onSaveObservation={onSaveObservation} draft={draft} photos={photos} onClose={() => setSelected(null)} onEdit={() => { const index = selected; setSelected(null); onEdit(index) }} onEvidenceTarget={onEvidenceTarget} evidence={evidence?.(selected)} onRestoreFocus={event => { const target = trigger.current?.isConnected ? trigger.current : list.current?.querySelector<HTMLElement>('[role=tab][data-state=active]'); if (target) { event.preventDefault(); target.focus({ preventScroll: true }) } }}/>}</Sheet></>
 }
 export function SpatialFeedbackCard({ draft, onFeedback }: { draft: FlowDraft; onFeedback: (value: string) => void }) {
   const id = useId()

@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { BellOff, Clock3, MessageCircle, Save } from 'lucide-react'
+import { BellOff, Clock3, Users, Save } from 'lucide-react'
+import { spatialAssessmentPreparation } from '@/data/spatial-overview'
 import { Switch as SwitchPrimitive } from 'radix-ui'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -19,13 +20,13 @@ export function SpatialBeforeStart() {
     timer.current = setTimeout(() => setMessage(''), 6000)
   }
   const items = [
-    { Icon: Clock3, title: 'Session can take about 15 minutes', description: 'Allow time to observe Dre at work' },
-    { Icon: BellOff, title: 'Avoid interruptions', description: 'Turn on Do Not Disturb', toggle: true },
-    { Icon: Save, title: 'Progress saves automatically', description: 'Saved on this device. Server sync is not available in this prototype.' },
-    { Icon: MessageCircle, title: 'Assess together', description: 'Explain the process first' },
+    { Icon: Clock3, title: `Estimated time: ~${spatialAssessmentPreparation.estimatedMinutes} min`, description: 'Based on the tasks in this assessment. Actual time may vary.' },
+    { Icon: BellOff, title: 'Avoid interruptions', description: 'Turn on Do Not Disturb.', toggle: true },
+    { Icon: Save, title: 'Progress saves automatically', description: 'Works offline. Syncs when connected.' },
+    { Icon: Users, title: 'Shared feedback', description: 'Comments and photos will be visible to Dre and other authorised assessment users.' },
   ]
   return <>
-    <SpatialSurface className="overview-card overview-sections spatial-before-start"><CardHeader><CardTitle><h2>Before you start</h2></CardTitle></CardHeader><CardContent><ul>{items.map(({ Icon, title, description, toggle }, index) => <li key={title}>{index > 0 && <Separator/>}<div className="spatial-before-start-row"><span className="overview-goal-icon" aria-hidden="true"><Icon/></span><span className="overview-section-copy">{toggle ? <label htmlFor={id}>{title}</label> : <span>{title}</span>}<small id={toggle ? id + '-description' : undefined}>{description}</small></span>{toggle && <SwitchPrimitive.Root id={id} className="spatial-dnd-switch" checked={quietPreview} onCheckedChange={preview} aria-label="Preview Do Not Disturb" aria-describedby={id + '-description'}><SwitchPrimitive.Thumb className="spatial-dnd-thumb"/></SwitchPrimitive.Root>}</div></li>)}</ul></CardContent></SpatialSurface>
+    <SpatialSurface className="overview-card overview-sections spatial-before-start"><CardHeader><CardTitle><h2>Before you start</h2></CardTitle></CardHeader><CardContent><ul>{items.map(({ Icon, title, description, toggle }, index) => <li key={title}>{index > 0 && <Separator/>}<div className="spatial-before-start-row"><span className="overview-goal-icon" aria-hidden="true"><Icon/></span><span className="overview-section-copy">{toggle ? <label htmlFor={id}>{title}</label> : <span>{title}</span>}<small id={toggle ? id + '-description' : undefined}>{description}{Icon === Save && <span className="spatial-local-save-note"> Prototype: saved on this device only; server sync is unavailable.</span>}</small></span>{toggle && <SwitchPrimitive.Root id={id} className="spatial-dnd-switch" checked={quietPreview} onCheckedChange={preview} aria-label="Preview Do Not Disturb" aria-describedby={id + '-description'}><SwitchPrimitive.Thumb className="spatial-dnd-thumb"/></SwitchPrimitive.Root>}</div></li>)}</ul></CardContent></SpatialSurface>
     <div className="spatial-android-toast" role="status" aria-live="polite" aria-atomic="true" data-visible={!!message}>{message && <><BellOff aria-hidden="true"/><span>{message}</span></>}</div>
   </>
 }

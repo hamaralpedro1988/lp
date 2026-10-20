@@ -1,0 +1,215 @@
+{
+  "reports": [
+    {
+      "theme": "spatial",
+      "brand": "spatial",
+      "state": "overview",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "spatial",
+      "brand": "spatial",
+      "state": "live",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "spatial",
+      "state": "submission",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "spatial",
+      "brand": "spatial",
+      "state": "unsaved",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "spatial",
+      "state": "discard",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "crimson",
+      "state": "overview",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "spatial",
+      "brand": "crimson",
+      "state": "live",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "crimson",
+      "state": "submission",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "spatial",
+      "brand": "crimson",
+      "state": "unsaved",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "crimson",
+      "state": "discard",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "ocean",
+      "state": "overview",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "spatial",
+      "brand": "ocean",
+      "state": "live",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "ocean",
+      "state": "submission",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "spatial",
+      "brand": "ocean",
+      "state": "unsaved",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "spatial",
+      "brand": "ocean",
+      "state": "discard",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "spatial",
+      "state": "overview",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "fluid",
+      "brand": "spatial",
+      "state": "live",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "spatial",
+      "state": "submission",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "fluid",
+      "brand": "spatial",
+      "state": "unsaved",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "spatial",
+      "state": "discard",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "crimson",
+      "state": "overview",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "fluid",
+      "brand": "crimson",
+      "state": "live",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "crimson",
+      "state": "submission",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "fluid",
+      "brand": "crimson",
+      "state": "unsaved",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "crimson",
+      "state": "discard",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "ocean",
+      "state": "overview",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "fluid",
+      "brand": "ocean",
+      "state": "live",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "ocean",
+      "state": "submission",
+      "violations": [],
+      "incomplete": 1
+    },
+    {
+      "theme": "fluid",
+      "brand": "ocean",
+      "state": "unsaved",
+      "violations": [],
+      "incomplete": 2
+    },
+    {
+      "theme": "fluid",
+      "brand": "ocean",
+      "state": "discard",
+      "violations": [],
+      "incomplete": 2
+    }
+  ],
+  "manualDeviceValidation": "Physical keyboard/IME, TalkBack and VoiceOver not available; no compliance claim."
+}

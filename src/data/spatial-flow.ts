@@ -16,8 +16,13 @@ export function normalizeSpatialDraft(value: unknown): FlowDraft {
   const receipt = (value as FlowDraft).completion
   if (receipt && typeof receipt.at === 'string' && Number.isFinite(Date.parse(receipt.at))) {
     const counts = Object.fromEntries(flowCriteria.map((_, i) => [i, Number.isInteger(receipt.photos?.[i]) && receipt.photos[i] > 0 ? receipt.photos[i] : 0]))
-    if (spatialMissing(result, counts).length === 0) {
-      result.completion = { at: receipt.at, photos: counts }
+    // Completion freezes responses, not pre-submission comment corrections. Validate
+    // the original evidence snapshot; submission still checks the CURRENT notes.
+    const originalNotes = receipt.notes && typeof receipt.notes === 'object'
+      ? Object.fromEntries(flowCriteria.flatMap((_, i) => typeof receipt.notes?.[i] === 'string' ? [[i, receipt.notes[i]]] : []))
+      : result.notes
+    if (spatialMissing({ ...result, notes: originalNotes }, counts).length === 0) {
+      result.completion = { at: receipt.at, photos: counts, ...(receipt.notes ? { notes: originalNotes } : {}) }
       if (result.screen !== 'signoff' && result.screen !== 'list') result.screen = 'review'
     }
   }
@@ -89,5 +94,13 @@ export const spatialOptions = [
 /** Capture eligibility only after validating the real, current-session evidence. */
 export function completeSpatialAssessment(draft: FlowDraft, photos: Record<number, number>): FlowDraft | null {
   if (draft.completion || spatialMissing(draft, photos).length) return null
-  return { ...draft, screen: 'review', paused: false, completion: { at: new Date().toISOString(), photos: { ...photos } } }
+  return { ...draft, screen: 'review', paused: false, completion: { at: new Date().toISOString(), photos: { ...photos }, notes: { ...draft.notes } } }
+}
+
+/** Only comments may be corrected after completion, until the local submission. */
+export function updateSpatialObservation(draft: FlowDraft, index: number, value: string): FlowDraft | null {
+  if (draft.assessorConfirmed || !Number.isInteger(index) || !flowCriteria[index]) return null
+  return { ...draft, notes: { ...draft.notes, [index]: value }, ...(draft.completion ? {
+    completion: { ...draft.completion, notes: draft.completion.notes ?? { ...draft.notes } },
+  } : {}) }
 }
