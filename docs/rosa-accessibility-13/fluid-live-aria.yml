@@ -1,0 +1,28 @@
+- progressbar "Tasks complete"
+- button "Back to overview"
+- heading "Fryer Station" [level=1]
+- paragraph: Food Process & Safety
+- button "View team member Dre Michael"
+- region "Live checklist":
+  - text: Swipe left for next or right for previous. Back, Sections and Next/Finish buttons are also available. Completion Task 9 of 11
+  - heading "Task 9 of 11, Completion. Checks the finished product quality. 0 of 11 tasks complete" [level=2]: Checks the finished product quality
+  - paragraph: Observe product quality checks against the agreed standard.
+  - radiogroup "Task 9 of 11, Completion. Checks the finished product quality. 0 of 11 tasks complete":
+    - strong: Pass
+    - text: Met the standard
+    - radio "Pass"
+    - strong: Fail
+    - text: Did not meet the standard
+    - radio "Fail" [checked]
+  - status: Comment and photo required before continuing.
+  - region "Observation evidence":
+    - textbox "Comment" [invalid]:
+      - /placeholder: Add a comment
+    - button "Add photo"
+    - status: Comment and photo required
+  - button "Open step guidance"
+  - status
+- navigation "Task navigation":
+  - button "Previous task": Back
+  - button "Sections"
+  - button "Next" [disabled]

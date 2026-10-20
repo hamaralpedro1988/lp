@@ -234,7 +234,7 @@ html[data-assessment-version="5"] .spatial-criterion-number>svg {width:14px;heig
 @keyframes spatial-back {from {opacity:.15;transform:translateX(calc(-1 * var(--spatial-motion-distance))) scale(var(--spatial-motion-scale))} to {opacity:1;transform:none}}
 @keyframes spatial-screen {from {opacity:.2;transform:translateY(12px)} to {opacity:1;transform:none}}
 @media(hover:hover) {
-  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice:hover {border-color:var(--spatial-selected-line);background:var(--spatial-selected)}
+  :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-choice:hover:not([data-selected=true]) {border-color:var(--spatial-selected-line);background:var(--spatial-selected)}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-section:hover,:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .review-item:hover {background:var(--spatial-choice)}
   :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-navigation .spatial-action:not([data-variant=outline]):hover:not(:disabled),:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .overview-start:hover {background:var(--spatial-primary-hover)}
 }
@@ -687,3 +687,48 @@ html[data-assessment-version="5"] .spatial-assessment-preview-actions [data-slot
 html[data-assessment-version="5"] .spatial-assessment-preview-actions [data-slot=button] {white-space:normal;height:auto}
 html[data-assessment-version="5"] .spatial-assessment-preview > button {width:44px;height:44px;display:grid;place-items:center;top:8px;right:8px;opacity:1}
 html[data-assessment-version="5"] .spatial-assessment-preview > button svg {width:20px;height:20px}
+/* Accessibility sprint: shared by Spatial and Fluid, with stable semantic roles. */
+html[data-assessment-version="5"] .spatial-validation,
+html[data-assessment-version="5"] .spatial-completion-alternative,
+html[data-assessment-version="5"] .spatial-acknowledgement-help {font-size:var(--spatial-type-secondary);line-height:1.5;color:var(--spatial-muted);margin:12px 0 0;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .spatial-no-drag {min-height:48px;margin-top:16px}
+html[data-assessment-version="5"] .spatial-consent {display:flex;align-items:flex-start;gap:12px;padding:12px 0;min-height:44px;cursor:pointer;line-height:1.5}
+html[data-assessment-version="5"] .spatial-consent [data-slot=checkbox] {flex:none;margin-top:4px;border-color:var(--spatial-control-line)}
+html[data-assessment-version="5"] .spatial-acknowledgement-summary {background:var(--spatial-surface);border-radius:16px;padding:16px}
+html[data-assessment-version="5"] .spatial-acknowledgement-summary p {white-space:pre-wrap;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .spatial-acknowledgement-body {min-height:0;overscroll-behavior:contain;scroll-padding:16px}
+html[data-assessment-version="5"] .spatial-acknowledgement-body [data-slot=tabs-list] {display:flex;flex-wrap:wrap;height:auto;gap:6px;width:100%}
+html[data-assessment-version="5"] .spatial-acknowledgement-body [data-slot=tabs-trigger] {min-height:44px;white-space:normal;flex:1}
+html[data-assessment-version="5"] .spatial-signature-pad {touch-action:none;user-select:none}
+html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialog-content],[data-slot=alert-dialog-content]) {scroll-padding:16px;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .spatial-completion-confirmation [data-slot=alert-dialog-footer] {display:flex;flex-direction:column;align-items:stretch}
+html[data-assessment-version="5"] :focus-visible {outline:3px solid var(--spatial-focus);outline-offset:3px}
+html[data-assessment-version="5"] .spatial-question-title {scroll-margin-block:16px}
+html[data-assessment-version="5"] [data-slot=tabs-trigger][data-state=inactive]:not(:disabled) {color:var(--spatial-muted)}
+/* Text can grow without truncating essential labels or increasing page width. */
+html[data-assessment-version="5"] .flow-v5 [data-slot=button]:not([data-size*=icon]):not(.spatial-slide-handle) {white-space:normal;height:auto;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-header-subtitle {white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-people .overview-metadata>div {grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+html[data-assessment-version="5"] .overview-status {white-space:normal;max-width:100%;text-align:center}
+html[data-assessment-version="5"] .flow-v5 .spatial-review-filters [data-slot=tabs-list] {height:auto;min-height:36px}
+html[data-assessment-version="5"] .flow-v5 .spatial-review-filters [data-slot=tabs-trigger] {height:auto;min-height:30px}
+html[data-assessment-version="5"] .flow-v5 .spatial-review-tab-count {height:auto;min-height:1.25em}
+html[data-assessment-version="5"] [data-slot=sheet-title] {padding-inline-end:40px}
+html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialog-content]) [data-slot=input] {height:auto;min-height:44px}
+/* Radix asChild triggers replace data-slot=button; include their real button element. */
+html[data-assessment-version="5"] .flow-v5 button[data-size]:not([data-size*=icon]):not(.spatial-slide-handle) {white-space:normal;height:auto;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-station {display:flex;flex-wrap:wrap}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-station>.spatial-station-image {flex:none}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-station>div {flex:1 1 8em;min-width:0;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-station-task-count {white-space:normal;max-width:100%}
+html[data-assessment-version="5"] .spatial-acknowledgement-body {background:var(--spatial-surface)}
+/* Keep routine answer guidance available to AT without a permanent visual notice.
+   A blocked swipe still uses the existing visible navigation feedback. */
+html[data-assessment-version="5"] .spatial-validation[data-visual=false] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* User-requested pre-accessibility Finish/Submission presentation, scoped to these sheets. */
+html[data-assessment-version="5"] :is(.spatial-finish-sheet,.spatial-signature-sheet) [data-slot=sheet-title] {padding-inline-end:0}
+html[data-assessment-version="5"] .spatial-signature-sheet [data-slot=input] {height:36px;min-height:0}
+html[data-assessment-version="5"] .spatial-signature-sheet>button {width:auto;height:auto;min-height:0;padding:0}
+html[data-assessment-version="5"] .spatial-signature-sheet [data-slot=button],
+html[data-assessment-version="5"] .spatial-submission [data-slot=button] {white-space:nowrap}

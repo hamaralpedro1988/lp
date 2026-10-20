@@ -1,0 +1,42 @@
+[
+  {
+    "theme": "spatial",
+    "pattern": "assignment",
+    "violations": []
+  },
+  {
+    "theme": "spatial",
+    "pattern": "completion",
+    "violations": []
+  },
+  {
+    "theme": "spatial",
+    "pattern": "choices",
+    "violations": []
+  },
+  {
+    "theme": "spatial",
+    "pattern": "signoff",
+    "violations": []
+  },
+  {
+    "theme": "fluid",
+    "pattern": "assignment",
+    "violations": []
+  },
+  {
+    "theme": "fluid",
+    "pattern": "completion",
+    "violations": []
+  },
+  {
+    "theme": "fluid",
+    "pattern": "choices",
+    "violations": []
+  },
+  {
+    "theme": "fluid",
+    "pattern": "signoff",
+    "violations": []
+  }
+]

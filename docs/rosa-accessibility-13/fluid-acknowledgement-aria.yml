@@ -1,0 +1,25 @@
+- dialog "Collect acknowledgement":
+  - heading "Collect acknowledgement" [level=2]
+  - paragraph: This confirms the feedback was discussed, not that you agree with the result. Identity is not verified by this prototype.
+  - region "Result and next steps":
+    - heading "Your assessment feedback" [level=3]
+    - paragraph: Some tasks need coaching. Review these observations with Rosa. The next step is manager review. This prototype keeps the record on this device; no certification is granted here.
+    - paragraph: Read the result and feedback with Rosa before continuing.
+    - heading "Tasks to discuss" [level=4]
+    - list:
+      - listitem: Lowers the basket safely
+      - listitem: Monitors the cycle and follows alerts
+    - paragraph: Ask Rosa about practice or coaching for these tasks.
+  - tablist "Acknowledgement method":
+    - tab "Type name" [selected]
+    - tab "Draw signature"
+  - tabpanel "Type name":
+    - paragraph: Typed acknowledgement is a prototype alternative. Business validation is required before treating it as a signature.
+  - text: Your full name (required)
+  - textbox "Your full name (required)":
+    - /placeholder: Enter your full name
+  - checkbox "I confirm this is my name and I received the feedback."
+  - text: I confirm this is my name and I received the feedback.
+  - status: Enter your full name to continue.
+  - button "Confirm acknowledgement" [disabled]
+  - button "Close"

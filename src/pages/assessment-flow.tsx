@@ -334,6 +334,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
         ].filter(item => !spatial || item.name !== 'Manager').map(({ name, role, description, confirmed, Icon }) => <div className="approval-row" key={name}><span className="overview-goal-icon"><Icon aria-hidden="true"/></span><div><strong>{name}</strong><small>{role}</small><p>{description}</p></div><Badge variant="outline" className={confirmed ? 'pill good' : ''}>{confirmed ? (spatial ? 'Local review' : 'Recorded · demo') : spatial && name === 'Dre Jackson' ? 'Not collected' : 'Pending'}</Badge></div>)}</CardContent></Surface>
         <p className={`notice signoff-notice ${offline ? 'warn' : ''}`}>{offline ? 'You’re offline. Your review stays on this device and has not been submitted.' : (spatial ? 'Your review is saved on this device only. It has not been submitted for approval and does not issue a certification.' : 'Demo sign-off only. Certification requires verified approvals and a server audit record.')}</p>
       </div>}
+      {spatial && saveError && screen !== 'assessment' && <p role="alert" className="notice warn">Unable to save on this device. Keep this page open. Nothing has been submitted.</p>}
       {spatial && offline && screen !== 'assessment' && <p role="status" className="notice warn">Offline · saved on this device only. No server sync.</p>}
       {saveError && screen !== 'assessment' && <p role="alert" className="notice warn">Local save unavailable. Keep this page open to retain your work.</p>}
       </section>

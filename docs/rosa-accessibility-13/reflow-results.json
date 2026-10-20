@@ -1,0 +1,450 @@
+[
+  {
+    "theme": "spatial",
+    "width": 320,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 320,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 320,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 320,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 375,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 375,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 375,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 375,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 419,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 419,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 419,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 419,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 520,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 520,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 520,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 390,
+    "height": 520,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 844,
+    "height": 390,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 844,
+    "height": 390,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 844,
+    "height": 390,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 844,
+    "height": 390,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 1280,
+    "height": 900,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 1280,
+    "height": 900,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 1280,
+    "height": 900,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "spatial",
+    "width": 1280,
+    "height": 900,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 320,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 320,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 320,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 320,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 375,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 375,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 375,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 375,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 419,
+    "height": 844,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 419,
+    "height": 844,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 419,
+    "height": 844,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 419,
+    "height": 844,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 520,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 520,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 520,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 390,
+    "height": 520,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 844,
+    "height": 390,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 844,
+    "height": 390,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 844,
+    "height": 390,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 844,
+    "height": 390,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 1280,
+    "height": 900,
+    "screen": "overview",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 1280,
+    "height": 900,
+    "screen": "live",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 1280,
+    "height": 900,
+    "screen": "result",
+    "documentReflow": true,
+    "clippedText": []
+  },
+  {
+    "theme": "fluid",
+    "width": 1280,
+    "height": 900,
+    "screen": "submission",
+    "documentReflow": true,
+    "clippedText": []
+  }
+]

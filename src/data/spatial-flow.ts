@@ -22,7 +22,7 @@ export function normalizeSpatialDraft(value: unknown): FlowDraft {
     }
   }
   const signature = (value as FlowDraft).signature
-  if (result.completion && signature && typeof signature.name === 'string' && signature.name.trim() && typeof signature.at === 'string' && Number.isFinite(Date.parse(signature.at)) && Array.isArray(signature.strokes) && signature.strokes.length <= 200 && signature.strokes.every(points => typeof points === 'string' && points.length <= 50000 && /^[0-9, .-]+$/.test(points))) result.signature = { name: signature.name.slice(0, 200), at: signature.at, strokes: signature.strokes }
+  if (result.completion && signature && typeof signature.name === 'string' && signature.name.trim() && typeof signature.at === 'string' && Number.isFinite(Date.parse(signature.at)) && Array.isArray(signature.strokes) && signature.strokes.length <= 200 && signature.strokes.every(points => typeof points === 'string' && points.length <= 50000 && /^[0-9, .-]+$/.test(points))) result.signature = { name: signature.name.slice(0, 200), at: signature.at, strokes: signature.strokes, method: signature.method === 'drawn' || signature.method === 'typed' ? signature.method : 'unknown', consent: signature.consent === true, identity: 'unverified', ...(signature.actor === 'employee-self-declared' ? { actor: signature.actor } : {}), ...(typeof signature.assessor === 'string' ? { assessor: signature.assessor.slice(0,200) } : {}), ...(signature.policy === 'prototype-only-business-validation-required' ? { policy: signature.policy } : {}) }
   return result
 }
 export type SpatialEvidenceRequirement = 'none' | 'comment' | 'photo' | 'comment-and-photo'

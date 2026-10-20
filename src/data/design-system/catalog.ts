@@ -18,7 +18,7 @@ export const coreComponents = [
   entry('tooltip','Tooltip','Feedback','Offer brief supplementary guidance on hover and keyboard focus.','Do not put essential instructions or interactive content in tooltips.','Focus/hover opens; Escape closes. The trigger keeps an accessible name.','primary, primary-foreground','closed · hover/focus open; side positioning', '<Tooltip><TooltipTrigger asChild><Button aria-label="Information">Info</Button></TooltipTrigger><TooltipContent>Supplementary guidance</TooltipContent></Tooltip>'),
   entry('skeleton','Skeleton','Feedback','Reserve space while actual content is being loaded.','Do not imply backend activity when there is none; label catalog demos.','Expose one loading status; decorative blocks need no focus.','muted; reduced motion','loading placeholder · resolved content', '<div role="status" aria-label="Loading example"><Skeleton className="h-5 w-40" /></div>'),
 ] as const
-export const sourceURL = (path: string) => `https://github.com/hamaralpedro1988/lp/blob/feat/rosa-fluid-ui/${path}`
+export const sourceURL = (path: string) => `https://github.com/hamaralpedro1988/lp/blob/feat/rosa-accessibility-13/${path}`
 export function componentCode(item: CoreComponent) {
   const names = [...new Set([...item.code.matchAll(/<([A-Z][A-Za-z]+)/g)].map(match => match[1]))]
   const local = names.filter(name => name !== 'Button' || item.id === 'button')

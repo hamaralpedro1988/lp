@@ -22,7 +22,7 @@ export function SpatialActionButton({ className, ...props }: ComponentProps<type
   return <Button className={cn('spatial-action', className)} {...props}/>
 }
 export function SpatialStatus({ children, tone = 'neutral', className, ...props }: ComponentProps<'p'> & { tone?: 'neutral' | 'warning' | 'success' | 'error' }) {
-  return <p className={cn('spatial-status', className)} data-tone={tone} role={tone === 'error' ? 'alert' : 'status'} {...props}>{children}</p>
+  return <p className={cn('spatial-status', className)} data-tone={tone} role={tone === 'error' ? 'alert' : tone === 'neutral' ? undefined : 'status'} {...props}>{children}</p>
 }
 /** Decorative preview chrome is automatic only on desktop, never on a native phone. */
 export function SpatialSystemChrome({ mode = 'auto' }: { mode?: 'auto' | 'preview' | 'native' }) {
@@ -56,13 +56,13 @@ export function SpatialChoice({ value, title, description, selected, disabled = 
   const id = useId()
   return <label className="spatial-choice" data-disabled={disabled || undefined} data-outcome={value} data-selected={selected} htmlFor={id}>
     <span className="spatial-choice-symbol" aria-hidden="true">{value === 'met' ? <Check/> : <X/>}</span>
-    <span className="spatial-choice-copy"><strong>{title}</strong><small>{description}</small></span>
-    <RadioGroupItem id={id} disabled={disabled} value={value} aria-label={title} className="spatial-radio"/>
+    <span className="spatial-choice-copy"><strong>{title}</strong><small id={`${id}-description`}>{description}</small></span>
+    <RadioGroupItem id={id} disabled={disabled} value={value} aria-label={title} aria-describedby={`${id}-description`} className="spatial-radio"/>
   </label>
 }
 /** Explicit roving selection keeps Radix radio behavior consistent on touch browsers. */
-export function SpatialChoices({ value, onChange, label = 'Observation result', disabled = false }: { value: string; onChange: (value: 'met' | 'fail') => void; label?: string; disabled?: boolean }) {
-  return <RadioGroup disabled={disabled} className="spatial-choices" aria-label={label} value={value} onValueChange={next => { if (next === 'met' || next === 'fail') onChange(next) }} onKeyDownCapture={event => {
+export function SpatialChoices({ value, onChange, label = 'Observation result', disabled = false, labelledBy, describedBy }: { value: string; onChange: (value: 'met' | 'fail') => void; label?: string; disabled?: boolean; labelledBy?: string; describedBy?: string }) {
+  return <RadioGroup disabled={disabled} className="spatial-choices" aria-required="true" aria-labelledby={labelledBy} aria-describedby={describedBy} aria-label={labelledBy ? undefined : label} value={value} onValueChange={next => { if (next === 'met' || next === 'fail') onChange(next) }} onKeyDownCapture={event => {
     if (!['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return
     const current = spatialOptions.findIndex(option => option.value === (event.target as HTMLButtonElement).value)
     if (current < 0) return
@@ -78,17 +78,17 @@ export function SpatialEvidenceComposer({ note, count, requirement, onNote, onCa
   const showHelp = requirement !== 'none' || count > 0
   return <section className="spatial-evidence" aria-label="Observation evidence">
     <div className="spatial-composer" data-required={pending || undefined} data-help={showHelp || undefined}>
-      <Textarea id={`${id}-comment`} aria-label="Comment" aria-describedby={showHelp ? `${id}-help` : undefined} placeholder="Add a comment" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
+      <Textarea id={`${id}-comment`} aria-label="Comment" aria-required={requirement === 'comment' || requirement === 'comment-and-photo'} aria-invalid={pending && (requirement === 'comment' || requirement === 'comment-and-photo') && !note.trim() || undefined} aria-describedby={showHelp ? `${id}-help` : undefined} placeholder="Add a comment" value={note} onChange={event => onNote(event.target.value)} onFocus={event => event.currentTarget.scrollIntoView({ block: 'nearest', behavior: 'instant' })}/>
       <SpatialActionButton variant="outline" size="icon" className="spatial-camera" data-attached={count > 0 || undefined} onClick={onCamera} aria-label={count ? 'Add another photo' : 'Add photo'} aria-describedby={showHelp ? `${id}-help` : undefined}><Camera aria-hidden="true"/>{count > 0 && <span className="spatial-camera-dot" aria-hidden="true"/>}</SpatialActionButton>
       {showHelp && <span id={`${id}-help`} className="spatial-composer-help" role="status">{spatialEvidenceMessage(requirement, note, count)}</span>}
     </div>
     <div className="flow-gallery spatial-attachments" ref={galleryRef}/>
   </section>
 }
-export function SpatialTaskHeading({ index, titleRef, titleId }: { index: number; titleRef?: Ref<HTMLHeadingElement>; titleId?: string }) {
+export function SpatialTaskHeading({ index, titleRef, titleId, completed }: { index: number; titleRef?: Ref<HTMLHeadingElement>; titleId?: string; completed?: number }) {
   const criterion = flowCriteria[index]
   return <><div className="spatial-criterion-context"><div className="spatial-badges"><Badge className="spatial-badge" variant="secondary">{criterion.section}</Badge>{'critical' in criterion && <Badge className="spatial-badge" data-tone="critical" variant="secondary">Critical</Badge>}</div><span className="spatial-position">Task {index + 1} of {flowCriteria.length}</span></div>
-      <h2 id={titleId} className="spatial-question-title" ref={titleRef} tabIndex={-1}>{criterion.title}</h2><p className="spatial-question-description">{criterion.desc}</p></>
+      <h2 id={titleId} className="spatial-question-title" aria-label={`Task ${index + 1} of ${flowCriteria.length}, ${criterion.section}. ${criterion.title}${completed === undefined ? '' : `. ${completed} of ${flowCriteria.length} tasks complete`}`} ref={titleRef} tabIndex={-1}>{criterion.title}</h2><p className="spatial-question-description">{criterion.desc}</p></>
 }
 export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, onNote, onCamera, galleryRef, onNavigate, navigationRef, swipeEnabled = true }: { draft: FlowDraft; photos: Record<number, number>; direction: 'next' | 'back'; titleRef: Ref<HTMLHeadingElement>; onAnswer: (value: FlowAnswer) => void; onNote: (value: string) => void; onCamera: () => void; galleryRef: Ref<HTMLDivElement>; onNavigate?: (direction: SwipeDirection) => void; swipeEnabled?: boolean; navigationRef?: RefObject<((direction: SwipeDirection) => void) | null> }) {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -101,18 +101,19 @@ export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, 
     navigationRef.current = requestNavigation
     return () => { navigationRef.current = null }
   }, [navigationRef, requestNavigation])
-  const criterion = flowCriteria[draft.index]
   const requirement = spatialEvidenceRequirement(draft.index)
+  const validationId = useId()
+  const reason = spatialNavigationBlock(draft, photos, 'next')
   useLayoutEffect(() => { cardRef.current?.scrollTo({ top: 0 }) }, [draft.index])
   return <><SpatialSurface className="spatial-live-card" ref={cardRef} aria-label="Current task" aria-describedby="spatial-swipe-help">
     <span id="spatial-swipe-help" className="sr-only">Swipe left for next or right for previous. Back, Sections and Next/Finish buttons are also available.</span>
     <div className="spatial-question-body" key={draft.index} data-direction={direction}>
-      <SpatialTaskHeading index={draft.index} titleRef={titleRef} titleId="live-question-title"/>
-      <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer}/>
+      <SpatialTaskHeading index={draft.index} titleRef={titleRef} titleId="live-question-title" completed={spatialCompleteIndices(draft, photos).length}/>
+      <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer} labelledBy="live-question-title" describedBy={reason ? validationId : undefined}/><p id={validationId} className="spatial-validation" data-visual={!!reason && (draft.answers[draft.index] === 'met' || draft.answers[draft.index] === 'fail')} role="status" aria-live="polite" aria-atomic="true">{reason ?? 'Response recorded. You can continue.'}</p>
     </div>
     <SpatialEvidenceComposer note={draft.notes[draft.index] ?? ''} count={photos[draft.index] ?? 0} requirement={requirement} onNote={onNote} onCamera={onCamera} galleryRef={galleryRef}/>
     <SpatialCriterionGuidance key={`guidance-${draft.index}`} index={draft.index}/>
-  </SpatialSurface><div className="spatial-swipe-feedback" role="status" aria-live="polite" aria-atomic="true" data-visible={!!feedback}>{feedback}</div><span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{criterion.section}, task {draft.index + 1} of {flowCriteria.length}. {criterion.title}</span></>
+  </SpatialSurface><div className="spatial-swipe-feedback" role="status" aria-live="polite" aria-atomic="true" data-visible={!!feedback}>{feedback}</div></>
 }
 export function SpatialNavigation({ index, canContinue, sectionsRef, onBack, onSections, onNext }: { index: number; canContinue: boolean; sectionsRef: Ref<HTMLButtonElement>; onBack: () => void; onSections: () => void; onNext: () => void }) {
   return <nav className="spatial-navigation" aria-label="Task navigation">
