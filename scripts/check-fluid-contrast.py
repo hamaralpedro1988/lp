@@ -29,7 +29,7 @@ with sync_playwright() as pw:
  expect(p.locator('[data-token="--fluid-glass-blur"]')).to_have_text('24px')
  p.screenshot(path='docs/rosa-fluid-ui/explorer-materials.png',full_page=True)
  p.emulate_media(reduced_motion='reduce');p.goto('http://localhost:5181/?version=5&brandDemo=1&visualTheme=fluid&flowPreview=live');p.wait_for_timeout(300)
- assert p.locator('.spatial-header-back').evaluate('(e)=>getComputedStyle(e).transitionDuration.split(",").every(v=>parseFloat(v)===0)')
+ assert p.locator('.spatial-header-back').evaluate('(e)=>getComputedStyle(e).transitionDuration.split(",").every(v=>parseFloat(v)<=0.00001)')
  b.close()
 Path('docs/rosa-fluid-ui/contrast.json').write_text(json.dumps(rows,indent=2))
 print('PASS: 24 axe color-contrast screen audits (no violations; incompletes recorded), exact 12 semantic roles across six combinations, rendered Critical badges, Explorer material tokens and reduced motion.')

@@ -60,3 +60,11 @@ Photos remain session-local; drafts/signatures are local. No new backend synchro
 - `tests/spatial.test.ts`, `tests/spatial-contrast.test.ts`, `tests/spatial-brands.test.ts` — read the extracted semantic layer and recognize additional decorative reflection roles.
 - `scripts/check-fluid-ui.py`, `scripts/check-fluid-contrast.py` — browser validation.
 - `docs/rosa-fluid-ui/` — reference, screenshots and validation reports.
+
+## Preview deployment
+
+[Open Fluid](https://lp-git-feat-rosa-fluid-ui-hamaralpedro1988.vercel.app/?version=5&brandDemo=1&visualTheme=fluid) · [Open Spatial](https://lp-git-feat-rosa-fluid-ui-hamaralpedro1988.vercel.app/?version=5&brandDemo=1) · [Explorer](https://lp-git-feat-rosa-fluid-ui-hamaralpedro1988.vercel.app/?view=design-system&visualTheme=fluid&brand=ocean) · [Draft PR #12](https://github.com/hamaralpedro1988/lp/pull/12) · [Six-combination comparison](comparison.png)
+
+Vercel's GitHub integration reports the preview **Ready** and confirms this public alias. Direct public HTTP/browser verification from the execution environment is blocked by its outbound proxy (`CONNECT 403`); production-build browser tests ran locally. No production application or main branch was changed.
+
+Final supplemental audit: 24 axe color-contrast screen checks with zero reported violations; incomplete checks are retained in [contrast.json](contrast.json). All 12 shared semantic roles resolve identically across six combinations; rendered Critical badge colors match their shared tokens. Reduced motion uses the existing effectively-instant accessibility reset (up to 0.01ms).
