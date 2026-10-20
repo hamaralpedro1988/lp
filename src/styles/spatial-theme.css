@@ -722,12 +722,13 @@ html[data-assessment-version="5"] .flow-v5 .spatial-overview-station>.spatial-st
 html[data-assessment-version="5"] .flow-v5 .spatial-overview-station>div {flex:1 1 8em;min-width:0;overflow-wrap:anywhere}
 html[data-assessment-version="5"] .flow-v5 .spatial-station-task-count {white-space:normal;max-width:100%}
 html[data-assessment-version="5"] .spatial-acknowledgement-body {background:var(--spatial-surface)}
-/* Long acknowledgement/confirmation copy must not consume the whole scroll viewport at text zoom. */
-html[data-assessment-version="5"] [data-slot=sheet-content]:is(.spatial-signature-sheet,.spatial-finish-sheet) {overflow-y:auto;overscroll-behavior:contain}
-html[data-assessment-version="5"] :is(.spatial-signature-sheet,.spatial-finish-sheet)>[data-slot=sheet-header],
-html[data-assessment-version="5"] .spatial-signature-sheet>.spatial-acknowledgement-body,
-html[data-assessment-version="5"] .spatial-finish-sheet>.min-h-0 {flex:none;overflow:visible}
-
 /* Keep routine answer guidance available to AT without a permanent visual notice.
    A blocked swipe still uses the existing visible navigation feedback. */
 html[data-assessment-version="5"] .spatial-validation[data-visual=false] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* User-requested pre-accessibility Finish/Submission presentation, scoped to these sheets. */
+html[data-assessment-version="5"] :is(.spatial-finish-sheet,.spatial-signature-sheet) [data-slot=sheet-title] {padding-inline-end:0}
+html[data-assessment-version="5"] .spatial-signature-sheet [data-slot=input] {height:36px;min-height:0}
+html[data-assessment-version="5"] .spatial-signature-sheet>button {width:auto;height:auto;min-height:0;padding:0}
+html[data-assessment-version="5"] .spatial-signature-sheet [data-slot=button],
+html[data-assessment-version="5"] .spatial-submission [data-slot=button] {white-space:nowrap}

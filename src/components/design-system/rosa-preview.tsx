@@ -38,7 +38,6 @@ export function RosaPreview({ pattern }: { pattern: string }) {
   const photos = Object.fromEntries(Object.entries(photo).map(([key,value])=>[key,value?1:0]))
   const attached=!!photo[draft.index]
   const scenarioOptions=explorerScenarios.filter(value => {
-    if(value==='Save error' && pattern==='completion') return true
     if(value==='Disabled')return pattern==='choices'
     if(value==='Save error'||value==='Offline')return ['header','card','system'].includes(pattern)
     return true
@@ -63,7 +62,7 @@ export function RosaPreview({ pattern }: { pattern: string }) {
     <div className="ds-rosa-layout"><div className="ds-device flow-app flow-v5" data-pattern={pattern}>
       <div className={`ds-pattern-canvas ${pattern === 'card' || editing ? 'ds-live-canvas' : ''}`}>
         {pattern === 'assignment' && <SpatialAssignmentCard status={draft.assessorConfirmed ? 'Local review' : assignmentStatus} onOpen={() => setNotice('View Assessment opens Overview in Rosa V5. This story stays isolated.')}/>}
-        {pattern === 'completion' && <><p>Optional slide or visible button, then explicit confirmation. No certification or server submission.</p><SpatialSlideComplete key={scenario} disabled={spatialMissing(draft, photos).length > 0} onComplete={() => { if (scenario === 'Save error') return false; setNotice('Completion confirmed in memory only. No assessment data was changed.'); return true }}/><p role="status">{spatialMissing(draft, photos).length === 0 ? 'Ready to review completion.' : 'Choose the Complete story state to satisfy the real response/evidence requirements.'}</p></>}
+        {pattern === 'completion' && <><p>Pre-accessibility finish interaction: slide to finish, or use the existing two-step keyboard activation.</p><SpatialSlideComplete key={scenario} disabled={spatialMissing(draft, photos).length > 0} onComplete={() => { setNotice('Completion confirmed in memory only. No assessment data was changed.') }}/><p>{spatialMissing(draft, photos).length === 0 ? 'Ready to finish.' : 'Choose the Complete story state to preview finishing.'}</p></>}
         {pattern === 'assessment-preview' && <SpatialAssessmentPreview/>}
         {pattern === 'before-start' && <SpatialBeforeStart/>}
         {pattern === 'people' && <><SpatialStationHeading/><SpatialPeopleCard status={assignmentStatus} learning={spatialOverviewLearning} onMember={() => setMember(true)}/></>}

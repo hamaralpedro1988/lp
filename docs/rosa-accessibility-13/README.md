@@ -1,5 +1,7 @@
 # Issue #13 — Accessibility & Inclusive UX Sprint
 
+**Subsequent UI decision:** Finish assessment and Assessment submission have been restored to the pre-accessibility `2463e27` implementation at the user’s request. Their sprint-era screenshots/findings are historical evidence, not assertions about the restored screens. The no-drag and explicit-acknowledgement redesigns are deferred; the remaining accessibility changes and quiet Live answer guidance are retained. Use the restored completion/submission regression scripts for these screens.
+
 WCAG 2.2 AA is the **target**. This work does **not** establish WCAG compliance. Browser tests, axe results and accessibility-tree snapshots are not substitutes for physical TalkBack/VoiceOver testing or business approval of acknowledgement policy.
 
 Base: latest successor `feat/rosa-fluid-ui` at `2463e27`, checked against open PRs #12/#11 and remote heads. Branch: `feat/rosa-accessibility-13`. P0 is isolated in the first implementation commit; subsequent work addresses audit findings and shared Explorer states. Production and main remain unchanged; UI review is required before merge.
