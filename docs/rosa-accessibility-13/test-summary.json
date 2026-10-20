@@ -13,5 +13,9 @@
   "physicalVoiceOver": "Not tested",
   "native400PercentBrowserZoom": "Not tested; 320 CSS px reflow proxy used",
   "virtualKeyboard": "Reduced viewport simulation only",
-  "policy": "Typed acknowledgement needs business validation; no verified identity or legal signature claim"
+  "policy": "Typed acknowledgement needs business validation; no verified identity or legal signature claim",
+  "unitTests": 45,
+  "interactionStates": 32,
+  "interactionReportedViolations": 0,
+  "interactionIncompleteRuleStates": 56
 }

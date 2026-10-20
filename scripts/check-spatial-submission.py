@@ -20,7 +20,7 @@ with sync_playwright() as pw:
  expect(p.get_by_text('Dre’s acknowledgement recorded',exact=True)).to_be_visible()
  expect(p.get_by_role('button',name='Submit assessment',exact=True)).to_be_enabled()
  p.get_by_role('button',name='View acknowledgement',exact=True).click()
- expect(p.get_by_role('dialog')).to_contain_text('Name entered: Dre Michael')
+ expect(p.get_by_role('dialog')).to_contain_text('Recorded name: Dre Michael')
  p.get_by_role('dialog').get_by_role('button',name='Close',exact=True).last.click()
  for width in [320,390,419]:
   p.set_viewport_size({'width':width,'height':844})

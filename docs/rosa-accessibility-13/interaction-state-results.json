@@ -1,0 +1,226 @@
+[
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "selected-pass",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "unselected-hover",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "keyboard-focus",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "offline",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "active-failed-filter",
+    "violations": [],
+    "incomplete": 1
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "selected-pass",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "unselected-hover",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "keyboard-focus",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "offline",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "active-failed-filter",
+    "violations": [],
+    "incomplete": 1
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "selected-pass",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "unselected-hover",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "keyboard-focus",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "offline",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "active-failed-filter",
+    "violations": [],
+    "incomplete": 1
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "disabled-choice",
+    "violations": [],
+    "incomplete": 1
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "selected-pass",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "unselected-hover",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "keyboard-focus",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "offline",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "active-failed-filter",
+    "violations": [],
+    "incomplete": 1
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "selected-pass",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "unselected-hover",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "keyboard-focus",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "offline",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "active-failed-filter",
+    "violations": [],
+    "incomplete": 1
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "selected-pass",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "unselected-hover",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "keyboard-focus",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "offline",
+    "violations": [],
+    "incomplete": 2
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "active-failed-filter",
+    "violations": [],
+    "incomplete": 1
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "disabled-choice",
+    "violations": [],
+    "incomplete": 1
+  }
+]
