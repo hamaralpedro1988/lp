@@ -21,7 +21,7 @@ with sync_playwright() as pw:
     ''')
     page.goto(args.url + '/?version=5&brandDemo=1&brand=mcdonalds')
     page.locator('.screen').wait_for()
-    page.get_by_role('button', name='View Assessment', exact=True).click()
+    page.get_by_role('button', name='Open assessment for Dre Michael', exact=True).click()
     page.get_by_role('button', name='Start Assessment', exact=True).click()
     page.get_by_role('radio', name='Pass', exact=True).check()
     page.get_by_role('textbox', name='Comment', exact=True).fill('Preserve this note through the animation.')

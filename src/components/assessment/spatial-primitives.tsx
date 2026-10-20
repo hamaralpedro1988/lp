@@ -85,6 +85,11 @@ export function SpatialEvidenceComposer({ note, count, requirement, onNote, onCa
     <div className="flow-gallery spatial-attachments" ref={galleryRef}/>
   </section>
 }
+export function SpatialTaskHeading({ index, titleRef, titleId }: { index: number; titleRef?: Ref<HTMLHeadingElement>; titleId?: string }) {
+  const criterion = flowCriteria[index]
+  return <><div className="spatial-criterion-context"><div className="spatial-badges"><Badge className="spatial-badge" variant="secondary">{criterion.section}</Badge>{'critical' in criterion && <Badge className="spatial-badge" data-tone="critical" variant="secondary">Critical</Badge>}</div><span className="spatial-position">Task {index + 1} of {flowCriteria.length}</span></div>
+      <h2 id={titleId} className="spatial-question-title" ref={titleRef} tabIndex={-1}>{criterion.title}</h2><p className="spatial-question-description">{criterion.desc}</p></>
+}
 export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, onNote, onCamera, galleryRef, onNavigate, navigationRef, swipeEnabled = true }: { draft: FlowDraft; photos: Record<number, number>; direction: 'next' | 'back'; titleRef: Ref<HTMLHeadingElement>; onAnswer: (value: FlowAnswer) => void; onNote: (value: string) => void; onCamera: () => void; galleryRef: Ref<HTMLDivElement>; onNavigate?: (direction: SwipeDirection) => void; swipeEnabled?: boolean; navigationRef?: RefObject<((direction: SwipeDirection) => void) | null> }) {
   const cardRef = useRef<HTMLDivElement>(null)
   const evidenceKey = `${draft.index}:${draft.answers[draft.index]}:${draft.notes[draft.index]}:${photos[draft.index]}`
@@ -102,8 +107,7 @@ export function SpatialLiveCard({ draft, photos, direction, titleRef, onAnswer, 
   return <><SpatialSurface className="spatial-live-card" ref={cardRef} aria-label="Current task" aria-describedby="spatial-swipe-help">
     <span id="spatial-swipe-help" className="sr-only">Swipe left for next or right for previous. Back, Sections and Next/Finish buttons are also available.</span>
     <div className="spatial-question-body" key={draft.index} data-direction={direction}>
-      <div className="spatial-criterion-context"><div className="spatial-badges"><Badge className="spatial-badge" variant="secondary">{criterion.section}</Badge>{'critical' in criterion && <Badge className="spatial-badge" data-tone="critical" variant="secondary">Critical</Badge>}</div><span className="spatial-position">Task {draft.index + 1} of {flowCriteria.length}</span></div>
-      <h2 id="live-question-title" className="spatial-question-title" ref={titleRef} tabIndex={-1}>{criterion.title}</h2><p className="spatial-question-description">{criterion.desc}</p>
+      <SpatialTaskHeading index={draft.index} titleRef={titleRef} titleId="live-question-title"/>
       <SpatialChoices value={draft.answers[draft.index] ?? ''} onChange={onAnswer}/>
     </div>
     <SpatialEvidenceComposer note={draft.notes[draft.index] ?? ''} count={photos[draft.index] ?? 0} requirement={requirement} onNote={onNote} onCamera={onCamera} galleryRef={galleryRef}/>

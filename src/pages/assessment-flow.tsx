@@ -1,3 +1,4 @@
+import { SpatialAssessmentPreview } from '@/components/assessment/spatial-assessment-preview'
 import { SpatialBeforeStart } from '@/components/assessment/spatial-before-start'
 import { SpatialSubmission } from '@/components/assessment/spatial-submission'
 import { spatialPreviewPages, spatialPreviewDraft, type SpatialPreviewPage } from '@/data/spatial-preview'
@@ -287,6 +288,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
                 <ChevronRight aria-hidden="true"/>
               </ActionButton>
             </div>)}
+            {spatial && <div className="spatial-preview-entry-wrap"><SpatialAssessmentPreview/></div>}
           </CardContent>
         </Surface>
         {spatial && <SpatialBeforeStart/>}

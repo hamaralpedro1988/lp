@@ -680,3 +680,23 @@ html[data-assessment-version="5"] .spatial-review-detail-body .spatial-review-ph
 
 /* Outline controls must not inherit the brand-adaptive page background. */
 html[data-assessment-version="5"] :where([data-slot=button][data-variant=outline]) {background:var(--spatial-surface)}
+
+.spatial-preview-entry-wrap {padding:var(--spatial-space-card-block) var(--spatial-space-card-inline);border-top:1px solid var(--spatial-line)}
+.flow-v5 .spatial-preview-entry {width:100%;gap:8px}
+.flow-v5 .spatial-preview-entry > svg:last-child {margin-left:auto}
+html[data-assessment-version="5"] [data-slot=sheet-content].spatial-assessment-preview {width:100%;max-width:430px;height:min(680px,88%);max-height:88dvh;gap:0;overflow:hidden}
+html[data-assessment-version="5"] .spatial-assessment-preview [data-slot=sheet-header] {flex:none;padding:28px var(--spatial-space-card-inline) var(--spatial-space-4)}
+html[data-assessment-version="5"] .spatial-assessment-preview [data-slot=sheet-title] {font-size:var(--spatial-type-card-title);padding-right:24px}
+.spatial-assessment-preview-body {flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--spatial-space-4) var(--spatial-space-card-inline) var(--spatial-space-card-block)}
+.spatial-preview-requirements {margin:0 0 var(--spatial-space-6)}
+.spatial-preview-requirements h3 {margin:0 0 var(--spatial-space-3);font-size:var(--spatial-type-body);font-weight:600}
+.spatial-preview-evidence-tags {display:flex;flex-wrap:wrap;gap:8px}
+.spatial-preview-evidence-tags .spatial-badge {display:inline-flex;gap:6px;align-items:center}
+.spatial-preview-evidence-tags .spatial-badge svg {width:16px;height:16px}
+.spatial-preview-evidence-tags .spatial-badge[data-required=true] {color:var(--spatial-warning-ink);background:var(--spatial-warning-bg)}
+.flow-v5 .spatial-preview-guidance {width:100%;gap:8px;touch-action:manipulation}
+.spatial-assessment-preview-actions {display:grid;grid-template-columns:1fr 1fr;flex:none;gap:12px;padding:16px var(--spatial-space-card-inline) max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--spatial-line)}
+html[data-assessment-version="5"] .spatial-assessment-preview-actions [data-slot=button]:disabled {background:var(--spatial-disabled);color:var(--spatial-disabled-ink);opacity:1}
+html[data-assessment-version="5"] .spatial-assessment-preview-actions [data-slot=button] {white-space:normal;height:auto}
+html[data-assessment-version="5"] .spatial-assessment-preview > button {width:44px;height:44px;display:grid;place-items:center;top:8px;right:8px;opacity:1}
+html[data-assessment-version="5"] .spatial-assessment-preview > button svg {width:20px;height:20px}
