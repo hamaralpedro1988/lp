@@ -704,3 +704,26 @@ html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialo
 html[data-assessment-version="5"] .spatial-completion-confirmation [data-slot=alert-dialog-footer] {display:flex;flex-direction:column;align-items:stretch}
 html[data-assessment-version="5"] :focus-visible {outline:3px solid var(--spatial-focus);outline-offset:3px}
 html[data-assessment-version="5"] .spatial-question-title {scroll-margin-block:16px}
+html[data-assessment-version="5"] [data-slot=tabs-trigger][data-state=inactive]:not(:disabled) {color:var(--spatial-muted)}
+/* Text can grow without truncating essential labels or increasing page width. */
+html[data-assessment-version="5"] .flow-v5 [data-slot=button]:not([data-size*=icon]):not(.spatial-slide-handle) {white-space:normal;height:auto;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-header-subtitle {white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-people .overview-metadata>div {grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+html[data-assessment-version="5"] .overview-status {white-space:normal;max-width:100%;text-align:center}
+html[data-assessment-version="5"] .flow-v5 .spatial-review-filters [data-slot=tabs-list] {height:auto;min-height:36px}
+html[data-assessment-version="5"] .flow-v5 .spatial-review-filters [data-slot=tabs-trigger] {height:auto;min-height:30px}
+html[data-assessment-version="5"] .flow-v5 .spatial-review-tab-count {height:auto;min-height:1.25em}
+html[data-assessment-version="5"] [data-slot=sheet-title] {padding-inline-end:40px}
+html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialog-content]) [data-slot=input] {height:auto;min-height:44px}
+/* Radix asChild triggers replace data-slot=button; include their real button element. */
+html[data-assessment-version="5"] .flow-v5 button[data-size]:not([data-size*=icon]):not(.spatial-slide-handle) {white-space:normal;height:auto;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-station {display:flex;flex-wrap:wrap}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-station>.spatial-station-image {flex:none}
+html[data-assessment-version="5"] .flow-v5 .spatial-overview-station>div {flex:1 1 8em;min-width:0;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .flow-v5 .spatial-station-task-count {white-space:normal;max-width:100%}
+html[data-assessment-version="5"] .spatial-acknowledgement-body {background:var(--spatial-surface)}
+/* Long acknowledgement/confirmation copy must not consume the whole scroll viewport at text zoom. */
+html[data-assessment-version="5"] [data-slot=sheet-content]:is(.spatial-signature-sheet,.spatial-finish-sheet) {overflow-y:auto;overscroll-behavior:contain}
+html[data-assessment-version="5"] :is(.spatial-signature-sheet,.spatial-finish-sheet)>[data-slot=sheet-header],
+html[data-assessment-version="5"] .spatial-signature-sheet>.spatial-acknowledgement-body,
+html[data-assessment-version="5"] .spatial-finish-sheet>.min-h-0 {flex:none;overflow:visible}

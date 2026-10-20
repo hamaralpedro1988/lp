@@ -1,0 +1,17 @@
+{
+  "wcagTarget": "WCAG 2.2 AA; no compliance claim",
+  "axeVersion": "4.14.0",
+  "journeyStates": 72,
+  "journeyReportedViolations": 0,
+  "journeyIncompleteRuleStates": 138,
+  "componentStates": 8,
+  "componentReportedViolations": 0,
+  "reflowCases": 56,
+  "reflowPageOverflow": 0,
+  "reflowClippedLabels": 0,
+  "physicalTalkBack": "Not tested",
+  "physicalVoiceOver": "Not tested",
+  "native400PercentBrowserZoom": "Not tested; 320 CSS px reflow proxy used",
+  "virtualKeyboard": "Reduced viewport simulation only",
+  "policy": "Typed acknowledgement needs business validation; no verified identity or legal signature claim"
+}

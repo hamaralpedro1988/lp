@@ -15,7 +15,7 @@ with sync_playwright() as pw:
  trigger.click()
  dialog=p.get_by_role('dialog',name='Assessment preview',exact=True)
  for i,title in enumerate(titles):
-  expect(dialog.get_by_role('heading',name=title,exact=True)).to_be_visible()
+  expect(dialog.get_by_role('heading',name=re.compile(re.escape(title)))).to_be_visible()
   expect(dialog.get_by_text(f'Task {i+1} of 11',exact=True)).to_be_visible()
   expect(dialog.locator('[data-tone=critical]')).to_have_count(1 if i in [1,4,7] else 0)
   expect(dialog.get_by_text('Photo required' if i==8 else 'Photo optional',exact=True)).to_be_visible()

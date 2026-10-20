@@ -1,0 +1,7019 @@
+[
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "entry",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".spatial-lock-clock > p"
+          ],
+          [
+            ".spatial-lock-clock > span"
+          ],
+          [
+            ".spatial-push-app > span"
+          ],
+          [
+            ".spatial-push-app > small"
+          ],
+          [
+            "strong"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > span:nth-child(3)"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > small"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "overview",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".overview-person-copy > span"
+          ],
+          [
+            ".overview-person-copy > small"
+          ],
+          [
+            ".spatial-learning-row > span"
+          ],
+          [
+            ".spatial-learning-row > strong"
+          ],
+          [
+            ".overview-metadata > div:nth-child(2) > span:nth-child(1)"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            "div:nth-child(3) > span"
+          ],
+          [
+            "div:nth-child(3) > strong"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".overview-description:nth-child(1)"
+          ],
+          [
+            ".overview-description:nth-child(2)"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(4) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(4) > span:nth-child(2)"
+          ],
+          [
+            ".overview-sections.flex-col[data-elevation=\"quiet\"] > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            ".spatial-preview-entry"
+          ],
+          [
+            ".spatial-before-start > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "label[for=\"_r_6_\"]"
+          ],
+          [
+            "#_r_6_-description"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            ".bg-primary"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "live",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "sections",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".spatial-guidance-trigger"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            "section:nth-child(1) > h3"
+          ],
+          [
+            "section:nth-child(1) > h3 > span"
+          ],
+          [
+            "section:nth-child(2) > h3"
+          ],
+          [
+            "section:nth-child(2) > h3 > span"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "required-fail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "guidance",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#radix-_r_59_"
+          ],
+          [
+            "#radix-_r_5a_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            ".spatial-guidance-body > p:nth-child(2)"
+          ],
+          [
+            "h4"
+          ],
+          [
+            "li:nth-child(1)"
+          ],
+          [
+            "li:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3)"
+          ],
+          [
+            ".spatial-guidance-note"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "result",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".border-border"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "task-detail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".px-6[data-slot=\"card-content\"] > .border-border.\\[a\\&\\]\\:hover\\:bg-accent.\\[a\\&\\]\\:hover\\:text-accent-foreground"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#radix-_r_d_"
+          ],
+          [
+            "#radix-_r_e_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            "section[aria-label=\"Task\"] > p"
+          ],
+          [
+            "section[aria-label=\"Recorded result\"] > h4"
+          ],
+          [
+            "section[aria-label=\"Rosa\u2019s observation\"] > h4"
+          ],
+          [
+            ".spatial-review-original-note"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "submission",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "typed-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "drawn-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "spatial",
+    "state": "completion-confirmation",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".gap-3"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "#radix-_r_4s_"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".spatial-live-card"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "button[aria-label=\"Finish checklist\"]"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            ".spatial-slide-label:nth-child(2)"
+          ],
+          [
+            "#radix-_r_51_"
+          ],
+          [
+            "#radix-_r_52_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "entry",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".spatial-lock-clock > p"
+          ],
+          [
+            ".spatial-lock-clock > span"
+          ],
+          [
+            ".spatial-push-app > span"
+          ],
+          [
+            ".spatial-push-app > small"
+          ],
+          [
+            "strong"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > span:nth-child(3)"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > small"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "overview",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".overview-person-copy > span"
+          ],
+          [
+            ".overview-person-copy > small"
+          ],
+          [
+            ".spatial-learning-row > span"
+          ],
+          [
+            ".spatial-learning-row > strong"
+          ],
+          [
+            ".overview-metadata > div:nth-child(2) > span:nth-child(1)"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            "div:nth-child(3) > span"
+          ],
+          [
+            "div:nth-child(3) > strong"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".overview-description:nth-child(1)"
+          ],
+          [
+            ".overview-description:nth-child(2)"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(4) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(4) > span:nth-child(2)"
+          ],
+          [
+            ".overview-sections.flex-col[data-elevation=\"quiet\"] > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            ".spatial-preview-entry"
+          ],
+          [
+            ".spatial-before-start > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "label[for=\"_r_6_\"]"
+          ],
+          [
+            "#_r_6_-description"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            ".bg-primary"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "live",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "sections",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".spatial-guidance-trigger"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            "section:nth-child(1) > h3"
+          ],
+          [
+            "section:nth-child(1) > h3 > span"
+          ],
+          [
+            "section:nth-child(2) > h3"
+          ],
+          [
+            "section:nth-child(2) > h3 > span"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "required-fail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "guidance",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#radix-_r_59_"
+          ],
+          [
+            "#radix-_r_5a_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            ".spatial-guidance-body > p:nth-child(2)"
+          ],
+          [
+            "h4"
+          ],
+          [
+            "li:nth-child(1)"
+          ],
+          [
+            "li:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3)"
+          ],
+          [
+            ".spatial-guidance-note"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "result",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".border-border"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "task-detail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".px-6[data-slot=\"card-content\"] > .border-border.\\[a\\&\\]\\:hover\\:bg-accent.\\[a\\&\\]\\:hover\\:text-accent-foreground"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#radix-_r_d_"
+          ],
+          [
+            "#radix-_r_e_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            "section[aria-label=\"Task\"] > p"
+          ],
+          [
+            "section[aria-label=\"Recorded result\"] > h4"
+          ],
+          [
+            "section[aria-label=\"Rosa\u2019s observation\"] > h4"
+          ],
+          [
+            ".spatial-review-original-note"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "submission",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "typed-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "drawn-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "crimson",
+    "state": "completion-confirmation",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".gap-3"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "#radix-_r_4s_"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".spatial-live-card"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "button[aria-label=\"Finish checklist\"]"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            ".spatial-slide-label:nth-child(2)"
+          ],
+          [
+            "#radix-_r_51_"
+          ],
+          [
+            "#radix-_r_52_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "entry",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".spatial-lock-clock > p"
+          ],
+          [
+            ".spatial-lock-clock > span"
+          ],
+          [
+            ".spatial-push-app > span"
+          ],
+          [
+            ".spatial-push-app > small"
+          ],
+          [
+            "strong"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > span:nth-child(3)"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > small"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "overview",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".overview-person-copy > span"
+          ],
+          [
+            ".overview-person-copy > small"
+          ],
+          [
+            ".spatial-learning-row > span"
+          ],
+          [
+            ".spatial-learning-row > strong"
+          ],
+          [
+            ".overview-metadata > div:nth-child(2) > span:nth-child(1)"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            "div:nth-child(3) > span"
+          ],
+          [
+            "div:nth-child(3) > strong"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".overview-description:nth-child(1)"
+          ],
+          [
+            ".overview-description:nth-child(2)"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(4) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(4) > span:nth-child(2)"
+          ],
+          [
+            ".overview-sections.flex-col[data-elevation=\"quiet\"] > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            ".spatial-preview-entry"
+          ],
+          [
+            ".spatial-before-start > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "label[for=\"_r_6_\"]"
+          ],
+          [
+            "#_r_6_-description"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            ".bg-primary"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "live",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "sections",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".spatial-guidance-trigger"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            "section:nth-child(1) > h3"
+          ],
+          [
+            "section:nth-child(1) > h3 > span"
+          ],
+          [
+            "section:nth-child(2) > h3"
+          ],
+          [
+            "section:nth-child(2) > h3 > span"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "required-fail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "guidance",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#radix-_r_59_"
+          ],
+          [
+            "#radix-_r_5a_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            ".spatial-guidance-body > p:nth-child(2)"
+          ],
+          [
+            "h4"
+          ],
+          [
+            "li:nth-child(1)"
+          ],
+          [
+            "li:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3)"
+          ],
+          [
+            ".spatial-guidance-note"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "result",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".border-border"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "task-detail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".px-6[data-slot=\"card-content\"] > .border-border.\\[a\\&\\]\\:hover\\:bg-accent.\\[a\\&\\]\\:hover\\:text-accent-foreground"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#radix-_r_d_"
+          ],
+          [
+            "#radix-_r_e_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            "section[aria-label=\"Task\"] > p"
+          ],
+          [
+            "section[aria-label=\"Recorded result\"] > h4"
+          ],
+          [
+            "section[aria-label=\"Rosa\u2019s observation\"] > h4"
+          ],
+          [
+            ".spatial-review-original-note"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "submission",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "typed-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "drawn-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "spatial",
+    "brand": "ocean",
+    "state": "completion-confirmation",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".gap-3"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "#radix-_r_4s_"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".spatial-live-card"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "button[aria-label=\"Finish checklist\"]"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            ".spatial-slide-label:nth-child(2)"
+          ],
+          [
+            "#radix-_r_51_"
+          ],
+          [
+            "#radix-_r_52_"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "entry",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".spatial-lock-clock > p"
+          ],
+          [
+            ".spatial-lock-clock > span"
+          ],
+          [
+            ".spatial-push-app > span"
+          ],
+          [
+            ".spatial-push-app > small"
+          ],
+          [
+            "strong"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > span:nth-child(3)"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > small"
+          ],
+          [
+            "#_r_0_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_2_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "overview",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".overview-person-copy > span"
+          ],
+          [
+            ".overview-person-copy > small"
+          ],
+          [
+            ".spatial-learning-row > span"
+          ],
+          [
+            ".spatial-learning-row > strong"
+          ],
+          [
+            ".overview-metadata > div:nth-child(2) > span:nth-child(1)"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            "div:nth-child(3) > span"
+          ],
+          [
+            "div:nth-child(3) > strong"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".overview-description:nth-child(1)"
+          ],
+          [
+            ".overview-description:nth-child(2)"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(4) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(4) > span:nth-child(2)"
+          ],
+          [
+            ".overview-sections.flex-col[data-elevation=\"quiet\"] > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            ".spatial-preview-entry"
+          ],
+          [
+            ".spatial-before-start > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "label[for=\"_r_6_\"]"
+          ],
+          [
+            "#_r_6_-description"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "live",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "sections",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".spatial-guidance-trigger"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            "section:nth-child(1) > h3"
+          ],
+          [
+            "section:nth-child(1) > h3 > span"
+          ],
+          [
+            "section:nth-child(2) > h3"
+          ],
+          [
+            "section:nth-child(2) > h3 > span"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "required-fail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "guidance",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#radix-_r_59_"
+          ],
+          [
+            "#radix-_r_5a_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            ".spatial-guidance-body > p:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2)"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "result",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".border-border"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#_r_f_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_h_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "task-detail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".px-6[data-slot=\"card-content\"] > .border-border.\\[a\\&\\]\\:hover\\:bg-accent.\\[a\\&\\]\\:hover\\:text-accent-foreground"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#radix-_r_d_"
+          ],
+          [
+            "#radix-_r_e_"
+          ],
+          [
+            "#_r_f_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_h_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "submission",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "typed-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "drawn-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "spatial",
+    "state": "completion-confirmation",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".gap-3"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "#radix-_r_4s_"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".spatial-live-card"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "button[aria-label=\"Finish checklist\"]"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            ".leading-none > h2"
+          ],
+          [
+            ".spatial-slide-label:nth-child(2)"
+          ],
+          [
+            ".spatial-completion-alternative"
+          ],
+          [
+            "#radix-_r_51_"
+          ],
+          [
+            "#radix-_r_52_"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "entry",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".spatial-lock-clock > p"
+          ],
+          [
+            ".spatial-lock-clock > span"
+          ],
+          [
+            ".spatial-push-app > span"
+          ],
+          [
+            ".spatial-push-app > small"
+          ],
+          [
+            "strong"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > span:nth-child(3)"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > small"
+          ],
+          [
+            "#_r_0_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_2_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "overview",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".overview-person-copy > span"
+          ],
+          [
+            ".overview-person-copy > small"
+          ],
+          [
+            ".spatial-learning-row > span"
+          ],
+          [
+            ".spatial-learning-row > strong"
+          ],
+          [
+            ".overview-metadata > div:nth-child(2) > span:nth-child(1)"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            "div:nth-child(3) > span"
+          ],
+          [
+            "div:nth-child(3) > strong"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".overview-description:nth-child(1)"
+          ],
+          [
+            ".overview-description:nth-child(2)"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(4) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(4) > span:nth-child(2)"
+          ],
+          [
+            ".overview-sections.flex-col[data-elevation=\"quiet\"] > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            ".spatial-preview-entry"
+          ],
+          [
+            ".spatial-before-start > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "label[for=\"_r_6_\"]"
+          ],
+          [
+            "#_r_6_-description"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "live",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "sections",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".spatial-guidance-trigger"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            "section:nth-child(1) > h3"
+          ],
+          [
+            "section:nth-child(1) > h3 > span"
+          ],
+          [
+            "section:nth-child(2) > h3"
+          ],
+          [
+            "section:nth-child(2) > h3 > span"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "required-fail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "guidance",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            ".spatial-guidance-body > p:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2)"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "result",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".border-border"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#_r_f_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_h_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "task-detail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".px-6[data-slot=\"card-content\"] > .border-border.\\[a\\&\\]\\:hover\\:bg-accent.\\[a\\&\\]\\:hover\\:text-accent-foreground"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#radix-_r_d_"
+          ],
+          [
+            "#radix-_r_e_"
+          ],
+          [
+            "#_r_f_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_h_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "submission",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "typed-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "drawn-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "crimson",
+    "state": "completion-confirmation",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".gap-3"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "#radix-_r_4s_"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".spatial-live-card"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "button[aria-label=\"Finish checklist\"]"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            ".leading-none > h2"
+          ],
+          [
+            ".spatial-slide-label:nth-child(2)"
+          ],
+          [
+            ".spatial-completion-alternative"
+          ],
+          [
+            "#radix-_r_51_"
+          ],
+          [
+            "#radix-_r_52_"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "entry",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".spatial-lock-clock > p"
+          ],
+          [
+            ".spatial-lock-clock > span"
+          ],
+          [
+            ".spatial-push-app > span"
+          ],
+          [
+            ".spatial-push-app > small"
+          ],
+          [
+            "strong"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > span:nth-child(3)"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50 > small"
+          ],
+          [
+            "#_r_0_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_2_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "overview",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".overview-person-copy > span"
+          ],
+          [
+            ".overview-person-copy > small"
+          ],
+          [
+            ".spatial-learning-row > span"
+          ],
+          [
+            ".spatial-learning-row > strong"
+          ],
+          [
+            ".overview-metadata > div:nth-child(2) > span:nth-child(1)"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            "div:nth-child(3) > span"
+          ],
+          [
+            "div:nth-child(3) > strong"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".overview-description:nth-child(1)"
+          ],
+          [
+            ".overview-description:nth-child(2)"
+          ],
+          [
+            ".flex-col.gap-6[data-elevation=\"quiet\"]:nth-child(4) > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(3) > span:nth-child(2)"
+          ],
+          [
+            "li:nth-child(4) > span:nth-child(2)"
+          ],
+          [
+            ".overview-sections.flex-col[data-elevation=\"quiet\"] > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Preparation: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Frying: 5 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-number"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > span"
+          ],
+          [
+            "button[aria-label=\"Preview Completion: 3 tasks\"] > .overview-section-copy > small"
+          ],
+          [
+            ".spatial-preview-entry"
+          ],
+          [
+            ".spatial-before-start > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(1) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "label[for=\"_r_6_\"]"
+          ],
+          [
+            "#_r_6_-description"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(3) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > span"
+          ],
+          [
+            "li:nth-child(4) > .spatial-before-start-row > .overview-section-copy > small"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "live",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "sections",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".spatial-guidance-trigger"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            "section:nth-child(1) > h3"
+          ],
+          [
+            "section:nth-child(1) > h3 > span"
+          ],
+          [
+            "section:nth-child(2) > h3"
+          ],
+          [
+            "section:nth-child(2) > h3 > span"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "required-fail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".flex-col"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "guidance",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".grid"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".gap-6"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_54_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_56_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "#_r_5_-help"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "#radix-_r_59_"
+          ],
+          [
+            "#radix-_r_5a_"
+          ],
+          [
+            "h3"
+          ],
+          [
+            ".spatial-guidance-body > p:nth-child(2)"
+          ],
+          [
+            "li:nth-child(2)"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "result",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".border-border"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span[aria-hidden=\"true\"]"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#_r_f_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_h_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "task-detail",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".spatial-overview-station > div > h1"
+          ],
+          [
+            ".spatial-overview-station > div > p"
+          ],
+          [
+            ".spatial-station-task-count"
+          ],
+          [
+            ".spatial-review-summary > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .dark\\:hover\\:bg-accent\\/50.spatial-action[data-variant=\"ghost\"]"
+          ],
+          [
+            ".px-6[data-slot=\"card-content\"] > .border-border.\\[a\\&\\]\\:hover\\:bg-accent.\\[a\\&\\]\\:hover\\:text-accent-foreground"
+          ],
+          [
+            ".spatial-review-result-detail"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Pass\"] > small"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > b"
+          ],
+          [
+            ".review-stat[data-result=\"Fail\"] > small"
+          ],
+          [
+            ".group\\/tabs > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "#radix-_r_3_-trigger-all"
+          ],
+          [
+            "#radix-_r_3_-trigger-all > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed"
+          ],
+          [
+            "#radix-_r_3_-trigger-failed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed"
+          ],
+          [
+            "#radix-_r_3_-trigger-passed > .spatial-review-tab-count"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical"
+          ],
+          [
+            "#radix-_r_3_-trigger-critical > .spatial-review-tab-count"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_8_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_9_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90:nth-child(1)"
+          ],
+          [
+            "span[data-tone=\"critical\"]"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_a_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > strong"
+          ],
+          [
+            "button[aria-describedby=\"_r_b_\"] > .spatial-review-item-copy > .spatial-review-item-meta > .bg-secondary.text-secondary-foreground.\\[a\\&\\]\\:hover\\:bg-secondary\\/90"
+          ],
+          [
+            ".spatial-review-view-all > .spatial-action.h-9[data-slot=\"button\"]"
+          ],
+          [
+            ".spatial-review-next > .\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            "li:nth-child(1) > span"
+          ],
+          [
+            "li:nth-child(1) > p"
+          ],
+          [
+            "li:nth-child(2) > span"
+          ],
+          [
+            "li:nth-child(2) > p"
+          ],
+          [
+            ".bg-primary"
+          ],
+          [
+            "#radix-_r_d_"
+          ],
+          [
+            "#radix-_r_e_"
+          ],
+          [
+            "#_r_f_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_h_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "submission",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".flex-col.gap-6.rounded-xl:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "typed-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "drawn-acknowledgement",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            ".spatial-header"
+          ],
+          [
+            ".screen"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".assessment-name"
+          ],
+          [
+            ".page-title"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(2) > .px-6[data-slot=\"card-content\"] > p:nth-child(1)"
+          ],
+          [
+            ".spatial-collect-signature"
+          ],
+          [
+            ".spatial-signature-status"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .\\@container\\/card-header.grid.auto-rows-min > .spatial-submission-heading > span"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(3) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            ".\\@container\\/card-header.grid.auto-rows-min > .leading-none.font-semibold[data-slot=\"card-title\"] > h2"
+          ],
+          [
+            ".gap-6.rounded-xl.bg-card:nth-child(4) > .px-6[data-slot=\"card-content\"] > p"
+          ],
+          [
+            ".spatial-submission-manager > span"
+          ],
+          [
+            "strong"
+          ],
+          [
+            "div > small"
+          ],
+          [
+            "#radix-_r_5_"
+          ],
+          [
+            "#radix-_r_6_"
+          ],
+          [
+            "#_r_7_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "fluid",
+    "brand": "ocean",
+    "state": "completion-confirmation",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-hidden-focus",
+        "nodes": [
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(1)"
+          ],
+          [
+            "header"
+          ],
+          [
+            ".gap-3"
+          ],
+          [
+            ".spatial-evidence"
+          ],
+          [
+            ".dark\\:hover\\:bg-accent\\/50"
+          ],
+          [
+            "footer"
+          ],
+          [
+            "#radix-_r_4s_"
+          ],
+          [
+            "aside"
+          ],
+          [
+            "span[data-radix-focus-guard=\"\"][data-aria-hidden=\"true\"]:nth-child(3)"
+          ]
+        ]
+      },
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          [
+            ".spatial-live-card"
+          ]
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "h1"
+          ],
+          [
+            ".spatial-header-subtitle"
+          ],
+          [
+            ".gap-1"
+          ],
+          [
+            ".spatial-position"
+          ],
+          [
+            "#live-question-title"
+          ],
+          [
+            ".spatial-question-description"
+          ],
+          [
+            "label[data-outcome=\"met\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_1_-description"
+          ],
+          [
+            "label[data-outcome=\"fail\"] > .spatial-choice-copy > strong"
+          ],
+          [
+            "#_r_3_-description"
+          ],
+          [
+            "#_r_0_"
+          ],
+          [
+            "#_r_5_-comment"
+          ],
+          [
+            "button[aria-label=\"Previous task\"]"
+          ],
+          [
+            "button[aria-label=\"Finish checklist\"]"
+          ],
+          [
+            "#radix-_r_4t_"
+          ],
+          [
+            "#radix-_r_4u_"
+          ],
+          [
+            ".leading-none > h2"
+          ],
+          [
+            ".spatial-slide-label:nth-child(2)"
+          ],
+          [
+            ".spatial-completion-alternative"
+          ],
+          [
+            "#radix-_r_51_"
+          ],
+          [
+            "#radix-_r_52_"
+          ],
+          [
+            "#_r_9_ > span[data-slot=\"select-value\"]"
+          ],
+          [
+            "#_r_b_ > span[data-slot=\"select-value\"]"
+          ]
+        ]
+      }
+    ]
+  }
+]
