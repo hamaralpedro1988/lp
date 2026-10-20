@@ -561,7 +561,7 @@ html[data-assessment-version="5"] .spatial-learning-detail>strong {font-size:36p
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .spatial-review-outcome {position:relative;min-height:64px;padding-inline:48px}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-summary .spatial-review-outcome > svg {position:absolute;left:16px;width:28px;height:28px;padding:5px;border-radius:50%;background:color-mix(in srgb,currentColor 10%,transparent)}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-view-all {padding:var(--spatial-space-card-block) var(--spatial-space-card-inline)}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-review-view-all button {width:100%;min-height:36px;border-radius:999px}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-list-action {width:100%;min-height:36px;border-radius:999px;background:var(--spatial-surface)}
 
 .flow-app.flow-v5 .screen.spatial-notification-screen {padding:0;display:flex;overflow:auto}
 .flow-app.flow-v5 .phonebottom[hidden] {display:none}
@@ -670,7 +670,6 @@ html[data-assessment-version="5"] :where([data-slot=button][data-variant=outline
 
 .spatial-preview-entry-wrap {padding:var(--spatial-space-card-block) var(--spatial-space-card-inline);border-top:1px solid var(--spatial-line)}
 .flow-v5 .spatial-preview-entry {width:100%;gap:8px}
-.flow-v5 .spatial-preview-entry > svg:last-child {margin-left:auto}
 html[data-assessment-version="5"] [data-slot=sheet-content].spatial-assessment-preview {width:100%;max-width:430px;height:min(680px,88%);max-height:88dvh;gap:0;overflow:hidden}
 html[data-assessment-version="5"] .spatial-assessment-preview [data-slot=sheet-header] {flex:none;padding:28px var(--spatial-space-card-inline) var(--spatial-space-4)}
 html[data-assessment-version="5"] .spatial-assessment-preview [data-slot=sheet-title] {font-size:var(--spatial-type-card-title);padding-right:24px}

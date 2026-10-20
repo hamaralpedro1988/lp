@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState, type Ref } from 'react'
-import { Camera, ChevronLeft, ChevronRight, Eye, MessageCircle } from 'lucide-react'
+import { Camera, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { flowCriteria } from '@/data/flow-draft'
@@ -36,7 +36,7 @@ export function SpatialAssessmentPreview() {
     heading.current?.focus({ preventScroll: true })
   }, [index, open])
   return <Sheet open={open} onOpenChange={next => { if (next) setIndex(0); setOpen(next) }}>
-    <SheetTrigger asChild><SpatialActionButton variant="outline" className="spatial-preview-entry"><Eye aria-hidden="true"/>Preview assessment<ChevronRight aria-hidden="true"/></SpatialActionButton></SheetTrigger>
+    <SheetTrigger asChild><SpatialActionButton variant="outline" className="spatial-preview-entry spatial-list-action">Preview assessment</SpatialActionButton></SheetTrigger>
     <SheetContent side="bottom" className="mobile-sheet flow-sheet spatial-assessment-preview mx-auto" onOpenAutoFocus={event => { event.preventDefault(); heading.current?.focus({ preventScroll: true }) }}>
       <SheetHeader><SheetTitle>Assessment preview</SheetTitle><SheetDescription>Explore the tasks before you start. Your assessment progress will not change.</SheetDescription></SheetHeader>
       <div ref={body} className="spatial-assessment-preview-body">
