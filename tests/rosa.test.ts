@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { criteria, sections, needsEvidence } from '../src/data/rosa-criteria.ts'
 
-test('supplied checklist has ten unique criteria grouped 3/4/3', () => {
+test('supplied checklist has ten unique tasks grouped 3/4/3', () => {
   assert.equal(criteria.length,10)
   assert.equal(new Set(criteria.map(c=>c.id)).size,10)
   assert.deepEqual(sections.map(s=>criteria.filter(c=>c.section===s).length),[3,4,3])

@@ -20,8 +20,10 @@ with sync_playwright() as pw:
   page.evaluate('() => Promise.all(document.getAnimations().map(a => a.finished.catch(() => {})))')
  def capture(name,full=False):
   settle();page.mouse.move(1,1);page.screenshot(path=str(shots/(name+'.png')),full_page=full)
- def complete(n):expect(page.get_by_role('progressbar',name='Criteria complete')).to_have_attribute('aria-valuenow',str(n))
- def nav(name):page.get_by_role('button',name=name,exact=True).click()
+ def complete(n):expect(page.get_by_role('progressbar',name='Tasks complete')).to_have_attribute('aria-valuenow',str(n))
+ def nav(name):
+  page.get_by_role('button',name=name,exact=True).click()
+  settle()
  page.goto(args.url+'/?version=5')
  expect(page.get_by_role('heading',name='Your assessments',exact=True)).to_be_visible()
  capture('01-assignments-390')
@@ -35,17 +37,17 @@ with sync_playwright() as pw:
  expect(page.get_by_role('radio',name='Pass',exact=True)).not_to_be_checked()
  expect(page.locator('.spatial-header .assessment-name')).to_have_text('Fryer Station')
  expect(page.locator('.spatial-header-subtitle')).to_have_text('Food Process & Safety')
- expect(page.locator('.spatial-person')).to_contain_text('Dre')
+ expect(page.get_by_role('button',name='View team member Dre Jackson',exact=True)).to_be_visible()
  for sel in ['.spatial-header','.phonebottom']:
   assert page.locator(sel).evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgba(0, 0, 0, 0)',sel
  page.get_by_role('radio',name='Pass',exact=True).focus();page.keyboard.press('ArrowDown')
  expect(page.get_by_role('radio',name='Fail',exact=True)).to_be_checked();complete(1)
- expect(page.locator('.spatial-position')).to_have_text('1 of 11')
+ expect(page.locator('.spatial-position')).to_have_text('Task 1 of 11')
  page.keyboard.press('ArrowUp');expect(page.get_by_role('radio',name='Pass',exact=True)).to_be_checked()
  nav('Next');expect(page.locator('#live-question-title')).to_be_focused()
  expect(page.get_by_role('button',name='Next',exact=True)).to_be_disabled()
  capture('03-live-390')
- nav('Previous criterion');expect(page.locator('.spatial-question-body')).to_have_attribute('data-direction','back')
+ nav('Previous task');expect(page.locator('.spatial-question-body')).to_have_attribute('data-direction','back')
  nav('Sections');expect(page.locator('.spatial-criterion-link')).to_have_count(11)
  capture('06-sections-sheet');page.keyboard.press('Escape');expect(page.get_by_role('button',name='Sections',exact=True)).to_be_focused()
  nav('Sections');page.locator('.spatial-criterion-link').nth(8).click()
@@ -76,14 +78,15 @@ with sync_playwright() as pw:
  expect(page.get_by_role('button',name='Next',exact=True)).to_be_enabled()
  nav('Sections');nav('Review all');capture('04-review-incomplete-390')
  expect(page.get_by_role('button',name='Continue to feedback & sign-off')).to_be_disabled()
- assert 'Needs coaching' not in page.locator('.phone').inner_text()
- page.get_by_role('button',name='Edit: Prepares a safe, clean work area',exact=True).click()
+ expect(page.get_by_role('radio',name='Needs coaching',exact=True)).to_have_count(0)
+ page.get_by_role('button',name='View: Prepares a safe, clean work area',exact=True).click();nav('Edit observation')
  for i in range(11):
   page.get_by_role('radio',name='Fail' if i in [4,8] else 'Pass',exact=True).check()
-  expect(page.locator('.spatial-position')).to_have_text(f'{i+1} of 11')
-  nav('Review' if i==10 else 'Next')
- expect(page.get_by_role('heading',name='Review observations',exact=True)).to_be_visible()
- expect(page.locator('.review-stat')).to_have_count(3)
+  expect(page.locator('.spatial-position')).to_have_text(f'Task {i+1} of 11')
+  nav('Finish checklist' if i==10 else 'Next')
+ expect(page.get_by_role('heading',name='Fryer Station',exact=True)).to_be_visible()
+ expect(page.locator('.review-stat')).to_have_count(2)
+ expect(page.get_by_text('Incomplete',exact=True)).to_have_count(0)
  expect(page.get_by_role('button',name='Continue to feedback & sign-off')).to_be_enabled()
  capture('04-review-390')
  page.locator('.screen').evaluate('(e)=>e.scrollTop=e.scrollHeight');capture('04-review-details-390')
@@ -119,7 +122,7 @@ with sync_playwright() as pw:
  assert card.evaluate('(e)=>getComputedStyle(e).scrollbarWidth')=='none'
  page.get_by_role('textbox',name='Comment',exact=True).focus();capture('07-short-mobile-evidence')
  page.emulate_media(reduced_motion='reduce')
- nav('Previous criterion');assert page.locator('.spatial-question-body').evaluate('(e)=>getComputedStyle(e).animationName')=='none'
+ nav('Previous task');assert page.locator('.spatial-question-body').evaluate('(e)=>getComputedStyle(e).animationName')=='none'
  assert page.evaluate('document.getAnimations().filter(a=>a.effect.getComputedTiming().iterations===Infinity).length')==0
  page.add_style_tag(content='.flow-v5 .spatial-question-description {font-size:22px!important}.flow-v5 .spatial-question-title {font-size:36px!important}')
  assert card.evaluate('(e)=>e.scrollWidth<=e.clientWidth')
@@ -146,7 +149,7 @@ with sync_playwright() as pw:
   expect(page.get_by_role('radio')).to_have_count(3)
   expect(page.get_by_role('button',name='Next',exact=True)).to_be_disabled()
   page.get_by_role('radio',name='Needs coaching',exact=True).check();nav('Next')
-  expect(page.locator('.criterion-position')).to_contain_text('Criterion 2 / 11')
+  expect(page.locator('.criterion-position')).to_contain_text('Task 2 / 11')
   assert page.locator('.flow-v5').count()==0
   if version==3:expect(page.locator('.evidence-fab-dock')).to_be_visible()
   if version==4:expect(page.locator('.inline-evidence-actions')).to_be_visible()

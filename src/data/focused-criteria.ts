@@ -18,7 +18,7 @@ export const focusedCriteria: FocusedCriterion[] = [
     "type": "binary",
     "critical": true,
     "evidence": "required",
-    "guide": "Evidence is required in this illustrative template. In a real workflow, the published criterion determines whether a note or photo is necessary."
+    "guide": "Evidence is required in this illustrative template. In a real workflow, the published task determines whether a note or photo is necessary."
   },
   {
     "id": "p3",

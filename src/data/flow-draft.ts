@@ -15,7 +15,7 @@ export const flowScreens = ['list', 'overview', 'assessment', 'review', 'signoff
 export type FlowScreen = typeof flowScreens[number]
 // Preserve legacy unobserved responses as pending; they are never converted into Fail.
 export type FlowAnswer = 'met' | 'coaching' | 'fail' | 'notObserved'
-export type FlowDraft = { screen: FlowScreen; index: number; offline: boolean; answers: Record<number, FlowAnswer>; notes: Record<number, string>; feedback: string; paused: boolean; assessorConfirmed: boolean }
+export type FlowDraft = { signature?: { name: string; at: string; strokes: string[] }; completion?: { at: string; photos: Record<number, number> }; screen: FlowScreen; index: number; offline: boolean; answers: Record<number, FlowAnswer>; notes: Record<number, string>; feedback: string; paused: boolean; assessorConfirmed: boolean }
 export const flowStorageKey = 'lp-rosa-flow-v2-v01'
 export const emptyFlowDraft = (): FlowDraft => ({ screen: 'overview', index: 0, offline: false, answers: {}, notes: {}, feedback: '', paused: false, assessorConfirmed: false })
 export function normalizeFlowDraft(value: unknown): FlowDraft {
