@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f5f8">
+<title>Learning Pool · Semantic-first Adaptive Liquid / Spatial · V2</title>
+<style>
+:root{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-synthesis:none;color:#263041;background:#e9edf2}*{box-sizing:border-box}html,body{margin:0;min-height:100%;}button,input,textarea{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #8697ae;outline-offset:3px}button:disabled{cursor:not-allowed}button svg{flex-shrink:0}svg{display:block}button:focus:not(:focus-visible){outline:0}[hidden]{display:none!important}
+.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.icon.sm{width:17px;height:17px}.icon.md{width:22px;height:22px}
+.workspace{min-height:100dvh;display:grid;grid-template-columns:minmax(340px,490px) minmax(370px,1fr);max-width:1520px;margin:0 auto;align-items:center;gap:clamp(30px,5.5vw,92px);padding:36px clamp(22px,6vw,96px);position:relative;isolation:isolate}.workspace:before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 36% 55% at 75% 25%,#d5dceb80,transparent),radial-gradient(ellipse 40% 44% at 15% 90%,#dde1ef80,transparent);z-index:-1}
+.lab{max-width:430px;display:flex;flex-direction:column;gap:27px}.kicker{display:inline-flex;align-items:center;gap:9px;color:#5b687b;font-size:11px;font-weight:780;letter-spacing:.15em;text-transform:uppercase}.kicker-dot{height:9px;width:9px;border-radius:50%;background:linear-gradient(135deg,#b7cadd,#7b879e);box-shadow:0 0 0 4px #ffffff8c}.lab h1{margin:2px 0 12px;letter-spacing:-2.6px;font-size:clamp(35px,3.8vw,54px);line-height:1.06;color:#263040;font-weight:780}.lab h1 em{font-style:normal;color:#7a879a}.lab-lead{max-width:385px;color:#697487;line-height:1.7;font-size:14px;margin:0}.choice-group{display:flex;flex-direction:column;gap:11px}.choice-label{font-size:12px;font-weight:740;color:#364256;display:flex;justify-content:space-between;align-items:center}.choice-label span{font-size:11px;font-weight:500;color:#8692a1}.theme-tabs{background:#dfe5edb0;border:1px solid #d5dde8;padding:5px;display:grid;grid-template-columns:1fr 1fr;border-radius:18px;gap:5px}.theme-tabs button{border:0;background:transparent;color:#6b7688;font-weight:710;font-size:13px;border-radius:13px;padding:13px 8px;transition:background .23s,box-shadow .23s,color .23s;display:flex;align-items:center;justify-content:center;gap:9px}.theme-tabs button[aria-selected="true"]{background:#fff;box-shadow:0 2px 9px #42516e12,0 7px 20px #42516e0a;color:#273248}.theme-tabs .icon{width:17px;height:17px}
+.brand-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.brand-option{border:1px solid #d7deea;background:#ffffff9c;border-radius:15px;padding:13px 7px 12px;display:flex;flex-direction:column;gap:8px;align-items:center;color:#697487;font-size:11px;font-weight:650;transition:all .2s}.brand-option[aria-pressed="true"]{background:#fff;border-color:#8d9cb0;box-shadow:0 0 0 2px #a3afc13b,0 4px 15px #62728a12;color:#28334a}.brand-swatch{width:27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#fafcfe,#aebdcc);border:3px solid #fff;box-shadow:0 2px 6px #3a4a641e}.brand-option[data-brand=red] .brand-swatch{background:linear-gradient(135deg,#ffcbc8,#c73e4a)}.brand-option[data-brand=blue] .brand-swatch{background:linear-gradient(135deg,#c1ecfb,#367cb1)}
+.compare-note{border-top:1px solid #cfd7e2;padding-top:23px;display:grid;gap:13px}.compare-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;font-weight:730;color:#344153}.compare-heading .tag{font-size:10px;font-weight:690;background:#fdfefeaa;border:1px solid #cbd5e0;color:#697789;padding:5px 8px;border-radius:30px}.compare-point{display:flex;gap:10px;align-items:start;color:#677387;font-size:12px;line-height:1.55}.compare-point .icon{color:#8792a3;margin-top:1px}.action-links{display:flex;flex-wrap:wrap;gap:11px;align-items:center}.action-links button{border:1px solid #cbd4e1;background:#ffffff91;color:#4b586c;border-radius:10px;font-size:12px;font-weight:650;padding:9px 12px;display:flex;align-items:center;gap:6px}.action-links button:hover{background:#fff}.lab-foot{font-size:10.5px;line-height:1.6;color:#8792a0;max-width:380px}
+.preview-stage{min-width:0;display:flex;justify-content:center;align-items:center;position:relative}.preview-stage:before{content:'';width:470px;height:630px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,#bccbd68a 5%,#dbe4ec18 55%,transparent 70%);pointer-events:none}.preview-tag{position:absolute;top:4px;left:calc(50% - 201px);z-index:10;display:flex;gap:7px;align-items:center;opacity:.65;color:#667285;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;transform:translateY(-25px)}.preview-tag .kicker-dot{height:6px;width:6px;box-shadow:0 0 0 2px #e9eef3}
+.phone{--ink:#253144;--muted:#778298;--border:#dfe5ed;--canvas:#f4f6fa;--primary:#252c3b;--accent:#708096;--accent-soft:#eff3f7;--accent-glow:#8392a724;--bg-soft:#f8fafd;--glass:#fdfefe9c;--glass-line:#ffffffcc;--glass-shadow:0 7px 27px #455d7714,0 1px 3px #455d7712,inset 0 1px 0 #fff;--brand-ink:#77889b;--brand-wash-a:#d5e3f3b5;--brand-wash-b:#dae7e7a2;--accent-active:#7286a1;--question:#242e3d;--badge:#eff2f7;--badge-ink:#566980;--selection:#ecf2f8;--selection-line:#92a9bd;--footer:#ffffffa8;--card-shadow:0 20px 50px #45566a16,0 3px 16px #47546e0b;position:relative;width:min(100%,412px);height:min(812px,calc(100dvh - 74px));min-height:610px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid #f5f7f9;background:radial-gradient(ellipse 95% 60% at 99% 0%,var(--brand-wash-a),transparent 70%),radial-gradient(ellipse 95% 60% at 7% 91%,var(--brand-wash-b),transparent 72%),var(--canvas);color:var(--ink);box-shadow:0 22px 65px #46566e30,0 6px 20px #50617d14;transition:background .25s;isolation:isolate;border-radius:4px}
+.phone:before{content:'';pointer-events:none;position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 70% 35% at 50% 47%,#fff5,transparent 100%)}
+.phone[data-brand=red]{--brand-ink:#bd4e55;--brand-wash-a:#f7d9dba8;--brand-wash-b:#dfe4edb2}
+.phone[data-brand=blue]{--brand-ink:#347eaf;--brand-wash-a:#cdeafaad;--brand-wash-b:#d9e7eeb7}
+.phone[data-theme=spatial]{--ink:#28253c;--muted:#7f7896;--border:#e4e0ee;--canvas:#f3f0fb;--primary:#28253c;--accent:#8272cf;--accent-soft:#f0ebfc;--accent-glow:#a190ec38;--bg-soft:#f9f8fd;--glass:#fff;--glass-line:#e5e0f0;--glass-shadow:0 4px 13px #5b4f8912;--brand-ink:#7363bd;--brand-wash-a:#e9e2f7c8;--brand-wash-b:#dcd6f1bc;--accent-active:#8272cf;--question:#28243c;--badge:#f0ebfa;--badge-ink:#6553a9;--selection:#f0eafd;--selection-line:#9785ed;--footer:#fff;--card-shadow:0 20px 50px #51458022,0 3px 16px #5145800c}
+.phone[data-theme=spatial] .liquid-shine{display:none}
+.phone[data-theme=spatial][data-brand=red],.phone[data-theme=spatial][data-brand=blue]{--brand-ink:#7363bd;--brand-wash-a:#e9e2f7c8;--brand-wash-b:#dcd6f1bc}
+.phone .liquid-shine{position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 45% 35% at 6% 14%,#fff8,transparent 94%),radial-gradient(ellipse 45% 30% at 93% 76%,#fff5,transparent)}
+.status-bar{height:35px;display:flex;justify-content:space-between;align-items:center;padding:7px 26px 0 27px;flex:0 0 auto;position:relative;z-index:3;color:var(--ink)}.status-time{font-size:13px;font-weight:720;letter-spacing:-.3px}.status-icons{display:flex;align-items:center;gap:5px}.status-icons svg{height:15px;width:17px;stroke-width:1.7}.status-battery{width:24px;height:11px;border:1.6px solid currentColor;border-radius:3px;position:relative;margin-left:1px}.status-battery:before{content:'';position:absolute;top:2px;right:-4px;width:2px;height:5px;background:currentColor;border-radius:0 1px 1px 0}.status-battery:after{content:'';position:absolute;inset:1.4px 3px 1.4px 1.4px;background:currentColor;border-radius:1px}
+.progress-area{flex:0 0 auto;display:flex;align-items:center;padding:10px 18px 0;min-height:15px}.progress-track{width:100%;height:3px;background:#d5dce5ba;position:relative;overflow:hidden;border-radius:0}.progress-fill{height:100%;width:9.09%;background:var(--accent-active);transition:width .35s cubic-bezier(.2,.75,.25,1)}.phone[data-theme=spatial] .progress-track{background:#e1ddea}
+.app-header{display:flex;align-items:center;gap:10px;padding:16px 18px 14px;min-height:77px;flex-shrink:0;position:relative;z-index:4}.glass-btn{border:1px solid var(--glass-line);box-shadow:var(--glass-shadow);background:var(--glass);-webkit-backdrop-filter:blur(22px) saturate(165%);backdrop-filter:blur(22px) saturate(165%);color:var(--ink);position:relative;overflow:hidden;isolation:isolate;transition:transform .17s,background .2s,box-shadow .2s}.glass-btn:before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(150deg,#fff9 0%,#ffffff15 32%,transparent 60%);mix-blend-mode:screen}.glass-btn:hover{background:#ffffffcf;box-shadow:0 7px 22px #51637c25,inset 0 1px #fff}.glass-btn:active{transform:scale(.96)}.phone[data-theme=spatial] .glass-btn{-webkit-backdrop-filter:none;backdrop-filter:none}.phone[data-theme=spatial] .glass-btn:before{display:none}
+.header-back{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;flex-shrink:0}.header-title{flex:1;min-width:0}.header-title h1{margin:0;font-size:19px;font-weight:790;line-height:1.1;letter-spacing:-.8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.header-title p{margin:5px 0 0;color:var(--muted);font-size:10.7px;font-weight:540;line-height:1.2;letter-spacing:.06px}.employee{display:flex;align-items:center;gap:8px;flex-shrink:0;min-width:0}.employee-avatar{width:34px;height:34px;background:color-mix(in srgb,var(--brand-ink) 10%,#ffffff 90%);display:grid;place-items:center;border:1px solid #ffffffab;border-radius:50%;font-size:10px;font-weight:820;color:var(--brand-ink);box-shadow:0 2px 8px #66748a12}.phone[data-theme=spatial] .employee-avatar{background:#ebe5fc;color:#6957b1}.employee strong{font-size:13px;font-weight:740;letter-spacing:-.2px}
+.app-body{flex:1;min-height:0;display:flex;position:relative;padding:0 18px 10px;overflow:hidden;z-index:2}.card-glow{position:absolute;pointer-events:none;z-index:0;left:30px;right:30px;bottom:8px;height:45px;filter:blur(22px);background:var(--brand-wash-a);opacity:.75}
+.criterion-card{position:relative;z-index:1;flex:1;min-height:0;border-radius:28px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-y;background:linear-gradient(165deg,#fff 0%,#fff 56%,#fcfdff 100%);border:1px solid #ffffffee;box-shadow:var(--card-shadow);padding:25px 23px 25px;display:flex;flex-direction:column;transition:box-shadow .25s,border-color .25s}.criterion-card::-webkit-scrollbar{display:none}.phone[data-theme=spatial] .criterion-card{background:linear-gradient(155deg,#ffffff 0%,#fff 40%,#faf8ff 100%);border-radius:28px}
+.pill-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.eyebrow{display:inline-flex;align-items:center;padding:7px 10px;border-radius:10px;background:var(--badge);color:var(--badge-ink);font-size:10px;font-weight:820;letter-spacing:.005em;text-transform:uppercase}.critical{background:#fff0e4;color:#a96534;font-size:10px;font-weight:780;text-transform:none}.counter{margin-left:auto;font-size:11px;font-weight:750;color:#9aa2af;font-variant-numeric:tabular-nums;white-space:nowrap}.question{font-size:clamp(25px,6.5vw,31px);font-weight:830;letter-spacing:-1.25px;line-height:1.16;color:var(--question);margin:36px 0 0}.instruction{color:var(--muted);font-size:15.5px;line-height:1.55;font-weight:460;margin:24px 0 28px;letter-spacing:-.2px}
+.choices{display:grid;gap:11px;flex:none}.answer{appearance:none;background:var(--bg-soft);min-height:76px;border-radius:19px;border:1px solid var(--border);padding:14px;display:flex;align-items:center;gap:13px;text-align:left;color:var(--ink);transition:transform .18s,background .2s,border-color .2s,box-shadow .2s}.answer:hover{border-color:#b7c3d2;background:#fff}.answer:active{transform:scale(.985)}.answer[aria-pressed=true]{background:var(--selection);border-color:var(--selection-line);box-shadow:0 0 0 2px var(--accent-glow),0 5px 14px #7589aa0f}.radio{height:22px;width:22px;border:1.6px solid #b4c1d1;border-radius:50%;display:grid;place-items:center;flex:none;background:#fff;transition:all .19s}.answer[aria-pressed=true] .radio{border-color:var(--accent-active)}.answer[aria-pressed=true] .radio:before{content:'';width:12px;height:12px;border-radius:50%;background:var(--accent-active);transform:scale(1);animation:pop .16s cubic-bezier(.2,1.4,.6,1)}.answer-label{display:flex;flex-direction:column;gap:3px;flex:1}.answer-label strong{font-size:15px;font-weight:730;letter-spacing:-.25px}.answer-label small{font-size:11.5px;color:var(--muted);font-weight:470}.answer-check{color:var(--accent-active);opacity:0;transition:opacity .16s}.answer[aria-pressed=true] .answer-check{opacity:1}
+.composer{position:relative;margin-top:23px;flex-shrink:0;border:1px solid var(--border);border-radius:19px;background:#ffffffcf;min-height:101px;display:flex;flex-direction:column;transition:box-shadow .2s,border-color .2s}.composer:focus-within{border-color:var(--selection-line);box-shadow:0 0 0 3px var(--accent-glow)}.composer textarea{resize:none;outline:0;min-height:63px;flex:1;width:100%;border:0;background:transparent;color:var(--ink);font-size:13.5px;line-height:1.5;padding:14px 67px 0 15px}.composer textarea::placeholder{color:#98a1b0}.composer-bottom{display:flex;align-items:center;min-height:36px;gap:7px;padding:0 53px 10px 15px}.composer-helper{font-size:10px;color:#98a1b0;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.composer-helper.required{color:#ad6a35;font-weight:650}.photo-chip{font-size:10px;color:var(--ink);padding:4px 6px;background:var(--accent-soft);border-radius:8px;border:1px solid var(--border);max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}.camera-btn{position:absolute;bottom:9px;right:9px;width:39px;height:39px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--glass-line);color:#657487}.camera-btn svg{width:19px;height:19px}.camera-dot{position:absolute;right:3px;top:3px;border-radius:50%;height:7px;width:7px;background:#427764;border:1px solid #fff;display:none}.camera-btn.has-photo .camera-dot{display:block}.photo-input{display:none}
+.card-footer-note{display:none;margin-top:22px;font-size:11px;line-height:1.6;color:var(--muted)}
+.app-footer{flex:0 0 auto;min-height:82px;padding:10px 18px max(16px,env(safe-area-inset-bottom));display:grid;grid-template-columns:minmax(0,1fr) 52px minmax(0,1.1fr);gap:10px;align-items:stretch;position:relative;z-index:3}.dock-btn{min-width:0;min-height:50px;display:flex;align-items:center;justify-content:center;gap:9px;border-radius:16px;font-size:13px;font-weight:740}.dock-btn .icon{width:18px;height:18px}.dock-btn.sections{width:52px;padding:0}.dock-btn.sections svg{width:22px;height:22px}.dock-btn.next{background:var(--primary);color:white;border:1px solid #ffffff10;box-shadow:0 9px 19px #323e5126,0 2px 4px #23304010;transition:transform .17s,opacity .2s}.dock-btn.next:active{transform:scale(.985)}.dock-btn.next:disabled{opacity:.48;box-shadow:none}.phone[data-theme=spatial] .dock-btn.next{box-shadow:0 10px 18px #342a5828}
+/* Different tactile presentation when switching the material philosophy. */
+.phone[data-theme=liquid] .header-back,.phone[data-theme=liquid] .dock-btn.glass-btn,.phone[data-theme=liquid] .camera-btn{border-color:#ffffffd9;background:linear-gradient(143deg,#fffffff0,#ffffff91 60%,#ffffffa8);-webkit-backdrop-filter:blur(24px) saturate(1.7);backdrop-filter:blur(24px) saturate(1.7);box-shadow:0 6px 21px #63738c17,0 1px 2px #57697e16,inset 0 1px 0 #fff}
+.phone[data-theme=liquid] .dock-btn.glass-btn:before{background:linear-gradient(155deg,#fff8,#fff2 58%,transparent 60%)}
+.phone[data-theme=liquid] .criterion-card{border:1px solid #fff;box-shadow:0 28px 52px #52677a1b,0 3px 15px #596e8210}
+/* Adaptive Liquid: a different physical treatment for chrome, not for reading content. */
+.phone[data-theme=liquid] .header-back{border-radius:19px;background:linear-gradient(142deg,#ffffffef,#ffffffe0 36%,#f6faff90 78%)}
+.phone[data-theme=liquid] .dock-btn.glass-btn{border-radius:999px;background:linear-gradient(145deg,#ffffffed,#f9fcffaf 60%,#ffffffb8);border-color:#fff;box-shadow:0 9px 23px #586d831c,0 2px 4px #75839a11,inset 0 1px 0 #fff,inset 0 -1px 0 #ffffff80}
+.phone[data-theme=liquid] .dock-btn.sections{border-radius:22px}
+.phone[data-theme=liquid] .dock-btn.next{border-radius:999px;background:linear-gradient(162deg,#343e51,#202a3b 65%);box-shadow:0 10px 20px #26364832,inset 0 1px 0 #ffffff21}
+.phone[data-theme=liquid] .header-back:after,.phone[data-theme=liquid] .dock-btn.glass-btn:after{content:'';position:absolute;top:1px;left:10%;width:76%;height:48%;background:radial-gradient(ellipse 65% 80% at 50% 0%,#ffffffc9,transparent);pointer-events:none;opacity:.65}
+.phone[data-theme=liquid] .app-footer:before{content:'';position:absolute;z-index:-1;inset:-26px -12px 0;background:radial-gradient(ellipse 65% 55% at 40% 85%,var(--brand-wash-a),transparent 95%);opacity:.78;filter:blur(20px);pointer-events:none}
+.phone[data-theme=liquid] .phone:after{pointer-events:none}
+/* Sections sheet */
+.sheet-overlay{position:absolute;inset:0;background:#2633415d;z-index:20;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .24s}.sheet-overlay.open{opacity:1;pointer-events:auto}.sheet{max-height:77%;display:flex;flex-direction:column;border-radius:28px 28px 0 0;border:1px solid #fff;box-shadow:0 -16px 42px #25334433;background:linear-gradient(155deg,#fff,#f9fbff);transform:translateY(100%);transition:transform .32s cubic-bezier(.2,.8,.22,1);overflow:hidden}.sheet-overlay.open .sheet{transform:translateY(0)}.phone[data-theme=spatial] .sheet{background:linear-gradient(155deg,#fff,#faf8ff)}.sheet-handle{height:4px;width:40px;border-radius:5px;background:#ccd4e0;margin:11px auto 13px;flex:0 0 auto}.sheet-top{display:flex;justify-content:space-between;align-items:center;padding:0 22px 13px}.sheet-top h3{margin:0;font-size:20px;font-weight:780;letter-spacing:-.6px}.sheet-close{border:0;background:#f1f3f7;border-radius:50%;height:32px;width:32px;color:#667388;display:grid;place-items:center}.sheet-scroller{overflow:auto;overscroll-behavior:contain;scrollbar-width:none;padding:0 15px max(22px,env(safe-area-inset-bottom))}.sheet-scroller::-webkit-scrollbar{display:none}.sheet-group{margin:8px 6px 12px}.sheet-section-title{display:flex;justify-content:space-between;align-items:center;color:#8390a0;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.11em;margin:8px 7px 10px}.section-row{background:#f5f7fa;border:1px solid #edf0f5;border-radius:13px;width:100%;display:flex;align-items:center;min-height:58px;text-align:left;gap:10px;margin:7px 0;padding:10px 12px;color:#2e3848}.section-row.current{border-color:var(--accent);background:var(--selection)}.section-index{font-size:11px;color:#909bab;width:19px}.section-name{flex:1;font-size:12px;font-weight:630;line-height:1.45}.mini-status{font-size:10px;color:#769181}.mini-status.fail{color:#b4686f}.mini-status.pending{color:#9ca4b2}
+.toast{position:absolute;z-index:30;top:141px;left:32px;right:32px;background:#29374ae8;border:1px solid #ffffff40;color:white;border-radius:14px;box-shadow:0 10px 34px #34455c33;padding:12px 15px;text-align:center;font-size:12px;line-height:1.45;font-weight:540;opacity:0;transform:translateY(-8px);pointer-events:none;transition:all .22s}.toast.show{opacity:1;transform:translateY(0)}.phone[data-theme=spatial] .toast{background:#29253ce8}
+@keyframes enter-left{from{opacity:.32;transform:translateX(24px) scale(.988)}to{opacity:1;transform:translateX(0) scale(1)}}@keyframes enter-right{from{opacity:.32;transform:translateX(-24px) scale(.988)}to{opacity:1;transform:translateX(0) scale(1)}}@keyframes pop{from{transform:scale(.65)}to{transform:scale(1)}}.criterion-card.enter-left{animation:enter-left .32s cubic-bezier(.2,.75,.18,1) both}.criterion-card.enter-right{animation:enter-right .32s cubic-bezier(.2,.75,.18,1) both}.criterion-card.dragging{transition:none!important}
+.mobile-lab{display:none}
+@media (max-width:960px){.workspace{grid-template-columns:minmax(280px,380px) minmax(350px,1fr);gap:25px;padding:30px}.lab{gap:20px}.lab h1{font-size:38px}.phone{height:min(812px,calc(100dvh - 70px))}}
+@media (max-width:760px){html,body{height:100%;overflow:hidden}.workspace{display:flex;flex-direction:column;padding:0;gap:0;max-width:none;height:100dvh;min-height:0}.lab{display:none}.mobile-lab{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 10px;width:100%;flex:0 0 auto;padding:9px 14px 8px;background:#e9edf3;border-bottom:1px solid #dbe1ea;z-index:11;box-shadow:0 2px 10px #58657910}.mobile-lab h2{font-size:10px;font-weight:780;letter-spacing:.11em;text-transform:uppercase;color:#5f6c7f;margin:0}.mobile-lab select{max-width:116px;min-height:31px;font-size:11px;font-weight:690;border-radius:9px;padding:4px 7px;background:#fff;border:1px solid #c9d3e0;color:#344357}.mobile-theme{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:3px;background:#d9e0eb;border-radius:10px}.mobile-theme button{border:0;background:transparent;font-size:11px;font-weight:730;padding:7px 8px;border-radius:7px;color:#748094}.mobile-theme button[aria-selected=true]{background:#fff;color:#293649;box-shadow:0 1px 5px #43566f20}.preview-stage{width:100%;height:100%;min-height:0;flex:1;display:flex;align-items:stretch}.preview-stage:before,.preview-tag{display:none}.phone{width:100%;height:100%;min-height:0;border-radius:0;border:0;box-shadow:none}.status-bar{padding-top:8px;height:38px}.app-header{padding-top:14px}.app-body{padding-inline:16px}.app-footer{padding-inline:16px}.question{margin-top:28px}}
+@media(max-width:350px){.mobile-lab{padding-inline:9px;gap:6px}.header-title h1{font-size:17px}.header-title p{font-size:9.6px}.app-header{padding-inline:12px;gap:8px}.app-body{padding-inline:12px}.criterion-card{padding:21px 17px 20px}.app-footer{padding-inline:12px;gap:7px;grid-template-columns:minmax(0,1fr) 45px minmax(0,1.05fr)}.dock-btn.sections{width:45px}.question{font-size:24px}.instruction{font-size:13.5px;margin:20px 0 24px}.answer{min-height:68px}.employee-avatar{width:30px;height:30px}.employee strong{font-size:12px}}
+@media(max-height:730px){.status-bar{height:30px}.progress-area{padding-top:7px;min-height:11px}.app-header{min-height:69px;padding-top:12px;padding-bottom:11px}.criterion-card{padding-top:19px}.question{margin-top:25px;font-size:clamp(23px,6.3vw,28px)}.instruction{margin:18px 0 21px;font-size:13.5px}.answer{min-height:64px}.choices{gap:8px}.composer{margin-top:18px}.app-footer{min-height:70px;padding-top:7px;padding-bottom:max(9px,env(safe-area-inset-bottom))}.dock-btn{min-height:46px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+body.focus .workspace{display:flex;justify-content:center;padding:0;min-height:100dvh}.focus .lab,.focus .mobile-lab,.focus .preview-tag{display:none}.focus .preview-stage{flex:1;height:100dvh;align-items:stretch}.focus .preview-stage:before{display:none}.focus .phone{height:100dvh;min-height:0;width:min(100vw,420px);border-radius:0;box-shadow:none;border:0}
+
+/* ==============================================================
+   SEMANTIC-FIRST ADAPTIVE LIQUID — V2
+   Reference: real Rosa Spatial React tokens, 2026-10-20.
+   Invariant: NO brand / material may override semantic CSS vars.
+   Brand affects atmosphere + person/avatar only, not answers.
+   ============================================================== */
+.phone{
+  --semantic-pass-bg:#edf7f1;
+  --semantic-pass-ink:#427764;
+  --semantic-pass-border:#54846d;
+  --semantic-pass-shadow:0 0 0 2px #b8d9c746,0 7px 19px #42776418;
+  --semantic-fail-bg:#fff2f2;
+  --semantic-fail-ink:#9d4255;
+  --semantic-fail-border:#c67585;
+  --semantic-fail-shadow:0 0 0 2px #f0b7bf46,0 7px 19px #c5788420;
+  --semantic-critical-bg:#fff1e2;
+  --semantic-critical-ink:#8d5228;
+  --semantic-critical-border:#dfb589;
+  --semantic-section-bg:#f1f2f5;
+  --semantic-section-ink:#535365;
+  --semantic-progress:#427764;
+  --semantic-progress-track:#e3e4e8;
+  --semantic-focus:#788296;
+  --semantic-choice-bg:#f9f8fd;
+  --semantic-choice-border:#e6e4ef;
+  --semantic-choice-ink:#242339;
+  --semantic-body-muted:#625c75;
+}
+/* Spatial is also white-label: brand identity may change its canvas. */
+.phone[data-theme=spatial] {
+  --brand-wash-a:#e9e2f7c8;
+  --brand-wash-b:#dcd6f1bc;
+  --brand-ink:#7363bd;
+}
+.phone[data-theme=spatial][data-brand=red]{
+  --canvas:#f9f5f6;--brand-ink:#b84c53;
+  --brand-wash-a:#f4daddb0;--brand-wash-b:#f0e9eea3;
+}
+.phone[data-theme=spatial][data-brand=blue]{
+  --canvas:#f3f8fa;--brand-ink:#3579a6;
+  --brand-wash-a:#d5eaf2b6;--brand-wash-b:#dfe9f0ab;
+}
+/* Avatar is a brand-context surface, not a success/failure indicator. */
+.phone[data-theme=spatial] .employee-avatar,
+.phone[data-theme=liquid] .employee-avatar{
+  background:color-mix(in srgb,var(--brand-ink) 10%,white);
+  color:var(--brand-ink);
+  border-color:color-mix(in srgb,var(--brand-ink) 12%,white);
+}
+/* Category and critical badges are semantic, not brand pills. */
+.phone .eyebrow:not(.critical){
+  background:var(--semantic-section-bg);
+  color:var(--semantic-section-ink);
+}
+.phone .eyebrow.critical{
+  background:var(--semantic-critical-bg);
+  color:var(--semantic-critical-ink);
+  border:1px solid var(--semantic-critical-border);
+  padding:6px 9px;
+}
+/* Same unselected response for ALL themes and brands. */
+.phone .answer{
+  color:var(--semantic-choice-ink);
+  background:var(--semantic-choice-bg);
+  border-color:var(--semantic-choice-border);
+}
+.phone .answer:hover:not([aria-pressed=true]){
+  background:#fff;
+  border-color:#a8a4b6;
+  box-shadow:0 2px 9px #3433460b;
+}
+.phone .answer .radio{border-color:#a6a1b5;background:#fff;}
+.phone .answer .answer-label small{color:var(--semantic-body-muted);}
+/* PASS — from the existing V5 semantic-success tokens. */
+.phone .answer[data-value=met][aria-pressed=true]{
+  background:var(--semantic-pass-bg);
+  border-color:var(--semantic-pass-border);
+  box-shadow:var(--semantic-pass-shadow);
+}
+.phone .answer[data-value=met][aria-pressed=true] .radio{
+  border-color:var(--semantic-pass-ink);
+}
+.phone .answer[data-value=met][aria-pressed=true] .radio:before{
+  background:var(--semantic-pass-ink);
+}
+.phone .answer[data-value=met][aria-pressed=true] .answer-check{
+  color:var(--semantic-pass-ink);
+}
+/* FAIL — from the existing V5 semantic-fail tokens. */
+.phone .answer[data-value=fail][aria-pressed=true]{
+  background:var(--semantic-fail-bg);
+  border-color:var(--semantic-fail-border);
+  box-shadow:var(--semantic-fail-shadow);
+}
+.phone .answer[data-value=fail][aria-pressed=true] .radio{
+  border-color:var(--semantic-fail-ink);
+}
+.phone .answer[data-value=fail][aria-pressed=true] .radio:before{
+  background:var(--semantic-fail-ink);
+}
+.phone .answer[data-value=fail][aria-pressed=true] .answer-check{
+  color:var(--semantic-fail-ink);
+}
+.phone .answer:focus-visible,
+.phone .dock-btn:focus-visible,
+.phone .header-back:focus-visible,
+.phone .camera-btn:focus-visible{
+  outline:3px solid var(--semantic-focus);outline-offset:3px;
+}
+.phone .composer:focus-within{
+  border-color:var(--semantic-focus);
+  box-shadow:0 0 0 3px #79849627;
+}
+.phone .composer-helper.required{
+  color:var(--semantic-critical-ink);
+}
+.phone .camera-dot{
+  background:var(--semantic-pass-ink);
+}
+/* Evidence is neutral. The green dot means an attachment exists,
+   and amber only appears for required missing evidence. */
+.phone .photo-chip{background:var(--semantic-section-bg);color:var(--semantic-section-ink);border-color:#dde0e7}
+/* Real V5 counts valid assessed criteria, never score/current index. */
+.phone .progress-track,
+.phone[data-theme=spatial] .progress-track{
+  height:4px;
+  background:var(--semantic-progress-track);
+}
+.phone .progress-fill{
+  background:var(--semantic-progress);
+}
+/* Real finger-sized media control and iOS-safe input font, shared across themes. */
+.phone .camera-btn{width:44px;height:44px;}
+.phone .composer textarea{font-size:16px;}
+/* Within Sections, row navigation is a neutral location marker. */
+.phone .section-row.current{
+  background:var(--semantic-section-bg);
+  border-color:#b3b5c0;
+}
+.phone .section-row .mini-status:not(.pending):not(.fail){
+  color:var(--semantic-pass-ink);
+}
+.phone .section-row .mini-status.fail{
+  color:var(--semantic-fail-ink);
+}
+.phone .sheet-section-title,.phone .section-index{
+  color:var(--semantic-section-ink);
+}
+/* Read-only semantic legend in the lab. */
+.semantic-demo{padding:16px 17px 15px;border-radius:18px;border:1px solid #d7dfeb;background:#ffffffb5;box-shadow:0 8px 24px #45566e08;display:grid;gap:12px}
+.semantic-heading{font-size:12px;font-weight:770;color:#344153;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.semantic-heading span{font-weight:540;color:#7c8896;font-size:10px}
+.semantic-legend{display:flex;flex-wrap:wrap;gap:7px}
+.semantic-chip{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:7px 9px;font-size:11px;font-weight:730;border:1px solid transparent}
+.semantic-chip .icon{height:13px;width:13px;stroke-width:2.4}
+.semantic-chip.pass{background:#edf7f1;color:#427764;border-color:#54846d}
+.semantic-chip.fail{background:#fff2f2;color:#9d4255;border-color:#c67585}
+.semantic-chip.critical-chip{background:#fff1e2;color:#8d5228;border-color:#dfb589}
+.semantic-chip.section-chip{background:#f1f2f5;color:#535365;border-color:#e1e3e8}
+.semantic-demo p{font-size:11px;line-height:1.6;color:#697487;margin:0}
+@media(max-width:760px){.semantic-demo{display:none}}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute;opacity:0;pointer-events:none"><defs>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 5-7 7 7 7"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M14 4H9l-2 3H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4l-2-3Z"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5.5 5.5L20 7"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 1.9 7.6L21.5 12l-7.6 2.4L12 22l-1.9-7.6L2.5 12l7.6-2.4L12 2Z"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="m5 12 14 0m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-rotate" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 3 7m-3 3v-6h6"/></symbol>
+<symbol id="i-view" viewBox="0 0 24 24"><rect width="18" height="15" x="3" y="4.5" rx="2"/><path d="m8 13 3-3 5 5"/></symbol>
+<symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 9c6-6 14-6 20 0M5 12c4-4 10-4 14 0M8 15c2-2 6-2 8 0M12 19h.01"/></symbol>
+<symbol id="i-bars" viewBox="0 0 24 24"><path d="M3 21v-5M8 21v-9M13 21V8M18 21V4" stroke-width="3"/></symbol>
+</defs></svg>
+<div class="workspace">
+  <aside class="lab" aria-label="Design comparison controls">
+    <div class="kicker"><span class="kicker-dot"></span> Learning Pool / Design exploration</div>
+    <div><h1>One flow.<br><em>Two material<br>directions.</em></h1><p class="lab-lead">A material experiment with one non-negotiable rule: changing the client brand never changes the meaning of Pass, Fail, Critical, sections or progress.</p></div>
+    <div class="choice-group"><div class="choice-label">01 / Visual language <span>Switch without losing answers</span></div><div class="theme-tabs" role="tablist" aria-label="Visual language"><button id="selectSpatial" role="tab" aria-selected="false" data-theme-select="spatial"><svg class="icon"><use href="#i-layers"/></svg>Spatial UI</button><button id="selectLiquid" role="tab" aria-selected="true" data-theme-select="liquid"><svg class="icon"><use href="#i-spark"/></svg>Adaptive Liquid</button></div></div>
+    <div class="choice-group"><div class="choice-label">02 / Client identity <span>Atmosphere only · both themes</span></div><div class="brand-options" role="group" aria-label="Brand preview"><button class="brand-option" data-brand="neutral" aria-pressed="true"><span class="brand-swatch"></span>Neutral</button><button class="brand-option" data-brand="red" aria-pressed="false"><span class="brand-swatch"></span>Crimson</button><button class="brand-option" data-brand="blue" aria-pressed="false"><span class="brand-swatch"></span>Ocean</button></div></div>
+    <div class="semantic-demo" aria-label="Outcome colors stay fixed across all brands"><div class="semantic-heading">Semantic tokens <span>Same across every brand</span></div><div class="semantic-legend"><span class="semantic-chip pass"><svg class="icon sm"><use href="#i-check"/></svg>Pass</span><span class="semantic-chip fail"><svg class="icon sm"><use href="#i-close"/></svg>Fail</span><span class="semantic-chip critical-chip">Critical</span><span class="semantic-chip section-chip">Preparation</span></div><p>Progress is also green, including completed Fail responses. Brand color changes the environment, not the assessment outcome.</p></div><div class="compare-note"><div class="compare-heading">What stays consistent <span class="tag">Fixed semantic layer</span></div><div class="compare-point"><svg class="icon sm"><use href="#i-check"/></svg><span><strong>Materials, not meanings.</strong> Liquid glass appears on navigation controls; the question card stays opaque for readability.</span></div><div class="compare-point"><svg class="icon sm"><use href="#i-check"/></svg><span><strong>Invariant assessment states.</strong> Pass stays green, Fail red, Critical amber; sections neutral. Progress remains green.</span></div><div class="compare-point"><svg class="icon sm"><use href="#i-check"/></svg><span><strong>Same assessment behavior.</strong> Pass/Fail, full-card scroll, swipe and required evidence follow the existing rules.</span></div></div>
+    <div class="action-links"><button id="resetDemo"><svg class="icon sm"><use href="#i-rotate"/></svg>Reset demo</button><button id="focusDemo"><svg class="icon sm"><use href="#i-view"/></svg>Open clean preview</button></div>
+    <p class="lab-foot">A standalone visual prototype for evaluation, not an Apple component implementation or the React/shadcn app. Photos stay in this tab. No server synchronization or sign-off is simulated.</p>
+  </aside>
+  <div class="mobile-lab"><div><h2>Learning Pool · Theme lab</h2><div class="mobile-theme" role="tablist" aria-label="Theme"><button data-theme-select="spatial" role="tab" aria-selected="false">Spatial</button><button data-theme-select="liquid" role="tab" aria-selected="true">Liquid</button></div></div><label style="display:flex;flex-direction:column;gap:4px;font-size:10px;color:#6f7e90;font-weight:690">Atmosphere<select id="mobileBrand" aria-label="Client theme"><option value="neutral">Neutral</option><option value="red">Crimson</option><option value="blue">Ocean</option></select></label></div>
+  <main class="preview-stage" aria-label="Interactive assessment preview"><div class="preview-tag"><span class="kicker-dot"></span> Interactive mobile preview</div>
+    <div class="phone" id="phone" data-theme="liquid" data-brand="neutral">
+      <div class="liquid-shine" aria-hidden="true"></div>
+      <div class="status-bar" aria-label="Illustrative mobile status bar"><span class="status-time">9:41</span><div class="status-icons"><svg class="icon"><use href="#i-bars"/></svg><svg class="icon"><use href="#i-wifi"/></svg><span class="status-battery"></span></div></div>
+      <div class="progress-area"><div id="progressTrack" class="progress-track" role="progressbar" aria-label="Completed criteria (green regardless of brand)" aria-valuemin="0" aria-valuemax="11" aria-valuenow="1"><div class="progress-fill" id="progressFill"></div></div></div>
+      <header class="app-header"><button class="glass-btn header-back" id="overviewBack" type="button" aria-label="Back to assessment overview (demo)"><svg class="icon md"><use href="#i-left"/></svg></button><div class="header-title"><h1>Fryer Station</h1><p>Food Process &amp; Safety</p></div><div class="employee" aria-label="Employee Dre"><span class="employee-avatar">DR</span><strong>Dre</strong></div></header>
+      <div class="app-body"><div class="card-glow" aria-hidden="true"></div><article class="criterion-card" id="criterionCard" aria-labelledby="questionTitle"><div class="pill-row"><span class="eyebrow" id="sectionPill">PREPARATION</span><span class="eyebrow critical" id="criticalPill">◆ Critical</span><span class="counter" id="questionCounter">02 / 11</span></div><h2 class="question" id="questionTitle">Checks fryer readiness and oil conditions</h2><p class="instruction" id="questionHelp">Observe the applicable safety checks before starting.</p><div class="choices" role="group" aria-label="Criterion result"><button class="answer" id="answerPass" data-value="met" type="button" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="answer-label"><strong>Pass</strong><small>Did meet the standard</small></span><svg class="icon answer-check"><use href="#i-check"/></svg></button><button class="answer" id="answerFail" data-value="fail" type="button" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="answer-label"><strong>Fail</strong><small>Standard not met</small></span><svg class="icon answer-check"><use href="#i-check"/></svg></button></div><div class="composer" id="composer"><label for="comment" style="position:absolute;left:-9999px">Observation comment</label><textarea id="comment" rows="2" placeholder="Comment" aria-label="Observation comment"></textarea><div class="composer-bottom"><span class="composer-helper" id="composerHelper">Optional evidence</span><button class="photo-chip" id="photoChip" type="button" title="Remove attached photo" hidden></button></div><button class="camera-btn glass-btn" id="cameraBtn" type="button" title="Attach photo" aria-label="Attach photo"><svg class="icon"><use href="#i-camera"/></svg><span class="camera-dot" aria-hidden="true"></span></button><input class="photo-input" id="photoInput" type="file" accept="image/*" capture="environment"></div><p class="card-footer-note" id="cardHint">Swipe between criteria, or use the controls below.</p></article></div>
+      <footer class="app-footer"><button class="dock-btn glass-btn" id="backBtn" type="button"><svg class="icon"><use href="#i-left"/></svg>Back</button><button class="dock-btn glass-btn sections" id="sectionsBtn" type="button" aria-label="Sections" title="Sections"><svg class="icon"><use href="#i-menu"/></svg></button><button class="dock-btn next" id="nextBtn" type="button">Next<svg class="icon"><use href="#i-right"/></svg></button></footer>
+      <div class="sheet-overlay" id="sheetOverlay" aria-hidden="true"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="sheet-handle"></div><div class="sheet-top"><h3 id="sheetTitle">Assessment sections</h3><button class="sheet-close" id="sheetClose" type="button" aria-label="Close sections"><svg class="icon sm"><use href="#i-close"/></svg></button></div><div class="sheet-scroller" id="sheetList"></div></div></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </main>
+</div>
+<script>
+(()=>{
+ const criteria=[
+  {section:'Preparation',title:'Prepares a safe, clean work area',desc:'Observe station readiness and safe working conditions.'},
+  {section:'Preparation',title:'Checks fryer readiness and oil conditions',desc:'Observe the applicable safety checks before starting.',critical:true},
+  {section:'Preparation',title:'Selects the correct product and portion',desc:'Check the food item and portion against the station standard.'},
+  {section:'Frying',title:'Loads the basket without overfilling',desc:'Observe preparation and basket loading.'},
+  {section:'Frying',title:'Lowers the basket safely',desc:'Watch how Dre handles and lowers the basket.',critical:true},
+  {section:'Frying',title:'Selects the approved cooking programme',desc:'Observe correct programme selection for this product.'},
+  {section:'Frying',title:'Monitors the cycle and follows alerts',desc:'Observe Dre responding to the equipment instructions.'},
+  {section:'Frying',title:'Lifts and drains the basket safely',desc:'Observe removal and handling of the cooked product.',critical:true},
+  {section:'Completion',title:'Checks the finished product quality',desc:'Observe product quality checks against the agreed standard.',evidence:'both'},
+  {section:'Completion',title:'Transfers product to the correct area',desc:'Observe the safe handoff to the designated service area.'},
+  {section:'Completion',title:'Follows the approved holding guidance',desc:'Observe product handling after cooking.'}
+ ];
+ const $=id=>document.getElementById(id),phone=$('phone'),card=$('criterionCard');const storageKey='lp-adaptive-liquid-semantic-v2';
+ let index=1,answers={0:'met'},notes={},photos={},toastTimer=null,lastTrigger=null;let theme='liquid',brand='neutral';
+ try{const saved=JSON.parse(localStorage.getItem(storageKey)||'null');if(saved&&typeof saved==='object'){if(saved.answers&&typeof saved.answers==='object')answers=Object.fromEntries(Object.entries(saved.answers).filter(([k,v])=>+k>=0&&+k<11&&(v==='met'||v==='fail')));if(saved.notes&&typeof saved.notes==='object')notes=saved.notes;if(Number.isInteger(saved.index)&&saved.index>=0&&saved.index<11)index=saved.index;}}catch{}
+ function persist(){try{localStorage.setItem(storageKey,JSON.stringify({index,answers,notes}));return true}catch{if(['http:','https:'].includes(location.protocol))showToast('Local save unavailable. Keep this tab open.');return false}}
+ function done(i){const c=criteria[i],answer=answers[i];return (answer==='met'||answer==='fail')&&(!c.evidence||(c.evidence==='both'?Boolean((notes[i]||'').trim())&&Boolean(photos[i]):Boolean((notes[i]||'').trim())||Boolean(photos[i])))}
+ function assessedCount(){return criteria.filter((_,i)=>done(i)).length}
+ function updateProgress(){const n=assessedCount();$('progressFill').style.width=(n/criteria.length*100)+'%';$('progressTrack').setAttribute('aria-valuenow',String(n));$('progressTrack').setAttribute('aria-valuetext',n+' of '+criteria.length+' criteria complete');}
+ function canAdvance(){const c=criteria[index];if(answers[index]!=='met'&&answers[index]!=='fail'){showToast('Choose Pass or Fail to continue.');return false;}if(c.evidence&&!done(index)){showToast('Add a comment and photo to continue.');return false;}return true}
+ function showToast(message){let el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2400)}
+ function update(){const c=criteria[index];$('sectionPill').textContent=c.section.toUpperCase();$('criticalPill').hidden=!c.critical;$('questionCounter').textContent=String(index+1).padStart(2,'0')+' / '+criteria.length;$('questionTitle').textContent=c.title;$('questionHelp').textContent=c.desc;for(const el of document.querySelectorAll('.answer')){el.setAttribute('aria-pressed',String(answers[index]===el.dataset.value))}$('comment').value=notes[index]||'';$('composerHelper').textContent=c.evidence==='both'?(done(index)?'Evidence added':'Comment and photo required'):'Optional evidence';$('composerHelper').classList.toggle('required',c.evidence==='both'&&!done(index));let photo=photos[index];$('photoChip').hidden=!photo;$('photoChip').textContent=photo?'Photo attached · remove':'';$('cameraBtn').classList.toggle('has-photo',Boolean(photo));let n=assessedCount();$('progressFill').style.width=(n/criteria.length*100)+'%';$('progressTrack').setAttribute('aria-valuenow',String(n));$('progressTrack').setAttribute('aria-valuetext',n+' of '+criteria.length+' criteria complete');$('backBtn').disabled=index===0;$('nextBtn').disabled=false;$('nextBtn').innerHTML=(index===10?'Review':'Next')+'<svg class="icon"><use href="#i-right"/></svg>';$('cardHint').textContent=c.evidence==='both'?'A comment and photo are required for this criterion.':'Swipe left or right to navigate between criteria.';}
+ function navigate(next,direction,skipForwardCheck=false){if(next>=11){showToast('This concept focuses on Live Assessment. Review stays in the current Spatial flow.');return;}if(next<0){showToast('This is the first criterion.');return;}if(next>index&&!skipForwardCheck&&!canAdvance())return;index=next;persist();card.scrollTop=0;card.classList.remove('enter-left','enter-right');void card.offsetWidth;card.classList.add(direction==='left'?'enter-left':'enter-right');update();}
+ $('backBtn').addEventListener('click',()=>navigate(index-1,'right'));$('nextBtn').addEventListener('click',()=>navigate(index+1,'left'));
+ for(const el of document.querySelectorAll('.answer')){el.addEventListener('click',()=>{answers[index]=el.dataset.value;persist();update()})}
+ $('comment').addEventListener('input',()=>{notes[index]=$('comment').value;persist();const c=criteria[index];if(c.evidence){$('composerHelper').classList.toggle('required',!done(index));$('composerHelper').textContent=done(index)?'Evidence added':'Comment and photo required';updateProgress();}});
+ $('cameraBtn').addEventListener('click',()=>$('photoInput').click());$('photoInput').addEventListener('change',e=>{let file=e.target.files?.[0];if(!file)return;photos[index]={name:file.name,size:file.size};update();showToast('Photo attached for this preview. It is not persisted.');e.target.value='';});$('photoChip').addEventListener('click',()=>{delete photos[index];update();showToast('Photo removed.');});
+ function setTheme(value){theme=value;phone.dataset.theme=value;document.querySelectorAll('[data-theme-select]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.themeSelect===value)));document.querySelectorAll('.brand-option').forEach(b=>b.disabled=false);$('mobileBrand').disabled=false;}
+ function setBrand(value){brand=value;phone.dataset.brand=value;$('mobileBrand').value=value;document.querySelectorAll('.brand-option').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.brand===value)));}
+ document.querySelectorAll('[data-theme-select]').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.themeSelect)));document.querySelectorAll('.brand-option').forEach(b=>b.addEventListener('click',()=>setBrand(b.dataset.brand)));$('mobileBrand').addEventListener('change',e=>setBrand(e.target.value));
+ $('resetDemo')?.addEventListener('click',()=>{answers={0:'met'};notes={};photos={};index=1;persist();update();showToast('Demo reset. One prior criterion is shown as complete.');});$('focusDemo')?.addEventListener('click',()=>{const url=new URL(window.location.href);url.searchParams.set('focus','1');window.open(url.href,'_blank','noopener');});
+ if(new URLSearchParams(location.search).get('focus')==='1')document.body.classList.add('focus');
+ function openSheet(){let overlay=$('sheetOverlay'),list=$('sheetList');lastTrigger=document.activeElement;list.innerHTML='';for(const section of ['Preparation','Frying','Completion']){let group=document.createElement('div');group.className='sheet-group';let sectionItems=criteria.map((c,i)=>({...c,i})).filter(c=>c.section===section);let header=document.createElement('div');header.className='sheet-section-title';header.textContent=section+' · '+sectionItems.length+' criteria';group.append(header);for(const c of sectionItems){let row=document.createElement('button');row.type='button';row.className='section-row'+(c.i===index?' current':'');let label=document.createElement('span');label.className='section-index';label.textContent=String(c.i+1).padStart(2,'0');let title=document.createElement('span');title.className='section-name';title.textContent=c.title;let state=document.createElement('span');state.className='mini-status'+(!done(c.i)?' pending':answers[c.i]==='fail'?' fail':'');state.textContent=done(c.i)?(answers[c.i]==='met'?'Pass':'Fail'):(answers[c.i]?'Evidence':'Pending');row.append(label,title,state);row.addEventListener('click',()=>{closeSheet();navigate(c.i,c.i>index?'left':'right',true)});group.append(row);}list.append(group);}overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');$('sheetClose').focus();}
+ function closeSheet(){let overlay=$('sheetOverlay');overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');if(lastTrigger?.focus)lastTrigger.focus();}
+ $('sectionsBtn').addEventListener('click',openSheet);$('sheetClose').addEventListener('click',closeSheet);$('sheetOverlay').addEventListener('click',e=>{if(e.target===$('sheetOverlay'))closeSheet()});$('overviewBack').addEventListener('click',()=>showToast('Overview navigation is outside this visual concept.'));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('sheetOverlay').classList.contains('open')){e.preventDefault();closeSheet();return;}if($('sheetOverlay').classList.contains('open')){if(e.key==='Tab'){let focusable=[...$('sheetOverlay').querySelectorAll('button')].filter(b=>b.offsetParent!==null);const ix=focusable.indexOf(document.activeElement);if(e.shiftKey&&ix<=0){e.preventDefault();focusable.at(-1)?.focus()}else if(!e.shiftKey&&ix===focusable.length-1){e.preventDefault();focusable[0]?.focus()}}return;}if(document.activeElement?.matches('textarea,input,select,[contenteditable="true"]'))return;if(e.key==='ArrowLeft'){e.preventDefault();navigate(index-1,'right')}if(e.key==='ArrowRight'){e.preventDefault();navigate(index+1,'left')}});
+ let gesture=null;const excluded='textarea,input,button,select,.composer,[contenteditable="true"]';card.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest(excluded)||$('sheetOverlay').classList.contains('open')){gesture=null;return;}let t=e.touches[0];gesture={x:t.clientX,y:t.clientY,dx:0,dy:0,locked:null,time:performance.now()};},{passive:true});card.addEventListener('touchmove',e=>{if(!gesture||e.touches.length!==1)return;let t=e.touches[0];gesture.dx=t.clientX-gesture.x;gesture.dy=t.clientY-gesture.y;if(!gesture.locked&&Math.max(Math.abs(gesture.dx),Math.abs(gesture.dy))>9){gesture.locked=Math.abs(gesture.dx)>Math.abs(gesture.dy)*1.25?'horizontal':'vertical';}if(gesture.locked==='horizontal'){e.preventDefault();let amount=Math.max(-70,Math.min(70,gesture.dx*.45));card.style.transform='translateX('+amount+'px)';card.style.opacity=String(1-Math.abs(amount)/750);card.classList.add('dragging');}},{passive:false});function endGesture(){if(!gesture)return;let g=gesture;gesture=null;card.classList.remove('dragging');card.style.transform='';card.style.opacity='';if(g.locked==='horizontal'&&Math.abs(g.dx)>=64&&Math.abs(g.dx)>Math.abs(g.dy)*1.4){navigate(index+(g.dx<0?1:-1),g.dx<0?'left':'right');}}card.addEventListener('touchend',endGesture);card.addEventListener('touchcancel',()=>{gesture=null;card.classList.remove('dragging');card.style.transform='';card.style.opacity='';});
+ setBrand('neutral');setTheme('liquid');update();
+})();
+</script>
+</body>
+</html>

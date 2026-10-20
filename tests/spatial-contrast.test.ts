@@ -6,7 +6,8 @@ import { spatialBrands } from '../src/data/spatial-brands.ts'
 
 const css = readFileSync(new URL('../src/styles/spatial-theme.css', import.meta.url), 'utf8')
 const root = css.slice(css.indexOf('html[data-assessment-version="5"] {'), css.indexOf('\n}', css.indexOf('html[data-assessment-version="5"] {')))
-const defaults = Object.fromEntries([...root.matchAll(/(--spatial-[a-z-]+):([^;\n]+);/g)].map(m => [m[1], m[2].trim()]))
+const semanticCSS = readFileSync(new URL('../src/styles/semantic-tokens.css', import.meta.url), 'utf8')
+const defaults = Object.fromEntries([...(root + semanticCSS).matchAll(/(--spatial-[a-z-]+):([^;\n]+);/g)].map(m => [m[1], m[2].trim()]))
 
 test('WCAG AA text across every gradient stop and brand, including selected rows', () => {
   for (const brand of spatialBrands) {

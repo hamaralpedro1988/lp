@@ -62,7 +62,7 @@ test('V5.6 binary migration requires explicit re-selection and preserves old-ver
 })
 
 test('rendered CSS theme text and focus/control roles retain accessible contrast', () => {
-  const css = readFileSync(new URL('../src/styles/spatial-theme.css', import.meta.url), 'utf8')
+  const css = readFileSync(new URL('../src/styles/spatial-theme.css', import.meta.url), 'utf8') + readFileSync(new URL('../src/styles/semantic-tokens.css', import.meta.url), 'utf8')
   const values = Object.fromEntries([...css.matchAll(/--(spatial-[a-z-]+):([^;\n]+);/g)].map(match => [match[1], match[2].trim()]))
   const resolve = (role: string): string => {
     const value = values['spatial-' + role]

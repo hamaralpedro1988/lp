@@ -1,3 +1,4 @@
+@import "./semantic-tokens.css";
 /* Rosa V5.6 — semantic materials shared by React screens AND Radix portals.
    Override --spatial-brand-* to adapt a client brand without rebuilding components. */
 html[data-assessment-version="5"] {
@@ -15,8 +16,6 @@ html[data-assessment-version="5"] {
   --spatial-muted:#625c75;
   --spatial-iris:#7363bd;
   --spatial-iris-deep:#6453b0;
-  --spatial-progress:var(--spatial-success-ink);
-  --spatial-progress-track:#e3e4e8;
   --spatial-choice:#f9f8fd;
   --spatial-selected:#efeff4;
   --spatial-selected-line:#a39aaf;
@@ -30,18 +29,6 @@ html[data-assessment-version="5"] {
   --spatial-disabled:#e7e5ee;
   --spatial-disabled-ink:#726c81;
   --spatial-status-ready-bg:#f0edfa;--spatial-status-ready-ink:#6555a9;
-  --spatial-section-bg:#f1f2f5;
-  --spatial-section-ink:#535365;
-  --spatial-warning-bg:#fff1e2;
-  --spatial-warning-ink:#8d5228;
-  --spatial-warning-line:#dfb589;
-  --spatial-success-bg:#edf7f1;
-  --spatial-success-ink:#427764;
-  --spatial-success-line:#54846d;
-  --spatial-shadow-pass:0 0 0 2px #b8d9c746,0 7px 19px #42776418;
-  --spatial-fail-bg:#fff2f2;
-  --spatial-fail-ink:#9d4255;
-  --spatial-fail-line:#c67585;
   --spatial-focus:#7962d0;
   --spatial-shadow:0 22px 46px #51458027,0 3px 14px #5145800b,inset 0 1px 0 #fff;
   --spatial-shadow-small:0 6px 18px #5145800d;
