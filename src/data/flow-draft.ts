@@ -15,7 +15,7 @@ export const flowScreens = ['list', 'overview', 'assessment', 'review', 'signoff
 export type FlowScreen = typeof flowScreens[number]
 // Preserve legacy unobserved responses as pending; they are never converted into Fail.
 export type FlowAnswer = 'met' | 'coaching' | 'fail' | 'notObserved'
-export type FlowDraft = { signature?: { name: string; at: string; strokes: string[]; method?: 'drawn' | 'typed' | 'unknown'; consent?: boolean; identity?: 'unverified'; actor?: 'employee-self-declared'; assessor?: string; policy?: 'prototype-only-business-validation-required' }; completion?: { at: string; photos: Record<number, number>; notes?: Record<number, string> }; screen: FlowScreen; index: number; offline: boolean; answers: Record<number, FlowAnswer>; notes: Record<number, string>; feedback: string; paused: boolean; assessorConfirmed: boolean }
+export type FlowDraft = { started?: boolean; signature?: { name: string; at: string; strokes: string[]; method?: 'drawn' | 'typed' | 'unknown'; consent?: boolean; identity?: 'unverified'; actor?: 'employee-self-declared'; assessor?: string; policy?: 'prototype-only-business-validation-required' }; completion?: { at: string; photos: Record<number, number>; notes?: Record<number, string> }; screen: FlowScreen; index: number; offline: boolean; answers: Record<number, FlowAnswer>; notes: Record<number, string>; feedback: string; paused: boolean; assessorConfirmed: boolean }
 export const flowStorageKey = 'lp-rosa-flow-v2-v01'
 export const emptyFlowDraft = (): FlowDraft => ({ screen: 'overview', index: 0, offline: false, answers: {}, notes: {}, feedback: '', paused: false, assessorConfirmed: false })
 export function normalizeFlowDraft(value: unknown): FlowDraft {
@@ -25,6 +25,7 @@ export function normalizeFlowDraft(value: unknown): FlowDraft {
   if (flowScreens.includes(v.screen as FlowScreen)) draft.screen = v.screen as FlowScreen
   if (Number.isInteger(v.index) && Number(v.index) >= 0 && Number(v.index) < flowCriteria.length) draft.index = Number(v.index)
   for (const key of ['offline', 'paused', 'assessorConfirmed'] as const) if (typeof v[key] === 'boolean') draft[key] = v[key]
+  if (typeof v.started === 'boolean') draft.started = v.started
   if (typeof v.feedback === 'string') draft.feedback = v.feedback
   for (let i = 0; i < flowCriteria.length; i++) {
     const answer = (v.answers as Record<number, unknown> | undefined)?.[i]

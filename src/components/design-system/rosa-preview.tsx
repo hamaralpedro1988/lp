@@ -1,3 +1,4 @@
+import { spatialLifecycle } from '@/data/spatial-lifecycle'
 import { SpatialSlideComplete } from '@/components/assessment/spatial-slide-complete'
 import { SpatialAssessmentPreview } from '@/components/assessment/spatial-assessment-preview'
 import { SpatialBeforeStart } from '@/components/assessment/spatial-before-start'
@@ -42,7 +43,8 @@ export function RosaPreview({ pattern }: { pattern: string }) {
     if(value==='Save error'||value==='Offline')return ['header','card','system'].includes(pattern)
     return true
   })
-  const assignmentStatus=spatialMissing(draft,photos).length===0?'Ready for review':Object.keys(draft.answers).length?'In progress':'Ready to Start'
+  const lifecycle = spatialLifecycle(draft, photos)
+  const assignmentStatus = lifecycle.status
   const canContinue = !spatialMissing(draft,photos).includes(draft.index)
   function onAnswer(value: FlowAnswer) { setDraft(previous => ({ ...previous, assessorConfirmed:false, answers:{ ...previous.answers, [previous.index]:value } })) }
   function onNote(value: string) { setDraft(previous => ({ ...previous, assessorConfirmed:false, notes:{ ...previous.notes,[previous.index]:value } })) }
@@ -61,7 +63,7 @@ export function RosaPreview({ pattern }: { pattern: string }) {
     <div className="ds-story-controls"><label htmlFor="rosa-scenario">Story state</label><Select value={scenario} onValueChange={value => { const next=value as ExplorerScenario;setScenario(next);setDraft(createExplorerDraft(pattern === 'completion' && next === 'Save error' ? 'Complete' : next));setPhoto(next === 'Complete' || (pattern === 'completion' && next === 'Save error') ? {8:true} : {});setEditing(false) }}><SelectTrigger id="rosa-scenario"><SelectValue/></SelectTrigger><SelectContent>{scenarioOptions.map(value => <SelectItem key={value} value={value}>{value}</SelectItem>)}</SelectContent></Select><Badge variant="outline">In-memory fixture</Badge></div>
     <div className="ds-rosa-layout"><div className="ds-device flow-app flow-v5" data-pattern={pattern}>
       <div className={`ds-pattern-canvas ${pattern === 'card' || editing ? 'ds-live-canvas' : ''}`}>
-        {pattern === 'assignment' && <SpatialAssignmentCard status={draft.assessorConfirmed ? 'Local review' : assignmentStatus} onOpen={() => setNotice('View Assessment opens Overview in Rosa V5. This story stays isolated.')}/>}
+        {pattern === 'assignment' && <SpatialAssignmentCard draft={draft} photos={photos} action={lifecycle.action} status={assignmentStatus} onOpen={() => setNotice('View Assessment opens Overview in Rosa V5. This story stays isolated.')}/>}
         {pattern === 'completion' && <><p>Pre-accessibility finish interaction: slide to finish, or use the existing two-step keyboard activation.</p><SpatialSlideComplete key={scenario} disabled={spatialMissing(draft, photos).length > 0} onComplete={() => { setNotice('Completion confirmed in memory only. No assessment data was changed.') }}/><p>{spatialMissing(draft, photos).length === 0 ? 'Ready to finish.' : 'Choose the Complete story state to preview finishing.'}</p></>}
         {pattern === 'assessment-preview' && <SpatialAssessmentPreview/>}
         {pattern === 'before-start' && <SpatialBeforeStart/>}

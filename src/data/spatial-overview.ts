@@ -4,3 +4,6 @@ export const spatialOverviewLearning: SpatialLearningResult = { activity: 'Fryer
 
 /** Assessment-specific illustrative estimate, not time per task. */
 export const spatialAssessmentPreparation = { estimatedMinutes: 15 } as const
+
+/** This assessment requires the designated manager's approval after submission. */
+export const spatialAssessmentPolicy = { managerApprovalRequired: true } as const

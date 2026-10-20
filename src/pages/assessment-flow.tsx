@@ -1,3 +1,7 @@
+import { clearEvidence } from '@/lib/evidence-storage'
+import { SpatialProgress as OverviewProgress } from '@/components/assessment/spatial-primitives'
+import { spatialLifecycle } from '@/data/spatial-lifecycle'
+import { spatialAssessmentPolicy } from '@/data/spatial-overview'
 import { updateSpatialObservation } from '@/data/spatial-flow'
 import { useVisualTheme } from '@/hooks/use-visual-theme'
 import { VisualThemeSwitcher } from '@/components/design-system/visual-theme-switcher'
@@ -28,7 +32,7 @@ import { VersionSwitcher } from '@/components/layout/version-switcher'
 import { flowCriteria as criteria, flowScreens, flowStorageKey, emptyFlowDraft, normalizeFlowDraft, flowEvidenceOk, flowMissing, type FlowDraft, type FlowScreen, type FlowAnswer } from '@/data/flow-draft'
 import { useMobileOverlay, useMobileViewport } from '@/hooks/use-mobile-overlay'
 import { spatialNavigationBlock, spatialEvidenceOk, spatialMissing, spatialTheme, spatialStorageKey, emptySpatialDraft, normalizeSpatialDraft } from '@/data/spatial-flow'
-import { SpatialPeopleCard, SpatialStationHeading, SpatialTaskStats, SpatialReviewSummary, SpatialReviewNextSteps, SpatialReviewList } from '@/components/assessment/spatial-journey'
+import { SpatialAssignmentCard, SpatialPeopleCard, SpatialStationHeading, SpatialTaskStats, SpatialReviewSummary, SpatialReviewNextSteps, SpatialReviewList } from '@/components/assessment/spatial-journey'
 import { SpatialSystemChrome, SpatialFlowHeader, SpatialAssessmentHeader, SpatialLiveCard, SpatialActionButton, SpatialSurface, SpatialNavigation, SpatialSections } from '@/components/assessment/spatial-primitives'
 import { applyTheme, creatorTheme, loadTheme } from '@/lib/theme'
 import '@/styles/flow.css'
@@ -88,6 +92,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
   const [retiredChoices, setRetiredChoices] = useState<number[]>(() => { if (!spatial) return []; try { const saved = JSON.parse(localStorage.getItem(storageKey) ?? 'null'); return Object.entries(saved?.answers ?? {}).filter(([, value]) => value === 'coaching').map(([key]) => Number(key)) } catch { return [] } })
   const [direction, setDirection] = useState<'next' | 'back'>('next')
   const [saveError, setSaveError] = useState(false)
+  const [evidenceError, setEvidenceError] = useState('')
   const [photos, setPhotos] = useState<Record<number, number>>({})
   const [mediaVersion, setMediaVersion] = useState(0)
   const [reviewEvidenceTarget, setReviewEvidenceTarget] = useState<{ index: number; node: HTMLDivElement } | null>(null)
@@ -150,7 +155,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
     if (spatial && draftRef.current.assessorConfirmed && (observation || patch.answers || patch.notes || patch.feedback !== undefined || patch.signature || patch.assessorConfirmed === false)) return
     if (spatial && draftRef.current.completion) {
       if (observation || patch.answers || patch.notes || patch.index !== undefined) return
-      if (patch.screen === 'assessment' || patch.screen === 'overview') patch = { ...patch, screen: 'review' }
+      if (patch.screen === 'assessment') patch = { ...patch, screen: 'review' }
     }
     if (spatial) {
       if (patch.index !== undefined && patch.index !== draftRef.current.index) setDirection(patch.index < draftRef.current.index ? 'back' : 'next')
@@ -159,7 +164,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
     replace({ ...draftRef.current, ...patch, ...(observation ? { assessorConfirmed: false } : {}) })
   }
   function go(next: FlowScreen) { update({ screen: next === 'signoff' && missing.length ? 'review' : next }); setSheet(null) }
-  function start() { if (spatial && missing.length === 0) { go('review'); return } const next = floatingEvidence ? (missing[0] ?? -1) : criteria.findIndex((_, i) => !draft.answers[i]); update({ screen: 'assessment', index: next < 0 ? draft.index : next, paused: false }) }
+  function start() { if (spatial) { const state = spatialLifecycle(draftRef.current, photos, spatialAssessmentPolicy.managerApprovalRequired); update({ screen: state.nextScreen, paused: false, started: true }); return } const next = floatingEvidence ? (missing[0] ?? -1) : criteria.findIndex((_, i) => !draft.answers[i]); update({ screen: 'assessment', index: next < 0 ? draft.index : next, paused: false }) }
   function edit(index: number) { update({ index, screen: 'assessment', paused: false }) }
   function jumpToCriterion(index: number) {
     sectionsFocus.current = 'question'
@@ -198,14 +203,15 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
     url.searchParams.set('flowPreview', page)
     location.assign(url.toString())
   }
-  function resetPrototype() {
+  async function resetPrototype() {
+    try { await Promise.all([clearEvidence(spatialStorageKey), clearEvidence(spatialStorageKey + '-preview')]) } catch { setSaveError(true); return }
     if (previewPage) {
       try { localStorage.removeItem(spatialStorageKey + '-preview'); localStorage.removeItem(spatialStorageKey) } catch { /* regular save path reports persistence errors */ }
       const url = new URL(location.href); url.searchParams.delete('flowPreview'); location.assign(url.toString()); return
     }
     requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' }))
     replace(emptySpatialDraft())
-    setPhotos({})
+    setPhotos({}); setEvidenceError('')
     setMediaVersion(value => value + 1)
     setRetiredChoices([])
     setReviewEvidenceTarget(null)
@@ -216,10 +222,12 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
   function sample() { update({ answers: Object.fromEntries(criteria.map((_, i) => [i, i === 5 ? (spatial ? 'fail' : 'coaching') : 'met'])), notes: { ...draft.notes, 8: 'Product appeared consistent with the agreed standard. Review portion size at next practice session.' }, index: 4, screen: 'assessment', paused: false }, true); setSheet(null) }
   function title(heading: string, description?: string) { return <header className="flow-page-intro"><h1 ref={titleRef} tabIndex={-1} className="page-title">{heading}</h1>{description && <p className="page-sub">{description}</p>}</header> }
   function back() {
-    if (screen === 'assessment') { update({ screen: 'overview', paused: recorded > 0 }); return }
+    if (screen === 'assessment') { update({ screen: 'overview', paused: spatial || recorded > 0 }); return }
+    if (spatial && screen === 'review') { go('overview'); return }
     go(screen === 'signoff' ? 'review' : screen === 'review' ? 'assessment' : 'list')
   }
-  const assessmentStatus = spatial && draft.completion ? 'Completed' : spatial && draft.assessorConfirmed && missing.length === 0 ? 'Review saved on this device' : draft.paused ? 'Saved draft' : recorded ? 'In progress' : spatial ? 'Ready to start' : 'Ready to Start'
+  const lifecycle = spatialLifecycle(draft, photos, spatialAssessmentPolicy.managerApprovalRequired)
+  const assessmentStatus = spatial ? lifecycle.status : draft.paused ? 'Saved draft' : recorded ? 'In progress' : 'Ready to Start'
   const pageLabels: Record<FlowScreen, string> = { list: 'Assessments', overview: spatial ? 'Assessment Overview' : 'Assessment overview', assessment: 'Assessment', review: spatial ? 'Assessment Result' : 'Assessment review', signoff: spatial ? 'Assessment submission' : 'Feedback & sign-off' }
 
   const [overlayContainer, setOverlayContainer] = useState<HTMLDivElement | null>(null)
@@ -231,16 +239,18 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
       <div className={spatial ? 'participant-surface' : 'device-shell-legacy'}>
       <div className="phone">
       {spatial && <SpatialSystemChrome mode={new URLSearchParams(location.search).get('native') === '1' ? 'native' : new URLSearchParams(location.search).get('systemChrome') === 'preview' ? 'preview' : 'auto'}/>}
-      {screen !== 'assessment' && screen !== 'list' && spatial && <SpatialFlowHeader title={pageLabels[screen]} onBack={screen === 'review' && !!draft.completion ? undefined : back} backLabel={screen === 'overview' ? (spatial ? 'Back to notification' : 'Back to assessments') : screen === 'review' ? 'Back to checklist' : 'Back to review'}/> }
-      {screen !== 'assessment' && !spatial && <header className="overview-topbar">{screen !== 'list' ? <ActionButton variant="ghost" size="icon" className={spatial ? 'spatial-header-back' : undefined} onClick={back} aria-label={screen === 'overview' ? (spatial ? 'Back to notification' : 'Back to assessments') : screen === 'review' ? 'Back to checklist' : 'Back to review'}><ChevronLeft aria-hidden="true"/></ActionButton> : <span/>}<p>{pageLabels[screen]}</p><div className="mobile-version-switcher"><VersionSwitcher current={version}/></div></header>}
+      {spatial && screen === 'list' && lifecycle.started && <SpatialFlowHeader title="Assessments"/>}
+      {screen !== 'assessment' && screen !== 'list' && spatial && <SpatialFlowHeader title={pageLabels[screen]} onBack={back} backLabel={screen === 'overview' ? (spatial && !lifecycle.started ? 'Back to notification' : 'Back to assessments') : screen === 'review' ? (spatial ? 'Back to overview' : 'Back to checklist') : 'Back to review'}/> }
+      {screen !== 'assessment' && !spatial && <header className="overview-topbar">{screen !== 'list' ? <ActionButton variant="ghost" size="icon" className={spatial ? 'spatial-header-back' : undefined} onClick={back} aria-label={screen === 'overview' ? (spatial && !lifecycle.started ? 'Back to notification' : 'Back to assessments') : screen === 'review' ? (spatial ? 'Back to overview' : 'Back to checklist') : 'Back to review'}><ChevronLeft aria-hidden="true"/></ActionButton> : <span/>}<p>{pageLabels[screen]}</p><div className="mobile-version-switcher"><VersionSwitcher current={version}/></div></header>}
       {screen === 'assessment' && !spatial && <header className="assessment-header" aria-label="Assessment progress">
         <ActionButton variant="ghost" size="icon" className="assessment-back" onClick={back} aria-label="Back to overview"><ChevronLeft aria-hidden="true"/></ActionButton><div className="assessment-header-copy"><div className="assessment-header-top"><h1 ref={floatingEvidence ? undefined : titleRef} tabIndex={-1} className="assessment-name">Fryer Station</h1><span className={`autosave-status ${draft.offline || saveError ? 'attention' : ''}`} role="status" aria-label={saveError ? 'Local save unavailable' : draft.offline ? 'Offline demo · local draft' : 'Saved on this device'}>{saveError ? 'Save unavailable' : draft.offline ? 'Offline · local draft' : 'Saved Automatically'}</span></div>
         <div className="assessment-header-progress"><span>{recorded} / {criteria.length} recorded</span><Progress className="flow-progress" value={recorded / criteria.length * 100} aria-label="Tasks recorded" aria-valuetext={`${recorded} of ${criteria.length} tasks recorded`}/><span>{Math.round(recorded / criteria.length * 100)}%</span></div>
       </div></header>}
       {screen === 'assessment' && spatial && <SpatialAssessmentHeader draft={{ ...draft, offline }} photos={photos} saveError={saveError} onBack={back} onMember={() => setSheet('member')}/>}
-      <section className={`screen ${spatial && screen === 'list' ? 'spatial-notification-screen' : ''} ${screen === 'assessment' ? 'assessment-screen' : screen === 'overview' ? 'overview-screen' : ''}`} ref={screenRef} data-screen={screen} aria-label={screenNames[screen]}>
+      <section className={`screen ${spatial && screen === 'list' && !lifecycle.started ? 'spatial-notification-screen' : ''} ${screen === 'assessment' ? 'assessment-screen' : screen === 'overview' ? 'overview-screen' : ''}`} ref={screenRef} data-screen={screen} aria-label={screenNames[screen]}>
+      {spatial && evidenceError && <p role="alert" className="notice warn">{evidenceError}</p>}
       {spatial && retiredChoices.length > 0 && (screen !== 'assessment' || retiredChoices.includes(draft.index)) && <p role="status" className="notice warn">Review your earlier observations and select Pass or Fail for each item.</p>}
-      {screen === 'list' && spatial && <SpatialNotification onOpen={() => go('overview')}/> }
+      {screen === 'list' && spatial && (lifecycle.started ? <div className="flow-page-content"><SpatialAssignmentCard draft={draft} photos={photos} status={assessmentStatus} action={lifecycle.action} onOpen={start}/></div> : <SpatialNotification onOpen={() => go('overview')}/>) }
       {screen === 'list' && !spatial && <div className="flow-page-content">
         {title('Your assessments', 'Observe, support and review your team’s practical skills.')}
         {<>
@@ -265,7 +275,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
           <div className="overview-heading"><h1 ref={titleRef} tabIndex={-1}>Fryer Station</h1><span>{criteria.length} tasks</span></div>
           <p className="overview-category">Food Process &amp; Safety{!spatial && <> <span aria-hidden="true">•</span> Category 2</>}</p>
         </header>}</>
-        {spatial ? <SpatialPeopleCard status={assessmentStatus} learning={spatialOverviewLearning} onMember={() => setSheet('member')}/> : <>
+        {spatial ? <><SpatialPeopleCard status={assessmentStatus} learning={spatialOverviewLearning} onMember={() => setSheet('member')}/>{lifecycle.started && <OverviewProgress draft={draft} photos={photos}/>}</> : <>
         <Surface data-elevation="quiet" className="overview-card">
           <CardContent className="overview-member-content">
             <ActionButton variant="ghost" className="overview-member" onClick={() => setSheet('member')} aria-label="View team member Dre Jackson">
@@ -355,7 +365,7 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
       </div>}
       <footer hidden={spatial && screen === 'list'} className={`phonebottom ${screen === 'overview' ? 'overview-footer' : ''}`}>
         {screen === 'list' && <p className="subtext center">Your assigned assessments are shown above</p>}
-        {screen === 'overview' && <ActionButton className="overview-start" size="lg" onClick={start}>{spatial && missing.length === 0 ? 'Review Assessment' : draft.paused || recorded ? 'Resume Assessment' : 'Start Assessment'}{spatial && <ChevronRight size={18} aria-hidden="true"/>}</ActionButton>}
+        {screen === 'overview' && <ActionButton className="overview-start" size="lg" onClick={start}>{spatial ? lifecycle.action : draft.paused || recorded ? 'Resume Assessment' : 'Start Assessment'}{spatial && <ChevronRight size={18} aria-hidden="true"/>}</ActionButton>}
         {screen === 'assessment' && spatial && <SpatialNavigation index={draft.index} canContinue={canContinue} sectionsRef={sectionsButton} onBack={() => criterionNavigation.current?.('back')} onSections={() => { sectionsFocus.current = 'trigger'; setSheet('sections') }} onNext={() => criterionNavigation.current?.('next')}/>}
         {screen === 'assessment' && !spatial && <nav className="criterion-navigation" aria-label="Task navigation">
           <ActionButton variant="outline" className="action outline" disabled={draft.index === 0} aria-label={spatial ? 'Previous task' : undefined} onClick={() => update({ index: draft.index - 1 })}><ArrowLeft size={16}/>{!spatial && ' Back'}</ActionButton>
@@ -368,8 +378,8 @@ export default function AssessmentFlow({ version = 2 }: { version?: 2 | 3 | 4 | 
       </footer>{spatial && <div ref={setOverlayContainer} className="device-overlay-root"/>}</div></div>{!spatial && <p className="floating">Working UX prototype · V{spatial ? '5.6' : version} / Assessment flow</p>}
     </main>{brandDemo && <aside className="spatial-brand-demo" aria-label="External preview controls"><p>Preview controls</p><VisualThemeSwitcher value={visualTheme} onChange={setVisualTheme}/><SpatialBrandSwitcher brand={brand} onChange={setBrand}/><a className="spatial-preview-library" href={`?view=design-system&brand=${brand.id}&visualTheme=${visualTheme}`}>Component Library <ArrowUpRight size={16} aria-hidden="true"/></a><nav className="spatial-preview-pages" aria-label="Prototype page shortcuts">{spatialPreviewPages.map(page => <Button key={page.id} variant="outline" onClick={() => openPreview(page.id)} aria-current={previewPage === page.id ? 'page' : undefined}>{page.label}</Button>)}</nav>{previewPage && <small className="spatial-preview-note">Example data · separate preview session.{previewPage === 'finish' ? ' Required evidence is simulated for this shortcut.' : ''}</small>}<Button variant="outline" className="mt-3 w-full" onClick={resetPrototype}>Reset prototype</Button></aside>}{!spatial && <aside className="right"><div className="eyebrow">DESIGN RATIONALE</div><h2>{rationale[screen][0]}</h2><div className="annotation"><b>Design intent</b><p>{floatingEvidence && screen === 'assessment' ? 'Keep responses prominent and evidence in the natural reading flow. Optional details scroll within the card.' : rationale[screen][1]}</p></div><div className="annotation"><b>Trade-off / validation</b><p>{spatial && screen === 'assessment' ? 'Notes persist on this device; photos remain in this page session. Neither is represented as a successful server upload.' : rationale[screen][2]}</p></div><div className="hint"><b>What we can evaluate</b><p>Tap targets, scanning, tasks clarity, mandatory evidence, save/resume and feedback.</p><b>What remains open</b><p>{floatingEvidence ? 'Scoring thresholds, exact critical items, sign-off identity checks and offline sync architecture.' : 'Scoring thresholds, exact critical items, video permission, sign-off identity checks and offline sync architecture.'}</p></div></aside>}
   </div>
-  <div hidden>{criteria.map((item, i) => <EvidencePanel key={`${i}-${mediaVersion}`} note={draft.notes[i] ?? ''} onNoteChange={value => note(i, value)} onPhotoCountChange={count => { setPhotos(previous => ({ ...previous, [i]: count })); update({ assessorConfirmed: false }) }} controllerRef={api => { controllers.current[i] = api }} context={item.title} photosOnly={floatingEvidence} persistentNote compact externalGallery galleryReadOnly={spatial && screen === 'review'} galleryTarget={screen === 'assessment' && draft.index === i ? galleryTarget : screen === 'review' && reviewEvidenceTarget?.index === i ? reviewEvidenceTarget.node : null}/>)}</div>
-  <Sheet open={sheet !== null} onOpenChange={open => { if (!open) setSheet(null) }}><SheetContent side="bottom" className={`mobile-sheet flow-sheet mx-auto max-w-lg rounded-t-3xl ${sheet === 'complete' ? 'spatial-finish-sheet' : ''}`} onCloseAutoFocus={event => { if (sectionsFocus.current) { event.preventDefault(); const target = sectionsFocus.current === 'question' || !sectionsButton.current?.isConnected ? titleRef.current : sectionsButton.current; sectionsFocus.current = null; target?.focus({ preventScroll: true }) } else if (floatingEvidence && sheetTrigger.current?.isConnected) { event.preventDefault(); sheetTrigger.current.focus({ preventScroll: true }) } }}>{sheet === 'complete' && <span className="spatial-finish-handle" aria-hidden="true"/>}<SheetHeader><SheetTitle>{sheet === 'complete' ? 'Finish assessment?' : sheet === 'sections' ? (spatial ? 'All tasks' : 'Jump to section') : sheet === 'reset' ? `Reset V${version} prototype?` : sheet === 'member' ? 'Team member' : sheet === 'preview' ? previewSection : spatial ? 'Submission saved on this device' : 'Assessor review recorded · demo'}</SheetTitle><SheetDescription>{sheet === 'complete' ? 'Once completed, you won’t be able to change Pass or Fail responses or repeat this assessment. You can correct comments before submission.' : sheet === 'sections' ? (spatial ? 'Choose an item to view or edit. An item is complete when its result and any required evidence are recorded.' : 'Jump to the first question in any section. Your responses and comments are saved automatically.') : sheet === 'reset' ? `Clear V${version} responses, comments, feedback and attachments. Other versions will be retained.` : sheet === 'member' ? (spatial ? 'Dre Michael · Crew Floor Member' : 'Dre Jackson · Crew Floor Member') : sheet === 'preview' ? 'Review what you will observe before starting the assessment.' : spatial ? 'Saved on this device only. Nothing has been sent to Alex. No approval or certification has been issued.' : 'This is a visual prototype. No real approval or certification has been issued.'}</SheetDescription></SheetHeader><div className="min-h-0 space-y-4 overflow-y-auto px-5 pb-5">
+  <div hidden>{criteria.map((item, i) => <EvidencePanel onPersistenceError={spatial ? setEvidenceError : undefined} evidenceStorageKey={spatial ? `${storageKey}:${previewPage ?? 'participant'}:${i}` : undefined} key={`${i}-${mediaVersion}`} note={draft.notes[i] ?? ''} onNoteChange={value => note(i, value)} onPhotoCountChange={(count, restored) => { setPhotos(previous => ({ ...previous, [i]: count })); if (!restored) update({ assessorConfirmed: false }) }} controllerRef={api => { controllers.current[i] = api }} context={item.title} photosOnly={floatingEvidence} persistentNote compact externalGallery galleryReadOnly={spatial && screen === 'review'} galleryTarget={screen === 'assessment' && draft.index === i ? galleryTarget : screen === 'review' && reviewEvidenceTarget?.index === i ? reviewEvidenceTarget.node : null}/>)}</div>
+  <Sheet open={sheet !== null} onOpenChange={open => { if (!open) setSheet(null) }}><SheetContent side="bottom" className={`mobile-sheet flow-sheet mx-auto max-w-lg rounded-t-3xl ${sheet === 'complete' ? 'spatial-finish-sheet' : ''}`} onCloseAutoFocus={event => { if (sectionsFocus.current) { event.preventDefault(); const target = sectionsFocus.current === 'question' || !sectionsButton.current?.isConnected ? titleRef.current : sectionsButton.current; sectionsFocus.current = null; target?.focus({ preventScroll: true }) } else if (floatingEvidence && sheetTrigger.current?.isConnected) { event.preventDefault(); sheetTrigger.current.focus({ preventScroll: true }) } }}>{sheet === 'complete' && <span className="spatial-finish-handle" aria-hidden="true"/>}<SheetHeader><SheetTitle>{sheet === 'complete' ? 'Finish assessment?' : sheet === 'sections' ? (spatial ? 'All tasks' : 'Jump to section') : sheet === 'reset' ? `Reset V${version} prototype?` : sheet === 'member' ? 'Team member' : sheet === 'preview' ? previewSection : spatial ? (lifecycle.status === 'Pending Review' ? 'Pending Review' : 'Submission saved on this device') : 'Assessor review recorded · demo'}</SheetTitle><SheetDescription>{sheet === 'complete' ? 'Once completed, you won’t be able to change Pass or Fail responses or repeat this assessment. You can correct comments before submission.' : sheet === 'sections' ? (spatial ? 'Choose an item to view or edit. An item is complete when its result and any required evidence are recorded.' : 'Jump to the first question in any section. Your responses and comments are saved automatically.') : sheet === 'reset' ? `Clear V${version} responses, comments, feedback and attachments. Other versions will be retained.` : sheet === 'member' ? (spatial ? 'Dre Michael · Crew Floor Member' : 'Dre Jackson · Crew Floor Member') : sheet === 'preview' ? 'Review what you will observe before starting the assessment.' : spatial ? 'Saved on this device only. Nothing has been sent to Alex. No approval or certification has been issued.' : 'This is a visual prototype. No real approval or certification has been issued.'}</SheetDescription></SheetHeader><div className="min-h-0 space-y-4 overflow-y-auto px-5 pb-5">
 
     {sheet === 'complete' && <>{missing.length > 0 && previewPage !== 'finish' && <p role="status">Complete {missing.length} remaining task(s), including required evidence, before finishing.</p>}<SpatialSurface className="spatial-finish-summary"><CardHeader><CardTitle><h2>Tasks summary</h2></CardTitle></CardHeader><CardContent><SpatialTaskStats draft={draft}/></CardContent></SpatialSurface><SpatialSlideComplete disabled={missing.length > 0 && previewPage !== 'finish'} onComplete={() => { const completed = completeSpatialAssessment(draftRef.current, previewPage === 'finish' ? { ...photos, 8: Math.max(1, photos[8] ?? 0) } : photos); if (completed) { replace(completed); setSheet(null) } }}/><ActionButton variant="outline" className="spatial-finish-back" onClick={() => setSheet(null)}>Back to assessment</ActionButton></>}
     {sheet === 'member' && <div className="space-y-3"><p>{spatial ? 'Crew Floor Member' : 'Dre is a new starter and completed e-learning yesterday.'}</p><p className="text-muted-foreground">Assigned assessment: Fryer Station</p><ActionButton className="w-full" onClick={() => setSheet(null)}>{screen === 'assessment' ? 'Back to assessment' : screen === 'review' ? 'Back to review' : 'Back to overview'}</ActionButton></div>}
