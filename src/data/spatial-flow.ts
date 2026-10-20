@@ -23,7 +23,7 @@ export function normalizeSpatialDraft(value: unknown): FlowDraft {
       : result.notes
     if (spatialMissing({ ...result, notes: originalNotes }, counts).length === 0) {
       result.completion = { at: receipt.at, photos: counts, ...(receipt.notes ? { notes: originalNotes } : {}) }
-      if (result.screen !== 'signoff' && result.screen !== 'list') result.screen = 'review'
+      if (result.screen === 'assessment') result.screen = 'review'
     }
   }
   const signature = (value as FlowDraft).signature
@@ -41,7 +41,7 @@ export function spatialEvidenceSatisfied(requirement: SpatialEvidenceRequirement
 export function spatialEvidenceMessage(requirement: SpatialEvidenceRequirement, note: string, photos: number) {
   const commentMissing = (requirement === 'comment' || requirement === 'comment-and-photo') && !note.trim()
   const photoMissing = (requirement === 'photo' || requirement === 'comment-and-photo') && photos <= 0
-  return commentMissing && photoMissing ? 'Comment and photo required' : commentMissing ? 'Comment required' : photoMissing ? 'Photo required' : requirement !== 'none' ? 'Evidence recorded' : photos > 0 ? 'Photo · session only' : 'Optional evidence'
+  return commentMissing && photoMissing ? 'Comment and photo required' : commentMissing ? 'Comment required' : photoMissing ? 'Photo required' : requirement !== 'none' ? 'Evidence recorded' : photos > 0 ? 'Photo saved on this device' : 'Optional evidence'
 }
 export function spatialEvidenceOk(draft: FlowDraft, index: number, photos: Record<number, number> = {}) {
   return spatialEvidenceSatisfied(spatialEvidenceRequirement(index), draft.notes[index] ?? '', draft.completion?.photos[index] ?? photos[index] ?? 0)

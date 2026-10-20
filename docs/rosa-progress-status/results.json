@@ -1,0 +1,22 @@
+[
+  {
+    "theme": "spatial",
+    "resumeLastIndex": 4,
+    "validProgress": 3,
+    "photoAfterReloadAndPageClose": true,
+    "allAnsweredStillInProgress": true,
+    "pendingReviewAfterSubmission": true,
+    "resetClearsPhotos": true,
+    "errors": []
+  },
+  {
+    "theme": "fluid",
+    "resumeLastIndex": 4,
+    "validProgress": 3,
+    "photoAfterReloadAndPageClose": true,
+    "allAnsweredStillInProgress": true,
+    "pendingReviewAfterSubmission": true,
+    "resetClearsPhotos": true,
+    "errors": []
+  }
+]
