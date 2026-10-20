@@ -21,7 +21,7 @@ export function SpatialBeforeStart() {
   const items = [
     { Icon: Clock3, title: 'Session can take about 15 minutes', description: 'Allow time to observe Dre at work' },
     { Icon: BellOff, title: 'Avoid interruptions', description: 'Turn on Do Not Disturb', toggle: true },
-    { Icon: Save, title: 'Progress saves automatically', description: 'Works offline. Syncs when connected' },
+    { Icon: Save, title: 'Progress saves automatically', description: 'Saved on this device. Server sync is not available in this prototype.' },
     { Icon: MessageCircle, title: 'Assess together', description: 'Explain the process first' },
   ]
   return <>

@@ -49,7 +49,7 @@ test('a completed assessment restores its local signature without accepting malf
   const completed = completeSpatialAssessment(draft, {8:1})!
   const signature = {name:'Dre Michael',at:new Date().toISOString(),strokes:['10,10 20,20 35,15']}
   const restored = normalizeSpatialDraft({...completed,signature})
-  assert.deepEqual(restored.signature, signature)
+  assert.deepEqual(restored.signature, { ...signature, method: 'unknown', consent: false, identity: 'unverified' })
   assert.equal(normalizeSpatialDraft({...completed,signature:{...signature,strokes:['<script>']}}).signature, undefined)
   assert.equal(normalizeSpatialDraft({...draft,signature}).signature, undefined)
 })

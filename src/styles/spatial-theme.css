@@ -687,3 +687,20 @@ html[data-assessment-version="5"] .spatial-assessment-preview-actions [data-slot
 html[data-assessment-version="5"] .spatial-assessment-preview-actions [data-slot=button] {white-space:normal;height:auto}
 html[data-assessment-version="5"] .spatial-assessment-preview > button {width:44px;height:44px;display:grid;place-items:center;top:8px;right:8px;opacity:1}
 html[data-assessment-version="5"] .spatial-assessment-preview > button svg {width:20px;height:20px}
+/* Accessibility sprint: shared by Spatial and Fluid, with stable semantic roles. */
+html[data-assessment-version="5"] .spatial-validation,
+html[data-assessment-version="5"] .spatial-completion-alternative,
+html[data-assessment-version="5"] .spatial-acknowledgement-help {font-size:var(--spatial-type-secondary);line-height:1.5;color:var(--spatial-muted);margin:12px 0 0;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .spatial-no-drag {min-height:48px;margin-top:16px}
+html[data-assessment-version="5"] .spatial-consent {display:flex;align-items:flex-start;gap:12px;padding:12px 0;min-height:44px;cursor:pointer;line-height:1.5}
+html[data-assessment-version="5"] .spatial-consent [data-slot=checkbox] {flex:none;margin-top:4px;border-color:var(--spatial-control-line)}
+html[data-assessment-version="5"] .spatial-acknowledgement-summary {background:var(--spatial-surface);border-radius:16px;padding:16px}
+html[data-assessment-version="5"] .spatial-acknowledgement-summary p {white-space:pre-wrap;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .spatial-acknowledgement-body {min-height:0;overscroll-behavior:contain;scroll-padding:16px}
+html[data-assessment-version="5"] .spatial-acknowledgement-body [data-slot=tabs-list] {display:flex;flex-wrap:wrap;height:auto;gap:6px;width:100%}
+html[data-assessment-version="5"] .spatial-acknowledgement-body [data-slot=tabs-trigger] {min-height:44px;white-space:normal;flex:1}
+html[data-assessment-version="5"] .spatial-signature-pad {touch-action:none;user-select:none}
+html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialog-content],[data-slot=alert-dialog-content]) {scroll-padding:16px;overflow-wrap:anywhere}
+html[data-assessment-version="5"] .spatial-completion-confirmation [data-slot=alert-dialog-footer] {display:flex;flex-direction:column;align-items:stretch}
+html[data-assessment-version="5"] :focus-visible {outline:3px solid var(--spatial-focus);outline-offset:3px}
+html[data-assessment-version="5"] .spatial-question-title {scroll-margin-block:16px}
