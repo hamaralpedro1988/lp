@@ -40,6 +40,8 @@ with sync_playwright() as pw:
   saved=json.loads(p.evaluate('localStorage.getItem("lp-rosa-flow-v5-v01-preview")'))['signature'];assert saved['method']=='drawn' and saved['name']=='Another explicit person' and saved['strokes']
   # Answer/evidence feedback: one stable message per missing modality, not each keystroke.
   p.goto(url+'&flowPreview=live');expect(p.locator('.spatial-validation')).to_have_text('Choose Pass or Fail before continuing.')
+  expect(p.locator('.spatial-validation')).to_have_attribute('data-visual','false')
+  expect(p.get_by_role('radiogroup')).to_have_attribute('aria-describedby',p.locator('.spatial-validation').get_attribute('id'))
   expect(p.get_by_role('button',name='Next',exact=True)).to_be_disabled()
   p.get_by_role('button',name='Sections',exact=True).click();p.get_by_role('dialog').locator('.spatial-section-list button').nth(8).click()
   p.get_by_role('radio',name='Fail',exact=True).check();expect(p.locator('.spatial-validation')).to_have_text('Comment and photo required before continuing.')
