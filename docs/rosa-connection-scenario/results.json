@@ -1,0 +1,34 @@
+[
+  {
+    "theme": "spatial",
+    "dataUnaffectedByToggle": true,
+    "requiredEvidenceStillGated": true,
+    "offlineEditingAndPhotoPersistence": true,
+    "recoveryTemporary": true,
+    "realOfflineNotOverridden": true,
+    "fiveScreens": true,
+    "narrowWidths": [
+      320,
+      390,
+      430
+    ],
+    "fetchOrXHR": [],
+    "errors": []
+  },
+  {
+    "theme": "fluid",
+    "dataUnaffectedByToggle": true,
+    "requiredEvidenceStillGated": true,
+    "offlineEditingAndPhotoPersistence": true,
+    "recoveryTemporary": true,
+    "realOfflineNotOverridden": true,
+    "fiveScreens": true,
+    "narrowWidths": [
+      320,
+      390,
+      430
+    ],
+    "fetchOrXHR": [],
+    "errors": []
+  }
+]
