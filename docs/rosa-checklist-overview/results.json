@@ -1,0 +1,47 @@
+{
+  "configurations": [
+    {
+      "theme": "spatial",
+      "width": 320,
+      "result": "pass",
+      "previewPreservedStorage": true,
+      "sequenceAnchorPreserved": true
+    },
+    {
+      "theme": "spatial",
+      "width": 390,
+      "result": "pass",
+      "previewPreservedStorage": true,
+      "sequenceAnchorPreserved": true
+    },
+    {
+      "theme": "spatial",
+      "width": 430,
+      "result": "pass",
+      "previewPreservedStorage": true,
+      "sequenceAnchorPreserved": true
+    },
+    {
+      "theme": "fluid",
+      "width": 320,
+      "result": "pass",
+      "previewPreservedStorage": true,
+      "sequenceAnchorPreserved": true
+    },
+    {
+      "theme": "fluid",
+      "width": 390,
+      "result": "pass",
+      "previewPreservedStorage": true,
+      "sequenceAnchorPreserved": true
+    },
+    {
+      "theme": "fluid",
+      "width": 430,
+      "result": "pass",
+      "previewPreservedStorage": true,
+      "sequenceAnchorPreserved": true
+    }
+  ],
+  "errors": []
+}
