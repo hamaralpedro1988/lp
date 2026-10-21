@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright,expect
 OUT=Path('docs/rosa-connection-scenario');OUT.mkdir(parents=True,exist_ok=True)
 BASE='http://127.0.0.1:5181/?version=5&brandDemo=1';KEY='lp-rosa-flow-v5-v01'
-OFFLINE='Offline · draft saved on this device only.';RECOVERY='Connection restored. Continue assessing.'
+OFFLINE='You’re offline. Keep assessing — your progress is saved on this device.';RECOVERY='You’re back online. Your progress is synced.'
 results=[]
 with sync_playwright() as pw:
  b=pw.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])

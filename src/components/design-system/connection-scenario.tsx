@@ -9,7 +9,7 @@ export function ConnectionScenario({ offline, otherOffline, onChange }: { offlin
   return <section className="spatial-connection-scenario" aria-labelledby={id}>
     <div className="spatial-connection-heading"><h2 id={id}>Connection scenario</h2><Badge variant="outline" id={`${id}-state`} aria-label={`Simulated connection: ${offline ? 'Offline' : 'Online'}`}><Icon aria-hidden="true"/>{offline ? 'Offline' : 'Online'}</Badge></div>
     <Button variant="outline" className="w-full" aria-describedby={`${id}-state ${id}-help`} onClick={() => onChange(!offline)}>{offline ? 'Restore connection' : 'Simulate connection loss'}</Button>
-    <p id={`${id}-help`}>UX simulation only. No server sync.</p>
+    <p id={`${id}-help`}>Connection and sync are simulated.</p>
     {!offline && otherOffline && <p>Another offline state is still active. This control does not reconnect the device.</p>}
   </section>
 }

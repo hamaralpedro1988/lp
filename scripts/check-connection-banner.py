@@ -35,7 +35,7 @@ with sync_playwright() as pw:
             results.append(dict(theme=theme,brand=brand,width=width,state=state,contrast=round(ratio,2),**colors,aboveProgress=True,fixedDuringContentScroll=True))
         check('offline')
         page.get_by_role('button',name='Restore connection',exact=True).click()
-        expect(banner).to_have_text('Connection restored. Continue assessing.')
+        expect(banner).to_have_text('You’re back online. Your progress is synced.')
         check('recovered')
         if brand=='spatial' and width==390:
             page.locator('.screen').evaluate('(e)=>{e.scrollTop=0}')

@@ -42,9 +42,9 @@ export function SpatialProgress({ draft, photos }: { draft: FlowDraft; photos: R
     <span aria-hidden="true" style={{ width: `${completed.length / flowCriteria.length * 100}%` }}/>
   </div></div>
 }
-/** Uses existing quiet feedback; recovery never implies a server synchronization. */
+/** Shared connection feedback; synced is a presentation-only scenario, not a backend operation. */
 export function SpatialConnectionStatus({ offline, recovered }: { offline: boolean; recovered?: boolean }) {
-  return offline ? <SpatialStatus className="spatial-connection-banner" tone="warning">Offline · draft saved on this device only.</SpatialStatus> : recovered ? <SpatialStatus className="spatial-connection-banner" tone="success">Connection restored. Continue assessing.</SpatialStatus> : null
+  return offline ? <SpatialStatus className="spatial-connection-banner" tone="warning">You’re offline. Keep assessing — your progress is saved on this device.</SpatialStatus> : recovered ? <SpatialStatus className="spatial-connection-banner" tone="success">You’re back online. Your progress is synced.</SpatialStatus> : null
 }
 /** Shared navigation chrome for every participant screen; progress is a contextual content. */
 export function SpatialFlowHeader({ title, onBack, backLabel, end, subtitle, children, label = 'Assessment navigation' }: { title: string; onBack?: () => void; backLabel?: string; end?: ReactNode; subtitle?: string; children?: ReactNode; label?: string }) {

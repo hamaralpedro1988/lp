@@ -48,7 +48,7 @@ with sync_playwright() as pw:
   expect(p.get_by_role('progressbar')).to_have_attribute('aria-valuenow','2')
   p.reload();expect(p.get_by_role('progressbar')).to_have_attribute('aria-valuenow','2');expect(p.get_by_role('button',name='Preview fryer-evidence.png')).to_have_count(0)
   p.wait_for_timeout(250);c.set_offline(True)
-  expect(p.get_by_text('Offline · draft saved on this device only.',exact=True)).to_be_visible()
+  expect(p.get_by_text('You’re offline. Keep assessing — your progress is saved on this device.',exact=True)).to_be_visible()
   photo={'name':'fryer-evidence.png','mimeType':'image/png','buffer':__import__('base64').b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aD1sAAAAASUVORK5CYII=')}
   p.locator('input[aria-label="Take photo"]').nth(8).set_input_files(photo)
   expect(p.get_by_role('progressbar')).to_have_attribute('aria-valuenow','3')

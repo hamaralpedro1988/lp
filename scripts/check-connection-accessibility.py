@@ -20,6 +20,6 @@ with sync_playwright() as pw:
  control=p.get_by_role('region',name='Connection scenario');control.get_by_role('button',name='Simulate connection loss',exact=True).click()
  p.evaluate('()=>{Storage.prototype.setItem=()=>{throw new Error("test save failure")}}')
  p.get_by_role('radio',name='Pass',exact=True).check();expect(p.get_by_text('Unable to save on this device. Keep this page open.',exact=True)).to_be_visible()
- control.get_by_role('button',name='Restore connection',exact=True).click();expect(p.get_by_text('Connection restored. Continue assessing.',exact=True)).to_have_count(0)
+ control.get_by_role('button',name='Restore connection',exact=True).click();expect(p.get_by_text('You’re back online. Your progress is synced.',exact=True)).to_have_count(0)
  Path('docs/rosa-connection-scenario/accessibility.json').write_text(json.dumps(reports,indent=2));print('PASS 18 axe states; save error retains priority over connection recovery')
  b.close()

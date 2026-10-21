@@ -6,7 +6,7 @@ Uses the latest compatible React implementation on `feat/rosa-checklist-overview
 
 1. In the existing external Preview controls panel, find **Connection scenario**.
 2. Select **Simulate connection loss**. The simulated state becomes **Offline**; the app reuses its existing quiet offline feedback. Continue answering, commenting, adding photos and navigating normally. Required evidence validation remains unchanged.
-3. Select **Restore connection**. The simulated state becomes **Online**, with a six-second **Connection restored. Continue assessing.** status. No upload/synchronisation is claimed.
+3. Select **Restore connection**. The simulated state becomes **Online**, with a six-second **You’re back online. Your progress is synced.** status. The participant message simulates successful sync. The external controls identify this as a UX simulation; no actual upload/sync occurs.
 
 The panel remains outside the phone on desktop and below it on narrow layouts; no new in-app toolbar or manual Save is introduced. Existing modal focus traps remain intact: close an open sheet to interact with the external presentation controls; a selected scenario continues while sheets are open.
 
