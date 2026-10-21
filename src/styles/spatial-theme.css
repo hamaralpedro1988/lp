@@ -22,6 +22,7 @@ html[data-assessment-version="5"] {
   --spatial-line:#e8e5f0;
   --spatial-choice-line:#e6e4ef;
   --spatial-control-line:#887d98;
+  --spatial-handle-width:40px;--spatial-handle-height:4px;--spatial-handle-radius:4px;--spatial-handle-color:var(--spatial-control-line);
   --spatial-field-line:#8b819c;--spatial-switch-off:#81788f;
   --spatial-input-line:#ded9ea;
   --spatial-primary:#28253c;
@@ -209,7 +210,7 @@ html[data-assessment-version="5"] .spatial-status[data-tone=error] {background:v
 html[data-assessment-version="5"] :is([data-slot=sheet-overlay],[data-slot=dialog-overlay],[data-slot=alert-dialog-overlay]) {background:var(--spatial-overlay);backdrop-filter:blur(6px);animation-duration:var(--spatial-motion-sheet)}
 html[data-assessment-version="5"] :is([data-slot=sheet-content],[data-slot=dialog-content],[data-slot=alert-dialog-content]) {font-family:var(--spatial-font);background:var(--spatial-surface-gradient);color:var(--spatial-ink);border:1px solid var(--spatial-line);box-shadow:var(--spatial-shadow-sheet);animation-duration:var(--spatial-motion-sheet);transition-duration:var(--spatial-motion-sheet)}
 html[data-assessment-version="5"] [data-slot=sheet-content] {border-radius:28px 28px 0 0;max-width:512px;max-height:calc(var(--visual-height,100dvh) - 12px)}
-html[data-assessment-version="5"] [data-slot=sheet-content]::before {content:"";width:38px;height:4px;background:var(--spatial-input-line);border-radius:4px;position:absolute;left:calc(50% - 19px);top:10px}
+html[data-assessment-version="5"] [data-slot=sheet-content]::before {content:"";width:var(--spatial-handle-width);height:var(--spatial-handle-height);background:var(--spatial-handle-color);border-radius:var(--spatial-handle-radius);position:absolute;left:50%;transform:translateX(-50%);top:10px}
 html[data-assessment-version="5"] [data-slot=sheet-header] {padding:28px var(--spatial-space-card-inline) var(--spatial-space-4)}
 html[data-assessment-version="5"] :is([data-slot=dialog-content],[data-slot=alert-dialog-content]) {border-radius:var(--spatial-radius-card)}
 html[data-assessment-version="5"] :is([data-slot=sheet-title],[data-slot=dialog-title],[data-slot=alert-dialog-title]) {font-size:20px;line-height:1.3;font-weight:750;letter-spacing:-.5px}
@@ -435,7 +436,7 @@ html[data-assessment-version="5"] .spatial-brand-demo>p {margin:0 0 12px;font-si
 /* Optional criterion guidance: a grabber only, with a full touch/keyboard target. */
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-guidance-trigger {display:flex;width:100%;height:44px;min-height:44px;margin-top:12px;padding:0;border:0;background:transparent;box-shadow:none;touch-action:none;cursor:ns-resize}
 :is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-guidance-trigger:hover {background:transparent}
-:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-guidance-trigger>span {display:block;width:40px;height:4px;border-radius:4px;background:var(--spatial-control-line)}
+:is(.flow-app.flow-v5,.flow-v5.spatial-catalog) .spatial-guidance-trigger>span {display:block;width:var(--spatial-handle-width);height:var(--spatial-handle-height);border-radius:var(--spatial-handle-radius);background:var(--spatial-handle-color)}
 html[data-assessment-version="5"] [data-slot=sheet-content].spatial-guidance-sheet {max-width:430px;max-height:76%;gap:16px}
 html[data-assessment-version="5"] .device-overlay-root [data-slot=sheet-content].spatial-guidance-sheet {max-height:76%}
 html[data-assessment-version="5"] .spatial-guidance-heading {display:flex;align-items:center;gap:12px;padding-right:30px}
@@ -506,7 +507,7 @@ html[data-assessment-version="5"] [data-slot=sheet-content].spatial-review-detai
 html[data-assessment-version="5"] .device-overlay-root [data-slot=sheet-content].spatial-review-details {max-height:88%}
 html[data-assessment-version="5"] [data-slot=sheet-content].spatial-review-details::before {display:none}
 html[data-assessment-version="5"] .spatial-review-sheet-handle {position:absolute;top:0;left:calc(50% - 40px);width:80px;height:28px;min-height:28px;padding:0;border:0;background:transparent;touch-action:none;box-shadow:none}
-html[data-assessment-version="5"] .spatial-review-sheet-handle>span {width:38px;height:4px;border-radius:4px;background:var(--spatial-control-line)}
+html[data-assessment-version="5"] .spatial-review-sheet-handle>span {width:var(--spatial-handle-width);height:var(--spatial-handle-height);border-radius:var(--spatial-handle-radius);background:var(--spatial-handle-color)}
 html[data-assessment-version="5"] .spatial-review-details [data-slot=sheet-header] {flex:none;padding:18px var(--spatial-space-card-inline) 16px}
 html[data-assessment-version="5"] .spatial-review-details [data-slot=sheet-title] {padding-right:24px;font-size:18px}
 html[data-assessment-version="5"] .spatial-review-detail-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 var(--spatial-space-card-inline) 20px;display:grid;gap:20px}
@@ -591,7 +592,7 @@ html[data-assessment-version="5"] .spatial-learning-detail>strong {font-size:36p
 
 /* Completion sheet: shared result stats, with a quiet white confirmation surface. */
 html[data-assessment-version="5"] .spatial-finish-sheet {gap:0;padding-top:48px;border-radius:28px 28px 0 0;background:var(--spatial-surface);max-height:90%;overflow:hidden}
-.spatial-finish-handle {position:absolute;top:20px;left:50%;transform:translateX(-50%);width:96px;height:5px;border-radius:99px;background:var(--spatial-control-line)}
+.spatial-finish-handle {position:absolute;top:20px;left:50%;transform:translateX(-50%);width:var(--spatial-handle-width);height:var(--spatial-handle-height);border-radius:var(--spatial-handle-radius);background:var(--spatial-handle-color)}
 html[data-assessment-version="5"] .spatial-finish-sheet [data-slot=sheet-header] {padding:12px var(--spatial-space-card-inline) var(--spatial-space-card-block);gap:16px}
 html[data-assessment-version="5"] .spatial-finish-sheet [data-slot=sheet-title] {font-size:24px;line-height:1.25;font-weight:740;color:var(--spatial-ink)}
 html[data-assessment-version="5"] .spatial-finish-sheet [data-slot=sheet-description] {font-size:var(--spatial-type-body);line-height:1.5;color:var(--spatial-muted);font-weight:400}
