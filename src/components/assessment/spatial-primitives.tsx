@@ -42,6 +42,10 @@ export function SpatialProgress({ draft, photos }: { draft: FlowDraft; photos: R
     <span aria-hidden="true" style={{ width: `${completed.length / flowCriteria.length * 100}%` }}/>
   </div></div>
 }
+/** Uses existing quiet feedback; recovery never implies a server synchronization. */
+export function SpatialConnectionStatus({ offline, recovered }: { offline: boolean; recovered?: boolean }) {
+  return offline ? <SpatialStatus tone="warning">Offline · draft saved on this device only.</SpatialStatus> : recovered ? <SpatialStatus tone="success">Connection restored. Continue assessing.</SpatialStatus> : null
+}
 /** Shared navigation chrome for every participant screen; progress is a contextual content. */
 export function SpatialFlowHeader({ title, onBack, backLabel, end, subtitle, children, label = 'Assessment navigation' }: { title: string; onBack?: () => void; backLabel?: string; end?: ReactNode; subtitle?: string; children?: ReactNode; label?: string }) {
   return <header className="spatial-header" aria-label={label}>
@@ -49,10 +53,10 @@ export function SpatialFlowHeader({ title, onBack, backLabel, end, subtitle, chi
     {children}
   </header>
 }
-export function SpatialAssessmentHeader({ draft, photos, saveError, onBack, onMember }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; onBack: () => void; onMember: () => void }) {
+export function SpatialAssessmentHeader({ draft, photos, saveError, onBack, onMember, connectionRecovered }: { draft: FlowDraft; photos: Record<number, number>; saveError: boolean; connectionRecovered?: boolean; onBack: () => void; onMember: () => void }) {
   const [photoFailed, setPhotoFailed] = useState(false)
   return <><SpatialProgress draft={draft} photos={photos}/><SpatialFlowHeader title="Fryer Station" subtitle="Food Process & Safety" onBack={onBack} backLabel="Back to overview" label="Assessment progress" end={<SpatialActionButton variant="outline" size="icon" className="spatial-person" onClick={onMember} aria-label="View team member Dre Michael" aria-haspopup="dialog">{photoFailed ? <span aria-hidden="true">DM</span> : <img src={dreAvatar} alt="" width={32} height={32} onError={() => setPhotoFailed(true)}/>}</SpatialActionButton>}>
-    {saveError ? <SpatialStatus tone="error">Unable to save on this device. Keep this page open.</SpatialStatus> : draft.offline && <SpatialStatus tone="warning">Offline · draft saved on this device only.</SpatialStatus>}
+    {saveError ? <SpatialStatus tone="error">Unable to save on this device. Keep this page open.</SpatialStatus> : <SpatialConnectionStatus offline={draft.offline} recovered={connectionRecovered}/>}
   </SpatialFlowHeader></>
 }
 export function SpatialChoice({ value, title, description, selected, disabled = false }: { value: 'met' | 'fail'; title: string; description: string; selected: boolean; disabled?: boolean }) {
